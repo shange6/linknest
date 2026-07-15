@@ -1,0 +1,240 @@
+{"title":"Google","url":"https://www.google.com","description":"全球最大的搜索引擎，提供网页、图片、视频等多种搜索服务。","tags":[["搜索引擎","搜索服务"],["工具效率","信息检索"]]}
+{"title":"Bing","url":"https://www.bing.com","description":"微软旗下的搜索引擎，集成AI驱动的Copilot搜索体验。","tags":[["搜索引擎","搜索服务"],["工具效率","AI 工具"]]}
+{"title":"DuckDuckGo","url":"https://duckduckgo.com","description":"注重隐私保护的搜索引擎，不追踪用户搜索行为。","tags":[["搜索引擎","搜索服务"],["工具效率","隐私保护"]]}
+{"title":"Yahoo","url":"https://www.yahoo.com","description":"老牌门户网站兼搜索引擎，提供新闻、邮箱、财经等综合服务。","tags":[["搜索引擎","搜索服务"],["海外新闻","新闻媒体"]]}
+{"title":"Yandex","url":"https://yandex.com","description":"俄罗斯最大的搜索引擎，提供搜索、地图、翻译、邮箱等综合服务。","tags":[["搜索引擎","搜索服务"],["工具效率","综合平台"]]}
+{"title":"Baidu","url":"https://www.baidu.com","description":"中国最大的搜索引擎，提供网页搜索及丰富的生态服务。","tags":[["搜索引擎","搜索服务"],["工具效率","信息检索"]]}
+{"title":"Ask.com","url":"https://www.ask.com","description":"以问答形式呈现搜索结果的搜索引擎，历史悠久。","tags":[["搜索引擎","搜索服务"],["工具效率","问答平台"]]}
+{"title":"Ecosia","url":"https://www.ecosia.org","description":"环保搜索引擎，将广告收入用于全球植树造林项目。","tags":[["搜索引擎","搜索服务"],["工具效率","环保公益"]]}
+{"title":"Startpage","url":"https://www.startpage.com","description":"荷兰隐私搜索引擎，通过Google匿名获取结果但不追踪用户。","tags":[["搜索引擎","搜索服务"],["工具效率","隐私保护"]]}
+{"title":"Brave Search","url":"https://search.brave.com","description":"Brave浏览器旗下的独立搜索引擎，注重隐私和去中心化。","tags":[["搜索引擎","搜索服务"],["工具效率","隐私保护"]]}
+{"title":"Twitter / X","url":"https://x.com","description":"全球实时信息与社交网络平台，以短文和话题讨论著称。","tags":[["社交媒体","社交平台"],["海外新闻","新闻媒体"]]}
+{"title":"Facebook","url":"https://www.facebook.com","description":"全球最大的社交网络平台，连接数十亿用户分享生活。","tags":[["社交媒体","社交平台"],["海外社交媒体","社交网络"]]}
+{"title":"Instagram","url":"https://www.instagram.com","description":"以图片和短视频为核心的社交平台，隶属Meta旗下。","tags":[["社交媒体","社交平台"],["海外社交媒体","图片分享"]]}
+{"title":"LinkedIn","url":"https://www.linkedin.com","description":"全球最大的职业社交平台，连接企业与职场人士。","tags":[["社交媒体","社交平台"],["海外招聘","职场网络"]]}
+{"title":"TikTok","url":"https://www.tiktok.com","description":"字节跳动旗下全球短视频平台，以创意娱乐内容风靡全球。","tags":[["社交媒体","社交平台"],["海外视频","短视频"]]}
+{"title":"Reddit","url":"https://www.reddit.com","description":"全球最大的社区论坛平台，用户创建和参与各类主题讨论。","tags":[["社交媒体","社交平台"],["海外社交媒体","社区论坛"]]}
+{"title":"Pinterest","url":"https://www.pinterest.com","description":"以图片收藏和灵感发现为核心的视觉社交平台。","tags":[["社交媒体","社交平台"],["海外设计","灵感发现"]]}
+{"title":"Snapchat","url":"https://www.snapchat.com","description":"以阅后即焚消息和趣味AR滤镜知名的即时通讯社交应用。","tags":[["社交媒体","社交平台"],["海外社交媒体","即时通讯"]]}
+{"title":"Tumblr","url":"https://www.tumblr.com","description":"轻博客社交平台，以创意、亚文化和多媒体内容著称。","tags":[["社交媒体","社交平台"],["海外社交媒体","博客社区"]]}
+{"title":"Threads","url":"https://www.threads.net","description":"Meta推出的文字社交平台，与Instagram深度整合。","tags":[["社交媒体","社交平台"],["海外社交媒体","文字社交"]]}
+{"title":"Mastodon","url":"https://mastodon.social","description":"开源去中心化社交网络，联邦式架构让用户自建实例。","tags":[["社交媒体","社交平台"],["海外技术","开源平台"]]}
+{"title":"Bluesky","url":"https://bsky.app","description":"Twitter联合创始人Jack Dorsey推动的去中心化社交协议平台。","tags":[["社交媒体","社交平台"],["海外社交媒体","去中心化"]]}
+{"title":"YouTube","url":"https://www.youtube.com","description":"全球最大的视频分享平台，Google旗下，月活用户超20亿。","tags":[["海外视频","视频平台"],["社交媒体","内容创作"]]}
+{"title":"Netflix","url":"https://www.netflix.com","description":"全球领先的流媒体订阅服务商，提供海量影视剧和原创内容。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"Hulu","url":"https://www.hulu.com","description":"美国主流流媒体平台，提供热门电视剧、电影及原创内容。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"Amazon Prime Video","url":"https://www.primevideo.com","description":"亚马逊旗下的流媒体服务，提供原创剧集、电影和体育直播。","tags":[["海外视频","流媒体"],["海外电商","生态服务"]]}
+{"title":"Disney+","url":"https://www.disneyplus.com","description":"迪士尼旗下流媒体平台，汇聚漫威、星战、皮克斯等顶级IP。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"HBO Max","url":"https://www.max.com","description":"华纳兄弟探索旗下流媒体服务（现更名Max），含HBO原创剧集。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"Paramount+","url":"https://www.paramountplus.com","description":"派拉蒙旗下流媒体，含CBS、尼克儿童频道、派拉蒙影业等内容。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"Peacock","url":"https://www.peacocktv.com","description":"NBC环球旗下流媒体平台，提供美剧、电影和体育赛事。","tags":[["海外视频","流媒体"],["海外视频","影视内容"]]}
+{"title":"Crunchyroll","url":"https://www.crunchyroll.com","description":"全球最大的动漫流媒体平台，提供海量日本动漫和亚洲内容。","tags":[["海外视频","流媒体"],["海外视频","动漫内容"]]}
+{"title":"Vimeo","url":"https://vimeo.com","description":"面向专业创作者的视频托管和分享平台，以高清质感和创意社群著称。","tags":[["海外视频","视频平台"],["海外设计","创作工具"]]}
+{"title":"Dailymotion","url":"https://www.dailymotion.com","description":"法国起家的全球视频分享平台，提供新闻、娱乐和用户生成内容。","tags":[["海外视频","视频平台"],["海外社交媒体","内容分享"]]}
+{"title":"Twitch","url":"https://www.twitch.tv","description":"全球最大的游戏直播和创作者社区平台，Amazon旗下。","tags":[["海外视频","视频平台"],["海外社交媒体","直播社区"]]}
+{"title":"Amazon","url":"https://www.amazon.com","description":"全球最大的电商平台，从图书起家扩展至全品类零售。","tags":[["海外电商","电商平台"],["海外电商","综合零售"]]}
+{"title":"Amazon Japan","url":"https://www.amazon.co.jp","description":"亚马逊日本站，为日本消费者提供本地化电商服务。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Amazon UK","url":"https://www.amazon.co.uk","description":"亚马逊英国站，服务英国及爱尔兰地区用户。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Amazon Germany","url":"https://www.amazon.de","description":"亚马逊德国站，欧洲最大的亚马逊区域站点之一。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Amazon India","url":"https://www.amazon.in","description":"亚马逊印度站，服务印度这一全球第二人口大国的电商市场。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"eBay","url":"https://www.ebay.com","description":"全球领先的C2C和B2C在线拍卖及购物平台。","tags":[["海外电商","电商平台"],["海外电商","拍卖市场"]]}
+{"title":"Etsy","url":"https://www.etsy.com","description":"以手工艺品、复古商品和创意设计为主的全球电商平台。","tags":[["海外电商","电商平台"],["海外设计","手工创意"]]}
+{"title":"Shopify","url":"https://www.shopify.com","description":"全球领先的电商建站和SaaS平台，赋能百万商家在线开店。","tags":[["海外电商","电商平台"],["海外技术","SaaS平台"]]}
+{"title":"Walmart","url":"https://www.walmart.com","description":"全球最大的实体连锁零售商，线上平台也是美国第二大电商。","tags":[["海外电商","电商平台"],["海外电商","综合零售"]]}
+{"title":"Target","url":"https://www.target.com","description":"美国知名零售连锁品牌，线上平台覆盖服饰家居日用品等品类。","tags":[["海外电商","电商平台"],["海外电商","综合零售"]]}
+{"title":"Best Buy","url":"https://www.bestbuy.com","description":"美国最大的消费电子产品零售商，线上线下全渠道覆盖。","tags":[["海外电商","电商平台"],["海外电商","电子数码"]]}
+{"title":"Newegg","url":"https://www.newegg.com","description":"北美知名电子产品和计算机硬件在线零售商。","tags":[["海外电商","电商平台"],["海外电商","电子数码"]]}
+{"title":"AliExpress","url":"https://www.aliexpress.com","description":"阿里巴巴旗下全球零售电商平台，以价格优势和丰富品类著称。","tags":[["海外电商","电商平台"],["海外电商","跨境零售"]]}
+{"title":"Rakuten","url":"https://www.rakuten.co.jp","description":"日本最大的电商平台，以积分生态和综合服务著称。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Mercado Libre","url":"https://www.mercadolibre.com","description":"拉丁美洲最大的电商和数字支付平台，覆盖18个国家。","tags":[["海外电商","电商平台"],["海外支付","数字支付"]]}
+{"title":"Flipkart","url":"https://www.flipkart.com","description":"印度领先的电商平台，Walmart旗下，与Amazon India竞争。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Zalando","url":"https://www.zalando.com","description":"欧洲最大的时尚电商平台，覆盖服饰、鞋履和配饰品类。","tags":[["海外电商","电商平台"],["海外电商","时尚零售"]]}
+{"title":"Shein","url":"https://www.shein.com","description":"全球快时尚跨境电商平台，以低价潮流服饰迅速崛起。","tags":[["海外电商","电商平台"],["海外电商","时尚零售"]]}
+{"title":"PayPal","url":"https://www.paypal.com","description":"全球最广泛使用的在线支付平台，支持跨境转账和商家收款。","tags":[["海外支付","数字支付"],["海外支付","金融服务"]]}
+{"title":"Stripe","url":"https://stripe.com","description":"全球领先的在线支付处理和API平台，服务互联网企业。","tags":[["海外支付","数字支付"],["海外技术","开发者工具"]]}
+{"title":"Wise","url":"https://wise.com","description":"跨国汇款和小额国际转账服务，以透明低费率和真实汇率著称。","tags":[["海外支付","数字支付"],["海外支付","国际汇款"]]}
+{"title":"Revolut","url":"https://www.revolut.com","description":"英国数字银行和金融超级应用，提供换汇、投资、加密货币等服务。","tags":[["海外支付","数字银行"],["海外支付","金融服务"]]}
+{"title":"Venmo","url":"https://venmo.com","description":"美国流行的P2P移动支付应用，支持朋友间轻松转账与社交分享。","tags":[["海外支付","数字支付"],["海外社交媒体","社交支付"]]}
+{"title":"Cash App","url":"https://cash.app","description":"Square旗下的P2P支付和金融服务应用，支持股票和比特币交易。","tags":[["海外支付","数字支付"],["海外支付","金融服务"]]}
+{"title":"Robinhood","url":"https://robinhood.com","description":"美国零佣金股票、ETF和加密货币交易平台，深受年轻投资者欢迎。","tags":[["海外支付","投资理财"],["海外支付","金融服务"]]}
+{"title":"Coinbase","url":"https://www.coinbase.com","description":"美国最大的合规加密货币交易所，也是首家上市的加密企业。","tags":[["海外支付","数字货币"],["海外支付","金融服务"]]}
+{"title":"Binance","url":"https://www.binance.com","description":"全球交易量最大的加密货币交易所，提供现货和衍生品交易。","tags":[["海外支付","数字货币"],["海外支付","金融服务"]]}
+{"title":"Kraken","url":"https://www.kraken.com","description":"美国老牌合规加密货币交易所，以安全性和监管合规著称。","tags":[["海外支付","数字货币"],["海外支付","金融服务"]]}
+{"title":"Square","url":"https://squareup.com","description":"面向中小商家的移动支付和POS解决方案，Block旗下。","tags":[["海外支付","数字支付"],["海外支付","商户服务"]]}
+{"title":"Adyen","url":"https://www.adyen.com","description":"荷兰全球支付技术公司，为Netflix、Spotify等企业提供支付网关。","tags":[["海外支付","数字支付"],["海外技术","企业服务"]]}
+{"title":"Afterpay","url":"https://www.afterpay.com","description":"全球先买后付(BNPL)支付先驱，Square/Block旗下品牌。","tags":[["海外支付","数字支付"],["海外电商","支付方式"]]}
+{"title":"Slack","url":"https://slack.com","description":"全球最流行的企业团队协作与即时通讯平台，Salesforce旗下。","tags":[["海外生产力","协作工具"],["工具效率","团队沟通"]]}
+{"title":"Zoom","url":"https://zoom.us","description":"全球最广泛使用的视频会议和远程协作平台。","tags":[["海外生产力","协作工具"],["工具效率","视频会议"]]}
+{"title":"Notion","url":"https://www.notion.so","description":"集文档、wiki、数据库于一体的全能型知识管理和协作工具。","tags":[["海外生产力","知识管理"],["工具效率","笔记工具"]]}
+{"title":"Airtable","url":"https://airtable.com","description":"将电子表格与数据库融合的低代码协作平台，可视化数据管理。","tags":[["海外生产力","数据管理"],["工具效率","低代码"]]}
+{"title":"Monday.com","url":"https://monday.com","description":"可视化项目管理与工作操作系统，色彩丰富的团队协作平台。","tags":[["海外生产力","项目管理"],["工具效率","团队协作"]]}
+{"title":"Miro","url":"https://miro.com","description":"在线白板协作平台，支持远程团队头脑风暴、流程图和设计迭代。","tags":[["海外生产力","协作工具"],["海外设计","白板工具"]]}
+{"title":"Loom","url":"https://www.loom.com","description":"异步视频消息和屏幕录制工具，让团队用视频代替长邮件。","tags":[["海外生产力","协作工具"],["海外视频","视频消息"]]}
+{"title":"Calendly","url":"https://calendly.com","description":"自动化会议预约和日程协调工具，消除邮件来回沟通的烦恼。","tags":[["海外生产力","日程管理"],["工具效率","自动化"]]}
+{"title":"Dropbox","url":"https://www.dropbox.com","description":"云存储和文件同步先驱，支持团队协作和文件共享。","tags":[["海外生产力","云存储"],["工具效率","文件管理"]]}
+{"title":"Box","url":"https://www.box.com","description":"面向企业的云端内容管理和协作平台，注重安全与合规。","tags":[["海外生产力","云存储"],["工具效率","企业服务"]]}
+{"title":"Google Drive","url":"https://drive.google.com","description":"Google生态的云存储和在线文档协作套件。","tags":[["海外生产力","云存储"],["工具效率","协作办公"]]}
+{"title":"OneDrive","url":"https://onedrive.live.com","description":"微软旗下的云存储服务，与Microsoft 365和Windows深度集成。","tags":[["海外生产力","云存储"],["工具效率","文件管理"]]}
+{"title":"Asana","url":"https://asana.com","description":"强大的项目管理和任务跟踪工具，帮助团队有条理地推进工作。","tags":[["海外生产力","项目管理"],["工具效率","团队协作"]]}
+{"title":"Trello","url":"https://trello.com","description":"看板式项目管理工具，Atlassian旗下，以卡片拖拽和可视化著称。","tags":[["海外生产力","项目管理"],["工具效率","看板管理"]]}
+{"title":"GitHub","url":"https://github.com","description":"全球最大的代码托管与开源协作平台，开发者生态的核心。","tags":[["海外技术","开发者工具"],["工具效率","版本控制"]]}
+{"title":"GitLab","url":"https://about.gitlab.com","description":"DevOps生命周期平台，提供从代码管理到CI/CD的一体化服务。","tags":[["海外技术","开发者工具"],["工具效率","DevOps"]]}
+{"title":"Bitbucket","url":"https://bitbucket.org","description":"Atlassian旗下的Git代码托管平台，深度集成Jira和Trello。","tags":[["海外技术","开发者工具"],["工具效率","版本控制"]]}
+{"title":"Docker","url":"https://www.docker.com","description":"容器化平台，推动应用打包、分发和部署的标准化革命。","tags":[["海外技术","开发者工具"],["工具效率","容器技术"]]}
+{"title":"DigitalOcean","url":"https://www.digitalocean.com","description":"面向开发者的简洁云基础设施平台，以Droplet云主机和教程社区闻名。","tags":[["海外技术","云计算"],["工具效率","云服务"]]}
+{"title":"Vercel","url":"https://vercel.com","description":"前端部署和边缘计算平台，Next.js的创建者，服务现代Web应用。","tags":[["海外技术","云计算"],["工具效率","前端平台"]]}
+{"title":"Heroku","url":"https://www.heroku.com","description":"Salesforce旗下PaaS平台，让开发者轻松部署和管理应用。","tags":[["海外技术","云计算"],["工具效率","PaaS"]]}
+{"title":"Netlify","url":"https://www.netlify.com","description":"静态网站和Jamstack应用的全托管部署平台。","tags":[["海外技术","云计算"],["工具效率","前端平台"]]}
+{"title":"Cloudflare","url":"https://www.cloudflare.com","description":"全球领先的CDN、DDoS防护和边缘计算平台。","tags":[["海外技术","云计算"],["工具效率","网络安全"]]}
+{"title":"Linode","url":"https://www.linode.com","description":"Akamai旗下的开发者友好型云计算平台，提供Linux虚拟机等服务。","tags":[["海外技术","云计算"],["工具效率","云服务"]]}
+{"title":"MongoDB Atlas","url":"https://www.mongodb.com/atlas","description":"MongoDB官方云数据库服务，全球分布式的NoSQL数据库平台。","tags":[["海外技术","数据库"],["工具效率","云服务"]]}
+{"title":"AWS","url":"https://aws.amazon.com","description":"Amazon Web Services，全球最大的公有云平台，提供200+云服务。","tags":[["海外技术","云计算"],["工具效率","云服务"]]}
+{"title":"Google Cloud","url":"https://cloud.google.com","description":"Google旗下的公有云平台，以AI/ML、大数据和Kubernetes服务见长。","tags":[["海外技术","云计算"],["工具效率","云服务"]]}
+{"title":"Microsoft Azure","url":"https://azure.microsoft.com","description":"微软的公有云平台，深度集成Microsoft 365和GitHub生态。","tags":[["海外技术","云计算"],["工具效率","云服务"]]}
+{"title":"Kaggle","url":"https://www.kaggle.com","description":"全球最大的数据科学竞赛和数据集共享平台，Google旗下。","tags":[["海外技术","数据科学"],["海外学术","研究平台"]]}
+{"title":"Stack Overflow","url":"https://stackoverflow.com","description":"全球最大的开发者问答社区，程序员的百科全书。","tags":[["海外技术","开发者工具"],["工具效率","技术问答"]]}
+{"title":"Google Scholar","url":"https://scholar.google.com","description":"Google旗下的学术文献搜索引擎，覆盖各学科学术论文和引用。","tags":[["海外学术","学术搜索"],["工具效率","信息检索"]]}
+{"title":"arXiv","url":"https://arxiv.org","description":"康奈尔大学运营的预印本论文平台，覆盖物理学、数学、计算机科学等。","tags":[["海外学术","学术论文"],["海外学术","开放获取"]]}
+{"title":"PubMed","url":"https://pubmed.ncbi.nlm.nih.gov","description":"美国国家医学图书馆提供的生物医学文献数据库，全球最大。","tags":[["海外学术","学术论文"],["海外学术","医学数据库"]]}
+{"title":"IEEE Xplore","url":"https://ieeexplore.ieee.org","description":"IEEE的科技文献数字图书馆，涵盖电子工程、计算机科学等领域。","tags":[["海外学术","学术论文"],["海外技术","工程技术"]]}
+{"title":"ACM Digital Library","url":"https://dl.acm.org","description":"美国计算机学会的全文数据库，计算机科学领域的核心文献来源。","tags":[["海外学术","学术论文"],["海外技术","计算机科学"]]}
+{"title":"Nature","url":"https://www.nature.com","description":"全球最权威的科学期刊之一，发表各学科顶尖研究发现。","tags":[["海外学术","学术期刊"],["海外新闻","科学新闻"]]}
+{"title":"Science","url":"https://www.science.org","description":"美国科学促进会出版的顶级科学期刊，与Nature齐名。","tags":[["海外学术","学术期刊"],["海外学术","科学研究"]]}
+{"title":"Springer","url":"https://link.springer.com","description":"全球最大的学术图书和期刊出版商之一，覆盖理工医社科。","tags":[["海外学术","学术期刊"],["海外学术","学术出版"]]}
+{"title":"Elsevier","url":"https://www.elsevier.com","description":"全球最大的学术出版商之一，旗下包括The Lancet、Cell等顶级期刊。","tags":[["海外学术","学术期刊"],["海外学术","学术出版"]]}
+{"title":"JSTOR","url":"https://www.jstor.org","description":"数字化学术期刊和图书存档平台，覆盖人文社科和自然科学。","tags":[["海外学术","学术论文"],["海外学术","数字档案"]]}
+{"title":"PLOS ONE","url":"https://journals.plos.org/plosone","description":"最大的开放获取同行评议科学期刊，覆盖所有科学和医学领域。","tags":[["海外学术","学术期刊"],["海外学术","开放获取"]]}
+{"title":"ResearchGate","url":"https://www.researchgate.net","description":"面向科研人员的学术社交网络，分享论文、提问并寻找合作者。","tags":[["海外学术","学术网络"],["社交媒体","学术社交"]]}
+{"title":"Academia.edu","url":"https://www.academia.edu","description":"学术论文分享和研究人员社交平台，追踪引用和下载量。","tags":[["海外学术","学术网络"],["社交媒体","学术社交"]]}
+{"title":"Semantic Scholar","url":"https://www.semanticscholar.org","description":"AI驱动的学术搜索引擎，利用NLP理解论文内容并提供引用图谱。","tags":[["海外学术","学术搜索"],["工具效率","AI 工具"]]}
+{"title":"BBC","url":"https://www.bbc.com","description":"英国广播公司，全球最受尊敬的公共广播机构，提供权威新闻。","tags":[["海外新闻","新闻媒体"],["海外新闻","公共广播"]]}
+{"title":"CNN","url":"https://www.cnn.com","description":"美国有线电视新闻网，全球24小时滚动新闻的先驱。","tags":[["海外新闻","新闻媒体"],["海外新闻","电视新闻"]]}
+{"title":"The New York Times","url":"https://www.nytimes.com","description":"美国最具影响力的日报之一，以深度报道和调查新闻著称。","tags":[["海外新闻","新闻媒体"],["海外新闻","深度报道"]]}
+{"title":"The Guardian","url":"https://www.theguardian.com","description":"英国左翼倾向的权威报纸，以调查报道和独立新闻闻名。","tags":[["海外新闻","新闻媒体"],["海外新闻","深度报道"]]}
+{"title":"Reuters","url":"https://www.reuters.com","description":"全球最大的国际新闻通讯社，以中立客观的财经新闻见长。","tags":[["海外新闻","新闻媒体"],["海外支付","财经资讯"]]}
+{"title":"Bloomberg","url":"https://www.bloomberg.com","description":"全球领先的财经新闻、数据和分析平台，彭博终端闻名于世。","tags":[["海外新闻","新闻媒体"],["海外支付","财经资讯"]]}
+{"title":"The Washington Post","url":"https://www.washingtonpost.com","description":"美国首都华盛顿的权威日报，以政治报道和调查新闻著称。","tags":[["海外新闻","新闻媒体"],["海外新闻","深度报道"]]}
+{"title":"The Atlantic","url":"https://www.theatlantic.com","description":"美国经典文化政治杂志，发表长篇深度文章和评论。","tags":[["海外新闻","新闻媒体"],["海外新闻","文化评论"]]}
+{"title":"NPR","url":"https://www.npr.org","description":"美国全国公共广播电台，非营利性媒体机构提供新闻和播客节目。","tags":[["海外新闻","新闻媒体"],["海外新闻","公共广播"]]}
+{"title":"BuzzFeed","url":"https://www.buzzfeed.com","description":"数字原生媒体公司，以病毒式内容、趣味测试和新闻融合著称。","tags":[["海外新闻","新闻媒体"],["社交媒体","数字媒体"]]}
+{"title":"Vox","url":"https://www.vox.com","description":"以解释性新闻和深度政策分析见长的美国数字媒体平台。","tags":[["海外新闻","新闻媒体"],["海外新闻","解释性新闻"]]}
+{"title":"Wired","url":"https://www.wired.com","description":"聚焦科技如何影响文化、商业和政治的知名科技文化杂志。","tags":[["海外新闻","新闻媒体"],["海外技术","科技媒体"]]}
+{"title":"TechCrunch","url":"https://techcrunch.com","description":"全球知名的科技创业和互联网行业媒体，报道融资和产品发布。","tags":[["海外新闻","新闻媒体"],["海外技术","科技媒体"]]}
+{"title":"The Verge","url":"https://www.theverge.com","description":"Vox Media旗下科技新闻网站，以产品评测和文化报道见长。","tags":[["海外新闻","新闻媒体"],["海外技术","科技媒体"]]}
+{"title":"Ars Technica","url":"https://arstechnica.com","description":"深度科技报道和分析网站，涵盖IT、科学、政策和游戏领域。","tags":[["海外新闻","新闻媒体"],["海外技术","科技媒体"]]}
+{"title":"Dribbble","url":"https://dribbble.com","description":"全球最大的设计师社区和作品展示平台，设计师的灵感发源地。","tags":[["海外设计","设计社区"],["社交媒体","设计师社交"]]}
+{"title":"Behance","url":"https://www.behance.net","description":"Adobe旗下的创意作品展示平台，汇聚全球设计师与艺术家。","tags":[["海外设计","设计社区"],["社交媒体","设计师社交"]]}
+{"title":"Figma","url":"https://www.figma.com","description":"基于浏览器的协作界面设计工具，已成为UI/UX设计的行业标准。","tags":[["海外设计","设计工具"],["海外生产力","协作工具"]]}
+{"title":"Adobe Creative Cloud","url":"https://www.adobe.com/creativecloud","description":"Adobe创意软件套件，含Photoshop、Illustrator、Premiere Pro等。","tags":[["海外设计","设计工具"],["海外视频","创作工具"]]}
+{"title":"Canva","url":"https://www.canva.com","description":"全球最流行的在线图形设计平台，让非设计师也能轻松创建视觉内容。","tags":[["海外设计","设计工具"],["工具效率","在线工具"]]}
+{"title":"Framer","url":"https://www.framer.com","description":"设计到代码的交互原型和建站工具，支持高保真设计与发布。","tags":[["海外设计","设计工具"],["海外技术","建站工具"]]}
+{"title":"InVision","url":"https://www.invisionapp.com","description":"数字产品设计协作平台，支持原型设计、工作流和设计系统管理。","tags":[["海外设计","设计工具"],["海外生产力","协作工具"]]}
+{"title":"Marvel","url":"https://marvelapp.com","description":"简单易用的APP原型设计和用户测试平台，适合快速验证创意。","tags":[["海外设计","设计工具"],["工具效率","原型设计"]]}
+{"title":"Sketch","url":"https://www.sketch.com","description":"macOS平台流行的矢量UI设计工具，曾是UI设计界的先行者。","tags":[["海外设计","设计工具"],["工具效率","UI设计"]]}
+{"title":"ProtoPie","url":"https://www.protopie.io","description":"高保真无代码交互原型工具，支持传感器和硬件级交互模拟。","tags":[["海外设计","设计工具"],["海外技术","交互设计"]]}
+{"title":"Awwwards","url":"https://www.awwwards.com","description":"全球网页设计评选与灵感展示平台，表彰和发现最佳网页设计。","tags":[["海外设计","设计社区"],["海外设计","灵感发现"]]}
+{"title":"Smashing Magazine","url":"https://www.smashingmagazine.com","description":"面向Web设计师和开发者的在线杂志，提供教程、书籍和会议。","tags":[["海外设计","设计资源"],["海外技术","前端开发"]]}
+{"title":"DeviantArt","url":"https://www.deviantart.com","description":"全球最大的在线艺术社区，艺术家展示和发现原创艺术作品。","tags":[["海外设计","设计社区"],["社交媒体","艺术社区"]]}
+{"title":"ArtStation","url":"https://www.artstation.com","description":"面向游戏、影视和媒体艺术家的专业作品集平台。","tags":[["海外设计","设计社区"],["海外视频","影视美术"]]}
+{"title":"Indeed","url":"https://www.indeed.com","description":"全球最大的独立职位搜索聚合平台，覆盖各类行业和岗位。","tags":[["海外招聘","招聘平台"],["工具效率","求职搜索"]]}
+{"title":"Glassdoor","url":"https://www.glassdoor.com","description":"职场评价和求职平台，提供公司评价、薪资数据和面经分享。","tags":[["海外招聘","招聘平台"],["海外招聘","职场评价"]]}
+{"title":"Monster","url":"https://www.monster.com","description":"老牌全球在线招聘平台，提供职位搜索、简历服务和职业建议。","tags":[["海外招聘","招聘平台"],["海外招聘","求职服务"]]}
+{"title":"ZipRecruiter","url":"https://www.ziprecruiter.com","description":"AI驱动的招聘市场平台，主动匹配求职者与雇主需求。","tags":[["海外招聘","招聘平台"],["工具效率","AI 工具"]]}
+{"title":"CareerBuilder","url":"https://www.careerbuilder.com","description":"美国知名在线招聘平台，依托人力资源数据和技术服务求职者。","tags":[["海外招聘","招聘平台"],["海外招聘","求职服务"]]}
+{"title":"Dice","url":"https://www.dice.com","description":"专注于科技和IT行业的垂直招聘平台，连接技术人才与科技公司。","tags":[["海外招聘","招聘平台"],["海外技术","技术招聘"]]}
+{"title":"Hired","url":"https://hired.com","description":"科技领域人才市场平台，让企业主动竞聘求职者并提供薪资透明。","tags":[["海外招聘","招聘平台"],["海外技术","技术招聘"]]}
+{"title":"AngelList / WellFound","url":"https://wellfound.com","description":"面向初创公司和创业人才的招聘与投资平台（现品牌名WellFound）。","tags":[["海外招聘","招聘平台"],["海外技术","创业招聘"]]}
+{"title":"Upwork","url":"https://www.upwork.com","description":"全球最大的自由职业市场平台，连接自由职业者和远程项目。","tags":[["海外招聘","自由职业"],["工具效率","远程工作"]]}
+{"title":"Fiverr","url":"https://www.fiverr.com","description":"全球微型自由职业服务市场，以固定价格提供各类创意和数字服务。","tags":[["海外招聘","自由职业"],["海外设计","创意服务"]]}
+{"title":"Spotify","url":"https://www.spotify.com","description":"全球最大的音乐流媒体服务平台，提供海量歌曲、播客和有声书。","tags":[["海外视频","流媒体"],["海外视频","音乐内容"]]}
+{"title":"Apple Music","url":"https://music.apple.com","description":"苹果旗下的音乐流媒体服务，拥有超过1亿首歌曲和精选歌单。","tags":[["海外视频","流媒体"],["海外视频","音乐内容"]]}
+{"title":"SoundCloud","url":"https://soundcloud.com","description":"独立音乐人和创作者的音乐流媒体和分享平台。","tags":[["海外视频","流媒体"],["社交媒体","音乐社区"]]}
+{"title":"Medium","url":"https://medium.com","description":"开放写作和阅读平台，让作者分享思考和专业知识。","tags":[["社交媒体","内容平台"],["海外新闻","博客平台"]]}
+{"title":"Substack","url":"https://substack.com","description":"独立作者的自媒体新闻通讯平台，通过付费订阅变现。","tags":[["社交媒体","内容平台"],["海外新闻","独立写作"]]}
+{"title":"Wikipedia","url":"https://www.wikipedia.org","description":"全球最大的免费在线百科全书，由志愿者协作编辑和维护。","tags":[["海外学术","知识平台"],["工具效率","信息检索"]]}
+{"title":"Quora","url":"https://www.quora.com","description":"全球知名问答社区，用户分享知识和专业见解。","tags":[["社交媒体","问答社区"],["工具效率","知识分享"]]}
+{"title":"Discord","url":"https://discord.com","description":"以游戏社区起家的语音、文字和视频即时通讯平台。","tags":[["社交媒体","即时通讯"],["海外社交媒体","社区平台"]]}
+{"title":"Telegram","url":"https://telegram.org","description":"注重安全和速度的云端即时通讯平台，支持频道和机器人。","tags":[["社交媒体","即时通讯"],["海外社交媒体","消息应用"]]}
+{"title":"WhatsApp","url":"https://www.whatsapp.com","description":"Meta旗下全球最大的即时通讯应用，端到端加密保护隐私。","tags":[["社交媒体","即时通讯"],["海外社交媒体","消息应用"]]}
+{"title":"Signal","url":"https://signal.org","description":"开源端到端加密即时通讯和通话应用，注重极致隐私安全。","tags":[["社交媒体","即时通讯"],["海外技术","隐私保护"]]}
+{"title":"LINE","url":"https://line.me","description":"日本及亚洲流行的即时通讯和生活服务平台，以贴纸文化著称。","tags":[["社交媒体","即时通讯"],["海外社交媒体","消息应用"]]}
+{"title":"KakaoTalk","url":"https://www.kakaocorp.com","description":"韩国国民级即时通讯应用，集成支付、出行和生活服务。","tags":[["社交媒体","即时通讯"],["海外支付","生活平台"]]}
+{"title":"Tripadvisor","url":"https://www.tripadvisor.com","description":"全球最大的旅游评论和规划平台，涵盖酒店、餐厅和体验。","tags":[["海外电商","旅游平台"],["工具效率","旅游规划"]]}
+{"title":"Booking.com","url":"https://www.booking.com","description":"全球领先的在线住宿预订平台，覆盖全球数百万房源。","tags":[["海外电商","旅游平台"],["工具效率","酒店预订"]]}
+{"title":"Airbnb","url":"https://www.airbnb.com","description":"全球最大的民宿短租和体验预订平台，连接房东与旅行者。","tags":[["海外电商","旅游平台"],["社交媒体","旅行社区"]]}
+{"title":"Expedia","url":"https://www.expedia.com","description":"全球综合性在线旅游平台，提供机票、酒店和度假套餐。","tags":[["海外电商","旅游平台"],["工具效率","旅游规划"]]}
+{"title":"Uber","url":"https://www.uber.com","description":"全球最大的出行和外卖配送平台，提供网约车和即时配送服务。","tags":[["海外电商","生活服务"],["工具效率","出行服务"]]}
+{"title":"DoorDash","url":"https://www.doordash.com","description":"美国领先的在线外卖和本地配送平台，连接用户与本地商家。","tags":[["海外电商","生活服务"],["工具效率","外卖配送"]]}
+{"title":"Deliveroo","url":"https://deliveroo.co.uk","description":"英国及欧洲流行的在线外卖配送平台，合作餐厅覆盖广泛。","tags":[["海外电商","生活服务"],["工具效率","外卖配送"]]}
+{"title":"Shopee","url":"https://shopee.com","description":"东南亚及台湾领先的移动电商平台，以社交化购物体验著称。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Lazada","url":"https://www.lazada.com","description":"阿里巴巴旗下东南亚电商平台，覆盖印尼、泰国、菲律宾等六国。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Coupang","url":"https://www.coupang.com","description":"韩国最大的电商平台，以火箭配送到家服务和极速物流著称。","tags":[["海外电商","电商平台"],["海外电商","区域站点"]]}
+{"title":"Naver","url":"https://www.naver.com","description":"韩国最大的搜索引擎和门户网站，提供搜索、新闻和电商服务。","tags":[["搜索引擎","搜索服务"],["海外电商","综合平台"]]}
+{"title":"Mailchimp","url":"https://mailchimp.com","description":"全球流行的电子邮件营销和自动化平台，Intuit旗下。","tags":[["海外生产力","营销工具"],["工具效率","邮件营销"]]}
+{"title":"HubSpot","url":"https://www.hubspot.com","description":"领先的CRM、营销、销售和服务一体化平台。","tags":[["海外生产力","营销工具"],["工具效率","CRM"]]}
+{"title":"Salesforce","url":"https://www.salesforce.com","description":"全球最大的CRM和企业云计算公司，提供销售和客户管理服务。","tags":[["海外生产力","企业服务"],["海外技术","SaaS平台"]]}
+{"title":"Atlassian","url":"https://www.atlassian.com","description":"Jira、Confluence、Trello的母公司，企业协作和开发工具巨头。","tags":[["海外技术","开发者工具"],["海外生产力","协作工具"]]}
+{"title":"OpenAI","url":"https://openai.com","description":"ChatGPT和GPT系列模型的母公司，引领生成式AI革命。","tags":[["工具效率","AI 工具"],["海外技术","人工智能"]]}
+{"title":"Anthropic","url":"https://www.anthropic.com","description":"Claude系列AI助手开发者，专注AI安全和可信研究。","tags":[["工具效率","AI 工具"],["海外技术","人工智能"]]}
+{"title":"Hugging Face","url":"https://huggingface.co","description":"全球最大的AI模型和数据集开源社区，机器学习协作平台。","tags":[["海外技术","人工智能"],["工具效率","AI 工具"]]}
+{"title":"DeepL","url":"https://www.deepl.com","description":"德国AI翻译服务，以高度精准的自然语言翻译质量闻名全球。","tags":[["工具效率","AI 工具"],["海外技术","翻译工具"]]}
+{"title":"Grammarly","url":"https://www.grammarly.com","description":"AI驱动的英语写作助手，提供语法检查、语调调整和内容润色。","tags":[["工具效率","AI 工具"],["海外生产力","写作工具"]]}
+{"title":"JetBrains","url":"https://www.jetbrains.com","description":"捷克IDE开发工具公司，产品包括IntelliJ IDEA、PyCharm等。","tags":[["海外技术","开发者工具"],["工具效率","编程工具"]]}
+{"title":"Postman","url":"https://www.postman.com","description":"全球最流行的API开发和测试协作平台。","tags":[["海外技术","开发者工具"],["工具效率","API 工具"]]}
+{"title":"Codecademy","url":"https://www.codecademy.com","description":"交互式在线编程学习平台，适合零基础到进阶学习者。","tags":[["海外技术","在线教育"],["工具效率","编程学习"]]}
+{"title":"Coursera","url":"https://www.coursera.org","description":"全球领先的在线学习平台，提供顶尖大学和企业的课程及学位。","tags":[["海外学术","在线教育"],["工具效率","学习平台"]]}
+{"title":"edX","url":"https://www.edx.org","description":"哈佛和MIT创立的非营利MOOC平台，提供免费和付费大学课程。","tags":[["海外学术","在线教育"],["海外学术","开放课程"]]}
+{"title":"Udemy","url":"https://www.udemy.com","description":"全球在线课程市场，拥有超过20万门课程和学习者社区。","tags":[["海外学术","在线教育"],["工具效率","学习平台"]]}
+{"title":"Duolingo","url":"https://www.duolingo.com","description":"全球最流行的游戏化语言学习应用，覆盖40+语种的学习。","tags":[["海外学术","在线教育"],["工具效率","语言学习"]]}
+{"title":"Khan Academy","url":"https://www.khanacademy.org","description":"非营利在线教育平台，提供从K-12到大学级别的免费课程。","tags":[["海外学术","在线教育"],["工具效率","免费教育"]]}
+{"title":"W3Schools","url":"https://www.w3schools.com","description":"全球最大的Web开发教程和参考网站，前端学习的经典起点。","tags":[["海外技术","在线教育"],["海外设计","前端开发"]]}
+{"title":"MDN Web Docs","url":"https://developer.mozilla.org","description":"Mozilla维护的最权威Web技术文档和开发者资源平台。","tags":[["海外技术","开发者工具"],["海外设计","前端开发"]]}
+{"title":"G2","url":"https://www.g2.com","description":"全球最大的企业软件评价和用户反馈平台，帮助B2B选型。","tags":[["海外技术","SaaS平台"],["工具效率","软件评测"]]}
+{"title":"Product Hunt","url":"https://www.producthunt.com","description":"新科技产品发现和社区投票平台，创业者和早期用户的聚集地。","tags":[["社交媒体","产品社区"],["海外技术","创业平台"]]}
+{"title":"Y Combinator","url":"https://www.ycombinator.com","description":"全球最知名的创业加速器，孵化出Airbnb、Dropbox等企业。","tags":[["海外技术","创业平台"],["海外招聘","创业生态"]]}
+{"title":"Crunchbase","url":"https://www.crunchbase.com","description":"全球最大的公司信息和商业情报数据库，追踪投资和创业动态。","tags":[["海外技术","创业平台"],["海外支付","投资数据"]]}
+{"title":"PitchBook","url":"https://pitchbook.com","description":"权威的PE/VC、并购和公开市场金融数据平台。","tags":[["海外支付","投资数据"],["海外支付","金融服务"]]}
+{"title":"Slideshare","url":"https://www.slideshare.net","description":"LinkedIn旗下的PPT和文档在线分享平台，学习行业报告首选。","tags":[["海外生产力","知识分享"],["海外学术","学术资源"]]}
+{"title":"Prezi","url":"https://prezi.com","description":"在线创意演示工具，以缩放式动态画布替代传统线性幻灯片。","tags":[["海外生产力","演示工具"],["海外设计","创作工具"]]}
+{"title":"Eventbrite","url":"https://www.eventbrite.com","description":"全球领先的活动管理和在线票务平台，覆盖各类线下线上活动。","tags":[["海外电商","生活服务"],["工具效率","活动管理"]]}
+{"title":"Shop Pay","url":"https://shop.app","description":"Shopify旗下一键结账和订单追踪支付服务，加速商家转化。","tags":[["海外支付","数字支付"],["海外电商","支付方式"]]}
+{"title":"Klarna","url":"https://www.klarna.com","description":"瑞典金融科技公司，全球先买后付(BNPL)和购物服务领先者。","tags":[["海外支付","数字支付"],["海外电商","支付方式"]]}
+{"title":"Temu","url":"https://www.temu.com","description":"拼多多旗下跨境电商平台，以超低价格和全品类商品快速风靡欧美市场。","tags":[["海外电商","电商平台"],["海外电商","跨境零售"]]}
+{"title":"N26","url":"https://n26.com","description":"德国领先的数字银行，提供手机端全功能银行账户服务。","tags":[["海外支付","数字银行"],["海外支付","金融服务"]]}
+{"title":"Chime","url":"https://www.chime.com","description":"美国领先的纯数字银行，提供无月费支票账户和自动储蓄。","tags":[["海外支付","数字银行"],["海外支付","金融服务"]]}
+{"title":"Monzo","url":"https://monzo.com","description":"英国流行的数字银行，以透明银行服务和预算管理功能著称。","tags":[["海外支付","数字银行"],["海外支付","金融服务"]]}
+{"title":"Starlink","url":"https://www.starlink.com","description":"SpaceX推出的低轨卫星互联网服务，为全球偏远地区提供高速网络。","tags":[["海外技术","互联网服务"],["工具效率","通信服务"]]}
+{"title":"Raspberry Pi","url":"https://www.raspberrypi.com","description":"世界上最流行的单板计算机，推动STEM教育和嵌入式开发。","tags":[["海外技术","硬件开发"],["海外学术","STEM 教育"]]}
+{"title":"Arduino","url":"https://www.arduino.cc","description":"开源电子原型平台，基于易用的硬件和软件推动创客文化。","tags":[["海外技术","硬件开发"],["海外学术","STEM 教育"]]}
+{"title":"IFTTT","url":"https://ifttt.com","description":"自动化集成服务，用if-this-then-that逻辑连接各类App和设备。","tags":[["工具效率","自动化"],["海外技术","物联网"]]}
+{"title":"Zapier","url":"https://zapier.com","description":"无代码工作流自动化平台，连接超过5000个应用实现自动化。","tags":[["工具效率","自动化"],["海外生产力","无代码"]]}
+{"title":"Make (Integromat)","url":"https://www.make.com","description":"高级可视化工作流自动化平台，支持复杂逻辑的跨应用集成。","tags":[["工具效率","自动化"],["海外生产力","无代码"]]}
+{"title":"ChatGPT","url":"https://chatgpt.com","description":"OpenAI推出的现象级AI对话助手，驱动新一轮技术革命。","tags":[["工具效率","AI 工具"],["海外技术","人工智能"]]}
+{"title":"Google Gemini","url":"https://gemini.google.com","description":"Google旗下多模态AI助手，整合搜索、图像理解和内容生成。","tags":[["工具效率","AI 工具"],["海外技术","人工智能"]]}
+{"title":"Claude","url":"https://claude.ai","description":"Anthropic开发的安全优先AI助手，以长上下文和深度推理著称。","tags":[["工具效率","AI 工具"],["海外技术","人工智能"]]}
+{"title":"Perplexity AI","url":"https://www.perplexity.ai","description":"AI驱动的答案引擎，实时搜索并生成带引用的精准回答。","tags":[["工具效率","AI 工具"],["搜索引擎","搜索服务"]]}
+{"title":"Cursor","url":"https://cursor.com","description":"AI驱动的代码编辑器，基于VS Code，深度集成智能代码生成。","tags":[["工具效率","AI 工具"],["海外技术","开发者工具"]]}
+{"title":"Stable Diffusion","url":"https://stability.ai","description":"Stability AI开发的开源文本到图像生成模型系列。","tags":[["工具效率","AI 工具"],["海外设计","AI 创作"]]}
+{"title":"Midjourney","url":"https://www.midjourney.com","description":"顶级AI图像生成平台，以高质量艺术风格图像创作闻名。","tags":[["工具效率","AI 工具"],["海外设计","AI 创作"]]}
+{"title":"Runway","url":"https://runwayml.com","description":"AI驱动的视频生成和编辑平台，面向创意专业人士。","tags":[["工具效率","AI 工具"],["海外视频","AI 创作"]]}
+{"title":"Wolfram Alpha","url":"https://www.wolframalpha.com","description":"计算知识引擎，直接通过计算回答事实性查询而非网页链接。","tags":[["搜索引擎","搜索服务"],["海外学术","学术工具"]]}
+{"title":"Tableau","url":"https://www.tableau.com","description":"Salesforce旗下全球领先的数据可视化和商业智能分析平台。","tags":[["海外技术","数据科学"],["海外生产力","数据分析"]]}
+{"title":"Power BI","url":"https://powerbi.microsoft.com","description":"微软的交互式数据可视化和商业智能工具，集成Microsoft生态。","tags":[["海外技术","数据科学"],["海外生产力","数据分析"]]}
+{"title":"Snowflake","url":"https://www.snowflake.com","description":"云端数据仓库和数据分析独角兽，重新定义了企业数据架构。","tags":[["海外技术","数据库"],["海外技术","云计算"]]}
+{"title":"Datadog","url":"https://www.datadoghq.com","description":"领先的云应用监控和安全可观测性平台。","tags":[["海外技术","云计算"],["工具效率","监控运维"]]}
+{"title":"Snyk","url":"https://snyk.io","description":"开发者安全平台，自动发现和修复开源依赖及容器中的漏洞。","tags":[["海外技术","开发者工具"],["工具效率","安全工具"]]}
+{"title":"SonarQube","url":"https://www.sonarsource.com/products/sonarqube","description":"开源代码质量和安全扫描平台，持续检查代码漏洞和技术债务。","tags":[["海外技术","开发者工具"],["工具效率","代码质量"]]}
+{"title":"Elastic","url":"https://www.elastic.co","description":"Elasticsearch引擎背后的公司，提供全文搜索和数据分析平台。","tags":[["海外技术","数据库"],["工具效率","搜索分析"]]}
+{"title":"Splunk","url":"https://www.splunk.com","description":"Cisco旗下机器数据分析和安全信息与事件管理(SIEM)平台。","tags":[["海外技术","数据科学"],["工具效率","安全运维"]]}
+{"title":"Otter.ai","url":"https://otter.ai","description":"AI驱动的会议记录、实时转录和笔记自动生成工具。","tags":[["工具效率","AI 工具"],["海外生产力","会议助手"]]}
+{"title":"Notability","url":"https://www.gingerlabs.com","description":"iPad最受欢迎的数字笔记和PDF批注应用，支持手写和录音同步。","tags":[["海外生产力","笔记工具"],["海外学术","学习工具"]]}
+{"title":"GoodNotes","url":"https://www.goodnotes.com","description":"优秀的数字手写笔记应用，支持PDF批注、OCR搜索和跨平台。","tags":[["海外生产力","笔记工具"],["海外学术","学习工具"]]}
+{"title":"Evernote","url":"https://evernote.com","description":"老牌跨平台笔记与知识管理工具，捕捉灵感和信息整理。","tags":[["海外生产力","笔记工具"],["工具效率","知识管理"]]}
+{"title":"Obsidian","url":"https://obsidian.md","description":"基于本地Markdown的双向链接知识库，构建个人第二大脑。","tags":[["海外生产力","笔记工具"],["工具效率","知识管理"]]}
+{"title":"Logitech","url":"https://www.logitech.com","description":"瑞士全球领先的电脑外设品牌，鼠标、键盘、摄像头和会议设备。","tags":[["海外技术","硬件设备"],["海外生产力","办公设备"]]}
+{"title":"Razer","url":"https://www.razer.com","description":"全球领先的游戏硬件和周边品牌，也覆盖生产力设备。","tags":[["海外技术","硬件设备"],["海外电商","游戏装备"]]}
+{"title":"NordVPN","url":"https://nordvpn.com","description":"全球最流行的VPN服务之一，提供在线隐私保护和网络安全。","tags":[["工具效率","隐私保护"],["海外技术","网络安全"]]}
+{"title":"ExpressVPN","url":"https://www.expressvpn.com","description":"高速全球VPN服务商，以流畅流媒体解锁和隐私保护著称。","tags":[["工具效率","隐私保护"],["海外技术","网络安全"]]}
+{"title":"Proton","url":"https://proton.me","description":"瑞士隐私科技公司，提供加密邮件、VPN、云存储和日历服务。","tags":[["工具效率","隐私保护"],["海外技术","网络安全"]]}
+{"title":"1Password","url":"https://1password.com","description":"全球领先的密码管理器，帮助个人和企业安全管理登录凭据。","tags":[["工具效率","隐私保护"],["海外技术","安全工具"]]}
+{"title":"LastPass","url":"https://www.lastpass.com","description":"知名密码管理器和数字保险库，自动填充和生成强密码。","tags":[["工具效率","隐私保护"],["海外技术","安全工具"]]}

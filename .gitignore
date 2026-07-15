@@ -6,11 +6,11 @@ dist/
 venv/
 .venv/
 
-# Database
-*.db
+# Database (kept for backup/sharing)
+# *.db
 
-# Batch import (large generated files)
-backend/batch_*.jsonl
+# Batch import (kept for backup/sharing)
+# backend/batch_*.jsonl
 
 # Frontend build artifacts
 frontend/dist/

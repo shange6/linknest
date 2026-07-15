@@ -1,0 +1,200 @@
+{"title":"ChatGPT","url":"https://chat.openai.com","description":"OpenAI旗下的对话式大语言模型平台，支持文本、图像、代码等多模态交互","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"Claude","url":"https://claude.ai","description":"Anthropic开发的注重安全性的AI助手，擅长长文本处理与深度推理","tags":[["技术开发","AI 工具"],["工具效率","办公协作"]]}
+{"title":"通义千问","url":"https://tongyi.aliyun.com","description":"阿里巴巴旗下大语言模型平台，集成文本、图像、语音等多模态能力","tags":[["技术开发","AI 工具"],["工具效率","办公协作"]]}
+{"title":"文心一言","url":"https://yiyan.baidu.com","description":"百度基于文心大模型打造的AI对话平台，支持搜索增强与多模态交互","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"Kimi","url":"https://kimi.moonshot.cn","description":"月之暗面推出的长文本AI助手，支持200万字上下文处理","tags":[["技术开发","AI 工具"],["工具效率","办公协作"]]}
+{"title":"豆包","url":"https://www.doubao.com","description":"字节跳动旗下AI对话助手，支持文本、语音、图像等多种交互方式","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"DeepSeek","url":"https://chat.deepseek.com","description":"深度求索开源大模型对话平台，以高性价比与强推理能力著称","tags":[["技术开发","AI 工具"],["工具效率","办公协作"]]}
+{"title":"智谱清言","url":"https://chatglm.cn","description":"智谱AI基于ChatGLM大模型打造的智能对话平台","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"百川大模型","url":"https://www.baichuan-ai.com","description":"百川智能推出的大语言模型平台，覆盖对话、搜索、医疗等场景","tags":[["技术开发","AI 工具"]]}
+{"title":"MiniMax海螺AI","url":"https://hailuoai.com","description":"MiniMax旗下的AI对话与内容生成平台，支持语音克隆与情感表达","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"零一万物","url":"https://www.01.ai","description":"李开复创办的AI大模型公司，推出Yi系列开源与商用大语言模型","tags":[["技术开发","AI 工具"]]}
+{"title":"阶跃星辰","url":"https://www.stepfun.com","description":"StepFun阶跃星辰，提供Step系列多模态大模型与API服务","tags":[["技术开发","AI 工具"]]}
+{"title":"面壁智能","url":"https://www.modelscope.cn","description":"面壁智能研发的MiniCPM系列端侧大模型，专注高效轻量化AI","tags":[["技术开发","AI 工具"]]}
+{"title":"天工AI","url":"https://www.tiangong.cn","description":"昆仑万维推出的AI对话平台，支持搜索增强与多模态交互","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"阿里百炼","url":"https://bailian.aliyun.com","description":"阿里云大模型服务平台，提供通义系列模型训练、部署与API调用","tags":[["技术开发","AI 工具"]]}
+{"title":"讯飞星火","url":"https://xinghuo.xfyun.cn","description":"科大讯飞推出的认知大模型平台，专注语音交互与教育场景","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"腾讯混元","url":"https://hunyuan.tencent.com","description":"腾讯研发的大语言模型，集成于微信、腾讯云等多个产品生态","tags":[["技术开发","AI 工具"]]}
+{"title":"商汤日日新","url":"https://techday.sensetime.com","description":"商汤科技的大模型服务平台，覆盖视觉、语言、生成等多个模态","tags":[["技术开发","AI 工具"]]}
+{"title":"浪潮源大模型","url":"https://air.inspur.com","description":"浪潮信息推出的源系列大模型，面向政企场景提供AI解决方案","tags":[["技术开发","AI 工具"]]}
+{"title":"360智脑","url":"https://ai.360.com","description":"360推出的认知大模型平台，融合搜索与安全能力","tags":[["技术开发","AI 工具"]]}
+{"title":"Hugging Face","url":"https://huggingface.co","description":"全球最大的AI模型托管与开源社区，提供模型、数据集、demo等资源","tags":[["技术开发","开发工具"],["技术开发","AI 工具"]]}
+{"title":"Ollama","url":"https://ollama.com","description":"本地部署大语言模型的简易工具，支持LLaMA、Mistral等主流模型","tags":[["技术开发","开发工具"],["技术开发","AI 工具"]]}
+{"title":"vLLM","url":"https://docs.vllm.ai","description":"高性能大语言模型推理引擎，支持PagedAttention与连续批处理","tags":[["技术开发","开发工具"]]}
+{"title":"LangChain","url":"https://www.langchain.com","description":"构建大语言模型应用的开源框架，提供链式调用与Agent能力","tags":[["技术开发","开发工具"]]}
+{"title":"LlamaIndex","url":"https://www.llamaindex.ai","description":"连接大语言模型与外部数据源的框架，专注RAG检索增强生成","tags":[["技术开发","开发工具"]]}
+{"title":"LangSmith","url":"https://smith.langchain.com","description":"LangChain官方LLM应用调试、测试与监控平台","tags":[["技术开发","开发工具"]]}
+{"title":"ElevenLabs","url":"https://elevenlabs.io","description":"AI语音合成与克隆平台，支持多语言、情感表达与声音定制","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"Replicate","url":"https://replicate.com","description":"云端AI模型运行与部署平台，一键调用数千个开源模型API","tags":[["技术开发","开发工具"]]}
+{"title":"Together AI","url":"https://www.together.ai","description":"开源AI模型的云端推理与训练平台，提供高性能GPU服务","tags":[["技术开发","开发工具"]]}
+{"title":"Anyscale","url":"https://www.anyscale.com","description":"基于Ray框架的分布式AI计算平台，支持大模型训练与推理","tags":[["技术开发","开发工具"]]}
+{"title":"Modal","url":"https://modal.com","description":"Serverless GPU云计算平台，专为AI/ML工作负载设计","tags":[["技术开发","开发工具"]]}
+{"title":"OpenRouter","url":"https://openrouter.ai","description":"统一的AI模型API网关，可通过单一接口调用200+大模型","tags":[["技术开发","开发工具"]]}
+{"title":"Dify","url":"https://dify.ai","description":"开源的AI应用开发平台，支持可视化构建LLM工作流与Agent","tags":[["技术开发","开发工具"]]}
+{"title":"Flowise","url":"https://flowiseai.com","description":"拖拽式AI应用构建工具，基于LangChain实现低代码LLM开发","tags":[["技术开发","开发工具"]]}
+{"title":"Gradio","url":"https://www.gradio.app","description":"快速构建机器学习模型Web演示界面的Python开源库","tags":[["技术开发","开发工具"]]}
+{"title":"Weights & Biases","url":"https://wandb.ai","description":"机器学习实验跟踪与模型监控平台，支持可视化与协作开发","tags":[["技术开发","开发工具"]]}
+{"title":"MLflow","url":"https://mlflow.org","description":"开源机器学习生命周期管理平台，覆盖实验、部署与模型注册","tags":[["技术开发","开发工具"]]}
+{"title":"Pinecone","url":"https://www.pinecone.io","description":"专为AI设计的向量数据库，支持语义搜索与RAG应用","tags":[["技术开发","开发工具"]]}
+{"title":"Chroma","url":"https://www.trychroma.com","description":"开源嵌入式向量数据库，专为LLM应用设计的轻量存储方案","tags":[["技术开发","开发工具"]]}
+{"title":"Weaviate","url":"https://weaviate.io","description":"开源的AI原生向量数据库，支持多模态搜索与GraphQL查询","tags":[["技术开发","开发工具"]]}
+{"title":"Qdrant","url":"https://qdrant.tech","description":"高性能开源向量搜索引擎，Rust编写支持过滤与高并发","tags":[["技术开发","开发工具"]]}
+{"title":"Milvus","url":"https://milvus.io","description":"全球领先的开源向量数据库，由Zilliz开发，支持万亿级向量检索","tags":[["技术开发","开发工具"]]}
+{"title":"Cursor","url":"https://cursor.com","description":"AI原生代码编辑器，深度集成GPT/Claude实现智能编程辅助","tags":[["技术开发","开发工具"]]}
+{"title":"GitHub Copilot","url":"https://github.com/features/copilot","description":"GitHub推出的AI编程助手，支持代码补全、解释与重构","tags":[["技术开发","开发工具"]]}
+{"title":"Tabnine","url":"https://www.tabnine.com","description":"AI代码补全工具，支持多种IDE与编程语言的智能代码生成","tags":[["技术开发","开发工具"]]}
+{"title":"Codeium","url":"https://codeium.com","description":"免费的AI代码补全与搜索工具，支持70+语言与40+编辑器","tags":[["技术开发","开发工具"]]}
+{"title":"Perplexity AI","url":"https://www.perplexity.ai","description":"AI驱动的搜索引擎，实时整合信息并提供带来源引用的答案","tags":[["工具效率","信息聚合"],["技术开发","AI 工具"]]}
+{"title":"Poe","url":"https://poe.com","description":"Quora推出的多模型AI对话聚合平台，集成GPT、Claude等模型","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"Midjourney","url":"https://www.midjourney.com","description":"顶级AI图像生成工具，以艺术风格与高质量出图著称","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Stable Diffusion WebUI","url":"https://github.com/AUTOMATIC1111/stable-diffusion-webui","description":"Stable Diffusion的流行Web界面，支持文本生成图像的本地运行","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Runway ML","url":"https://runwayml.com","description":"AI视频生成与编辑平台，提供文本生成视频与视频特效工具","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Suno AI","url":"https://suno.com","description":"AI音乐生成平台，通过文字描述即可创作完整的歌曲","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Udio","url":"https://www.udio.com","description":"AI音乐生成与创作平台，由前Google DeepMind研究员创立","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"NotebookLM","url":"https://notebooklm.google.com","description":"Google推出的AI笔记研究助手，可基于文档生成摘要与问答","tags":[["工具效率","办公协作"],["技术开发","AI 工具"]]}
+{"title":"Gamma","url":"https://gamma.app","description":"AI驱动的演示文稿与文档生成工具，一键创建精美PPT","tags":[["工具效率","办公协作"],["技术开发","AI 工具"]]}
+{"title":"Beautiful.ai","url":"https://www.beautiful.ai","description":"智能演示文稿设计工具，AI自动排版生成专业幻灯片","tags":[["工具效率","办公协作"]]}
+{"title":"Tome","url":"https://tome.app","description":"AI叙事与演示工具，生成交互式故事与商业文档","tags":[["工具效率","办公协作"],["技术开发","AI 工具"]]}
+{"title":"Microsoft 365 Copilot","url":"https://copilot.microsoft.com","description":"微软Microsoft 365集成的AI助手，辅助Word、Excel、PPT等工作","tags":[["工具效率","办公协作"],["技术开发","AI 工具"]]}
+{"title":"Jasper AI","url":"https://www.jasper.ai","description":"AI内容营销平台，辅助撰写博客、广告文案与社交媒体内容","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Copy.ai","url":"https://www.copy.ai","description":"AI营销文案生成工具，帮助企业自动化内容创作与销售流程","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Canva AI","url":"https://www.canva.com","description":"集成AI的在线设计平台，支持智能设计、背景移除与内容生成","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Descript","url":"https://www.descript.com","description":"AI音视频编辑工具，支持基于文本编辑音频与视频内容","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Notion AI","url":"https://www.notion.so","description":"集成AI功能的全能笔记与协作平台，支持智能写作与知识管理","tags":[["工具效率","办公协作"],["技术开发","AI 工具"]]}
+{"title":"Character.AI","url":"https://character.ai","description":"AI角色对话平台，用户可与自定义或预设的AI角色互动对话","tags":[["技术开发","AI 工具"],["工具效率","内容创作"]]}
+{"title":"Gemini","url":"https://gemini.google.com","description":"Google推出的多模态大语言模型平台，支持文本、图像、代码能力","tags":[["技术开发","AI 工具"]]}
+{"title":"Meta LLaMA","url":"https://llama.meta.com","description":"Meta开源大语言模型项目，LLaMA系列影响深远","tags":[["技术开发","开源项目"]]}
+{"title":"Mistral AI","url":"https://mistral.ai","description":"法国开源AI公司，推出Mistral与Mixtral系列高效模型","tags":[["技术开发","开源项目"]]}
+{"title":"Gemma","url":"https://ai.google.dev/gemma","description":"Google开源轻量级大语言模型，适合研究与开发者使用","tags":[["技术开发","开源项目"]]}
+{"title":"Falcon LLM","url":"https://falconllm.tii.ae","description":"阿布扎比技术创新研究所开源的Falcon系列大语言模型","tags":[["技术开发","开源项目"]]}
+{"title":"BLOOM","url":"https://bigscience.huggingface.co","description":"BigScience项目开源的176B参数多语言大语言模型","tags":[["技术开发","开源项目"]]}
+{"title":"StableLM","url":"https://github.com/Stability-AI/StableLM","description":"Stability AI开源的大语言模型，作为Stable Diffusion的文本补充","tags":[["技术开发","开源项目"]]}
+{"title":"Yi系列模型","url":"https://github.com/01-ai/Yi","description":"零一万物开源的Yi系列大语言模型，中英文能力均衡","tags":[["技术开发","开源项目"]]}
+{"title":"Qwen模型","url":"https://github.com/QwenLM/Qwen","description":"阿里巴巴开源的Qwen通义千问系列大语言模型","tags":[["技术开发","开源项目"]]}
+{"title":"DeepSeek模型","url":"https://github.com/deepseek-ai","description":"深度求索开源的大语言模型，以高效训练与推理性能见长","tags":[["技术开发","开源项目"]]}
+{"title":"ChatGLM开源","url":"https://github.com/THUDM/ChatGLM-6B","description":"清华与智谱开源的ChatGLM系列双语对话模型","tags":[["技术开发","开源项目"]]}
+{"title":"Stable Diffusion","url":"https://stability.ai","description":"Stability AI开源的最流行文本到图像生成模型","tags":[["技术开发","开源项目"],["工具效率","内容创作"]]}
+{"title":"Whisper","url":"https://github.com/openai/whisper","description":"OpenAI开源的通用语音识别模型，支持99种语言","tags":[["技术开发","开源项目"]]}
+{"title":"OpenCV","url":"https://opencv.org","description":"经典的开源计算机视觉库，广泛应用于AI图像处理","tags":[["技术开发","开源项目"]]}
+{"title":"PyTorch","url":"https://pytorch.org","description":"Meta开源的深度学习框架，AI研究的行业标准工具","tags":[["技术开发","开源项目"]]}
+{"title":"TensorFlow","url":"https://www.tensorflow.org","description":"Google开源的端到端机器学习平台，广泛用于生产与科研","tags":[["技术开发","开源项目"]]}
+{"title":"JAX","url":"https://github.com/google/jax","description":"Google开源的高性能数值计算与机器学习框架","tags":[["技术开发","开源项目"]]}
+{"title":"Apache MXNet","url":"https://mxnet.apache.org","description":"Apache基金会的高效深度学习框架，支持多语言与分布式训练","tags":[["技术开发","开源项目"]]}
+{"title":"XGBoost","url":"https://xgboost.readthedocs.io","description":"经典的开源梯度提升库，在结构化数据上表现优异","tags":[["技术开发","开源项目"]]}
+{"title":"Scikit-learn","url":"https://scikit-learn.org","description":"Python机器学习最广泛使用的开源库，涵盖分类、回归、聚类","tags":[["技术开发","开源项目"]]}
+{"title":"ONNX Runtime","url":"https://onnxruntime.ai","description":"微软开源的高性能AI模型推理引擎，支持跨平台与硬件加速","tags":[["技术开发","开源项目"]]}
+{"title":"OpenAI Gym","url":"https://github.com/openai/gym","description":"OpenAI开源的强化学习环境工具包，成为RL研发标准","tags":[["技术开发","开源项目"]]}
+{"title":"波士顿动力","url":"https://bostondynamics.com","description":"全球领先的机器人研发公司，以Atlas人形机器人与Spot机器狗闻名","tags":[["技术开发","机器人"]]}
+{"title":"Tesla AI & Robotics","url":"https://www.tesla.com/AI","description":"特斯拉AI部门，研发自动驾驶FSD与人形机器人Optimus","tags":[["技术开发","机器人"],["技术开发","自动驾驶"]]}
+{"title":"Waymo","url":"https://waymo.com","description":"Google母公司Alphabet旗下自动驾驶公司，已在多地开展Robotaxi服务","tags":[["技术开发","自动驾驶"]]}
+{"title":"Cruise","url":"https://www.getcruise.com","description":"通用汽车旗下的自动驾驶子公司，专注城市Robotaxi运营","tags":[["技术开发","自动驾驶"]]}
+{"title":"小马智行","url":"https://www.pony.ai","description":"头部自动驾驶技术公司，在中美均有Robotaxi与Robotruck业务","tags":[["技术开发","自动驾驶"]]}
+{"title":"文远知行","url":"https://www.weride.ai","description":"全球领先的L4级自动驾驶公司，覆盖Robotaxi、Robobus等多场景","tags":[["技术开发","自动驾驶"]]}
+{"title":"百度Apollo","url":"https://apollo.baidu.com","description":"百度自动驾驶开放平台，提供Robotaxi服务与自动驾驶解决方案","tags":[["技术开发","自动驾驶"]]}
+{"title":"DJI大疆","url":"https://www.dji.com","description":"全球无人机与摄影技术领导者，拓展机器人及AI视觉领域","tags":[["技术开发","机器人"]]}
+{"title":"优必选科技","url":"https://www.ubtrobot.com","description":"中国人形机器人代表企业，覆盖教育、服务与工业机器人","tags":[["技术开发","机器人"]]}
+{"title":"Figure AI","url":"https://www.figure.ai","description":"美国AI人形机器人公司，对标Tesla Optimus打造通用人形机器人","tags":[["技术开发","机器人"]]}
+{"title":"OpenAI Robotics","url":"https://openai.com","description":"OpenAI此前在机器人研究领域的探索，影响深远","tags":[["技术开发","机器人"]]}
+{"title":"Agility Robotics","url":"https://agilityrobotics.com","description":"美国双足机器人公司，Digit人形机器人已在物流仓库实用","tags":[["技术开发","机器人"]]}
+{"title":"宇树科技","url":"https://www.unitree.com","description":"中国四足与人形机器人领先企业，推出高性能机器狗与G1人形机器人","tags":[["技术开发","机器人"]]}
+{"title":"Nuro","url":"https://www.nuro.ai","description":"自动驾驶配送车公司，专注最后一公里无人送货","tags":[["技术开发","自动驾驶"]]}
+{"title":"地平线机器人","url":"https://www.horizon.ai","description":"中国车规级AI芯片领导者，提供智能驾驶计算平台","tags":[["技术开发","自动驾驶"]]}
+{"title":"Aurora Innovation","url":"https://aurora.tech","description":"自动驾驶卡车技术公司，专注高速公路货运自动驾驶","tags":[["技术开发","自动驾驶"]]}
+{"title":"Zipline","url":"https://www.flyzipline.com","description":"无人机医疗配送公司，已在卢旺达等地大规模运营紧急物资运送","tags":[["技术开发","机器人"]]}
+{"title":"1X Technologies","url":"https://www.1x.tech","description":"挪威AI人形机器人公司，开发面向家庭的EVE与NEO机器人","tags":[["技术开发","机器人"]]}
+{"title":"Ameca","url":"https://www.engineeredarts.co.uk","description":"英国仿真人形机器人制造商，打造表情最丰富的人形机器人","tags":[["技术开发","机器人"]]}
+{"title":"Apptronik","url":"https://apptronik.com","description":"德州大学衍生的人形机器人公司，推出Apollo通用机器人","tags":[["技术开发","机器人"]]}
+{"title":"MetaMask","url":"https://metamask.io","description":"最流行的以太坊钱包与浏览器扩展，Web3生态入口","tags":[["技术开发","Web3"]]}
+{"title":"Uniswap","url":"https://uniswap.org","description":"以太坊上去中心化交易所DEX的开创者，AMM机制标杆","tags":[["技术开发","Web3"]]}
+{"title":"OpenSea","url":"https://opensea.io","description":"全球最大的NFT交易市场，支持多条链的数字藏品交易","tags":[["技术开发","Web3"]]}
+{"title":"Etherscan","url":"https://etherscan.io","description":"以太坊区块链浏览器，可查询交易、地址、合约与代币信息","tags":[["技术开发","Web3"]]}
+{"title":"Solana","url":"https://solana.com","description":"高性能公链，以高TPS与低费用支持DeFi与NFT应用","tags":[["技术开发","Web3"]]}
+{"title":"Polygon","url":"https://polygon.technology","description":"以太坊Layer 2扩容方案，提供快速低成本的交易环境","tags":[["技术开发","Web3"]]}
+{"title":"Avalanche","url":"https://www.avax.network","description":"高性能Layer 1公链，支持子网架构与快速最终确认","tags":[["技术开发","Web3"]]}
+{"title":"Arbitrum","url":"https://arbitrum.io","description":"以太坊Optimistic Rollup Layer 2扩容方案，TVL领先","tags":[["技术开发","Web3"]]}
+{"title":"Optimism","url":"https://www.optimism.io","description":"以太坊Optimistic Rollup网络，推动公共数字基础设施","tags":[["技术开发","Web3"]]}
+{"title":"Chainlink","url":"https://chain.link","description":"去中心化预言机网络，为智能合约提供链下数据","tags":[["技术开发","Web3"]]}
+{"title":"The Graph","url":"https://thegraph.com","description":"Web3数据索引协议，让去中心化应用高效查询区块链数据","tags":[["技术开发","Web3"]]}
+{"title":"Alchemy","url":"https://www.alchemy.com","description":"Web3开发平台，提供区块链API、节点服务与开发者工具","tags":[["技术开发","Web3"]]}
+{"title":"Infura","url":"https://www.infura.io","description":"以太坊与IPFS的API基础设施，提供可靠的节点连接服务","tags":[["技术开发","Web3"]]}
+{"title":"ENS","url":"https://ens.domains","description":"以太坊域名服务，将长地址映射为人可读的.eth域名","tags":[["技术开发","Web3"]]}
+{"title":"IPFS","url":"https://ipfs.tech","description":"星际文件系统，去中心化的内容寻址点对点网络协议","tags":[["技术开发","Web3"]]}
+{"title":"Filecoin","url":"https://filecoin.io","description":"基于IPFS的去中心化存储网络，以加密经济激励文件存储","tags":[["技术开发","Web3"]]}
+{"title":"Arweave","url":"https://www.arweave.org","description":"永久存储协议，以一次性付费实现数据的永久存储","tags":[["技术开发","Web3"]]}
+{"title":"以太坊","url":"https://ethereum.org","description":"全球最主要的智能合约公链，去中心化应用的核心基础设施","tags":[["技术开发","Web3"]]}
+{"title":"Polkadot","url":"https://polkadot.network","description":"多链互操作网络，通过平行链架构实现跨链通信","tags":[["技术开发","Web3"]]}
+{"title":"Cosmos","url":"https://cosmos.network","description":"区块链互联网生态系统，通过IBC协议实现链间互操作","tags":[["技术开发","Web3"]]}
+{"title":"Tether","url":"https://tether.to","description":"全球最大美元稳定币USDT发行方，Web3支付基础设施","tags":[["技术开发","Web3"]]}
+{"title":"Circle USDC","url":"https://www.circle.com","description":"全球第二大稳定币USDC发行方，合规化数字美元","tags":[["技术开发","Web3"]]}
+{"title":"MakerDAO","url":"https://makerdao.com","description":"去中心化稳定币DAI发行协议，DeFi领域的奠基者","tags":[["技术开发","Web3"]]}
+{"title":"Aave","url":"https://aave.com","description":"领先的去中心化借贷协议，支持多种加密资产的存借","tags":[["技术开发","Web3"]]}
+{"title":"Ledger","url":"https://www.ledger.com","description":"全球领先的硬件加密钱包，安全存储私钥与数字资产","tags":[["技术开发","Web3"]]}
+{"title":"IBM Quantum","url":"https://www.ibm.com/quantum","description":"IBM量子计算云平台，提供量子处理器访问与Qiskit开发框架","tags":[["技术开发","量子计算"]]}
+{"title":"Google Quantum AI","url":"https://quantumai.google","description":"谷歌量子计算实验室，曾实现量子霸权里程碑","tags":[["技术开发","量子计算"]]}
+{"title":"D-Wave","url":"https://www.dwavesys.com","description":"全球首个商用量子计算机公司，专注量子退火技术","tags":[["技术开发","量子计算"]]}
+{"title":"Rigetti Computing","url":"https://www.rigetti.com","description":"美国全栈量子计算公司，提供超导量子处理器与云服务","tags":[["技术开发","量子计算"]]}
+{"title":"IonQ","url":"https://ionq.com","description":"离子阱量子计算领军企业，已上市并提供云端量子计算服务","tags":[["技术开发","量子计算"]]}
+{"title":"Xanadu","url":"https://www.xanadu.ai","description":"加拿大光量子计算公司，开发PennyLane量子机器学习框架","tags":[["技术开发","量子计算"]]}
+{"title":"PsiQuantum","url":"https://www.psiquantum.com","description":"硅基光量子计算公司，目标建造百万量子比特的通用量子计算机","tags":[["技术开发","量子计算"]]}
+{"title":"本源量子","url":"https://www.originqc.com.cn","description":"中国首家量子计算公司，推出悟源、悟本系列量子计算机","tags":[["技术开发","量子计算"]]}
+{"title":"国盾量子","url":"https://www.quantum-info.com","description":"中国量子通信龙头企业，提供量子保密通信核心设备","tags":[["技术开发","量子计算"]]}
+{"title":"国仪量子","url":"https://www.ciqtek.com","description":"中国量子精密测量仪器公司，中科院中科大量子技术转化","tags":[["技术开发","量子计算"]]}
+{"title":"Qiskit","url":"https://qiskit.org","description":"IBM主导的开源量子计算SDK，最流行的量子编程框架","tags":[["技术开发","量子计算"]]}
+{"title":"QuEra Computing","url":"https://www.quera.com","description":"中性原子量子计算公司，来自哈佛大学与MIT的团队","tags":[["技术开发","量子计算"]]}
+{"title":"Quantinuum","url":"https://www.quantinuum.com","description":"霍尼韦尔量子与Cambridge Quantum合并的集成量子计算公司","tags":[["技术开发","量子计算"]]}
+{"title":"Microsoft Azure Quantum","url":"https://azure.microsoft.com/en-us/products/quantum","description":"微软量子计算云平台，提供量子资源与Q#开发环境","tags":[["技术开发","量子计算"]]}
+{"title":"Amazon Braket","url":"https://aws.amazon.com/braket","description":"AWS量子计算云服务，可访问D-Wave、IonQ、Rigetti量子处理器","tags":[["技术开发","量子计算"]]}
+{"title":"Alice & Bob","url":"https://alice-bob.com","description":"法国量子计算公司，以自纠错Cat量子比特技术为特色","tags":[["技术开发","量子计算"]]}
+{"title":"Oxford Quantum Circuits","url":"https://oxfordquantumcircuits.com","description":"英国超导量子计算公司，推出Toshiko系列量子处理器","tags":[["技术开发","量子计算"]]}
+{"title":"IQM","url":"https://www.meetiqm.com","description":"欧洲超导量子计算硬件公司，为研究机构提供量子处理器","tags":[["技术开发","量子计算"]]}
+{"title":"中科院量子信息实验室","url":"https://quantum.ustc.edu.cn","description":"中科大潘建伟团队领衔的中国量子信息科学研究重镇","tags":[["技术开发","量子计算"]]}
+{"title":"Quantum Machines","url":"https://www.quantum-machines.co","description":"以色列量子控制操作系统公司，提供量子计算编排层解决方案","tags":[["技术开发","量子计算"]]}
+{"title":"SpaceX","url":"https://www.spacex.com","description":"Elon Musk创办的航天公司，以可回收火箭与星舰闻名","tags":[["技术开发","航天"]]}
+{"title":"NASA","url":"https://www.nasa.gov","description":"美国国家航空航天局，全球最权威的航天与航空研究机构","tags":[["技术开发","航天"]]}
+{"title":"Blue Origin","url":"https://www.blueorigin.com","description":"Jeff Bezos创办的航天公司，开发New Shepard与New Glenn火箭","tags":[["技术开发","航天"]]}
+{"title":"ESA","url":"https://www.esa.int","description":"欧洲航天局，22个成员国合作的航天研究与发展组织","tags":[["技术开发","航天"]]}
+{"title":"JAXA","url":"https://www.jaxa.jp","description":"日本宇宙航空研究开发机构，在深空探测与返回技术领先","tags":[["技术开发","航天"]]}
+{"title":"中国航天科技集团","url":"https://www.spacechina.com","description":"中国航天主力军，研发长征系列火箭与载人航天工程","tags":[["技术开发","航天"]]}
+{"title":"中国航天科工集团","url":"https://www.casic.com.cn","description":"中国军工航天企业，覆盖导弹、卫星与商业航天","tags":[["技术开发","航天"]]}
+{"title":"中国卫星网络集团","url":"https://www.chinasatcom.com","description":"中国卫星互联网建设运营主体，推动低轨宽带卫星星座建设","tags":[["技术开发","航天"]]}
+{"title":"Starlink","url":"https://www.starlink.com","description":"SpaceX低轨卫星互联网服务，全球最大卫星星座","tags":[["技术开发","航天"]]}
+{"title":"Rocket Lab","url":"https://www.rocketlabusa.com","description":"美国小型运载火箭公司，Electron火箭已高频次发射","tags":[["技术开发","航天"]]}
+{"title":"Planet Labs","url":"https://www.planet.com","description":"全球最大地球观测卫星星座运营商，每日拍摄全球影像","tags":[["技术开发","航天"]]}
+{"title":"Maxar","url":"https://www.maxar.com","description":"领先的高分辨率地球观测卫星与空间基础设施公司","tags":[["技术开发","航天"]]}
+{"title":"AST SpaceMobile","url":"https://ast-science.com","description":"建设太空蜂窝宽带网络，让普通手机直连卫星通信","tags":[["技术开发","航天"]]}
+{"title":"Relativity Space","url":"https://www.relativityspace.com","description":"3D打印火箭制造公司，开发全3D打印的可重复使用火箭","tags":[["技术开发","航天"]]}
+{"title":"Sierra Space","url":"https://www.sierraspace.com","description":"商业空间站Dream Chaser太空飞机开发商","tags":[["技术开发","航天"]]}
+{"title":"Firefly Aerospace","url":"https://fireflyspace.com","description":"美国商业火箭与月球着陆器公司，提供中小型运载服务","tags":[["技术开发","航天"]]}
+{"title":"北京航空航天大学","url":"https://www.buaa.edu.cn","description":"中国航空航天领域顶尖科研学府，培养大量航天人才","tags":[["技术开发","航天"]]}
+{"title":"哈尔滨工业大学","url":"https://www.hit.edu.cn","description":"中国航天工程技术研究核心力量，参与多项国家航天项目","tags":[["技术开发","航天"]]}
+{"title":"南京航空航天大学","url":"https://www.nuaa.edu.cn","description":"中国民航与航天人才培养基地，航空航天特色高校","tags":[["技术开发","航天"]]}
+{"title":"北斗卫星导航系统","url":"http://www.beidou.gov.cn","description":"北斗卫星导航系统官方网站，提供北斗系统应用与推广信息","tags":[["技术开发","航天"]]}
+{"title":"Axiom Space","url":"https://www.axiomspace.com","description":"商业空间站建设与运营公司，承接NASA国际空间站商业化任务","tags":[["技术开发","航天"]]}
+{"title":"Amazon Bedrock","url":"https://aws.amazon.com/bedrock","description":"AWS全托管大模型服务，提供Claude、LLaMA、Titan等模型API","tags":[["技术开发","AI 工具"]]}
+{"title":"云从科技","url":"https://www.cloudwalk.com","description":"中国人机协同AI公司，深耕大模型与智能金融场景","tags":[["技术开发","AI 工具"]]}
+{"title":"第四范式","url":"https://www.4paradigm.com","description":"中国AI决策公司，企业级AI平台主导者","tags":[["技术开发","AI 工具"]]}
+{"title":"Cohere","url":"https://cohere.com","description":"加拿大企业级大语言模型公司，专注检索增强生成与嵌入模型","tags":[["技术开发","AI 工具"]]}
+{"title":"AI21 Labs","url":"https://www.ai21.com","description":"以色列大语言模型公司，推出Jurassic系列模型与Wordtune写作工具","tags":[["技术开发","AI 工具"]]}
+{"title":"Inflection AI","url":"https://inflection.ai","description":"由DeepMind联合创始人创办，推出Pi个人AI助手","tags":[["技术开发","AI 工具"]]}
+{"title":"Anthropic","url":"https://www.anthropic.com","description":"Claude的研发公司，专注AI安全与对齐研究","tags":[["技术开发","AI 工具"]]}
+{"title":"DeepL","url":"https://www.deepl.com","description":"AI驱动的专业翻译工具，翻译质量广受好评","tags":[["工具效率","办公协作"]]}
+{"title":"HeyGen","url":"https://www.heygen.com","description":"AI数字人视频生成平台，可快速创建多语言AI主播视频","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Synthesia","url":"https://www.synthesia.io","description":"AI虚拟人视频生成平台，140+语言AI主播视频制作","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"D-ID","url":"https://www.d-id.com","description":"AI数字人视频平台，可将静态照片转为会说话的视频","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Pika Labs","url":"https://pika.art","description":"AI视频生成工具，通过文字或图像快速生成创意短视频","tags":[["工具效率","内容创作"],["技术开发","AI 工具"]]}
+{"title":"Vercel AI SDK","url":"https://sdk.vercel.ai","description":"用于构建AI驱动应用的TypeScript工具包，支持多框架集成","tags":[["技术开发","开发工具"]]}
+{"title":"CrewAI","url":"https://www.crewai.com","description":"多AI Agent协作框架，支持编排复杂的自动化工件流","tags":[["技术开发","开发工具"]]}
+{"title":"AutoGen","url":"https://github.com/microsoft/autogen","description":"微软开源的多Agent对话框架，支持构建复杂AI系统","tags":[["技术开发","开发工具"]]}
+{"title":"Langfuse","url":"https://langfuse.com","description":"开源LLM可观测性与分析平台，跟踪token用量、延迟与质量","tags":[["技术开发","开发工具"]]}
+{"title":"Airtrain","url":"https://www.airtrain.ai","description":"无代码AI模型微调平台，简化大模型的定制化训练","tags":[["技术开发","开发工具"]]}
+{"title":"Groq","url":"https://groq.com","description":"AI推理加速芯片公司，LPU架构实现极速大模型推理","tags":[["技术开发","AI 工具"]]}
+{"title":"Cerebras Systems","url":"https://www.cerebras.net","description":"推出晶圆级AI芯片WSE-3，超大规模AI训练与推理","tags":[["技术开发","AI 工具"]]}
+{"title":"SambaNova","url":"https://sambanova.ai","description":"全栈AI平台公司，自研可重构数据流加速器","tags":[["技术开发","AI 工具"]]}
+{"title":"Graphcore","url":"https://www.graphcore.ai","description":"英国AI芯片公司，推出IPU智能处理器","tags":[["技术开发","AI 工具"]]}
+{"title":"NVIDIA AI","url":"https://www.nvidia.com/en-us/ai","description":"NVIDIA AI计算平台，提供GPU、CUDA与AI框架","tags":[["技术开发","AI 工具"]]}
+{"title":"Baseten","url":"https://www.baseten.co","description":"专为大模型优化的ML模型部署平台","tags":[["技术开发","开发工具"]]}
+{"title":"Roboflow","url":"https://roboflow.com","description":"计算机视觉开发平台，提供数据标注训练部署一体化服务","tags":[["技术开发","开发工具"]]}
+{"title":"Labelbox","url":"https://labelbox.com","description":"AI数据标注与管理平台，支持多模态数据标注","tags":[["技术开发","开发工具"]]}
+{"title":"Scale AI","url":"https://scale.com","description":"AI数据标注巨头，为OpenAI、Meta等提供训练数据服务","tags":[["技术开发","AI 工具"]]}
+{"title": "Hugging Face Hub", "url": "https://huggingface.co/docs/hub", "description": "Hugging Face模型与数据集仓库，托管超50万AI资源", "tags": [["技术开发", "开发工具"]]}
+{"title": "SpaceX API", "url": "https://github.com/r-spacex/SpaceX-API", "description": "SpaceX开源数据API，提供火箭、发射、飞船等开放数据", "tags": [["技术开发", "航天"]]}

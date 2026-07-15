@@ -1,0 +1,205 @@
+{"title":"Google Scholar","url":"https://scholar.google.com","description":"全球最大的学术文献搜索引擎，提供跨学科学术论文、图书、摘要检索与引用分析。","tags":[["科学学术","学术搜索"]]}
+{"title":"百度学术","url":"https://xueshu.baidu.com","description":"百度旗下的中文学术资源搜索平台，整合知网、万方、维普等中文数据库。","tags":[["科学学术","学术搜索"]]}
+{"title":"中国知网 CNKI","url":"https://www.cnki.net","description":"中国最大的中文学术文献数据库，涵盖期刊、博硕士论文、会议论文等全文资源。","tags":[["科学学术","学术搜索"]]}
+{"title":"万方数据","url":"https://www.wanfangdata.com.cn","description":"综合性中文学术数据库，提供期刊论文、学位论文、会议论文、专利标准等检索服务。","tags":[["科学学术","学术搜索"]]}
+{"title":"维普中文期刊","url":"http://www.cqvip.com","description":"国内大型中文科技期刊全文数据库，覆盖自然科学、工程技术、医药卫生等领域。","tags":[["科学学术","学术搜索"]]}
+{"title":"Web of Science","url":"https://www.webofscience.com","description":"科睿唯安旗下权威学术引文索引数据库，收录SCI/SSCI/AHCI等核心期刊。","tags":[["科学学术","学术搜索"]]}
+{"title":"Scopus","url":"https://www.scopus.com","description":"爱思唯尔旗下的全球最大同行评审文献摘要和引文数据库，覆盖多学科领域。","tags":[["科学学术","学术搜索"]]}
+{"title":"PubMed","url":"https://pubmed.ncbi.nlm.nih.gov","description":"美国国家医学图书馆提供的生物医学文献免费检索系统，收录MEDLINE等数据库。","tags":[["科学学术","学术搜索"]]}
+{"title":"IEEE Xplore","url":"https://ieeexplore.ieee.org","description":"IEEE旗下的电气电子工程与计算机科学领域权威文献数据库。","tags":[["科学学术","学术搜索"]]}
+{"title":"ACM Digital Library","url":"https://dl.acm.org","description":"美国计算机协会（ACM）的全文数据库，涵盖计算机科学与信息技术领域前沿成果。","tags":[["科学学术","学术搜索"]]}
+{"title":"ResearchGate","url":"https://www.researchgate.net","description":"面向科研人员的学术社交网络平台，可分享论文、关注同行、获取文献全文。","tags":[["科学学术","学术搜索"]]}
+{"title":"Semantic Scholar","url":"https://www.semanticscholar.org","description":"AI驱动的学术搜索引擎，利用自然语言处理技术分析文献，提供高影响力引文网络。","tags":[["科学学术","学术搜索"]]}
+{"title":"Microsoft Academic","url":"https://academic.microsoft.com","description":"微软推出的免费学术搜索引擎，利用知识图谱技术检索学术出版物和作者信息。","tags":[["科学学术","学术搜索"]]}
+{"title":"BASE","url":"https://www.base-search.net","description":"比勒菲尔德学术搜索引擎，全球最大的开放获取学术资源搜索引擎之一。","tags":[["科学学术","学术搜索"]]}
+{"title":"CORE","url":"https://core.ac.uk","description":"全球最大的开放获取学术论文聚合平台，提供全文检索和元数据服务。","tags":[["科学学术","学术搜索"]]}
+{"title":"ScienceDirect","url":"https://www.sciencedirect.com","description":"爱思唯尔旗下的全文科学文献数据库，涵盖自然科学、工程技术、医学等领域。","tags":[["科学学术","学术搜索"]]}
+{"title":"SpringerLink","url":"https://link.springer.com","description":"施普林格旗下的学术期刊、图书、参考工具书全文在线平台。","tags":[["科学学术","学术搜索"]]}
+{"title":"Wiley Online Library","url":"https://onlinelibrary.wiley.com","description":"威立出版社的学术资源平台，收录生命科学、医学、化学等学科期刊和图书。","tags":[["科学学术","学术搜索"]]}
+{"title":"arXiv","url":"https://arxiv.org","description":"康奈尔大学运营的物理学、数学、计算机科学等领域论文预印本开放获取平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"bioRxiv","url":"https://www.biorxiv.org","description":"冷泉港实验室运营的生物学领域论文预印本免费在线平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"medRxiv","url":"https://www.medrxiv.org","description":"医学、临床研究和健康科学领域的论文预印本开放平台，由冷泉港实验室等运营。","tags":[["科学学术","论文预印本"]]}
+{"title":"SSRN","url":"https://www.ssrn.com","description":"社会科学研究网络，爱思唯尔旗下的社会科学及人文领域预印本和工作论文平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"ChemRxiv","url":"https://chemrxiv.org","description":"化学领域的论文预印本开放获取平台，由美国化学会等多家学会联合运营。","tags":[["科学学术","论文预印本"]]}
+{"title":"PsyArXiv","url":"https://psyarxiv.com","description":"心理学领域的论文预印本免费开放平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"SocArXiv","url":"https://osf.io/preprints/socarxiv","description":"社会科学领域的开放获取预印本平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"EarthArXiv","url":"https://eartharxiv.org","description":"地球科学领域的论文预印本开放获取平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"engrXiv","url":"https://engrxiv.org","description":"工程学领域的论文预印本开放获取平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"Research Square","url":"https://www.researchsquare.com","description":"多学科论文预印本平台，并与多家期刊合作提供审稿前发表服务。","tags":[["科学学术","论文预印本"]]}
+{"title":"Preprints.org","url":"https://www.preprints.org","description":"MDPI运营的多学科论文预印本开放平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"果壳网","url":"https://www.guokr.com","description":"中国领先的大众科普平台，以生动有趣的方式传播科学知识，涵盖科技、自然、健康等领域。","tags":[["科学学术","科普平台"]]}
+{"title":"科学松鼠会","url":"http://songshuhui.net","description":"中国科学作家组成的科普公益组织，致力于推动中文世界的科学传播。","tags":[["科学学术","科普平台"]]}
+{"title":"知乎科学","url":"https://www.zhihu.com/topic/19551147","description":"知乎平台上的科学话题社区，汇聚大量科学问答和科普讨论。","tags":[["科学学术","科普平台"]]}
+{"title":"科普中国","url":"https://www.kepuchina.cn","description":"中国科协旗下的国家级科普信息化平台，提供权威科学知识和辟谣服务。","tags":[["科学学术","科普平台"]]}
+{"title":"Quanta Magazine","url":"https://www.quantamagazine.org","description":"深度报道数学、理论物理、计算机科学和生物学前沿进展的科普杂志。","tags":[["科学学术","科普平台"]]}
+{"title":"Scientific American","url":"https://www.scientificamerican.com","description":"全球历史最悠久的科普杂志之一，以权威科学报道和深度分析著称。","tags":[["科学学术","科普平台"]]}
+{"title":"Nature","url":"https://www.nature.com","description":"国际顶级科学期刊，发表各学科前沿研究成果和科学新闻。","tags":[["科学学术","科普平台"]]}
+{"title":"Science","url":"https://www.science.org","description":"美国科学促进会（AAAS）出版的权威科学期刊，涵盖所有科学领域。","tags":[["科学学术","科普平台"]]}
+{"title":"New Scientist","url":"https://www.newscientist.com","description":"面向大众的全球知名科学科技新闻杂志，内容涵盖科技、健康、环境等。","tags":[["科学学术","科普平台"]]}
+{"title":"National Geographic Science","url":"https://www.nationalgeographic.com/science","description":"国家地理杂志科学频道，报道自然探索与科学研究的前沿资讯。","tags":[["科学学术","科普平台"]]}
+{"title":"BBC Science","url":"https://www.bbc.com/news/science_and_environment","description":"英国广播公司科技与环境新闻频道，提供全球科学动态报道。","tags":[["科学学术","科普平台"]]}
+{"title":"ScienceDaily","url":"https://www.sciencedaily.com","description":"每日更新的科学研究新闻聚合平台，覆盖所有学科最新研究成果。","tags":[["科学学术","科普平台"]]}
+{"title":"Live Science","url":"https://www.livescience.com","description":"面向大众的科普新闻网站，报道最新科学发现、技术突破和奇趣事实。","tags":[["科学学术","科普平台"]]}
+{"title":"Khan Academy","url":"https://www.khanacademy.org","description":"免费提供数学、科学、计算机等各学科在线课程和交互学习的非营利教育平台。","tags":[["科学学术","科普平台"]]}
+{"title":"TED 科学演讲","url":"https://www.ted.com/topics/science","description":"TED平台上的科学主题演讲合集，由全球科学家和思想者分享前沿观点。","tags":[["科学学术","科普平台"]]}
+{"title":"Kaggle","url":"https://www.kaggle.com","description":"全球最大的数据科学竞赛平台和数据社区，提供公开数据集、竞赛和云端编程环境。","tags":[["科学学术","开放数据"]]}
+{"title":"UCI Machine Learning Repository","url":"https://archive.ics.uci.edu","description":"加州大学欧文分校维护的经典机器学习数据集仓库，广泛用于学术研究和教学。","tags":[["科学学术","开放数据"]]}
+{"title":"data.gov","url":"https://data.gov","description":"美国政府开放数据门户，提供超过30万公共数据集，涵盖气候、健康、教育等领域。","tags":[["科学学术","开放数据"]]}
+{"title":"国家统计局","url":"https://www.stats.gov.cn","description":"中国国家统计局官方网站，发布国民经济和社会发展统计数据与普查信息。","tags":[["科学学术","开放数据"]]}
+{"title":"世界银行开放数据","url":"https://data.worldbank.org","description":"世界银行提供的全球发展数据免费获取平台，涵盖经济、人口、环境等指标。","tags":[["科学学术","开放数据"]]}
+{"title":"Google Dataset Search","url":"https://datasetsearch.research.google.com","description":"谷歌推出的数据集专用搜索引擎，可检索全球各类公开数据集。","tags":[["科学学术","开放数据"]]}
+{"title":"Zenodo","url":"https://zenodo.org","description":"CERN运营的开放科学数据存储库，支持研究数据、软件、论文等多类型成果共享。","tags":[["科学学术","开放数据"]]}
+{"title":"Figshare","url":"https://figshare.com","description":"面向研究人员的在线数字对象存储和共享平台，支持数据、图表、视频等。","tags":[["科学学术","开放数据"]]}
+{"title":"Dryad","url":"https://datadryad.org","description":"面向科研数据的国际开放存储库，专注于与学术论文关联的科学数据长期保存。","tags":[["科学学术","开放数据"]]}
+{"title":"Harvard Dataverse","url":"https://dataverse.harvard.edu","description":"哈佛大学运营的科研数据开放共享平台，支持研究者发布和管理数据。","tags":[["科学学术","开放数据"]]}
+{"title":"Open Data Network","url":"https://www.opendatanetwork.com","description":"整合全球多个公开数据源的数据搜索和分析平台。","tags":[["科学学术","开放数据"]]}
+{"title":"EU Open Data Portal","url":"https://data.europa.eu","description":"欧盟官方开放数据门户，提供欧盟机构和成员国的公开数据资源。","tags":[["科学学术","开放数据"]]}
+{"title":"国家数据","url":"https://data.stats.gov.cn","description":"国家统计局提供的官方数据查询平台，可检索中国各级各类统计指标数据。","tags":[["科学学术","开放数据"]]}
+{"title":"OSF","url":"https://osf.io","description":"开放科学框架，支持研究者全流程管理和共享研究项目、数据、材料和预注册。","tags":[["科学学术","开放数据"]]}
+{"title":"中国政府网","url":"https://www.gov.cn","description":"中华人民共和国中央人民政府门户网站，发布国家政策法规、政务信息和政府服务。","tags":[["政府组织","中国政府"]]}
+{"title":"外交部","url":"https://www.fmprc.gov.cn","description":"中华人民共和国外交部官方网站，发布外交动态、领事服务和国际关系信息。","tags":[["政府组织","中国政府"]]}
+{"title":"教育部","url":"https://www.moe.gov.cn","description":"中华人民共和国教育部官方网站，发布教育政策、招生考试、学历认证等信息。","tags":[["政府组织","中国政府"]]}
+{"title":"科学技术部","url":"https://www.most.gov.cn","description":"中华人民共和国科学技术部官方网站，发布科技政策、项目申报和科研动态。","tags":[["政府组织","中国政府"]]}
+{"title":"财政部","url":"https://www.mof.gov.cn","description":"中华人民共和国财政部官方网站，发布财政政策、预算决算和税收法规。","tags":[["政府组织","中国政府"]]}
+{"title":"商务部","url":"https://www.mofcom.gov.cn","description":"中华人民共和国商务部官方网站，发布商贸政策、外资外贸和市场运行信息。","tags":[["政府组织","中国政府"]]}
+{"title":"工业和信息化部","url":"https://www.miit.gov.cn","description":"中华人民共和国工业和信息化部官方网站，发布工业、通信业和信息化政策。","tags":[["政府组织","中国政府"]]}
+{"title":"国家发展和改革委员会","url":"https://www.ndrc.gov.cn","description":"中华人民共和国国家发改委官方网站，发布宏观经济规划、产业政策和重大项目。","tags":[["政府组织","中国政府"]]}
+{"title":"人力资源和社会保障部","url":"https://www.mohrss.gov.cn","description":"中华人民共和国人社部官方网站，发布就业、社保、人事人才等政策。","tags":[["政府组织","中国政府"]]}
+{"title":"自然资源部","url":"https://www.mnr.gov.cn","description":"中华人民共和国自然资源部官方网站，发布土地、矿产、海洋、测绘等政策。","tags":[["政府组织","中国政府"]]}
+{"title":"生态环境部","url":"https://www.mee.gov.cn","description":"中华人民共和国生态环境部官方网站，发布环境保护政策、监测数据和污染治理信息。","tags":[["政府组织","中国政府"]]}
+{"title":"住房和城乡建设部","url":"https://www.mohurd.gov.cn","description":"中华人民共和国住建部官方网站，发布城乡规划、住房政策、建筑标准等信息。","tags":[["政府组织","中国政府"]]}
+{"title":"交通运输部","url":"https://www.mot.gov.cn","description":"中华人民共和国交通运输部官方网站，发布公路、铁路、水运、民航等交通政策。","tags":[["政府组织","中国政府"]]}
+{"title":"农业农村部","url":"https://www.moa.gov.cn","description":"中华人民共和国农业农村部官方网站，发布农业政策、乡村振兴和农产品信息。","tags":[["政府组织","中国政府"]]}
+{"title":"文化和旅游部","url":"https://www.mct.gov.cn","description":"中华人民共和国文化和旅游部官方网站，发布文化事业、文化遗产和旅游政策。","tags":[["政府组织","中国政府"]]}
+{"title":"国家卫生健康委员会","url":"https://www.nhc.gov.cn","description":"中华人民共和国国家卫健委官方网站，发布医疗卫生政策、疫情通报和健康科普。","tags":[["政府组织","中国政府"]]}
+{"title":"应急管理部","url":"https://www.mem.gov.cn","description":"中华人民共和国应急管理部官方网站，发布安全生产、防灾减灾和应急救援信息。","tags":[["政府组织","中国政府"]]}
+{"title":"中国人民银行","url":"https://www.pbc.gov.cn","description":"中国的中央银行官方网站，发布货币政策、金融市场和金融稳定信息。","tags":[["政府组织","中国政府"]]}
+{"title":"审计署","url":"https://www.audit.gov.cn","description":"中华人民共和国审计署官方网站，发布审计公告、政策法规和审计动态。","tags":[["政府组织","中国政府"]]}
+{"title":"国家市场监督管理总局","url":"https://www.samr.gov.cn","description":"中华人民共和国市场监管总局官方网站，发布市场监管、食品安全和标准化政策。","tags":[["政府组织","中国政府"]]}
+{"title":"中国人大网","url":"https://www.npc.gov.cn","description":"全国人民代表大会官方网站，发布法律法规、立法动态和监督工作信息。","tags":[["政府组织","中国政府"]]}
+{"title":"中国政协网","url":"https://www.cppcc.gov.cn","description":"中国人民政治协商会议全国委员会官方网站，发布政协提案和协商议政信息。","tags":[["政府组织","中国政府"]]}
+{"title":"最高人民法院","url":"https://www.court.gov.cn","description":"中华人民共和国最高人民法院官方网站，发布司法解释、典型案例和审判动态。","tags":[["政府组织","中国政府"]]}
+{"title":"最高人民检察院","url":"https://www.spp.gov.cn","description":"中华人民共和国最高人民检察院官方网站，发布检察工作、司法解释和法律监督信息。","tags":[["政府组织","中国政府"]]}
+{"title":"北京市政府","url":"https://www.beijing.gov.cn","description":"北京市人民政府官方网站，发布首都政务信息、政策法规和公共服务事项。","tags":[["政府组织","中国政府"]]}
+{"title":"上海市政府","url":"https://www.shanghai.gov.cn","description":"上海市人民政府官方网站，发布上海政务信息、营商政策和城市服务。","tags":[["政府组织","中国政府"]]}
+{"title":"广东省政府","url":"https://www.gd.gov.cn","description":"广东省人民政府官方网站，发布粤港澳大湾区建设、经济政策和民生服务信息。","tags":[["政府组织","中国政府"]]}
+{"title":"浙江省政府","url":"https://www.zj.gov.cn","description":"浙江省人民政府官方网站，发布数字经济、民营经济和公共服务信息。","tags":[["政府组织","中国政府"]]}
+{"title":"江苏省政府","url":"https://www.jiangsu.gov.cn","description":"江苏省人民政府官方网站，发布经济强省建设、科技创新和民生政策信息。","tags":[["政府组织","中国政府"]]}
+{"title":"四川省政府","url":"https://www.sc.gov.cn","description":"四川省人民政府官方网站，发布成渝双城经济圈建设和内陆开放高地政策。","tags":[["政府组织","中国政府"]]}
+{"title":"湖北省政府","url":"https://www.hubei.gov.cn","description":"湖北省人民政府官方网站，发布中部崛起战略、产业发展和政务服务信息。","tags":[["政府组织","中国政府"]]}
+{"title":"山东省政府","url":"https://www.shandong.gov.cn","description":"山东省人民政府官方网站，发布新旧动能转换、海洋强省和乡村振兴政策。","tags":[["政府组织","中国政府"]]}
+{"title":"河南省政府","url":"https://www.henan.gov.cn","description":"河南省人民政府官方网站，发布中原经济区建设和公共服务信息。","tags":[["政府组织","中国政府"]]}
+{"title":"福建省政府","url":"https://www.fujian.gov.cn","description":"福建省人民政府官方网站，发布海峡西岸经济区建设和数字福建政策。","tags":[["政府组织","中国政府"]]}
+{"title":"湖南省政府","url":"https://www.hunan.gov.cn","description":"湖南省人民政府官方网站，发布长株潭一体化和创新型省份建设政策。","tags":[["政府组织","中国政府"]]}
+{"title":"陕西省政府","url":"https://www.shaanxi.gov.cn","description":"陕西省人民政府官方网站，发布西部大开发和一带一路建设政策。","tags":[["政府组织","中国政府"]]}
+{"title":"国务院国有资产监督管理委员会","url":"https://www.sasac.gov.cn","description":"国务院国资委官方网站，发布中央企业改革、国有资产监督政策信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家统计局（国际版）","url":"https://www.stats.gov.cn/english","description":"中国国家统计局英文版，向国际社会发布中国经济和社会发展统计公报。","tags":[["政府组织","中国政府"]]}
+{"title":"海关总署","url":"https://www.customs.gov.cn","description":"中华人民共和国海关总署官方网站，发布进出口贸易统计、关务政策信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家税务总局","url":"https://www.chinatax.gov.cn","description":"国家税务总局官方网站，发布税收政策法规、办税指南和税务新闻。","tags":[["政府组织","中国政府"]]}
+{"title":"国家知识产权局","url":"https://www.cnipa.gov.cn","description":"国家知识产权局官方网站，提供专利商标申请查询、知识产权保护政策。","tags":[["政府组织","中国政府"]]}
+{"title":"香港特别行政区政府","url":"https://www.gov.hk","description":"香港特别行政区政府一站通，提供香港政务信息、在线服务和政策公告。","tags":[["政府组织","中国政府"]]}
+{"title":"澳门特别行政区政府","url":"https://www.gov.mo","description":"澳门特别行政区政府门户网站，发布澳门政务信息和公共服务指南。","tags":[["政府组织","中国政府"]]}
+{"title":"联合国","url":"https://www.un.org","description":"联合国官方网站，发布全球和平安全、发展、人权和国际法相关信息。","tags":[["政府组织","国际组织"]]}
+{"title":"世界卫生组织 WHO","url":"https://www.who.int","description":"联合国下属的全球公共卫生机构官方网站，发布疾病防控指南和全球健康数据。","tags":[["政府组织","国际组织"]]}
+{"title":"世界贸易组织 WTO","url":"https://www.wto.org","description":"全球贸易规则制定和国际经贸争端解决机构，促进全球自由贸易。","tags":[["政府组织","国际组织"]]}
+{"title":"国际货币基金组织 IMF","url":"https://www.imf.org","description":"促进全球货币合作和金融稳定的国际机构，提供经济分析和贷款援助。","tags":[["政府组织","国际组织"]]}
+{"title":"世界银行 World Bank","url":"https://www.worldbank.org","description":"向发展中国家提供资金支持和技术援助的国际金融机构。","tags":[["政府组织","国际组织"]]}
+{"title":"经济合作与发展组织 OECD","url":"https://www.oecd.org","description":"促进成员国经济和社会福祉的国际组织，发布各国经济数据与政策建议。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国教科文组织 UNESCO","url":"https://www.unesco.org","description":"联合国教育、科学和文化组织，推动全球教育公平、科学合作与文化遗产保护。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国粮农组织 FAO","url":"https://www.fao.org","description":"联合国粮食及农业组织，致力于消除饥饿、改善营养和促进可持续农业。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国开发计划署 UNDP","url":"https://www.undp.org","description":"联合国全球发展网络，推动消除贫困、减少不平等和实现可持续发展目标。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国儿童基金会 UNICEF","url":"https://www.unicef.org","description":"联合国附属机构，致力于保障全球儿童生存、发展和受教育的权利。","tags":[["政府组织","国际组织"]]}
+{"title":"国际劳工组织 ILO","url":"https://www.ilo.org","description":"联合国负责劳工权益和社会保障的专门机构，制定国际劳工标准。","tags":[["政府组织","国际组织"]]}
+{"title":"国际原子能机构 IAEA","url":"https://www.iaea.org","description":"推动核能和平利用的国际组织，负责核安全保障和防护标准制定。","tags":[["政府组织","国际组织"]]}
+{"title":"世界知识产权组织 WIPO","url":"https://www.wipo.int","description":"联合国负责知识产权保护的专门机构，管理国际专利和商标体系。","tags":[["政府组织","国际组织"]]}
+{"title":"国际电信联盟 ITU","url":"https://www.itu.int","description":"联合国信息通信技术专门机构，制定全球电信标准和管理频谱资源。","tags":[["政府组织","国际组织"]]}
+{"title":"世界气象组织 WMO","url":"https://public.wmo.int","description":"联合国气候、天气和水资源专门机构，协调全球气象观测和预报。","tags":[["政府组织","国际组织"]]}
+{"title":"国际民航组织 ICAO","url":"https://www.icao.int","description":"联合国航空事务专门机构，制定国际民航标准和安全规范。","tags":[["政府组织","国际组织"]]}
+{"title":"国际海事组织 IMO","url":"https://www.imo.org","description":"联合国海事安全与防止船舶污染专门机构，制定国际海运规则。","tags":[["政府组织","国际组织"]]}
+{"title":"亚太经合组织 APEC","url":"https://www.apec.org","description":"推动亚太地区贸易投资自由化和经济技术合作的区域经济论坛。","tags":[["政府组织","国际组织"]]}
+{"title":"东南亚国家联盟 ASEAN","url":"https://asean.org","description":"东南亚十国组成的区域性政府间合作组织，促进经济、政治和安全合作。","tags":[["政府组织","国际组织"]]}
+{"title":"非洲联盟 AU","url":"https://au.int","description":"非洲55个成员国组成的政治联盟，推动非洲大陆一体化与和平发展。","tags":[["政府组织","国际组织"]]}
+{"title":"欧洲联盟 EU","url":"https://european-union.europa.eu","description":"欧洲27国组成的政治经济联盟官方网站，发布政策和法律信息。","tags":[["政府组织","国际组织"]]}
+{"title":"国家企业信用信息公示系统","url":"https://www.gsxt.gov.cn","description":"国家市场监督管理总局提供的企业信用信息全国统一查询平台。","tags":[["政府组织","公共查询"]]}
+{"title":"国家社会保险公共服务平台","url":"https://si.12333.gov.cn","description":"人力资源和社会保障部提供的全国统一社保查询和服务线上平台。","tags":[["政府组织","公共查询"]]}
+{"title":"全国住房公积金","url":"https://www.12329.gov.cn","description":"住房和城乡建设部提供的住房公积金全国统一查询与服务入口。","tags":[["政府组织","公共查询"]]}
+{"title":"中国裁判文书网","url":"https://wenshu.court.gov.cn","description":"最高人民法院主办的全网统一裁判文书公开平台，可检索各类司法判决文书。","tags":[["政府组织","公共查询"]]}
+{"title":"中国气象局","url":"https://www.cma.gov.cn","description":"中国气象局官方网站，提供全国天气预报、气象预警和气候变化信息。","tags":[["政府组织","公共查询"]]}
+{"title":"中国地震局","url":"https://www.cea.gov.cn","description":"中国地震局官方网站，发布地震监测预报、震灾防御和应急救援信息。","tags":[["政府组织","公共查询"]]}
+{"title":"国家药品监督管理局","url":"https://www.nmpa.gov.cn","description":"国家药监局官方网站，提供药品、医疗器械、化妆品审批和监管信息查询。","tags":[["政府组织","公共查询"]]}
+{"title":"中国执行信息公开网","url":"https://zxgk.court.gov.cn","description":"最高人民法院提供的失信被执行人（老赖）名单全国统一查询平台。","tags":[["政府组织","公共查询"]]}
+{"title":"全国认证认可信息公共服务平台","url":"https://cx.cnca.cn","description":"国家认证认可监督管理委员会提供的认证证书、检验检测机构查询平台。","tags":[["政府组织","公共查询"]]}
+{"title":"国家法律法规数据库","url":"https://flk.npc.gov.cn","description":"全国人大主办的国家级法律法规权威数据库，提供宪法、法律、法规全文检索。","tags":[["政府组织","公共查询"]]}
+{"title":"政府采购网","url":"https://www.ccgp.gov.cn","description":"财政部主办的中国政府采购信息公开发布平台，提供招标公告和中标结果查询。","tags":[["政府组织","公共查询"]]}
+{"title":"国家自然科学基金委员会","url":"https://www.nsfc.gov.cn","description":"负责管理和资助国家自然科学基金的机构，发布基金项目申请和评审信息。","tags":[["科学学术","学术搜索"]]}
+{"title":"中国科学院","url":"https://www.cas.cn","description":"中国最高自然科学研究机构官方网站，发布科研进展、院士信息和学术活动。","tags":[["科学学术","学术搜索"]]}
+{"title":"中国工程院","url":"https://www.cae.cn","description":"中国工程技术最高咨询性学术机构官网，发布院士信息和工程科技战略研究。","tags":[["科学学术","学术搜索"]]}
+{"title":"中国科学技术协会","url":"https://www.cast.org.cn","description":"中国科技工作者的群众组织官方网站，推动科学普及和学术交流。","tags":[["科学学术","学术搜索"]]}
+{"title":"DOAJ","url":"https://doaj.org","description":"开放获取期刊目录，收录全球高质量的同行评审开放获取学术期刊。","tags":[["科学学术","学术搜索"]]}
+{"title":"Sci-Hub","url":"https://sci-hub.se","description":"全球知名学术论文免费获取平台，提供大量付费论文的开放访问。","tags":[["科学学术","学术搜索"]]}
+{"title":"中国科技论文在线","url":"http://www.paper.edu.cn","description":"教育部科技发展中心主办的学术论文预发布和免费开放获取平台。","tags":[["科学学术","论文预印本"]]}
+{"title":"国家哲学社会科学学术期刊数据库","url":"https://www.nssd.cn","description":"中国社科院主办的社会科学学术期刊免费开放获取平台。","tags":[["科学学术","学术搜索"]]}
+{"title":"Taylor & Francis Online","url":"https://www.tandfonline.com","description":"全球知名学术出版机构，提供人文社科和科技领域期刊论文全文服务。","tags":[["科学学术","学术搜索"]]}
+{"title":"ProQuest","url":"https://www.proquest.com","description":"全球性学位论文数据库，收录博硕士论文全文及学术文献资源。","tags":[["科学学术","学术搜索"]]}
+{"title":"EBSCOhost","url":"https://www.ebsco.com","description":"综合学术数据库，提供期刊、电子书和研究报告的全文检索服务。","tags":[["科学学术","学术搜索"]]}
+{"title":"JSTOR","url":"https://www.jstor.org","description":"人文社科领域经典学术期刊回溯数据库，提供历史文献全文检索。","tags":[["科学学术","学术搜索"]]}
+{"title":"ORCID","url":"https://orcid.org","description":"全球科研人员唯一身份标识系统，帮助研究者管理学术产出和身份认证。","tags":[["科学学术","学术搜索"]]}
+{"title":"Crossref","url":"https://www.crossref.org","description":"国际学术出版DOI注册和文献链接管理组织，促进学术引文标准化。","tags":[["科学学术","学术搜索"]]}
+{"title":"PubMed Central","url":"https://www.ncbi.nlm.nih.gov/pmc","description":"美国国立卫生研究院免费全文生物医学和生命科学文献数据库。","tags":[["科学学术","学术搜索"]]}
+{"title":"NASA","url":"https://www.nasa.gov","description":"美国国家航空航天局官方网站，发布太空探索、科学研究和航天技术信息。","tags":[["科学学术","科普平台"]]}
+{"title":"ESA","url":"https://www.esa.int","description":"欧洲空间局官方网站，发布航天任务、空间科学和地球观测等信息。","tags":[["科学学术","科普平台"]]}
+{"title":"中国科普博览","url":"http://www.kepu.net.cn","description":"中国科学院主办的科普虚拟博物馆，涵盖天文、地理、生物等主题。","tags":[["科学学术","科普平台"]]}
+{"title":"Nature Portfolio 中文","url":"https://www.nature.com/nchina","description":"自然系列期刊面向中国读者的中文资讯平台，发布中国科研进展。","tags":[["科学学术","科普平台"]]}
+{"title":"环球科学","url":"https://www.huanqiukexue.com","description":"Scientific American中文版合作平台，提供前沿科学研究的中文解读。","tags":[["科学学术","科普平台"]]}
+{"title":"丁香园","url":"https://www.dxy.cn","description":"面向医生和生命科学专业人员的医药生物领域综合门户社区。","tags":[["科学学术","科普平台"]]}
+{"title":"生物谷","url":"https://www.bioon.com","description":"生物医药领域专业信息平台，报道生命科学前沿进展和产业动态。","tags":[["科学学术","科普平台"]]}
+{"title":"机器之心","url":"https://www.jiqizhixin.com","description":"人工智能和前沿科技专业媒体平台，报道AI研究进展和产业应用。","tags":[["科学学术","科普平台"]]}
+{"title":"中国数字科技馆","url":"https://www.cdstm.cn","description":"中国科协主办的数字科技馆，提供科普资源和虚拟展览服务。","tags":[["科学学术","科普平台"]]}
+{"title":"Phys.org","url":"https://phys.org","description":"国际科学新闻平台，报道物理学、地球科学、纳米技术等前沿研究动态。","tags":[["科学学术","科普平台"]]}
+{"title":"EurekAlert!","url":"https://www.eurekalert.org","description":"美国科学促进会主办的科学新闻发布平台，向记者和公众传播科研进展。","tags":[["科学学术","科普平台"]]}
+{"title":"MIT Technology Review","url":"https://www.technologyreview.com","description":"麻省理工学院出版的科技评论杂志，深度报道新兴技术及其社会影响。","tags":[["科学学术","科普平台"]]}
+{"title":"Discover Magazine","url":"https://www.discovermagazine.com","description":"美国著名科普杂志，以通俗易懂的方式报道科学、技术和医学前沿。","tags":[["科学学术","科普平台"]]}
+{"title":"Smithsonian Magazine","url":"https://www.smithsonianmag.com","description":"史密森尼学会出版的科普杂志，报道历史、科学、艺术和文化。","tags":[["科学学术","科普平台"]]}
+{"title":"中国空气质量在线监测平台","url":"https://www.aqistudy.cn","description":"提供全国城市空气质量实时数据、历史分析和监测对比的公益平台。","tags":[["科学学术","开放数据"]]}
+{"title":"中国国家地球系统科学数据中心","url":"https://www.geodata.cn","description":"科技部主管的地球系统科学数据共享平台，提供地学领域科研数据。","tags":[["科学学术","开放数据"]]}
+{"title":"国家人口健康科学数据中心","url":"https://www.ncmi.cn","description":"科技部人口健康领域国家科学数据中心，提供医学和公共卫生研究数据。","tags":[["科学学术","开放数据"]]}
+{"title":"国家气象科学数据中心","url":"https://data.cma.cn","description":"中国气象局主管的气象科学数据共享服务平台，提供气象观测和预报数据。","tags":[["科学学术","开放数据"]]}
+{"title":"AWS Open Data Registry","url":"https://registry.opendata.aws","description":"亚马逊云托管的公开数据集注册表，提供大规模科学数据的免费访问。","tags":[["科学学术","开放数据"]]}
+{"title":"GitHub Archive Program","url":"https://archiveprogram.github.com","description":"GitHub代码存档计划，旨在长期保存开源代码为人类知识遗产。","tags":[["科学学术","开放数据"]]}
+{"title":"Re3data","url":"https://www.re3data.org","description":"全球科研数据存储库注册目录，帮助研究者查找适合的数据存储和共享平台。","tags":[["科学学术","开放数据"]]}
+{"title":"DataHub","url":"https://datahub.io","description":"开源的数据管理和发布平台，提供全球各类公共数据集的发现和下载。","tags":[["科学学术","开放数据"]]}
+{"title":"联合国数据 UNdata","url":"https://data.un.org","description":"联合国系统统计数据统一入口，提供全球各国经济、社会、人口数据查询。","tags":[["政府组织","国际组织"]]}
+{"title":"WHO 全球卫生观察站","url":"https://www.who.int/data/gho","description":"世界卫生组织全球健康数据门户，提供各国疾病负担和卫生系统数据。","tags":[["政府组织","国际组织"]]}
+{"title":"OECD Data","url":"https://data.oecd.org","description":"经合组织成员国经济社会数据门户，提供各国GDP、就业、教育等指标。","tags":[["政府组织","国际组织"]]}
+{"title":"IMF Data","url":"https://data.imf.org","description":"国际货币基金组织数据门户，提供全球金融统计、贸易和宏观经济数据。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国气候变化框架公约 UNFCCC","url":"https://unfccc.int","description":"全球气候变化应对的国际公约机构，组织缔约方会议和发布气候报告。","tags":[["政府组织","国际组织"]]}
+{"title":"世界知识产权组织专利数据库 PATENTSCOPE","url":"https://patentscope.wipo.int","description":"WIPO提供的全球专利检索系统，可免费查询全球专利文献。","tags":[["政府组织","国际组织"]]}
+{"title":"国际能源署 IEA","url":"https://www.iea.org","description":"全球能源政策协调机构，发布能源统计、分析和脱碳路径建议。","tags":[["政府组织","国际组织"]]}
+{"title":"联合国贸易和发展会议 UNCTAD","url":"https://unctad.org","description":"联合国贸易和发展机构，发布全球投资、贸易和发展统计报告。","tags":[["政府组织","国际组织"]]}
+{"title":"金砖国家 BRICS","url":"https://brics2023.gov.za","description":"巴西、俄罗斯、印度、中国、南非等新兴经济体合作机制信息门户。","tags":[["政府组织","国际组织"]]}
+{"title":"上海合作组织 SCO","url":"https://eng.sectsco.org","description":"欧亚地区政治、经济和安全合作国际组织官方网站。","tags":[["政府组织","国际组织"]]}
+{"title":"G20","url":"https://www.g20.org","description":"二十国集团国际经济合作论坛官方网站，协调全球重大经济议题。","tags":[["政府组织","国际组织"]]}
+{"title":"全国公共资源交易平台","url":"https://ggzyfw.gjzwfw.gov.cn","description":"国家统一的公共资源交易信息发布平台，提供工程招标、政府采购等查询。","tags":[["政府组织","公共查询"]]}
+{"title":"国家企业信用信息公示系统","url":"https://www.gsxt.gov.cn","description":"市场监督管理总局提供的全国统一企业信用信息查询和年度报告公示平台。","tags":[["政府组织","公共查询"]]}
+{"title":"信用中国","url":"https://www.creditchina.gov.cn","description":"全国社会信用体系建设统一门户，提供企业和个人信用信息公开查询。","tags":[["政府组织","公共查询"]]}
+{"title":"中国商标网","url":"https://sbj.cnipa.gov.cn/sbcx","description":"国家知识产权局商标局官方查询平台，提供商标注册、评审信息查询。","tags":[["政府组织","公共查询"]]}
+{"title":"中国专利公布公告查询","url":"http://epub.sipo.gov.cn","description":"国家知识产权局提供的专利公布公告查询系统，可检索中国专利全文。","tags":[["政府组织","公共查询"]]}
+{"title":"全国标准信息公共服务平台","url":"https://std.samr.gov.cn","description":"国家标准委提供的国家标准、行业标准和地方标准统一查询平台。","tags":[["政府组织","公共查询"]]}
+{"title":"中国土地市场网","url":"https://www.landchina.com","description":"自然资源部主办的土地市场信息发布平台，提供土地出让和交易查询。","tags":[["政府组织","公共查询"]]}
+{"title":"天眼查","url":"https://www.tianyancha.com","description":"企业信用信息商业查询平台，提供企业工商注册、股东和经营信息检索。","tags":[["政府组织","公共查询"]]}
+{"title":"中国社会组织公共服务平台","url":"https://www.chinanpo.gov.cn","description":"民政部提供的社会组织和慈善组织信息统一查询平台。","tags":[["政府组织","公共查询"]]}
+{"title":"全国法院被执行人信息查询","url":"https://zxgk.court.gov.cn","description":"最高人民法院提供的被执行人信息和失信被执行人名单全国统一查询。","tags":[["政府组织","公共查询"]]}
+{"title":"国家邮政局","url":"https://www.spb.gov.cn","description":"国家邮政局官方网站，发布邮政和快递行业监管政策信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家能源局","url":"https://www.nea.gov.cn","description":"国家能源局官方网站，发布能源政策、电力规划和新能源发展信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家烟草专卖局","url":"https://www.tobacco.gov.cn","description":"国家烟草专卖局官方网站，发布烟草专卖政策和行业监管信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家国防科技工业局","url":"https://www.sastind.gov.cn","description":"国家国防科工局官方网站，发布国防科技工业政策和军民融合信息。","tags":[["政府组织","中国政府"]]}
+{"title":"国家林业和草原局","url":"https://www.forestry.gov.cn","description":"国家林草局官方网站，发布林业草原保护、国家公园建设等信息。","tags":[["政府组织","中国政府"]]}
+{"title":"新华社","url":"https://www.xinhuanet.com","description":"中国国家通讯社官方网站，发布国内外时政新闻和权威政策解读。","tags":[["政府组织","中国政府"]]}
+{"title":"人民日报","url":"https://www.people.com.cn","description":"中国共产党中央委员会机关报官方网站，发布权威新闻和社论。","tags":[["政府组织","中国政府"]]}
+{"title":"国家移民管理局","url":"https://www.nia.gov.cn","description":"国家移民管理局官方网站，提供出入境管理、签证护照办理信息。","tags":[["政府组织","中国政府"]]}
+{"title":"北京市人力资源和社会保障局","url":"http://rsj.beijing.gov.cn","description":"北京市人社局官方网站，提供社保、就业、人才引进等服务信息。","tags":[["政府组织","中国政府"]]}
+{"title":"上海市一网通办","url":"https://zwdt.sh.gov.cn","description":"上海市政务服务一网通办总门户，在线办理各类行政审批和公共服务。","tags":[["政府组织","中国政府"]]}
+{"title":"广东省政务服务网","url":"https://www.gdzwfw.gov.cn","description":"广东省统一政务服务门户，提供省级行政审批和便民服务在线办理。","tags":[["政府组织","中国政府"]]}
+{"title":"浙江省政务服务网","url":"https://www.zjzwfw.gov.cn","description":"浙江省政务服务网（浙里办），推动最多跑一次改革和数字政务。","tags":[["政府组织","中国政府"]]}
+{"title":"中国领事服务网","url":"https://cs.mfa.gov.cn","description":"外交部提供的外国人来华签证、海外中国公民领事保护和证件办理服务。","tags":[["政府组织","中国政府"]]}
+{"title":"国家国际发展合作署","url":"https://www.cidca.gov.cn","description":"国务院直属机构，负责中国对外援助和国际发展合作政策与项目管理。","tags":[["政府组织","中国政府"]]}

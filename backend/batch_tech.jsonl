@@ -1,0 +1,234 @@
+{"title":"Python 官方文档","url":"https://docs.python.org/zh-cn/3/","description":"Python 编程语言官方中文文档，涵盖标准库、语言参考和教程","tags":[["技术开发","编程语言","Python"]]}
+{"title":"Node.js 中文网","url":"https://nodejs.cn/","description":"Node.js 官方中文站点，提供 JavaScript 服务器运行时环境文档与下载","tags":[["技术开发","编程语言","JavaScript"]]}
+{"title":"TypeScript 官方文档","url":"https://www.typescriptlang.org/zh/","description":"TypeScript 官方中文文档，JavaScript 超集的类型系统指南","tags":[["技术开发","编程语言","TypeScript"]]}
+{"title":"Rust 程序设计语言中文版","url":"https://www.rust-lang.org/zh-CN/","description":"Rust 官方中文站点，系统级编程语言，内存安全零抽象开销","tags":[["技术开发","编程语言","Rust"]]}
+{"title":"Go 语言中文网","url":"https://studygolang.com/","description":"国内最大的 Go 语言学习社区，涵盖教程、文档、开源项目和招聘","tags":[["技术开发","编程语言","Go"]]}
+{"title":"MDN Web 文档","url":"https://developer.mozilla.org/zh-CN/","description":"Mozilla 维护的 Web 技术权威文档，HTML/CSS/JS 全面参考","tags":[["技术开发","前端开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Vue.js 中文文档","url":"https://cn.vuejs.org/","description":"Vue.js 官方中文文档，渐进式 JavaScript 前端框架","tags":[["技术开发","前端开发"],["技术开发","前端框架","Vue"]]}
+{"title":"React 官方文档","url":"https://zh-hans.react.dev/","description":"React 官方中文文档，用于构建 Web 和原生交互界面的前端库","tags":[["技术开发","前端开发"],["技术开发","前端框架","React"]]}
+{"title":"Vite 中文文档","url":"https://cn.vitejs.dev/","description":"Vite 新一代前端构建工具中文文档，快速冷启动和热更新","tags":[["技术开发","前端开发"],["技术开发","构建工具","Vite"]]}
+{"title":"Webpack 中文文档","url":"https://webpack.docschina.org/","description":"Webpack 前端资源模块打包器中文文档，现代前端工程化核心工具","tags":[["技术开发","前端开发"],["技术开发","构建工具","Webpack"]]}
+{"title":"掘金","url":"https://juejin.cn/","description":"国内知名开发者技术社区，涵盖前端、后端、AI、移动开发等优质文章","tags":[["技术开发","开发者社区"]]}
+{"title":"SegmentFault 思否","url":"https://segmentfault.com/","description":"中文技术问答社区，开发者交流编程问题的技术客栈","tags":[["技术开发","开发者社区"]]}
+{"title":"CSDN","url":"https://www.csdn.net/","description":"中国最大 IT 技术社区，提供博客、问答、课程、下载等一站式服务","tags":[["技术开发","开发者社区"]]}
+{"title":"博客园","url":"https://www.cnblogs.com/","description":"老牌中文技术博客平台，汇集海量开发者的技术文章和心得","tags":[["技术开发","开发者社区"]]}
+{"title":"V2EX","url":"https://www.v2ex.com/","description":"创意工作者社区，以技术话题为主的技术社区和社交网络","tags":[["技术开发","开发者社区"]]}
+{"title":"GitHub","url":"https://github.com/","description":"全球最大代码托管平台，开源协作与版本控制的核心枢纽","tags":[["技术开发","代码托管"],["技术开发","DevOps"]]}
+{"title":"Gitee 码云","url":"https://gitee.com/","description":"国内领先的代码托管平台，提供 Git/SVN 代码托管和 DevOps 服务","tags":[["技术开发","代码托管"],["技术开发","DevOps"]]}
+{"title":"阿里云开发者社区","url":"https://developer.aliyun.com/","description":"阿里云官方开发者社区，技术博客、问答、活动和学习路径","tags":[["技术开发","云平台","阿里云"],["技术开发","开发者社区"]]}
+{"title":"腾讯云开发者社区","url":"https://cloud.tencent.com/developer","description":"腾讯云官方开发者社区，技术文章、视频课程和行业解决方案","tags":[["技术开发","云平台","腾讯云"],["技术开发","开发者社区"]]}
+{"title":"InfoQ 中国","url":"https://www.infoq.cn/","description":"面向软件开发者的技术媒体，报道前沿技术趋势和最佳实践","tags":[["技术开发","开发者社区"],["技术开发","技术媒体"]]}
+{"title":"Postman 官网","url":"https://www.postman.com/","description":"全球最流行的 API 开发测试平台，支持 API 设计、测试、文档和监控","tags":[["技术开发","API工具"]]}
+{"title":"Swagger 官方","url":"https://swagger.io/","description":"OpenAPI 规范工具链，API 文档自动生成和交互式调试","tags":[["技术开发","API工具"]]}
+{"title":"Apifox","url":"https://apifox.com/","description":"API 一体化协作平台，集 API 文档、调试、Mock、测试于一体","tags":[["技术开发","API工具"]]}
+{"title":"NPM 中文文档","url":"https://www.npmjs.cn/","description":"Node.js 包管理器 NPM 中文文档，JavaScript 生态核心依赖管理","tags":[["技术开发","包管理"],["技术开发","编程语言","JavaScript"]]}
+{"title":"PyPI","url":"https://pypi.org/","description":"Python 官方包索引，海量 Python 第三方库的发布和安装中心","tags":[["技术开发","包管理"],["技术开发","编程语言","Python"]]}
+{"title":"Java 官方文档","url":"https://docs.oracle.com/javase/8/docs/","description":"Oracle Java SE 官方 API 文档，Java 开发核心参考","tags":[["技术开发","编程语言","Java"]]}
+{"title":"Spring 官方文档","url":"https://spring.io/docs","description":"Spring 框架官方文档，Java 企业级应用开发的事实标准","tags":[["技术开发","后端开发"],["技术开发","后端框架","Spring"]]}
+{"title":"Django 中文文档","url":"https://docs.djangoproject.com/zh-hans/","description":"Django 官方中文文档，Python 全栈 Web 框架，自带 ORM、Admin 和认证","tags":[["技术开发","后端开发"],["技术开发","后端框架","Django"]]}
+{"title":"FastAPI 官方文档","url":"https://fastapi.tiangolo.com/zh/","description":"FastAPI 官方中文文档，高性能 Python Web 框架，自动生成 OpenAPI 文档","tags":[["技术开发","后端开发"],["技术开发","后端框架","FastAPI"]]}
+{"title":"Gin Web Framework","url":"https://gin-gonic.com/zh-cn/","description":"Gin 官方中文文档，Go 语言高性能 HTTP Web 框架","tags":[["技术开发","后端开发"],["技术开发","后端框架","Gin"]]}
+{"title":"Express 中文文档","url":"https://www.expressjs.com.cn/","description":"Express 官方中文文档，Node.js 最流行的 Web 应用框架","tags":[["技术开发","后端开发"],["技术开发","后端框架","Express"]]}
+{"title":"NestJS 中文文档","url":"https://docs.nestjs.cn/","description":"NestJS 官方中文文档，渐进式 Node.js 企业级服务端框架","tags":[["技术开发","后端开发"],["技术开发","后端框架","NestJS"]]}
+{"title":"Angular 中文文档","url":"https://angular.cn/","description":"Angular 官方中文文档，Google 维护的企业级前端应用框架","tags":[["技术开发","前端开发"],["技术开发","前端框架","Angular"]]}
+{"title":"Svelte 中文文档","url":"https://svelte.cn/","description":"Svelte 中文文档，编译时前端框架，将组件编译为高效原生 JS","tags":[["技术开发","前端开发"],["技术开发","前端框架","Svelte"]]}
+{"title":"Next.js 中文文档","url":"https://nextjs.cn/","description":"Next.js 中文文档，React 全栈框架，支持 SSR、SSG 和 ISR","tags":[["技术开发","前端开发"],["技术开发","前端框架","Next.js"]]}
+{"title":"Nuxt.js 中文文档","url":"https://www.nuxtjs.cn/","description":"Nuxt.js 中文文档，基于 Vue.js 的服务端渲染应用框架","tags":[["技术开发","前端开发"],["技术开发","前端框架","Nuxt"]]}
+{"title":"Element Plus","url":"https://element-plus.org/zh-CN/","description":"基于 Vue 3 的桌面端组件库，饿了么前端团队出品的企业级 UI 组件","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Ant Design","url":"https://ant.design/","description":"蚂蚁集团出品的 React 企业级 UI 设计语言和组件库","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Ant Design Vue","url":"https://www.antdv.com/","description":"Ant Design 的 Vue 实现，企业级 UI 组件库适合中后台产品","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Naive UI","url":"https://www.naiveui.com/zh-CN/","description":"Vue 3 组件库，使用 TypeScript 构建，主题可定制且性能优异","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"TDesign","url":"https://tdesign.tencent.com/","description":"腾讯出品的企业级设计体系，支持 Vue/React/小程序等多框架","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Arco Design","url":"https://arco.design/","description":"字节跳动出品的企业级产品设计系统，支持 React 和 Vue","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Layui","url":"https://layui.dev/","description":"经典模块化前端 UI 框架，遵循原生态 HTML/CSS/JS 设计模式","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Bootstrap 中文网","url":"https://www.bootcss.com/","description":"Bootstrap 中文网，流行前端 UI 框架的中文文档与资源站","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Tailwind CSS 中文文档","url":"https://www.tailwindcss.cn/","description":"Tailwind CSS 中文文档，实用优先的 CSS 框架快速构建现代网站","tags":[["技术开发","前端开发"],["技术开发","CSS框架"]]}
+{"title":"Docker 中文社区","url":"https://www.docker.org.cn/","description":"Docker 中文技术社区，容器化技术教程、镜像和最佳实践","tags":[["技术开发","DevOps"],["技术开发","容器技术"]]}
+{"title":"Docker Hub","url":"https://hub.docker.com/","description":"Docker 官方镜像仓库，海量容器镜像的发布与分发中心","tags":[["技术开发","DevOps"],["技术开发","容器技术"]]}
+{"title":"Kubernetes 中文文档","url":"https://kubernetes.io/zh-cn/","description":"Kubernetes 官方中文文档，容器编排平台的生产级指南","tags":[["技术开发","DevOps"],["技术开发","容器技术"]]}
+{"title":"Jenkins 中文网","url":"https://www.jenkins-zh.cn/","description":"Jenkins 中文社区，持续集成和持续交付自动化服务器","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"GitLab","url":"https://gitlab.cn/","description":"极狐 GitLab 中文站，一体化 DevOps 平台从代码托管到 CI/CD","tags":[["技术开发","代码托管"],["技术开发","DevOps"]]}
+{"title":"Nginx 中文文档","url":"https://www.nginx.cn/doc/","description":"Nginx 中文文档，高性能 HTTP 和反向代理 Web 服务器","tags":[["技术开发","后端开发"],["技术开发","服务器"]]}
+{"title":"阿里云","url":"https://www.aliyun.com/","description":"阿里巴巴旗下云计算品牌，国内市场份额最大的公有云服务商","tags":[["技术开发","云平台","阿里云"]]}
+{"title":"腾讯云","url":"https://cloud.tencent.com/","description":"腾讯旗下云计算平台，提供云服务器、CDN、数据库等全栈服务","tags":[["技术开发","云平台","腾讯云"]]}
+{"title":"华为云","url":"https://www.huaweicloud.com/","description":"华为旗下云计算品牌，覆盖云原生、AI、大数据等企业级云服务","tags":[["技术开发","云平台","华为云"]]}
+{"title":"亚马逊云科技中国","url":"https://www.amazonaws.cn/","description":"AWS 中国区域官网，全球领先云计算平台的中国服务入口","tags":[["技术开发","云平台","AWS"]]}
+{"title":"Microsoft Azure 中国","url":"https://www.azure.cn/","description":"微软 Azure 中国区，由世纪互联运营的智能云服务平台","tags":[["技术开发","云平台","Azure"]]}
+{"title":"百度智能云","url":"https://cloud.baidu.com/","description":"百度旗下云计算平台，AI 能力突出的公有云服务产品","tags":[["技术开发","云平台","百度云"]]}
+{"title":"京东云","url":"https://www.jdcloud.com/","description":"京东集团旗下云计算品牌，提供电商场景优化的云服务","tags":[["技术开发","云平台","京东云"]]}
+{"title":"七牛云","url":"https://www.qiniu.com/","description":"国内领先的云存储和 CDN 服务商，专注多媒体数据处理","tags":[["技术开发","云平台"],["技术开发","云存储"]]}
+{"title":"又拍云","url":"https://www.upyun.com/","description":"云存储、CDN 加速及多媒体处理服务商，开发者友好","tags":[["技术开发","云平台"],["技术开发","云存储"]]}
+{"title":"语雀","url":"https://www.yuque.com/","description":"支付宝孵化的知识管理平台，技术团队文档协作和 API 文档托管","tags":[["技术开发","文档工具"],["技术开发","开发者工具"]]}
+{"title":"ShowDoc","url":"https://www.showdoc.com.cn/","description":"IT 团队在线 API 文档和技术文档管理工具，轻量易用","tags":[["技术开发","API工具"],["技术开发","文档工具"]]}
+{"title":"Knife4j","url":"https://doc.xiaominfo.com/","description":"基于 Swagger 增强的 Java 生态 API 文档工具，提供离线文档导出","tags":[["技术开发","API工具"],["技术开发","后端开发","Java"]]}
+{"title":"RuoYi 若依","url":"https://ruoyi.vip/","description":"国内流行的 Java EE 企业级快速开发平台，权限管理系统脚手架","tags":[["技术开发","后端开发"],["技术开发","开源项目"]]}
+{"title":"MyBatis 中文网","url":"https://mybatis.net.cn/","description":"MyBatis SQL Mapper 框架中文文档，Java 持久层框架首选","tags":[["技术开发","后端开发"],["技术开发","后端框架","MyBatis"]]}
+{"title":"MyBatis-Plus","url":"https://baomidou.com/","description":"MyBatis 增强工具，无侵入式简化 CRUD 的 Java ORM 框架","tags":[["技术开发","后端开发"],["技术开发","后端框架","MyBatis"]]}
+{"title":"Spring Boot 中文文档","url":"https://springdoc.cn/spring-boot/","description":"Spring Boot 中文文档，微服务快速开发框架的社区翻译版","tags":[["技术开发","后端开发"],["技术开发","后端框架","Spring"]]}
+{"title":"Spring Cloud 中文网","url":"https://www.springcloud.cc/","description":"Spring Cloud 中文文档索引站，微服务治理框架全套组件参考","tags":[["技术开发","后端开发"],["技术开发","后端框架","Spring"]]}
+{"title":"Apache Tomcat","url":"https://tomcat.apache.org/","description":"Java Servlet 容器官方站，应用最广的轻量级 Java Web 服务器","tags":[["技术开发","后端开发"],["技术开发","服务器"]]}
+{"title":"Maven 中央仓库","url":"https://mvnrepository.com/","description":"Java Maven 依赖查询和中央仓库索引，JVM 生态核心依赖站","tags":[["技术开发","包管理"],["技术开发","编程语言","Java"]]}
+{"title":"Gradle 中文网","url":"https://gradle.cn/","description":"Gradle 官方中文文档，灵活的 Java/Android 自动化构建工具","tags":[["技术开发","构建工具"],["技术开发","编程语言","Java"]]}
+{"title":"Cargo 中文文档","url":"https://cargo.budshome.com/","description":"Rust 包管理器和构建系统社区中文文档","tags":[["技术开发","包管理"],["技术开发","编程语言","Rust"]]}
+{"title":"Rust 语言中文社区","url":"https://rustcc.cn/","description":"国内 Rust 语言中文社区，教程、博客、论坛和开源项目导航","tags":[["技术开发","编程语言","Rust"],["技术开发","开发者社区"]]}
+{"title":"C 语言中文网","url":"http://c.biancheng.net/","description":"C 语言学习网站，涵盖 C/C++ 教程、数据结构和项目实战","tags":[["技术开发","编程语言","C/C++"]]}
+{"title":"C++ 参考手册中文","url":"https://zh.cppreference.com/","description":"C/C++ 语言标准库和语法的中文参考手册，开发者必备","tags":[["技术开发","编程语言","C/C++"]]}
+{"title":"GCC 在线文档","url":"https://gcc.gnu.org/onlinedocs/","description":"GNU Compiler Collection 官方文档，C/C++ 编译器权威参考","tags":[["技术开发","编程语言","C/C++"],["技术开发","编译工具"]]}
+{"title":"Qt 中文官网","url":"https://www.qt.io/zh-cn/","description":"C++ 跨平台 GUI 框架官方中文站，桌面和嵌入式应用开发工具","tags":[["技术开发","编程语言","C/C++"],["技术开发","GUI框架"]]}
+{"title":"Redis 中文网","url":"https://www.redis.net.cn/","description":"Redis 中文文档和社区，高性能内存键值数据库","tags":[["技术开发","数据库"],["技术开发","缓存"]]}
+{"title":"MySQL 中文网","url":"https://www.mysqlzh.com/","description":"MySQL 中文文档和教程，全球最流行的开源关系型数据库","tags":[["技术开发","数据库"]]}
+{"title":"PostgreSQL 中文社区","url":"https://www.postgres.cn/","description":"PostgreSQL 中文社区，功能强大的开源对象关系型数据库","tags":[["技术开发","数据库"]]}
+{"title":"MongoDB 中文网","url":"https://www.mongodb.org.cn/","description":"MongoDB 中文文档站，文档型 NoSQL 数据库教程与实践","tags":[["技术开发","数据库"]]}
+{"title":"Elastic 中文社区","url":"https://elasticsearch.cn/","description":"Elasticsearch 中文社区，搜索引擎和大数据实时分析平台","tags":[["技术开发","数据库"],["技术开发","搜索引擎"]]}
+{"title":"InfluxDB 中文文档","url":"https://jasper-zhang1.gitbooks.io/influxdb/","description":"InfluxDB 时序数据库中文教程，物联网和监控数据存储方案","tags":[["技术开发","数据库"]]}
+{"title":"Navicat 中国","url":"https://www.navicat.com.cn/","description":"数据库管理工具中文官网，支持 MySQL、PostgreSQL 等多数据库","tags":[["技术开发","数据库"],["技术开发","开发者工具"]]}
+{"title":"DBeaver 社区","url":"https://dbeaver.io/","description":"免费通用数据库管理工具，支持几乎所有主流数据库的连接管理","tags":[["技术开发","数据库"],["技术开发","开发者工具"]]}
+{"title":"Linux 中国","url":"https://linux.cn/","description":"Linux 中文开源社区，技术新闻、教程、命令大全和开源资讯","tags":[["技术开发","操作系统"],["技术开发","开发者社区"]]}
+{"title":"鸟哥的 Linux 私房菜","url":"https://linux.vbird.org/","description":"经典 Linux 中文学习教程，系统管理员和开发者入门必读","tags":[["技术开发","操作系统"],["技术开发","Linux"]]}
+{"title":"Ubuntu 中文站","url":"https://cn.ubuntu.com/","description":"Ubuntu Linux 官方中文站，桌面和服务器操作系统下载与文档","tags":[["技术开发","操作系统"],["技术开发","Linux"]]}
+{"title":"CentOS 中文站","url":"https://www.centos.org.cn/","description":"CentOS 中文社区，企业级 Linux 发行版的镜像与文档","tags":[["技术开发","操作系统"],["技术开发","Linux"]]}
+{"title":"Arch Linux 中文维基","url":"https://wiki.archlinuxcn.org/","description":"Arch Linux 社区中文维基，滚动更新 Linux 发行版的详尽文档","tags":[["技术开发","操作系统"],["技术开发","Linux"]]}
+{"title":"开源中国","url":"https://www.oschina.net/","description":"国内最大开源技术社区，开源软件资讯、项目和开发者交流平台","tags":[["技术开发","开源社区"],["技术开发","开发者社区"]]}
+{"title":"Gitea 中文","url":"https://gitea.io/zh-cn/","description":"轻量级自托管 Git 服务中文站，GitHub/Gitea 的开源替代方案","tags":[["技术开发","代码托管"]]}
+{"title":"CODING","url":"https://coding.net/","description":"腾讯旗下云端开发协作平台，提供代码托管、项目管理与 CI/CD","tags":[["技术开发","代码托管"],["技术开发","DevOps"]]}
+{"title":"Travis CI 中文","url":"https://www.travis-ci.com/","description":"云端持续集成服务，与 GitHub 深度集成的自动化构建测试平台","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"CircleCI 官网","url":"https://circleci.com/","description":"云原生持续集成与交付平台，支持 Docker 和 Kubernetes 构建","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Harbor","url":"https://goharbor.io/","description":"云原生容器镜像仓库开源项目，企业级 Docker Registry 方案","tags":[["技术开发","DevOps"],["技术开发","容器技术"]]}
+{"title":"Rancher 中文","url":"https://www.rancher.cn/","description":"企业级 Kubernetes 管理平台中文站，多集群容器管理","tags":[["技术开发","DevOps"],["技术开发","容器技术"]]}
+{"title":"Prometheus 中文文档","url":"https://prometheus.fuckcloudnative.io/","description":"Prometheus 监控系统中文文档，云原生可观测性核心组件","tags":[["技术开发","DevOps"],["技术开发","监控"]]}
+{"title":"Grafana 官网","url":"https://grafana.com/","description":"开源监控和可观测性平台，数据可视化仪表盘的首选工具","tags":[["技术开发","DevOps"],["技术开发","监控"]]}
+{"title":"Apache JMeter 中文网","url":"https://www.jmeter.com.cn/","description":"JMeter 中文教程站，Java 性能测试和负载测试工具","tags":[["技术开发","测试"],["技术开发","性能测试"]]}
+{"title":"Selenium 中文网","url":"https://www.selenium.dev/zh-cn/","description":"浏览器自动化测试框架官方中文文档，Web UI 自动化测试标准","tags":[["技术开发","测试"]]}
+{"title":"Jest 中文文档","url":"https://www.jestjs.cn/","description":"Facebook 出品 JS 测试框架中文文档，React 项目测试首选","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"Vitest 中文文档","url":"https://cn.vitest.dev/","description":"基于 Vite 的极速单元测试框架中文站，原生 ESM 支持","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"Cypress 中文文档","url":"https://www.cypress.cn/","description":"Cypress 前端 E2E 测试框架中文文档，实时重载调试体验","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"Playwright 中文文档","url":"https://playwright.cn/","description":"微软出品的端到端测试框架中文站，跨浏览器自动化测试","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"Figma 中文","url":"https://www.figma.com/zh-cn/","description":"云端协作设计工具，UI/UX 设计师和前端开发者的桥梁","tags":[["技术开发","设计工具"],["技术开发","前端开发"]]}
+{"title":"蓝湖","url":"https://lanhuapp.com/","description":"产品设计协作平台，自动标注和切图，设计师与开发紧密协作","tags":[["技术开发","设计工具"],["技术开发","前端开发"]]}
+{"title":"即时设计","url":"https://js.design/","description":"国产在线 UI 设计协作工具，可云端编辑的 Figma 替代方案","tags":[["技术开发","设计工具"],["技术开发","前端开发"]]}
+{"title":"MasterGo","url":"https://mastergo.com/","description":"国产在线协同设计工具，高性能 UI 设计与原型交互平台","tags":[["技术开发","设计工具"],["技术开发","前端开发"]]}
+{"title":"ChatGPT","url":"https://chatgpt.com/","description":"OpenAI 开发的对话式 AI 助手，编程辅助和技术问答常用工具","tags":[["技术开发","AI工具"],["技术开发","开发者工具"]]}
+{"title":"DeepSeek","url":"https://chat.deepseek.com/","description":"深度求索出品的大语言模型，代码生成和技术提问的得力助手","tags":[["技术开发","AI工具"]]}
+{"title":"GitHub Copilot","url":"https://github.com/features/copilot","description":"GitHub 的 AI 编程助手，代码自动补全和智能建议工具","tags":[["技术开发","AI工具"],["技术开发","代码托管"]]}
+{"title":"Cursor","url":"https://cursor.com/","description":"AI 驱动的代码编辑器，内置 ChatGPT 让编程效率倍增","tags":[["技术开发","AI工具"],["技术开发","编辑器"]]}
+{"title":"VS Code 中文","url":"https://code.visualstudio.com/","description":"微软开源代码编辑器，最流行的轻量级 IDE 中文支持完善","tags":[["技术开发","编辑器"],["技术开发","开发者工具"]]}
+{"title":"JetBrains 中文","url":"https://www.jetbrains.com/zh-cn/","description":"IntelliJ IDEA 等专业 IDE 开发商，Java/Python/Go 开发首选工具","tags":[["技术开发","编辑器"],["技术开发","开发者工具"]]}
+{"title":"Vim 中文社区","url":"https://vim-china.org/","description":"经典终端编辑器 Vim 的中文社区，高效文本编辑利器","tags":[["技术开发","编辑器"]]}
+{"title":"W3school 中文","url":"https://www.w3school.com.cn/","description":"Web 技术入门教程中文站，HTML/CSS/JS/SQL 等基础教程","tags":[["技术开发","前端开发"],["技术开发","编程语言"]]}
+{"title":"菜鸟教程","url":"https://www.runoob.com/","description":"编程技术入门教程站，零基础学习各种编程语言和框架","tags":[["技术开发","编程语言"],["技术开发","学习资源"]]}
+{"title":"慕课网","url":"https://www.imooc.com/","description":"IT 技能在线学习平台，编程实战视频教程涵盖前端后端移动开发","tags":[["技术开发","学习资源"]]}
+{"title":"极客时间","url":"https://time.geekbang.org/","description":"极客邦旗下 IT 知识服务平台，专栏课程和每日一课学技术","tags":[["技术开发","学习资源"],["技术开发","技术媒体"]]}
+{"title":"实验楼","url":"https://www.lanqiao.cn/","description":"在线 IT 实验平台，在浏览器中动手做编程实验学技术","tags":[["技术开发","学习资源"]]}
+{"title":"LeetCode 中国","url":"https://leetcode.cn/","description":"中文算法刷题平台，程序员面试算法题库和技术面试准备","tags":[["技术开发","算法"],["技术开发","面试"]]}
+{"title":"牛客网","url":"https://www.nowcoder.com/","description":"IT 求职面试刷题平台，笔试编程题和企业校招真题","tags":[["技术开发","面试"],["技术开发","算法"]]}
+{"title":"LintCode","url":"https://www.lintcode.com/","description":"在线编程刷题平台，海量算法题和面试模拟练习","tags":[["技术开发","算法"],["技术开发","面试"]]}
+{"title":"Stack Overflow 中文版","url":"https://stackoverflow.org.cn/","description":"Stack Overflow 中文镜像，全球程序员问答社区的译文版","tags":[["技术开发","问答社区"]]}
+{"title":"知乎技术话题","url":"https://www.zhihu.com/topic/19550901/","description":"知乎编程技术话题页，高质量技术讨论和行业从业者分享","tags":[["技术开发","开发者社区"]]}
+{"title":"Hacker News","url":"https://news.ycombinator.com/","description":"Y Combinator 旗下的技术新闻社区，全球开发者热议的科技动态","tags":[["技术开发","技术媒体"],["技术开发","开发者社区"]]}
+{"title":"Dev.to","url":"https://dev.to/","description":"全球开发者写作社区，技术博客分享和开发者交流平台","tags":[["技术开发","开发者社区"],["技术开发","技术媒体"]]}
+{"title":"稀土掘金翻译计划","url":"https://github.com/xitu/gold-miner","description":"掘金翻译计划 GitHub 仓库，优质英文技术文章的中文翻译集合","tags":[["技术开发","开发者社区"],["技术开发","翻译"]]}
+{"title":"Flutter 中文网","url":"https://flutterchina.club/","description":"Flutter 中文社区资源站，Google 跨平台移动应用框架中文文档","tags":[["技术开发","移动开发"],["技术开发","跨平台框架"]]}
+{"title":"React Native 中文网","url":"https://reactnative.cn/","description":"React Native 中文网，使用 React 构建原生移动应用的框架文档","tags":[["技术开发","移动开发"],["技术开发","前端框架","React"]]}
+{"title":"Uni-App 官网","url":"https://uniapp.dcloud.net.cn/","description":"DCloud 出品的跨端开发框架，一套代码发布到多个平台","tags":[["技术开发","移动开发"],["技术开发","前端框架"]]}
+{"title":"Taro","url":"https://taro.jd.com/","description":"京东出品的跨端跨框架解决方案，React/Vue 写小程序和 H5","tags":[["技术开发","移动开发"],["技术开发","前端框架"]]}
+{"title":"微信小程序文档","url":"https://developers.weixin.qq.com/miniprogram/dev/","description":"微信小程序官方开发文档，小程序 API 和云开发指南","tags":[["技术开发","移动开发"],["技术开发","小程序"]]}
+{"title":"支付宝小程序文档","url":"https://opendocs.alipay.com/mini","description":"支付宝小程序开放文档，阿里生态小程序开发指南","tags":[["技术开发","移动开发"],["技术开发","小程序"]]}
+{"title":"字节跳动小程序","url":"https://microapp.bytedance.com/","description":"字节跳动小程序开发者平台，抖音头条生态小程序开发","tags":[["技术开发","移动开发"],["技术开发","小程序"]]}
+{"title":"Electron 中文","url":"https://www.electronjs.org/zh/","description":"使用 JS/HTML/CSS 构建跨平台桌面应用的框架中文站","tags":[["技术开发","桌面开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Tauri","url":"https://tauri.app/zh-cn/","description":"用 Rust 构建更小更快的跨平台桌面应用框架中文文档","tags":[["技术开发","桌面开发"],["技术开发","编程语言","Rust"]]}
+{"title":"Wails","url":"https://wails.io/zh-Hans/","description":"Go 语言桌面应用开发框架，用 Go 和 Web 前端构建桌面程序","tags":[["技术开发","桌面开发"],["技术开发","编程语言","Go"]]}
+{"title":"GraphQL 中文","url":"https://graphql.cn/","description":"GraphQL 官方中文站，API 查询语言和运行时环境","tags":[["技术开发","API"],["技术开发","查询语言"]]}
+{"title":"gRPC 中文文档","url":"https://doc.oschina.net/grpc","description":"Google 高性能 RPC 框架中文文档，微服务间通信协议","tags":[["技术开发","后端开发"],["技术开发","RPC"]]}
+{"title":"Protobuf 官方","url":"https://protobuf.dev/","description":"Protocol Buffers 数据序列化协议，gRPC 和微服务的核心编码层","tags":[["技术开发","后端开发"],["技术开发","数据格式"]]}
+{"title":"Apache Kafka 中文","url":"https://kafka.apachecn.org/","description":"Apache Kafka 分布式消息系统中文文档，大数据流处理平台","tags":[["技术开发","消息队列"],["技术开发","大数据"]]}
+{"title":"RabbitMQ 中文文档","url":"https://www.rabbitmq.cn/","description":"RabbitMQ 消息中间件中文社区文档，AMQP 协议实现","tags":[["技术开发","消息队列"]]}
+{"title":"RocketMQ 官网","url":"https://rocketmq.apache.org/zh/","description":"Apache RocketMQ 中文站，阿里开源的分布式消息中间件","tags":[["技术开发","消息队列"],["技术开发","中间件"]]}
+{"title":"Nacos 官网","url":"https://nacos.io/zh-cn/","description":"阿里开源的服务发现配置管理平台，云原生动态服务管理","tags":[["技术开发","微服务"],["技术开发","中间件"]]}
+{"title":"Sentinel","url":"https://sentinelguard.io/zh-cn/","description":"阿里开源流量防卫兵，分布式系统流量控制和熔断降级","tags":[["技术开发","微服务"],["技术开发","中间件"]]}
+{"title":"Dubbo 官网","url":"https://dubbo.apache.org/zh-cn/","description":"Apache Dubbo 中文官方站，高性能 Java RPC 微服务框架","tags":[["技术开发","微服务"],["技术开发","后端框架"]]}
+{"title":"Seata","url":"https://seata.io/zh-cn/","description":"阿里巴巴开源分布式事务解决方案，微服务数据一致性保障","tags":[["技术开发","微服务"],["技术开发","中间件"]]}
+{"title":"ZooKeeper 中文","url":"https://zookeeper.apache.org/doc/current/","description":"分布式协调服务，配置维护和分布式同步的核心组件","tags":[["技术开发","中间件"],["技术开发","分布式"]]}
+{"title":"Etcd 官方文档","url":"https://etcd.io/","description":"CoreOS 开源的分布式键值存储，Kubernetes 核心配置中心","tags":[["技术开发","中间件"],["技术开发","分布式"]]}
+{"title":"Consul 中文","url":"https://www.consul.io/","description":"HashiCorp 服务网格解决方案，服务发现和配置管理","tags":[["技术开发","微服务"],["技术开发","服务网格"]]}
+{"title":"Istio 中文","url":"https://istio.io/latest/zh/","description":"Service Mesh 服务网格中文文档，微服务流量管理可观测安全","tags":[["技术开发","微服务"],["技术开发","服务网格"]]}
+{"title":"Envoy 中文","url":"https://www.envoyproxy.io/","description":"云原生高性能边缘和服务代理，Istio 数据面核心组件","tags":[["技术开发","微服务"],["技术开发","代理"]]}
+{"title":"Hadoop 中文","url":"https://hadoop.apache.org/","description":"Apache Hadoop 大数据框架，分布式存储和计算的开源实现","tags":[["技术开发","大数据"]]}
+{"title":"Spark 中文文档","url":"https://spark.apache.org/docs/latest/","description":"Apache Spark 统一分析引擎，大规模数据处理和机器学习","tags":[["技术开发","大数据"]]}
+{"title":"Flink 中文社区","url":"https://flink.apache.org/zh/","description":"Apache Flink 中文站，实时流处理框架状态化计算引擎","tags":[["技术开发","大数据"]]}
+{"title":"ClickHouse 中文","url":"https://clickhouse.com/docs/zh","description":"ClickHouse 列式数据库中文文档，OLAP 实时分析引擎","tags":[["技术开发","数据库"],["技术开发","大数据"]]}
+{"title":"TDengine","url":"https://www.taosdata.com/","description":"国产开源时序数据库，物联网大数据平台的高性能存储引擎","tags":[["技术开发","数据库"],["技术开发","物联网"]]}
+{"title":"TiDB 中文","url":"https://docs.pingcap.com/zh/tidb/stable","description":"PingCAP 开源分布式 NewSQL 数据库，HTAP 混合负载支持","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"OceanBase","url":"https://www.oceanbase.com/","description":"蚂蚁集团自研分布式数据库，金融级高可用原生分布式架构","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"达梦数据库","url":"https://www.dameng.com/","description":"国产关系型数据库，自主可控的数据管理平台和企业级解决方案","tags":[["技术开发","数据库"]]}
+{"title":"人大金仓","url":"https://www.kingbase.com.cn/","description":"国产数据库管理系统，信创领域关系型数据库领先品牌","tags":[["技术开发","数据库"]]}
+{"title":"微信公众平台","url":"https://mp.weixin.qq.com/","description":"微信公众号和小程序开发者后台，内容与服务的开发接口","tags":[["技术开发","移动开发"],["技术开发","API"]]}
+{"title":"企业微信开发者","url":"https://developer.work.weixin.qq.com/","description":"企业微信开放平台，企业内部应用和第三方应用开发文档","tags":[["技术开发","API"],["技术开发","企业应用"]]}
+{"title":"飞书开放平台","url":"https://open.feishu.cn/","description":"飞书开发者平台，应用开发 API、机器人创建和服务端集成","tags":[["技术开发","API"],["技术开发","企业应用"]]}
+{"title":"钉钉开放平台","url":"https://open.dingtalk.com/","description":"钉钉开发者平台，企业内部应用和第三方 ISV 应用开发","tags":[["技术开发","API"],["技术开发","企业应用"]]}
+{"title":"百度地图开放平台","url":"https://lbsyun.baidu.com/","description":"百度地图 API 开发者平台，地图展示、定位和导航服务","tags":[["技术开发","API"],["技术开发","地图服务"]]}
+{"title":"高德开放平台","url":"https://lbs.amap.com/","description":"高德地图开发者平台，地图 JS API 和定位 SDK 服务","tags":[["技术开发","API"],["技术开发","地图服务"]]}
+{"title":"聚合数据","url":"https://www.juhe.cn/","description":"国内 API 数据服务商，提供天气、快递、手机归属等开放接口","tags":[["技术开发","API"],["技术开发","数据服务"]]}
+{"title":"阿里云 API 网关","url":"https://www.aliyun.com/product/apigateway","description":"阿里云 API 网关服务，API 生命周期管理和流量控制","tags":[["技术开发","API工具"],["技术开发","云平台","阿里云"]]}
+{"title":"腾讯云 API 网关","url":"https://cloud.tencent.com/product/apigateway","description":"腾讯云 API 网关产品，Serverless HTTP 服务和 API 管理","tags":[["技术开发","API工具"],["技术开发","云平台","腾讯云"]]}
+{"title":"RAP2","url":"https://rap2.taobao.org/","description":"淘宝前端团队出品的接口管理工具，RAP API Mock 平台二代","tags":[["技术开发","API工具"],["技术开发","Mock"]]}
+{"title":"YApi","url":"https://hellosean1025.github.io/yapi/","description":"可视化 API 管理平台，接口文档管理和 Mock 服务","tags":[["技术开发","API工具"],["技术开发","Mock"]]}
+{"title":"Eolink","url":"https://www.eolink.com/","description":"一站式 API 研发管理平台，API 文档、测试和监控","tags":[["技术开发","API工具"]]}
+{"title":"Hoppscotch","url":"https://hoppscotch.io/zh-cn","description":"开源 API 开发工具，轻量级 Postman 替代方案支持 REST/GraphQL","tags":[["技术开发","API工具"]]}
+{"title":"Insomnia","url":"https://insomnia.rest/","description":"开源 API 客户端和设计工具，GraphQL 和 REST API 调试工具","tags":[["技术开发","API工具"]]}
+{"title":"JSON.cn","url":"https://www.json.cn/","description":"在线 JSON 格式化校验工具，JSON 与 XML 互转及编辑器","tags":[["技术开发","开发者工具"]]}
+{"title":"站长工具","url":"https://tool.chinaz.com/","description":"中国站长站出品的综合在线工具集，开发运维常用工具箱","tags":[["技术开发","开发者工具"]]}
+{"title":"在线工具","url":"https://tool.lu/","description":"程序员的在线工具箱，编码转换、加密解密、格式化等","tags":[["技术开发","开发者工具"]]}
+{"title":"Be JSON","url":"https://www.bejson.com/","description":"在线 JSON 和开发工具集，格式化校验、编码转换、生成器","tags":[["技术开发","开发者工具"]]}
+{"title":"So JSON","url":"https://www.sojson.com/","description":"在线 JSON 综合工具站，解析格式化及各类开发者实用工具","tags":[["技术开发","开发者工具"]]}
+{"title":"Curl 在线转换","url":"https://curlconverter.com/","description":"cURL 命令转为各种编程语言代码的在线工具","tags":[["技术开发","开发者工具"]]}
+{"title":"Can I Use","url":"https://caniuse.com/","description":"前端兼容性查询，浏览器对 Web 标准特性支持情况一览","tags":[["技术开发","前端开发"],["技术开发","开发者工具"]]}
+{"title":"Regex101","url":"https://regex101.com/","description":"在线正则表达式测试和调试工具，支持多种语言语法","tags":[["技术开发","开发者工具"]]}
+{"title":"Colab 谷歌","url":"https://colab.research.google.com/","description":"Google Colab 在线 Python 编程环境，免费 GPU 云端笔记本","tags":[["技术开发","编程语言","Python"],["技术开发","AI工具"]]}
+{"title":"Jupyter 官网","url":"https://jupyter.org/","description":"交互式计算和 Notebook 开源项目，数据科学和 Python 开发利器","tags":[["技术开发","编程语言","Python"],["技术开发","数据科学"]]}
+{"title":"PyTorch 中文","url":"https://pytorch.apachecn.org/","description":"PyTorch 深度学习框架中文文档与社区教程","tags":[["技术开发","AI"],["技术开发","深度学习"]]}
+{"title":"TensorFlow 中文","url":"https://tensorflow.google.cn/","description":"TensorFlow 官方中文站，Google 机器学习框架中文文档","tags":[["技术开发","AI"],["技术开发","深度学习"]]}
+{"title":"PaddlePaddle","url":"https://www.paddlepaddle.org.cn/","description":"百度飞桨深度学习平台，国产开源深度学习框架和产业级模型库","tags":[["技术开发","AI"],["技术开发","深度学习"]]}
+{"title":"Hugging Face","url":"https://huggingface.co/","description":"AI 模型和数据集开源社区，Transformers 库和模型托管平台","tags":[["技术开发","AI"],["技术开发","模型库"]]}
+{"title":"ModelScope 魔搭社区","url":"https://www.modelscope.cn/","description":"阿里达摩院开源模型社区，中文 AI 模型与数据集的一站平台","tags":[["技术开发","AI"],["技术开发","模型库"]]}
+{"title":"OpenI 启智社区","url":"https://openi.pcl.ac.cn/","description":"鹏城实验室 AI 开源平台，国产 AI 模型、数据集和算力共享","tags":[["技术开发","AI"],["技术开发","开源社区"]]}
+{"title":"Kaggle 中文","url":"https://www.kaggle.com/","description":"数据科学竞赛平台，机器学习数据集和 Notebook 云端开发","tags":[["技术开发","数据科学"],["技术开发","AI"]]}
+{"title":"阿里云云天池","url":"https://tianchi.aliyun.com/","description":"阿里云大数据 AI 竞赛平台，算法比赛和数据集开源社区","tags":[["技术开发","AI"],["技术开发","数据科学"]]}
+{"title":"和鲸社区","url":"https://www.heywhale.com/","description":"数据科学协作平台，Kesci 中文数据竞赛和 Notebook 环境","tags":[["技术开发","数据科学"],["技术开发","AI"]]}
+{"title":"Apache ECharts","url":"https://echarts.apache.org/zh/","description":"百度开源数据可视化图表库中文站，丰富的交互式图表","tags":[["技术开发","前端开发"],["技术开发","数据可视化"]]}
+{"title":"AntV","url":"https://antv.antgroup.com/zh/","description":"蚂蚁集团数据可视化解决方案，G2/G6/L7 可视化引擎","tags":[["技术开发","前端开发"],["技术开发","数据可视化"]]}
+{"title":"D3.js 中文网","url":"https://www.d3js.org.cn/","description":"D3.js 中文教程与文档站，数据驱动的 SVG 可视化库","tags":[["技术开发","前端开发"],["技术开发","数据可视化"]]}
+{"title":"Three.js 中文网","url":"https://www.three3d.cn/","description":"Three.js 中文教程站，浏览器端 WebGL 3D 渲染库","tags":[["技术开发","前端开发"],["技术开发","3D渲染"]]}
+{"title":"Babylon.js 中文","url":"https://www.babylonjs.com/","description":"微软开源 3D 引擎，浏览器端高性能 WebGL 游戏和可视化","tags":[["技术开发","前端开发"],["技术开发","3D渲染"]]}
+{"title":"WebGL 中文网","url":"https://www.webgl3d.cn/","description":"WebGL 中文教程站，浏览器端三维图形编程入门","tags":[["技术开发","前端开发"],["技术开发","3D渲染"]]}
+{"title":"iView / View Design","url":"https://www.iviewui.com/","description":"View Design Vue 组件库（原 iView），企业级中后台 UI 组件","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Varlet","url":"https://varletjs.org/","description":"基于 Vue3 的 Material 风格移动端组件库，中文友好文档","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Vant UI","url":"https://vant-ui.github.io/vant/","description":"有赞出品的 Vue 移动端轻量级 UI 组件库","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"NutUI","url":"https://nutui.jd.com/","description":"京东出品的移动端 Vue 组件库，支持多端小程序和 H5","tags":[["技术开发","前端开发"],["技术开发","UI组件库"]]}
+{"title":"Swiper 中文网","url":"https://www.swiper.com.cn/","description":"移动端触控滑动组件中文站，轮播图滑动交互解决方案","tags":[["技术开发","前端开发"],["技术开发","UI组件"]]}
+{"title":"Lodash 中文","url":"https://www.lodashjs.com/","description":"JavaScript 工具函数库中文文档，数组对象函数等实用helper","tags":[["技术开发","前端开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Moment.js 中文网","url":"https://momentjs.cn/","description":"JavaScript 日期处理库中文文档，时间格式化解析操作","tags":[["技术开发","前端开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Day.js 中文","url":"https://dayjs.fenxianglu.cn/","description":"轻量级 JavaScript 日期库中文文档，Moment.js 的现代替代","tags":[["技术开发","前端开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Axios 中文文档","url":"https://www.axios-http.cn/","description":"基于 Promise 的 HTTP 客户端中文文档，前端 API 请求首选","tags":[["技术开发","前端开发"],["技术开发","编程语言","JavaScript"]]}
+{"title":"Pinia 中文","url":"https://pinia.vuejs.org/zh/","description":"Vue 官方状态管理库 Pinia 中文文档，Vuex 的继任者","tags":[["技术开发","前端开发"],["技术开发","前端框架","Vue"]]}
+{"title":"Vue Router 中文","url":"https://router.vuejs.org/zh/","description":"Vue.js 官方路由管理器中文文档，单页应用路由方案","tags":[["技术开发","前端开发"],["技术开发","前端框架","Vue"]]}
+{"title":"React Router 中文","url":"https://reactrouter.com/","description":"React 路由库官方文档，声明式路由管理客户端导航","tags":[["技术开发","前端开发"],["技术开发","前端框架","React"]]}
+{"title":"Redux 中文","url":"https://cn.redux.js.org/","description":"JavaScript 状态管理容器中文文档，React 可预测状态管理","tags":[["技术开发","前端开发"],["技术开发","前端框架","React"]]}
+{"title":"Zustand 中文","url":"https://awesomer.cn/zustand/","description":"极简 React 状态管理库中文文档，比 Redux 更轻量","tags":[["技术开发","前端开发"],["技术开发","前端框架","React"]]}
+{"title":"MobX 中文","url":"https://zh.mobx.js.org/","description":"简单可扩展的状态管理中文文档，响应式编程范式","tags":[["技术开发","前端开发"],["技术开发","前端框架"]]}
+{"title":"Rollup 中文","url":"https://www.rollupjs.com/","description":"ES 模块打包器中文文档，类库开发的理想打包工具","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"ESBuild 中文","url":"https://esbuild.github.io/","description":"极速 JavaScript 打包器，Go 编写构建速度远超传统工具","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"Turbopack","url":"https://turbo.build/pack","description":"Vercel 出品的增量打包器，Rust 编写专为大型项目打造","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"PNPM 中文","url":"https://pnpm.io/zh/","description":"快速节省磁盘空间的 Node.js 包管理器中文文档","tags":[["技术开发","包管理"],["技术开发","前端开发"]]}
+{"title":"Yarn 中文","url":"https://yarn.bootcss.com/","description":"Facebook 推出的 JS 包管理器中文文档，快速可靠依赖管理","tags":[["技术开发","包管理"],["技术开发","前端开发"]]}
+{"title":"Bun","url":"https://bun.sh/","description":"全新 JavaScript 运行时和工具链，内置打包器测试运行器","tags":[["技术开发","编程语言","JavaScript"],["技术开发","运行时"]]}
+{"title":"Deno 中文","url":"https://deno.com/","description":"Node.js 作者重写的现代 JS/TS 运行时，内置 TypeScript 支持","tags":[["技术开发","编程语言","JavaScript"],["技术开发","运行时"]]}
+{"title":"OpenAI API 中文","url":"https://platform.openai.com/docs/","description":"OpenAI API 官方文档，GPT 大语言模型的开发者接入指南","tags":[["技术开发","AI工具"],["技术开发","API"]]}
+{"title":"通义千问","url":"https://tongyi.aliyun.com/","description":"阿里出品的 AI 大语言模型，提供对话和代码生成能力","tags":[["技术开发","AI工具"]]}
+{"title":"文心一言","url":"https://yiyan.baidu.com/","description":"百度出品的知识增强大语言模型，编程辅助和知识问答","tags":[["技术开发","AI工具"]]}
+{"title":"GLM 大模型","url":"https://open.bigmodel.cn/","description":"智谱 AI 开放平台，ChatGLM 大模型 API 和开发者工具","tags":[["技术开发","AI工具"]]}
+{"title":"无服务器函数计算","url":"https://www.aliyun.com/product/fc","description":"阿里云函数计算 FC，事件驱动的 Serverless 计算平台","tags":[["技术开发","云平台","阿里云"],["技术开发","Serverless"]]}
+{"title":"腾讯云云函数","url":"https://cloud.tencent.com/product/scf","description":"腾讯云 SCF Serverless 函数服务，事件驱动无服务器架构","tags":[["技术开发","云平台","腾讯云"],["技术开发","Serverless"]]}
+{"title":"Vercel","url":"https://vercel.com/","description":"前端部署和 Serverless 平台，Next.js 创建者的云服务","tags":[["技术开发","前端开发"],["技术开发","部署平台"]]}
+{"title":"Netlify","url":"https://www.netlify.com/","description":"现代 Web 项目构建部署平台，Jamstack 架构的托管服务","tags":[["技术开发","前端开发"],["技术开发","部署平台"]]}
+{"title":"Cloudflare 中文","url":"https://www.cloudflare-cn.com/","description":"全球 CDN 和 Web 安全服务，Workers 边缘计算 Serverless 平台","tags":[["技术开发","CDN"],["技术开发","Serverless"]]}
+{"title":"掘金小册","url":"https://juejin.cn/books","description":"掘金平台的技术小册，高质量系统性技术学习图文内容","tags":[["技术开发","学习资源"]]}

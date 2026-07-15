@@ -1,0 +1,200 @@
+{"title":"Apache TVM","url":"https://tvm.apache.org","description":"开源深度学习编译器堆栈，将模型部署到多种硬件后端","tags":[["技术开发","AI 工具"],["技术开发","模型部署"]]}
+{"title":"GGML","url":"https://github.com/ggerganov/ggml","description":"面向大语言模型的 C 语言张量库，支持 CPU 上的高效推理","tags":[["技术开发","AI 工具"],["技术开发","大语言模型"]]}
+{"title":"TensorRT","url":"https://developer.nvidia.com/tensorrt","description":"NVIDIA 深度学习推理优化器和运行时，最大化推理吞吐","tags":[["技术开发","AI 工具"],["技术开发","模型部署"]]}
+{"title":"Ray Serve","url":"https://docs.ray.io/en/latest/serve/index.html","description":"基于 Ray 的可扩展模型服务框架，支持在线推理与复合模型图","tags":[["技术开发","AI 工具"],["技术开发","模型部署"]]}
+{"title":"BentoML","url":"https://www.bentoml.com","description":"统一模型打包、服务、部署的 Python 框架","tags":[["技术开发","AI 工具"],["技术开发","模型部署"]]}
+{"title":"Triton Inference Server","url":"https://developer.nvidia.com/nvidia-triton-inference-server","description":"NVIDIA 开源推理服务器，支持多框架并发 GPU 推理","tags":[["技术开发","AI 工具"],["技术开发","模型部署"]]}
+{"title":"Weights & Biases","url":"https://wandb.ai","description":"ML 实验跟踪、超参调优与模型管理平台","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Neptune.ai","url":"https://neptune.ai","description":"ML 元数据存储与实验跟踪，团队协作的 MLOps 平台","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"DVC","url":"https://dvc.org","description":"数据版本控制与 ML 流水线管理工具，与 Git 搭配","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Feast","url":"https://feast.dev","description":"开源特征存储，统一 ML 特征的存储与服务","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Tecton","url":"https://www.tecton.ai","description":"企业级特征平台，实时与批量特征工程","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Gradio","url":"https://www.gradio.app","description":"快速构建 ML 模型 Web 演示界面的 Python 库","tags":[["技术开发","AI 工具"],["技术开发","前端开发"]]}
+{"title":"Streamlit","url":"https://streamlit.io","description":"纯 Python 构建数据与 ML 应用的 Web 框架","tags":[["技术开发","AI 工具"],["技术开发","前端开发"]]}
+{"title":"Replicate","url":"https://replicate.com","description":"云端一键运行开源 ML 模型 API 平台","tags":[["技术开发","AI 工具"],["技术开发","云平台"]]}
+{"title":"Modal","url":"https://modal.com","description":"Python 无服务器云平台，擅长 GPU 工作负载","tags":[["技术开发","AI 工具"],["技术开发","云平台"]]}
+{"title":"JAX","url":"https://jax.readthedocs.io","description":"Google 的高性能数值计算与自动微分库","tags":[["技术开发","AI 工具"],["技术开发","深度学习"]]}
+{"title":"DeepSpeed","url":"https://www.deepspeed.ai","description":"Microsoft 的深度学习优化引擎，支持万亿参数训练","tags":[["技术开发","AI 工具"],["技术开发","大语言模型"]]}
+{"title":"MegEngine","url":"https://www.megengine.org.cn","description":"旷视科技开源深度学习框架，专注训练推理一体化","tags":[["技术开发","AI 工具"],["技术开发","深度学习"]]}
+{"title":"PaddlePaddle","url":"https://www.paddlepaddle.org.cn","description":"百度开源深度学习平台，中文 NLP 与 CV 生态完善","tags":[["技术开发","AI 工具"],["技术开发","深度学习"]]}
+{"title":"OneFlow","url":"https://github.com/Oneflow-Inc/oneflow","description":"一流科技开源深度学习框架，主打分布式训练效率","tags":[["技术开发","AI 工具"],["技术开发","深度学习"]]}
+{"title":"OpenCV","url":"https://opencv.org","description":"计算机视觉与图像处理的开源算法库","tags":[["技术开发","AI 工具"],["技术开发","计算机视觉"]]}
+{"title":"YOLO","url":"https://pjreddie.com/darknet/yolo","description":"实时目标检测算法与 Darknet 框架","tags":[["技术开发","AI 工具"],["技术开发","计算机视觉"]]}
+{"title":"Detectron2","url":"https://github.com/facebookresearch/detectron2","description":"Facebook AI 的目标检测与分割研究框架","tags":[["技术开发","AI 工具"],["技术开发","计算机视觉"]]}
+{"title":"FastAI","url":"https://www.fast.ai","description":"基于 PyTorch 的高层深度学习训练库，降低门槛","tags":[["技术开发","AI 工具"],["技术开发","深度学习"]]}
+{"title":"LightGBM","url":"https://lightgbm.readthedocs.io","description":"Microsoft 开源梯度提升决策树框架，速度快精度高","tags":[["技术开发","AI 工具"],["技术开发","机器学习"]]}
+{"title":"XGBoost","url":"https://xgboost.readthedocs.io","description":"优化的分布式梯度提升库，Kaggle 竞赛标配","tags":[["技术开发","AI 工具"],["技术开发","机器学习"]]}
+{"title":"CatBoost","url":"https://catboost.ai","description":"Yandex 的梯度提升库，原生处理类别特征","tags":[["技术开发","AI 工具"],["技术开发","机器学习"]]}
+{"title":"scikit-learn","url":"https://scikit-learn.org","description":"经典机器学习算法库，分类回归聚类全覆盖","tags":[["技术开发","AI 工具"],["技术开发","机器学习"]]}
+{"title":"Dask","url":"https://www.dask.org","description":"并行计算库，将 NumPy/Pandas 扩展到分布式集群","tags":[["技术开发","AI 工具"],["技术开发","数据处理"]]}
+{"title":"Metaflow","url":"https://metaflow.org","description":"Netflix 开源的数据科学工作流框架，从原型到生产","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Prefect","url":"https://www.prefect.io","description":"现代数据与 ML 工作流编排框架","tags":[["技术开发","AI 工具"],["技术开发","MLOps"]]}
+{"title":"Dagster","url":"https://dagster.io","description":"数据管道编排平台，面向软件工程最佳实践的 ETL 工具","tags":[["技术开发","AI 工具"],["技术开发","数据处理"]]}
+{"title":"Airbyte","url":"https://airbyte.com","description":"开源数据集成引擎，200+ 连接器同步任意数据源","tags":[["技术开发","数据处理"],["技术开发","ETL"]]}
+{"title":"Apache Flink","url":"https://flink.apache.org","description":"流批一体的高性能分布式数据处理引擎","tags":[["技术开发","数据处理"],["技术开发","大数据"]]}
+{"title":"Apache Spark","url":"https://spark.apache.org","description":"大规模数据处理统一分析引擎","tags":[["技术开发","数据处理"],["技术开发","大数据"]]}
+{"title":"Apache Kafka","url":"https://kafka.apache.org","description":"分布式事件流平台，万亿级消息处理","tags":[["技术开发","消息队列"],["技术开发","大数据"]]}
+{"title":"Apache Pulsar","url":"https://pulsar.apache.org","description":"云原生分布式消息与流平台","tags":[["技术开发","消息队列"],["技术开发","大数据"]]}
+{"title":"RabbitMQ","url":"https://www.rabbitmq.com","description":"广泛使用的开源消息代理，支持多协议","tags":[["技术开发","消息队列"],["技术开发","后端开发"]]}
+{"title":"NATS","url":"https://nats.io","description":"云原生高性能消息系统，极致简洁与吞吐","tags":[["技术开发","消息队列"],["技术开发","后端开发"]]}
+{"title":"TimescaleDB","url":"https://www.timescale.com","description":"基于 PostgreSQL 的时间序列数据库","tags":[["技术开发","数据库"],["技术开发","时序数据库"]]}
+{"title":"InfluxDB","url":"https://www.influxdata.com","description":"高性能时间序列数据平台，监控与物联网首选","tags":[["技术开发","数据库"],["技术开发","时序数据库"]]}
+{"title":"QuestDB","url":"https://questdb.io","description":"极速开源时序数据库，SQL 查询性能突出","tags":[["技术开发","数据库"],["技术开发","时序数据库"]]}
+{"title":"VictoriaMetrics","url":"https://victoriametrics.com","description":"快速可扩展的时序数据库与监控方案","tags":[["技术开发","数据库"],["技术开发","时序数据库"]]}
+{"title":"Apache Cassandra","url":"https://cassandra.apache.org","description":"去中心化分布式宽列 NoSQL 数据库","tags":[["技术开发","数据库"],["技术开发","NoSQL"]]}
+{"title":"ScyllaDB","url":"https://www.scylladb.com","description":"Cassandra 兼容的 C++ 高性能 NoSQL 数据库","tags":[["技术开发","数据库"],["技术开发","NoSQL"]]}
+{"title":"Couchbase","url":"https://www.couchbase.com","description":"内存优先的分布式 NoSQL 文档数据库","tags":[["技术开发","数据库"],["技术开发","NoSQL"]]}
+{"title":"ArangoDB","url":"https://www.arangodb.com","description":"原生多模型数据库，支持图文档键值","tags":[["技术开发","数据库"],["技术开发","图数据库"]]}
+{"title":"Dgraph","url":"https://dgraph.io","description":"原生分布式图数据库，GraphQL 原生查询","tags":[["技术开发","数据库"],["技术开发","图数据库"]]}
+{"title":"JanusGraph","url":"https://janusgraph.org","description":"开源分布式图数据库，可扩展至千亿节点","tags":[["技术开发","数据库"],["技术开发","图数据库"]]}
+{"title":"Apache HBase","url":"https://hbase.apache.org","description":"Hadoop 上的分布式列式数据库，海量随机读写","tags":[["技术开发","数据库"],["技术开发","大数据"]]}
+{"title":"Apache Druid","url":"https://druid.apache.org","description":"实时分析数据库，亚秒级 OLAP 查询","tags":[["技术开发","数据库"],["技术开发","大数据"]]}
+{"title":"Trino","url":"https://trino.io","description":"分布式 SQL 查询引擎，联合查询多种数据源","tags":[["技术开发","数据库"],["技术开发","大数据"]]}
+{"title":"Presto","url":"https://prestodb.io","description":"Facebook 开源的大数据交互式分析引擎","tags":[["技术开发","数据库"],["技术开发","大数据"]]}
+{"title":"CockroachDB","url":"https://www.cockroachlabs.com","description":"云原生分布式 SQL 数据库，强一致性与全球部署","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"YugabyteDB","url":"https://www.yugabyte.com","description":"开源分布式 PostgreSQL 兼容数据库","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"Aerospike","url":"https://aerospike.com","description":"极低延迟的键值数据库，广告与金融场景","tags":[["技术开发","数据库"],["技术开发","NoSQL"]]}
+{"title":"LevelDB","url":"https://github.com/google/leveldb","description":"Google 开源的高性能键值存储库","tags":[["技术开发","数据库"],["技术开发","存储引擎"]]}
+{"title":"RocksDB","url":"https://rocksdb.org","description":"Facebook 开发的高性能嵌入式键值存储","tags":[["技术开发","数据库"],["技术开发","存储引擎"]]}
+{"title":"FoundationDB","url":"https://www.foundationdb.org","description":"Apple 开源分布式数据库，强 ACID 事务","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"Ceph","url":"https://ceph.io","description":"统一分布式存储系统，对象块文件三合一","tags":[["技术开发","存储"],["技术开发","分布式"]]}
+{"title":"MinIO MC","url":"https://min.io/docs/minio/linux/reference/minio-mc.html","description":"MinIO 命令行客户端，管理对象存储桶与文件","tags":[["技术开发","存储"],["技术开发","对象存储"]]}
+{"title":"Longhorn","url":"https://longhorn.io","description":"CNCF 云原生分布式块存储，Kubernetes 原生","tags":[["技术开发","存储"],["技术开发","容器编排"]]}
+{"title":"Apache Arrow","url":"https://arrow.apache.org","description":"列式内存格式，跨语言零拷贝数据分析","tags":[["技术开发","数据处理"],["技术开发","数据库"]]}
+{"title":"Polars","url":"https://pola.rs","description":"极速 DataFrame 库，Rust 编写 Python 绑定","tags":[["技术开发","数据处理"],["技术开发","数据分析"]]}
+{"title":"Apache Parquet","url":"https://parquet.apache.org","description":"列式存储文件格式，大数据生态核心","tags":[["技术开发","数据处理"],["技术开发","大数据"]]}
+{"title":"Jupyter","url":"https://jupyter.org","description":"交互式笔记本环境，数据科学标配","tags":[["技术开发","数据分析"],["技术开发","开发工具"]]}
+{"title":"pandas","url":"https://pandas.pydata.org","description":"Python 数据分析核心库，表格数据操作","tags":[["技术开发","数据分析"],["技术开发","数据处理"]]}
+{"title":"Apache Superset","url":"https://superset.apache.org","description":"开源数据探索与可视化 BI 平台","tags":[["技术开发","数据分析"],["技术开发","BI"]]}
+{"title":"Metabase","url":"https://www.metabase.com","description":"简单易用的开源 BI 查询与仪表板工具","tags":[["技术开发","数据分析"],["技术开发","BI"]]}
+{"title":"Redash","url":"https://redash.io","description":"数据可视化协作平台，SQL 查询生成仪表板","tags":[["技术开发","数据分析"],["技术开发","BI"]]}
+{"title":"Grafana Loki","url":"https://grafana.com/oss/loki","description":"水平可扩展的日志聚合系统，受 Prometheus 启发","tags":[["技术开发","可观测性"],["技术开发","日志"]]}
+{"title":"Elastic Stack","url":"https://www.elastic.co/elastic-stack","description":"Elasticsearch + Logstash + Kibana 日志分析三件套","tags":[["技术开发","可观测性"],["技术开发","日志"]]}
+{"title":"Fluentd","url":"https://www.fluentd.org","description":"CNCF 统一日志层，采集过滤路由日志数据","tags":[["技术开发","可观测性"],["技术开发","日志"]]}
+{"title":"Vector","url":"https://vector.dev","description":"轻量超快可观测性数据管道，Rust 编写","tags":[["技术开发","可观测性"],["技术开发","日志"]]}
+{"title":"Sentry","url":"https://sentry.io","description":"应用错误追踪与性能监控平台","tags":[["技术开发","可观测性"],["技术开发","APM"]]}
+{"title":"Datadog","url":"https://www.datadoghq.com","description":"全栈可观测性 SaaS 平台，基础设施到应用监控","tags":[["技术开发","可观测性"],["技术开发","APM"]]}
+{"title":"New Relic","url":"https://newrelic.com","description":"应用性能监控与可观测性平台","tags":[["技术开发","可观测性"],["技术开发","APM"]]}
+{"title":"Signoz","url":"https://signoz.io","description":"开源 OpenTelemetry 原生 APM 与可观测性平台","tags":[["技术开发","可观测性"],["技术开发","APM"]]}
+{"title":"Pyroscope","url":"https://pyroscope.io","description":"开源持续分析平台，发现性能瓶颈","tags":[["技术开发","可观测性"],["技术开发","性能分析"]]}
+{"title":"Artillery.io","url":"https://www.artillery.io","description":"云原生负载测试工具，YAML 声明式脚本","tags":[["技术开发","测试"],["技术开发","性能测试"]]}
+{"title":"K6","url":"https://k6.io","description":"Grafana 出品的开源负载测试工具，JS 编写脚本","tags":[["技术开发","测试"],["技术开发","性能测试"]]}
+{"title":"Locust","url":"https://locust.io","description":"Python 编写的可扩展负载测试框架","tags":[["技术开发","测试"],["技术开发","性能测试"]]}
+{"title":"Gatling","url":"https://gatling.io","description":"高性能负载测试工具，Scala DSL 脚本","tags":[["技术开发","测试"],["技术开发","性能测试"]]}
+{"title":"Testcontainers","url":"https://testcontainers.com","description":"Java/Go/Node/Python 集成测试容器化工具","tags":[["技术开发","测试"],["技术开发","后端开发"]]}
+{"title":"Cucumber","url":"https://cucumber.io","description":"BDD 行为驱动开发框架，Gherkin 语法","tags":[["技术开发","测试"],["技术开发","BDD"]]}
+{"title":"Pact","url":"https://pact.io","description":"消费者驱动契约测试框架，微服务专用","tags":[["技术开发","测试"],["技术开发","契约测试"]]}
+{"title":"RestAssured","url":"https://rest-assured.io","description":"Java DSL 简化 REST API 测试","tags":[["技术开发","测试"],["技术开发","后端开发"]]}
+{"title":"Mocha.js","url":"https://mochajs.org","description":"Node.js 灵活测试框架，支持多种断言库","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"JUnit 5","url":"https://junit.org/junit5","description":"Java 测试框架最新版，模块化与扩展模型","tags":[["技术开发","测试"],["技术开发","后端开发"]]}
+{"title":"Pytest","url":"https://docs.pytest.org","description":"Python 测试框架，简洁语法与丰富插件生态","tags":[["技术开发","测试"],["技术开发","后端开发"]]}
+{"title":"RSpec","url":"https://rspec.info","description":"Ruby BDD 测试框架，可读性极高的测试 DSL","tags":[["技术开发","测试"],["技术开发","BDD"]]}
+{"title":"Storybook","url":"https://storybook.js.org","description":"UI 组件开发与测试工作台，隔离构建与视觉测试","tags":[["技术开发","前端开发"],["技术开发","测试"]]}
+{"title":"WebdriverIO","url":"https://webdriver.io","description":"下一代浏览器与移动自动化测试框架","tags":[["技术开发","测试"],["技术开发","E2E"]]}
+{"title":"Puppeteer","url":"https://pptr.dev","description":"Google 的 Headless Chrome 自动化 Node 库","tags":[["技术开发","测试"],["技术开发","E2E"]]}
+{"title":"Vitest","url":"https://vitest.dev","description":"基于 Vite 的极速单元测试框架","tags":[["技术开发","测试"],["技术开发","前端开发"]]}
+{"title":"CircleCI","url":"https://circleci.com","description":"云端 CI/CD 平台，灵活管道配置","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Travis CI","url":"https://www.travis-ci.com","description":"老牌托管 CI 服务，开源项目免费","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Buildkite","url":"https://buildkite.com","description":"混合 CI/CD 平台，自托管运行器加云端管理","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Woodpecker CI","url":"https://woodpecker-ci.org","description":"轻量开源 CI 引擎，Drone 社区分支","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Earthly","url":"https://earthly.dev","description":"Makefile + Dockerfile 融合的构建自动化工具","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"Dagger","url":"https://dagger.io","description":"可编程 CI/CD 引擎，用代码定义管道","tags":[["技术开发","DevOps"],["技术开发","CI/CD"]]}
+{"title":"HashiCorp Vault","url":"https://www.vaultproject.io","description":"密钥管理与数据加密平台","tags":[["技术开发","DevOps"],["技术开发","安全"]]}
+{"title":"HashiCorp Consul","url":"https://www.consul.io","description":"服务网格与服务发现平台","tags":[["技术开发","DevOps"],["技术开发","微服务"]]}
+{"title":"HashiCorp Nomad","url":"https://www.nomadproject.io","description":"简单灵活的工作负载调度器","tags":[["技术开发","DevOps"],["技术开发","容器编排"]]}
+{"title":"Traefik","url":"https://traefik.io","description":"云原生反向代理与负载均衡器","tags":[["技术开发","DevOps"],["技术开发","云原生"]]}
+{"title":"Caddy","url":"https://caddyserver.com","description":"自动 HTTPS 的现代 Web 服务器","tags":[["技术开发","DevOps"],["技术开发","Web 服务器"]]}
+{"title":"Envoy","url":"https://www.envoyproxy.io","description":"CNCF 高性能边缘与服务代理","tags":[["技术开发","DevOps"],["技术开发","微服务"]]}
+{"title":"HAProxy","url":"https://www.haproxy.org","description":"高可用 TCP/HTTP 负载均衡器","tags":[["技术开发","DevOps"],["技术开发","后端开发"]]}
+{"title":"Cloudflare Tunnel","url":"https://developers.cloudflare.com/cloudflare-one/connections/connect-networks","description":"安全隧道将本地服务暴露到公网","tags":[["技术开发","DevOps"],["技术开发","网络"]]}
+{"title":"ngrok","url":"https://ngrok.com","description":"内网穿透工具，本地服务公网可访问","tags":[["技术开发","DevOps"],["技术开发","开发工具"]]}
+{"title":"Teleport","url":"https://goteleport.com","description":"零信任基础设施访问平台","tags":[["技术开发","DevOps"],["技术开发","安全"]]}
+{"title":"Podman","url":"https://podman.io","description":"无守护进程的 OCI 容器引擎，Docker 替代品","tags":[["技术开发","容器编排"],["技术开发","DevOps"]]}
+{"title":"LXC / Incus","url":"https://linuxcontainers.org","description":"Linux 系统容器管理，轻量虚拟化","tags":[["技术开发","容器编排"],["技术开发","DevOps"]]}
+{"title":"K3s","url":"https://k3s.io","description":"轻量 Kubernetes，边缘与 IoT 场景","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"K0s","url":"https://k0sproject.io","description":"零依赖零摩擦的 Kubernetes 发行版","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"OpenShift","url":"https://www.redhat.com/en/technologies/cloud-computing/openshift","description":"Red Hat 的企业 Kubernetes 平台","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Kubespray","url":"https://kubespray.io","description":"基于 Ansible 的生产级 Kubernetes 集群部署","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"k9s","url":"https://k9scli.io","description":"Kubernetes 终端 UI 管理工具","tags":[["技术开发","容器编排"],["技术开发","开发工具"]]}
+{"title":"Lens","url":"https://k8slens.dev","description":"Kubernetes IDE 桌面管理工具","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Kustomize","url":"https://kustomize.io","description":"Kubernetes 原生配置管理模板引擎","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Kyverno","url":"https://kyverno.io","description":"Kubernetes 策略管理引擎，无需编程语言","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"External Secrets","url":"https://external-secrets.io","description":"Kubernetes 外部密钥管理 Operator","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Crossplane","url":"https://www.crossplane.io","description":"CNCF 云原生控制平面框架，用 K8s 管理一切","tags":[["技术开发","容器编排"],["技术开发","云原生"]]}
+{"title":"KubeVirt","url":"https://kubevirt.io","description":"Kubernetes 上管理虚拟机的扩展","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Keda","url":"https://keda.sh","description":"Kubernetes 事件驱动自动伸缩组件","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Knative","url":"https://knative.dev","description":"Kubernetes 无服务器框架","tags":[["技术开发","容器编排"],["技术开发","Serverless"]]}
+{"title":"Helmfile","url":"https://github.com/helmfile/helmfile","description":"声明式 Helm Chart 部署管理工具","tags":[["技术开发","容器编排"],["技术开发","DevOps"]]}
+{"title":"Komodor","url":"https://komodor.com","description":"Kubernetes 故障排查与变更可视化平台","tags":[["技术开发","容器编排"],["技术开发","Kubernetes"]]}
+{"title":"Temporal","url":"https://temporal.io","description":"高可靠工作流编排引擎，微服务常用","tags":[["技术开发","后端开发"],["技术开发","微服务"]]}
+{"title":"Cadence","url":"https://cadenceworkflow.io","description":"Uber 的分布式可扩展工作流引擎","tags":[["技术开发","后端开发"],["技术开发","微服务"]]}
+{"title":"Camunda","url":"https://camunda.com","description":"流程自动化与工作流引擎平台","tags":[["技术开发","后端开发"],["技术开发","工作流"]]}
+{"title":"Apache Airflow","url":"https://airflow.apache.org","description":"数据工程与 ETL 工作流调度平台","tags":[["技术开发","数据处理"],["技术开发","工作流"]]}
+{"title":"Conductor","url":"https://conductor-oss.github.io/conductor","description":"Netflix 的微服务编排引擎","tags":[["技术开发","后端开发"],["技术开发","微服务"]]}
+{"title":"gRPC","url":"https://grpc.io","description":"Google 的高性能 RPC 框架，Protobuf 序列化","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"GraphQL","url":"https://graphql.org","description":"API 查询语言，精确获取所需数据","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Apollo GraphQL","url":"https://www.apollographql.com","description":"GraphQL 客户端、服务端与联邦化工具","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Hasura","url":"https://hasura.io","description":"即时 GraphQL API 引擎，数据库秒变 API","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"FastAPI","url":"https://fastapi.tiangolo.com","description":"Python 高性能异步 Web 框架，自动 OpenAPI","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"NestJS","url":"https://nestjs.com","description":"TypeScript 渐进式服务端框架","tags":[["技术开发","后端开发"],["技术开发","Node.js"]]}
+{"title":"Quarkus","url":"https://quarkus.io","description":"Kubernetes 原生 Java 框架，启动快内存低","tags":[["技术开发","后端开发"],["技术开发","Java"]]}
+{"title":"Micronaut","url":"https://micronaut.io","description":"AOT 编译微服务框架，极低内存占用","tags":[["技术开发","后端开发"],["技术开发","Java"]]}
+{"title":"Gin","url":"https://gin-gonic.com","description":"Go 语言高性能 HTTP Web 框架","tags":[["技术开发","后端开发"],["技术开发","Go"]]}
+{"title":"Fiber","url":"https://gofiber.io","description":"Go 语言 Express 风格高性能 Web 框架","tags":[["技术开发","后端开发"],["技术开发","Go"]]}
+{"title":"Echo","url":"https://echo.labstack.com","description":"Go 语言极简高性能 Web 框架","tags":[["技术开发","后端开发"],["技术开发","Go"]]}
+{"title":"Flask","url":"https://flask.palletsprojects.com","description":"Python 微框架，灵活轻量 Web 开发","tags":[["技术开发","后端开发"],["技术开发","Python"]]}
+{"title":"Phoenix","url":"https://www.phoenixframework.org","description":"Elixir 实时 Web 框架，高并发 WebSocket","tags":[["技术开发","后端开发"],["技术开发","Elixir"]]}
+{"title":"SvelteKit","url":"https://kit.svelte.dev","description":"Svelte 全栈应用框架","tags":[["技术开发","前端开发"],["技术开发","全栈"]]}
+{"title":"Nuxt","url":"https://nuxt.com","description":"Vue.js 全栈框架，SSR 与文件路由","tags":[["技术开发","前端开发"],["技术开发","Vue"]]}
+{"title":"Remix","url":"https://remix.run","description":"React Web 框架，专注 Web 标准","tags":[["技术开发","前端开发"],["技术开发","React"]]}
+{"title":"Astro","url":"https://astro.build","description":"内容型网站框架，零 JS 默认架构","tags":[["技术开发","前端开发"],["技术开发","静态站点"]]}
+{"title":"Gatsby","url":"https://www.gatsbyjs.com","description":"React 静态站点生成器，GraphQL 数据层","tags":[["技术开发","前端开发"],["技术开发","React"]]}
+{"title":"SolidJS","url":"https://www.solidjs.com","description":"高性能响应式 UI 框架，无虚拟 DOM","tags":[["技术开发","前端开发"],["技术开发","响应式"]]}
+{"title":"Qwik","url":"https://qwik.dev","description":"极致可恢复性的即时加载框架","tags":[["技术开发","前端开发"],["技术开发","性能优化"]]}
+{"title":"RedwoodJS","url":"https://redwoodjs.com","description":"React + GraphQL 全栈 Jamstack 框架","tags":[["技术开发","前端开发"],["技术开发","全栈"]]}
+{"title":"HTMX","url":"https://htmx.org","description":"用 HTML 属性实现 AJAX/WebSocket 交互","tags":[["技术开发","前端开发"],["技术开发","HTML"]]}
+{"title":"Alpine.js","url":"https://alpinejs.dev","description":"轻量声明式前端框架，Vue 风格的 jQuery","tags":[["技术开发","前端开发"],["技术开发","交互"]]}
+{"title":"Vite","url":"https://vitejs.dev","description":"下一代前端构建工具，极速 HMR","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"esbuild","url":"https://esbuild.github.io","description":"Go 语言编写的极速 JS 打包器","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"SWC","url":"https://swc.rs","description":"Rust 编写的高速 JS/TS 编译工具","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"Turborepo","url":"https://turbo.build/repo","description":"Monorepo 高性能构建编排工具","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"Nx","url":"https://nx.dev","description":"Monorepo 智能构建系统与工具","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"Bun","url":"https://bun.sh","description":"高性能 JS 运行时打包测试一体工具","tags":[["技术开发","前端开发"],["技术开发","运行时"]]}
+{"title":"Deno","url":"https://deno.com","description":"Ryan Dahl 的现代安全 JS/TS 运行时","tags":[["技术开发","前端开发"],["技术开发","运行时"]]}
+{"title":"Babel","url":"https://babeljs.io","description":"JavaScript 编译器，转译下一代 JS 语法","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"Rspack","url":"https://rspack.dev","description":"Rust 编写的高性能 Webpack 兼容打包器","tags":[["技术开发","前端开发"],["技术开发","构建工具"]]}
+{"title":"ECharts","url":"https://echarts.apache.org","description":"百度开源交互式图表库，国产项目最爱","tags":[["技术开发","前端开发"],["技术开发","数据可视化"]]}
+{"title":"Three.js","url":"https://threejs.org","description":"WebGL 3D 渲染库，浏览器 3D 开发标配","tags":[["技术开发","前端开发"],["技术开发","3D图形"]]}
+{"title":"Babylon.js","url":"https://www.babylonjs.com","description":"Microsoft 的 Web 3D 游戏引擎","tags":[["技术开发","前端开发"],["技术开发","3D图形"]]}
+{"title":"Electron","url":"https://www.electronjs.org","description":"用 JS/HTML/CSS 构建跨平台桌面应用","tags":[["技术开发","前端开发"],["技术开发","桌面开发"]]}
+{"title":"Tauri","url":"https://tauri.app","description":"Rust 驱动的轻量桌面应用框架","tags":[["技术开发","前端开发"],["技术开发","桌面开发"]]}
+{"title":"Expo","url":"https://expo.dev","description":"React Native 应用开发框架与云服务","tags":[["技术开发","移动开发"],["技术开发","跨平台"]]}
+{"title":"Ionic","url":"https://ionicframework.com","description":"跨平台移动 UI 框架，Web 技术构建原生应用","tags":[["技术开发","移动开发"],["技术开发","跨平台"]]}
+{"title":"Capacitor","url":"https://capacitorjs.com","description":"跨平台原生运行时，Web 应用调用原生能力","tags":[["技术开发","移动开发"],["技术开发","跨平台"]]}
+{"title":"Xamarin","url":"https://dotnet.microsoft.com/apps/xamarin","description":"Microsoft 的 .NET 跨平台移动开发框架","tags":[["技术开发","移动开发"],["技术开发","C#"]]}
+{"title":"MAUI","url":"https://dotnet.microsoft.com/apps/maui","description":"微软 .NET 多平台应用 UI 框架","tags":[["技术开发","移动开发"],["技术开发","C#"]]}
+{"title":"Kotlin Multiplatform","url":"https://kotlinlang.org/docs/multiplatform.html","description":"JetBrains 的 Kotlin 跨平台共享逻辑方案","tags":[["技术开发","移动开发"],["技术开发","Kotlin"]]}
+{"title":"Detox","url":"https://wix.github.io/Detox","description":"React Native 端到端测试与自动化框架","tags":[["技术开发","移动开发"],["技术开发","测试"]]}
+{"title":"Rust","url":"https://www.rust-lang.org","description":"系统编程语言，内存安全零成本抽象","tags":[["技术开发","编程语言"],["技术开发","系统编程"]]}
+{"title":"Go","url":"https://go.dev","description":"Google 的并发系统编程语言","tags":[["技术开发","编程语言"],["技术开发","系统编程"]]}
+{"title":"Zig","url":"https://ziglang.org","description":"与 C 兼容的现代系统编程语言","tags":[["技术开发","编程语言"],["技术开发","系统编程"]]}
+{"title":"Protocol Buffers","url":"https://protobuf.dev","description":"Google 的语言中立序列化协议","tags":[["技术开发","后端开发"],["技术开发","数据格式"]]}
+{"title":"FlatBuffers","url":"https://flatbuffers.dev","description":"零拷贝高性能序列化库，游戏常用","tags":[["技术开发","后端开发"],["技术开发","数据格式"]]}
+{"title":"OpenAPI","url":"https://www.openapis.org","description":"REST API 标准规范与工具生态","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Swagger","url":"https://swagger.io","description":"OpenAPI 工具套件，API 设计文档调试","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Postman","url":"https://www.postman.com","description":"API 开发协作平台","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Insomnia","url":"https://insomnia.rest","description":"开源 API 客户端与设计工具","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Hoppscotch","url":"https://hoppscotch.io","description":"开源 API 开发工具，浏览器即可使用","tags":[["技术开发","后端开发"],["技术开发","API"]]}
+{"title":"Redis Stack","url":"https://redis.io/docs/about/about-stack","description":"Redis 扩展能力集，搜索、JSON、时序与概率","tags":[["技术开发","数据库"],["技术开发","缓存"]]}
+{"title":"Memcached","url":"https://memcached.org","description":"经典分布式内存对象缓存系统","tags":[["技术开发","数据库"],["技术开发","缓存"]]}
+{"title":"Citus","url":"https://www.citusdata.com","description":"PostgreSQL 分布式扩展，水平分片","tags":[["技术开发","数据库"],["技术开发","分布式"]]}
+{"title":"pgvector","url":"https://github.com/pgvector/pgvector","description":"PostgreSQL 向量相似度搜索扩展","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Milvus","url":"https://milvus.io","description":"开源向量数据库，AI 语义搜索","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Weaviate","url":"https://weaviate.io","description":"AI 原生向量数据库，GraphQL 语义搜索","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Qdrant","url":"https://qdrant.tech","description":"高性能向量搜索引擎与数据库","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Chroma","url":"https://www.trychroma.com","description":"开源嵌入数据库，AI 应用开发友好","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Pinecone","url":"https://www.pinecone.io","description":"托管向量数据库服务","tags":[["技术开发","数据库"],["技术开发","向量数据库"]]}
+{"title":"Meilisearch","url":"https://www.meilisearch.com","description":"高性能开箱即用搜索引擎","tags":[["技术开发","数据库"],["技术开发","搜索"]]}
+{"title":"Typesense","url":"https://typesense.org","description":"容错即时搜索引擎，Algolia 开源替代","tags":[["技术开发","数据库"],["技术开发","搜索"]]}
+{"title":"Algolia","url":"https://www.algolia.com","description":"托管搜索 API 平台","tags":[["技术开发","数据库"],["技术开发","搜索"]]}
+{"title":"Elastic Cloud","url":"https://www.elastic.co/cloud","description":"Elasticsearch 托管服务","tags":[["技术开发","数据库"],["技术开发","搜索"]]}
