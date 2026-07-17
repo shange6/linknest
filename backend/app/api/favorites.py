@@ -5,7 +5,7 @@ from app.core.database import get_db
 from app.core.auth import get_current_user
 from app.models.user import User
 from app.models.bookmark import Bookmark
-from app.models.user_favorite import UserFavorite
+from app.models.user_bookmark import UserFavorite
 from app.schemas.schemas import FavoriteCreate, FavoriteOut, BookmarkOut
 
 router = APIRouter(prefix="/api/favorites", tags=["favorites"])

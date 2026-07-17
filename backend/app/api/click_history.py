@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from math import ceil
+from datetime import datetime
 
 from app.core.database import get_db
 from app.core.auth import get_current_user
 from app.models.user import User
 from app.models.bookmark import Bookmark
-from app.models.user_click_history import UserClickHistory
+from app.models.user_history import UserHistory
 from app.schemas.schemas import ClickHistoryCreate, ClickHistoryOut
 
 router = APIRouter(prefix="/api/history", tags=["click-history"])
@@ -19,9 +19,9 @@ def get_history(
     current_user: User = Depends(get_current_user),
 ):
     history = (
-        db.query(UserClickHistory)
-        .filter(UserClickHistory.user_id == current_user.id)
-        .order_by(UserClickHistory.clicked_at.desc())
+        db.query(UserHistory)
+        .filter(UserHistory.user_id == current_user.id)
+        .order_by(UserHistory.updated_at.desc())
         .limit(limit)
         .all()
     )
@@ -38,14 +38,29 @@ def record_click(
     if not bookmark:
         raise HTTPException(status_code=404, detail="Bookmark not found")
 
-    click = UserClickHistory(
+    existing = (
+        db.query(UserHistory)
+        .filter(
+            UserHistory.user_id == current_user.id,
+            UserHistory.bookmark_id == data.bookmark_id,
+        )
+        .first()
+    )
+    if existing:
+        existing.click_count += 1
+        existing.updated_at = datetime.utcnow()
+        db.commit()
+        db.refresh(existing)
+        return existing
+
+    record = UserHistory(
         user_id=current_user.id,
         bookmark_id=data.bookmark_id,
     )
-    db.add(click)
+    db.add(record)
     db.commit()
-    db.refresh(click)
-    return click
+    db.refresh(record)
+    return record
 
 
 @router.delete("", status_code=204)
@@ -53,8 +68,8 @@ def clear_history(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    db.query(UserClickHistory).filter(
-        UserClickHistory.user_id == current_user.id
+    db.query(UserHistory).filter(
+        UserHistory.user_id == current_user.id
     ).delete()
     db.commit()
     return None

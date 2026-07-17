@@ -133,6 +133,8 @@ class ClickHistoryOut(BaseModel):
     user_id: int
     bookmark_id: int
     bookmark: BookmarkOut
-    clicked_at: datetime
+    click_count: int
+    first_clicked_at: datetime
+    last_clicked_at: datetime
 
     model_config = {"from_attributes": True}

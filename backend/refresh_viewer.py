@@ -8,7 +8,7 @@ html_path = os.path.join(base, 'db_schema_viewer.html')
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 db_schema = {"tables": [], "relationships": []}
-for table in ['users', 'tags', 'bookmarks', 'bookmarks_tags', 'user_favorites', 'user_click_history']:
+for table in ['users', 'tags', 'bookmarks', 'bookmarks_tags', 'user_favorites', 'user_history']:
     cursor.execute(f'PRAGMA table_info("{table}")')
     columns = [dict(cid=c[0], name=c[1], type=c[2], notnull=bool(c[3]), dflt_value=str(c[4]) if c[4] is not None else None, pk=bool(c[5])) for c in cursor.fetchall()]
     cursor.execute(f'PRAGMA foreign_key_list("{table}")')
