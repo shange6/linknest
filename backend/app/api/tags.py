@@ -22,7 +22,6 @@ def build_tag_tree(tags: list[Tag], parent_id: Optional[int] = None) -> list[dic
             "name": child.name,
             "slug": child.slug,
             "parent_id": child.parent_id,
-            "level": child.level,
             "sort_order": child.sort_order,
             "description": child.description,
             "updated_at": child.updated_at.isoformat() if child.updated_at else None,
@@ -34,7 +33,7 @@ def build_tag_tree(tags: list[Tag], parent_id: Optional[int] = None) -> list[dic
 
 @router.get("", response_model=list[dict])
 def get_tags(db: Session = Depends(get_db)):
-    tags = db.query(Tag).order_by(Tag.level, Tag.sort_order).all()
+    tags = db.query(Tag).order_by(Tag.sort_order).all()
     return build_tag_tree(tags)
 
 

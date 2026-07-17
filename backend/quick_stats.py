@@ -15,7 +15,7 @@ print("\n叶子标签 / 书签数 (Top 15):")
 rows = db.execute(text("""
     SELECT t.name, t.level, COUNT(bt.bookmark_id) as cnt
     FROM tags t
-    JOIN bookmark_tags bt ON t.id = bt.tag_id
+    JOIN bookmarks_tags bt ON t.id = bt.tag_id
     GROUP BY t.id
     ORDER BY cnt DESC
     LIMIT 15
@@ -29,7 +29,7 @@ rows = db.execute(text("""
     SELECT tag_count, COUNT(*) as bm_count FROM (
         SELECT b.id, COUNT(bt.tag_id) as tag_count
         FROM bookmarks b
-        LEFT JOIN bookmark_tags bt ON b.id = bt.bookmark_id
+        LEFT JOIN bookmarks_tags bt ON b.id = bt.bookmark_id
         GROUP BY b.id
     ) GROUP BY tag_count ORDER BY tag_count
 """)).fetchall()

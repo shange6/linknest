@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkNest · 数据库结构</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0}
+  :root{
+    --h:0 0% 0%;
+    --b:0 0% 10%;
+    --m:0 0% 40%;
+    --l:0 0% 60%;
+    --bg:0 0% 98%;
+    --surface:0 0% 100%;
+    --border:0 0% 88%;
+    --hair:0 0% 94%;
+    --accent:210 40% 48%;
+    --accent-bg:210 40% 96%;
+    --warn:30 90% 52%;
+    --warn-bg:30 90% 95%;
+    --pk-dot:8 54% 50%;
+    --fk-dot:260 40% 52%;
+    --idx-dot:180 30% 48%;
+  }
+  html{font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%}
+  body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:hsl(var(--b));background:hsl(var(--bg));-webkit-font-smoothing:antialiased}
+  header{
+    padding:2rem 1.5rem 1.5rem;
+    border-bottom:1px solid hsl(var(--border));
+    background:hsl(var(--surface));
+    position:sticky;top:0;z-index:10;
+  }
+  header h1{font-size:1.15rem;font-weight:580;letter-spacing:-0.01em}
+  header .sub{font-size:.8rem;color:hsl(var(--m));margin-top:.3rem}
+  .toolbar{
+    display:flex;gap:.5rem;margin-top:1rem;
+    flex-wrap:wrap;align-items:center;
+  }
+  .search-box{
+    flex:1;min-width:200px;max-width:480px;position:relative;
+  }
+  .search-box input{
+    width:100%;padding:.55rem .75rem .55rem 2rem;
+    border:1px solid hsl(var(--border));border-radius:0;
+    font-size:.82rem;font-family:inherit;color:hsl(var(--b));
+    background:hsl(var(--bg));outline:none;
+  }
+  .search-box input:focus{border-color:hsl(var(--accent))}
+  .search-box svg{
+    position:absolute;left:.6rem;top:50%;transform:translateY(-50%);
+    width:15px;height:15px;color:hsl(var(--m));
+  }
+  .btn{
+    padding:.55rem .9rem;font-size:.78rem;font-family:inherit;
+    border:1px solid hsl(var(--border));border-radius:0;
+    background:hsl(var(--surface));color:hsl(var(--b));
+    cursor:pointer;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:.35rem;
+  }
+  .btn:hover{background:hsl(var(--bg))}
+  .btn:active{border-color:hsl(var(--accent))}
+  .btn svg{width:14px;height:14px;flex-shrink:0}
+  .count-badge{
+    font-size:.7rem;color:hsl(var(--m));margin-left:.4rem;
+  }
+  main{
+    max-width:1120px;margin:0 auto;padding:1.5rem;
+    display:grid;grid-template-columns:280px 1fr;gap:1.5rem;
+    min-height:70vh;
+  }
+  aside{
+    position:sticky;top:7.5rem;align-self:start;
+    max-height:calc(100vh - 9rem);overflow-y:auto;
+  }
+  .table-list{}
+  .table-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.65rem .75rem;font-size:.82rem;color:hsl(var(--b));
+    border-left:2px solid transparent;cursor:pointer;
+    transition:background .12s;
+  }
+  .table-item:hover{background:hsl(var(--bg))}
+  .table-item.active{
+    background:hsl(var(--accent-bg));
+    border-left-color:hsl(var(--accent));
+    font-weight:580;
+  }
+  .table-item .name{font-variant-numeric:tabular-nums}
+  .table-item .cols-count{font-size:.7rem;color:hsl(var(--m))}
+  .table-item .row-count{
+    font-size:.67rem;color:hsl(var(--m));
+    margin-left:.5rem;
+  }
+  .content{}
+  .toc-bar{
+    display:flex;gap:0;margin-bottom:1rem;
+    border-bottom:1px solid hsl(var(--hair));
+  }
+  .toc-link{
+    padding:.5rem 1rem;font-size:.78rem;color:hsl(var(--m));
+    cursor:pointer;border-bottom:2px solid transparent;
+    text-decoration:none;
+  }
+  .toc-link:hover{color:hsl(var(--b))}
+  .toc-link.active{color:hsl(var(--accent));border-bottom-color:hsl(var(--accent));font-weight:580}
+  section{}
+  .table-card{
+    background:hsl(var(--surface));border:1px solid hsl(var(--border));
+    margin-bottom:1.5rem;
+  }
+  .table-header{
+    padding:1rem 1.25rem;border-bottom:1px solid hsl(var(--hair));
+    display:flex;align-items:center;gap:.6rem;
+  }
+  .table-header h2{
+    font-size:.95rem;font-weight:580;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .tag{
+    font-size:.65rem;padding:.15rem .45rem;border-radius:0;
+    border:1px solid hsl(var(--border));font-weight:500;
+  }
+  .tag.root{background:hsl(var(--accent-bg));border-color:hsl(var(--accent));color:hsl(var(--accent))}
+  .tag.join{background:hsl(0 0% 96%);color:hsl(var(--m))}
+  .fields-wrap{overflow-x:auto}
+  table.fields{
+    width:100%;border-collapse:collapse;
+    font-size:.8rem;font-variant-numeric:tabular-nums;
+  }
+  table.fields th{
+    text-align:left;padding:.5rem .75rem;
+    font-weight:520;font-size:.72rem;color:hsl(var(--m));
+    text-transform:uppercase;letter-spacing:.04em;
+    border-bottom:1px solid hsl(var(--border));
+    position:sticky;top:0;background:hsl(var(--surface));
+  }
+  table.fields td{
+    padding:.45rem .75rem;border-bottom:1px solid hsl(var(--hair));
+    vertical-align:middle;
+  }
+  table.fields tr:last-child td{border-bottom:none}
+  table.fields .col-name{
+    font-weight:520;color:hsl(var(--b));
+    font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+    font-size:.78rem;
+  }
+  table.fields .col-type{
+    font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+    font-size:.77rem;color:hsl(var(--m));
+  }
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .dot.pk{background:hsl(var(--pk-dot))}
+  .dot.fk{background:hsl(var(--fk-dot))}
+  .dot.idx{background:hsl(var(--idx-dot))}
+  .constraint-badges{display:flex;gap:.3rem;flex-wrap:wrap}
+  .badge{
+    font-size:.63rem;padding:.1rem .4rem;border:1px solid;
+    white-space:nowrap;font-weight:500;
+  }
+  .badge.pk{border-color:hsl(var(--pk-dot));color:hsl(var(--pk-dot));background:hsl(8 54% 97%)}
+  .badge.fk{border-color:hsl(var(--fk-dot));color:hsl(var(--fk-dot));background:hsl(260 40% 97%)}
+  .badge.uq{border-color:hsl(30 70% 50%);color:hsl(30 70% 40%);background:hsl(30 70% 96%)}
+  .badge.nn{border-color:hsl(var(--m));color:hsl(var(--m));background:hsl(0 0% 95%)}
+  .badge.idx{border-color:hsl(var(--idx-dot));color:hsl(var(--idx-dot));background:hsl(180 30% 95%)}
+  .badge.def{border-color:hsl(var(--l));color:hsl(var(--m));background:hsl(0 0% 97%)}
+  .null-mark{color:hsl(var(--l));font-style:italic;font-size:.73rem}
+  .dflt-value{color:hsl(var(--m));font-family:'SF Mono','Cascadia Code','Consolas',monospace;font-size:.73rem}
+
+  /* Index section */
+  .index-list{padding:.75rem 1.25rem;border-top:1px solid hsl(var(--hair))}
+  .index-list summary{font-size:.78rem;color:hsl(var(--m));cursor:pointer;font-weight:520}
+  .index-list summary:hover{color:hsl(var(--b))}
+  .index-row{font-size:.77rem;padding:.35rem 0;display:flex;gap:.5rem;align-items:center}
+  .index-name{font-family:'SF Mono','Cascadia Code','Consolas',monospace;font-size:.73rem;color:hsl(var(--b))}
+  .index-cols{color:hsl(var(--m))}
+
+  /* ER section */
+  .er-section{margin-bottom:1.5rem}
+  .er-section h3{font-size:.88rem;font-weight:580;margin-bottom:.75rem}
+  .er-diagram{
+    background:hsl(var(--surface));border:1px solid hsl(var(--border));
+    padding:1.5rem;overflow-x:auto;
+  }
+  .er-diagram svg{display:block;max-width:100%}
+  .rel-list{padding:1rem 1.25rem}
+  .rel-item{
+    font-size:.8rem;padding:.5rem 0;border-bottom:1px solid hsl(var(--hair));
+    display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+  }
+  .rel-item:last-child{border-bottom:none}
+  .rel-arrow{color:hsl(var(--m));font-size:.75rem}
+  .rel-table{font-weight:520;font-family:'SF Mono','Cascadia Code','Consolas',monospace;font-size:.77rem}
+
+  /* Summary panel */
+  .summary-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:1rem;margin-bottom:1.5rem;
+  }
+  .summary-card{
+    background:hsl(var(--surface));border:1px solid hsl(var(--border));
+    padding:1rem 1.25rem;
+  }
+  .summary-card .metric{font-size:1.6rem;font-weight:560;font-variant-numeric:tabular-nums}
+  .summary-card .label{font-size:.73rem;color:hsl(var(--m));margin-top:.2rem}
+
+  /* No results */
+  .no-results{
+    text-align:center;padding:3rem 1rem;color:hsl(var(--m));
+    font-size:.85rem;
+  }
+
+  /* SQL export */
+  .sql-preview{
+    margin-top:1rem;background:hsl(var(--surface));
+    border:1px solid hsl(var(--border));max-height:420px;overflow:auto;
+  }
+  .sql-preview pre{
+    font-family:'SF Mono','Cascadia Code','Consolas',monospace;
+    font-size:.74rem;line-height:1.6;padding:1rem 1.25rem;
+    color:hsl(var(--b));white-space:pre-wrap;word-break:break-all;
+  }
+
+  @media(max-width:720px){
+    main{grid-template-columns:1fr}
+    aside{position:static;max-height:none;
+      display:flex;gap:.35rem;flex-wrap:wrap;
+      border-bottom:1px solid hsl(var(--border));padding-bottom:.75rem;
+    }
+    .table-item{border-left:none;border-bottom:1px solid hsl(var(--hair));padding:.5rem .6rem;font-size:.78rem}
+    .table-item.active{background:hsl(var(--accent-bg));border-bottom-color:hsl(var(--accent))}
+    .toc-bar{overflow-x:auto}
+    header{padding:1.2rem 1rem}
+    main{padding:1rem}
+  }
+  @media print{
+    header{position:static}
+    aside{display:none}
+    main{grid-template-columns:1fr;padding:0}
+    .btn,.search-box,.toc-bar{display:none}
+    .table-card,.er-diagram{break-inside:avoid;border:1px solid #ccc}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LinkNest · 数据库结构文档</h1>
+  <div class="sub">SQLite · 4 张表 · 3 组外键 · 最后更新 2026-07-17</div>
+  <div class="toolbar">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" id="search" placeholder="搜索表名或字段名…" oninput="doSearch()">
+    </div>
+    <button class="btn" onclick="exportPDF()" title="导出 PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      导出 PDF
+    </button>
+    <button class="btn" onclick="exportSQL()" title="导出 DDL">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      导出 SQL DDL
+    </button>
+    <button class="btn" onclick="showAll()">全部展开</button>
+  </div>
+</header>
+
+<main>
+  <aside id="sidebar"></aside>
+  <div class="content" id="content"></div>
+</main>
+
+<div id="sql-modal" class="sql-preview" style="display:none;position:fixed;inset:0;background:hsla(0,0%,0%,.3);z-index:100">
+  <div style="max-width:800px;margin:3rem auto;background:#fff;border:1px solid #ddd;max-height:80vh;overflow:auto">
+    <div style="padding:.75rem 1rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-weight:580;font-size:.85rem">SQL DDL 脚本</span>
+      <button class="btn" onclick="document.getElementById('sql-modal').style.display='none'" style="font-size:.75rem">关闭</button>
+    </div>
+    <pre id="sql-content" style="font-size:.74rem;padding:1rem;white-space:pre-wrap"></pre>
+  </div>
+</div>
+
+<script>
+const SCHEMA = {
+  "tables": [
+    {
+      "name": "users",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "mobile",
+          "type": "VARCHAR(20)",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 2,
+          "name": "email",
+          "type": "VARCHAR(255)",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 3,
+          "name": "username",
+          "type": "VARCHAR(100)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 4,
+          "name": "password",
+          "type": "VARCHAR(255)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 5,
+          "name": "role",
+          "type": "VARCHAR(20)",
+          "notnull": true,
+          "dflt_value": "'user'",
+          "pk": false
+        },
+        {
+          "cid": 6,
+          "name": "is_active",
+          "type": "BOOLEAN",
+          "notnull": true,
+          "dflt_value": "1",
+          "pk": false
+        },
+        {
+          "cid": 7,
+          "name": "created_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        },
+        {
+          "cid": 8,
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "ix_users_email",
+          "unique": false,
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "ix_users_mobile",
+          "unique": false,
+          "columns": [
+            "mobile"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_users_2",
+          "unique": true,
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_users_1",
+          "unique": true,
+          "columns": [
+            "mobile"
+          ]
+        }
+      ],
+      "row_count": 4
+    },
+    {
+      "name": "tags",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "VARCHAR(100)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 2,
+          "name": "slug",
+          "type": "VARCHAR(100)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 3,
+          "name": "parent_id",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 4,
+          "name": "sort_order",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": "0",
+          "pk": false
+        },
+        {
+          "cid": 5,
+          "name": "description",
+          "type": "VARCHAR(500)",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 6,
+          "name": "created_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        },
+        {
+          "cid": 7,
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "from_col": "parent_id",
+          "to_table": "tags",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "ix_tags_slug",
+          "unique": false,
+          "columns": [
+            "slug"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_tags_1",
+          "unique": true,
+          "columns": [
+            "slug"
+          ]
+        }
+      ],
+      "row_count": 504
+    },
+    {
+      "name": "bookmarks",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "VARCHAR(500)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 2,
+          "name": "url",
+          "type": "VARCHAR(2048)",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 3,
+          "name": "favicon_url",
+          "type": "VARCHAR(2048)",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 4,
+          "name": "description",
+          "type": "TEXT",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 5,
+          "name": "created_at",
+          "type": "DATETIME",
+          "notnull": false,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        },
+        {
+          "cid": 6,
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notnull": false,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "ix_bookmarks_url",
+          "unique": false,
+          "columns": [
+            "url"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_bookmarks_1",
+          "unique": true,
+          "columns": [
+            "url"
+          ]
+        }
+      ],
+      "row_count": 2292
+    },
+    {
+      "name": "bookmarks_tags",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "bookmark_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "tag_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": true
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "from_col": "tag_id",
+          "to_table": "tags",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "from_col": "bookmark_id",
+          "to_table": "bookmarks",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_bookmarks_tags_1",
+          "unique": true,
+          "columns": [
+            "bookmark_id",
+            "tag_id"
+          ]
+        }
+      ],
+      "row_count": 2986
+    },
+    {
+      "name": "user_favorites",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "bookmark_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 2,
+          "name": "created_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "from_col": "bookmark_id",
+          "to_table": "bookmarks",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "from_col": "user_id",
+          "to_table": "users",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_user_favorites_1",
+          "unique": true,
+          "columns": [
+            "user_id",
+            "bookmark_id"
+          ]
+        }
+      ],
+      "row_count": 0
+    },
+    {
+      "name": "user_click_history",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": false,
+          "dflt_value": null,
+          "pk": true
+        },
+        {
+          "cid": 1,
+          "name": "user_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 2,
+          "name": "bookmark_id",
+          "type": "INTEGER",
+          "notnull": true,
+          "dflt_value": null,
+          "pk": false
+        },
+        {
+          "cid": 3,
+          "name": "clicked_at",
+          "type": "DATETIME",
+          "notnull": true,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "pk": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "from_col": "bookmark_id",
+          "to_table": "bookmarks",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "from_col": "user_id",
+          "to_table": "users",
+          "to_col": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "ix_click_history_user_time",
+          "unique": false,
+          "columns": [
+            "user_id",
+            "clicked_at"
+          ]
+        }
+      ],
+      "row_count": 0
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "tags",
+      "from_col": "parent_id",
+      "to_table": "tags",
+      "to_col": "id",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "bookmarks_tags",
+      "from_col": "tag_id",
+      "to_table": "tags",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "bookmarks_tags",
+      "from_col": "bookmark_id",
+      "to_table": "bookmarks",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "user_favorites",
+      "from_col": "bookmark_id",
+      "to_table": "bookmarks",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "user_favorites",
+      "from_col": "user_id",
+      "to_table": "users",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "user_click_history",
+      "from_col": "bookmark_id",
+      "to_table": "bookmarks",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "user_click_history",
+      "from_col": "user_id",
+      "to_table": "users",
+      "to_col": "id",
+      "on_delete": "CASCADE"
+    }
+  ]
+};
+
+
+
+
+
+// FK lookup
+const fkMap = {};
+SCHEMA.relationships.forEach(r => {
+  if (!fkMap[r.from_table]) fkMap[r.from_table] = {};
+  fkMap[r.from_table][r.from_col] = r;
+});
+
+// Col comments
+const COMMENTS = {
+  "users": {
+    "id": "用户ID",
+    "mobile": "手机号",
+    "email": "登录邮箱",
+    "username": "显示名称",
+    "password": "bcrypt哈希密码",
+    "role": "角色(admin|user)",
+    "is_active": "激活状态",
+    "created_at": "注册时间",
+    "updated_at": "更新时间"
+  },
+  "tags": {
+    "id": "标签ID",
+    "name": "标签名",
+    "slug": "URL标识",
+    "parent_id": "父标签(自引用)",
+    "sort_order": "同级排序",
+    "description": "标签说明",
+    "created_at": "创建时间",
+    "updated_at": "修改时间"
+  },
+  "bookmarks": {
+    "id": "书签ID",
+    "title": "标题",
+    "url": "URL(唯一)",
+    "favicon_url": "favicon地址",
+    "description": "描述",
+    "created_at": "创建时间",
+    "updated_at": "修改时间"
+  },
+  "bookmarks_tags": {
+    "bookmark_id": "FK→bookmarks.id",
+    "tag_id": "FK→tags.id"
+  }
+};
+
+
+
+
+
+let activeTable = null;
+let searchTerm = '';
+
+function badge(col, table) {
+  const badges = [];
+  if (col.pk) badges.push('<span class="badge pk">PK</span>');
+  if (fkMap[table] && fkMap[table][col.name]) {
+    const fk = fkMap[table][col.name];
+    badges.push(`<span class="badge fk">FK → ${fk.to_table}.${fk.to_col}</span>`);
+  }
+  if (!col.pk && col.name === 'slug' && table === 'tags') badges.push('<span class="badge uq">UQ</span>');
+  if (col.notnull) badges.push('<span class="badge nn">NOT NULL</span>');
+  return badges.join('');
+}
+
+function dflt(c) {
+  if (c.dflt_value) return `<span class="dflt-value">${c.dflt_value}</span>`;
+  return '<span class="null-mark">NULL</span>';
+}
+
+function renderSidebar(tables, filter) {
+  const s = document.getElementById('sidebar');
+  const hasFilter = filter && filter.trim();
+  const filtered = hasFilter
+    ? tables.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()) ||
+        t.columns.some(c => c.name.toLowerCase().includes(filter.toLowerCase())))
+    : tables;
+
+  let html = '';
+  filtered.forEach(t => {
+    const cls = activeTable === t.name ? ' active' : '';
+    html += `<div class="table-item${cls}" onclick="selectTable('${t.name}')">
+      <span class="name">${t.name}</span>
+      <span style="display:flex;gap:.5rem">
+        <span class="cols-count">${t.columns.length} 字段</span>
+        <span class="row-count">${t.row_count.toLocaleString()} 行</span>
+      </span>
+    </div>`;
+  });
+
+  if (filtered.length === 0 && hasFilter) {
+    html = '<div class="no-results">未找到匹配项</div>';
+  }
+  s.innerHTML = html;
+}
+
+function renderTable(t) {
+  const comments = COMMENTS[t.name] || {};
+  let html = `<div class="table-card" id="tbl-${t.name}">
+    <div class="table-header">
+      <h2>
+        ${t.name}
+        ${t.name === 'bookmark_tags' ? '<span class="tag join">联接表</span>' : ''}
+        ${t.name === 'tags' ? '<span class="tag root">自引用</span>' : ''}
+      </h2>
+      <span style="color:hsl(var(--m));font-size:.75rem">${t.columns.length} 字段 · ${t.row_count.toLocaleString()} 行</span>
+    </div>
+    ${t.notes ? `<div style="padding:.6rem 1.25rem;font-size:.78rem;color:hsl(var(--m));border-bottom:1px solid hsl(var(--hair))">${t.notes}</div>` : ''}
+    <div class="fields-wrap">
+    <table class="fields">
+      <thead><tr>
+        <th>#</th><th>字段名</th><th>类型</th><th>约束</th><th>默认值</th><th>说明</th>
+      </tr></thead>
+      <tbody>`;
+
+  t.columns.forEach((c,i) => {
+    const cmt = comments[c.name] || '';
+    html += `<tr>
+      <td>${i+1}</td>
+      <td><span class="col-name">${c.name}</span></td>
+      <td><span class="col-type">${c.type}</span></td>
+      <td><div class="constraint-badges">${badge(c, t.name)}</div></td>
+      <td>${dflt(c)}</td>
+      <td style="color:hsl(var(--m));font-size:.77rem">${cmt}</td>
+    </tr>`;
+  });
+
+  html += `</tbody></table></div>`;
+
+  // Indexes
+  if (t.indexes.length > 0) {
+    html += `<details class="index-list"><summary>${t.indexes.length} 个索引</summary>`;
+    t.indexes.forEach(idx => {
+      html += `<div class="index-row">
+        <span class="dot idx"></span>
+        <span class="index-name">${idx.name}</span>
+        ${idx.unique ? '<span class="badge uq">UNIQUE</span>' : ''}
+        <span class="index-cols">(${idx.columns.join(', ')})</span>
+      </div>`;
+    });
+    html += `</details>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderAll(tables, filter) {
+  const content = document.getElementById('content');
+  const hasFilter = filter && filter.trim();
+  let tablesToShow = tables;
+
+  if (hasFilter) {
+    const q = filter.toLowerCase();
+    tablesToShow = tables.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      t.columns.some(c => c.name.toLowerCase().includes(q) ||
+        (COMMENTS[t.name] && COMMENTS[t.name][c.name] && COMMENTS[t.name][c.name].toLowerCase().includes(q)))
+    );
+  } else if (activeTable) {
+    tablesToShow = tables.filter(t => t.name === activeTable);
+  }
+
+  let html = '';
+
+  // Summary
+  if (!activeTable && !hasFilter) {
+    html += `<div class="summary-grid">
+      <div class="summary-card"><div class="metric">${tables.length}</div><div class="label">数据表</div></div>
+      <div class="summary-card"><div class="metric">${tables.reduce((s,t)=>s+t.columns.length,0)}</div><div class="label">总字段</div></div>
+      <div class="summary-card"><div class="metric">${SCHEMA.relationships.length}</div><div class="label">外键关系</div></div>
+      <div class="summary-card"><div class="metric">${tables.reduce((s,t)=>s+t.row_count,0).toLocaleString()}</div><div class="label">总行数</div></div>
+    </div>`;
+
+    // ER diagram
+    html += renderER();
+  }
+
+  if (tablesToShow.length === 0) {
+    html += '<div class="no-results">未找到匹配的表或字段</div>';
+  } else {
+    tablesToShow.forEach(t => { html += renderTable(t); });
+  }
+
+  content.innerHTML = html;
+}
+
+function renderER() {
+  const tables = SCHEMA.tables;
+  const rels = SCHEMA.relationships;
+
+  // Position tables in a grid
+  const positions = {
+    users: {x:50,y:30,w:160},
+    bookmarks: {x:400,y:30,w:180},
+    bookmark_tags: {x:400,y:200,w:160},
+    tags: {x:700,y:200,w:180}
+  };
+  const H=280,W=900;
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="hsl(260,40%,52%)"/>
+    </marker></defs>`;
+
+  // Draw relationships
+  rels.forEach(r => {
+    const from = positions[r.from_table];
+    const to = positions[r.to_table];
+    if (!from || !to) return;
+
+    const x1 = from.x + from.w/2;
+    const y1 = from.y + 60;
+    const x2 = to.x + to.w/2;
+    const y2 = to.y;
+
+    // Route: from bottom of from → right → down → into top of to
+    const midX = Math.max(x1, x2) + 40;
+    svg += `<path d="M${x1},${y1} L${midX},${y1} L${midX},${y2} L${x2-5},${y2}"
+      stroke="hsl(260,40%,52%)" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>`;
+
+    // Self-ref for tags
+    if (r.from_table === 'tags' && r.to_table === 'tags') {
+      svg += `<path d="M${x2+80},${y2+15} C${x2+110},${y2+15} ${x2+110},${y2+55} ${x2+80},${y2+55}"
+        stroke="hsl(260,40%,52%)" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>`;
+      svg += `<text x="${x2+85}" y="${y2+20}" font-size="7" font-family="system-ui" fill="hsl(var(--m))">parent_id</text>`;
+    }
+  });
+
+  // Draw tables
+  Object.entries(positions).forEach(([name, pos]) => {
+    const t = tables.find(x => x.name === name);
+    if (!t) return;
+    const rows = Math.min(t.columns.length, 10);
+    const h = 25 + rows * 10;
+
+    svg += `<rect x="${pos.x}" y="${pos.y}" width="${pos.w}" height="${h}" fill="white" stroke="#ddd" stroke-width="1"/>`;
+    svg += `<text x="${pos.x+8}" y="${pos.y+16}" font-size="8.5" font-family="system-ui" font-weight="600" fill="#222">${name}</text>`;
+
+    t.columns.slice(0, 10).forEach((c, i) => {
+      const cx = pos.x + 8;
+      const cy = pos.y + 30 + i * 10;
+      const colProps = ['font-size:6.5;font-family:monospace;'];
+      if (c.pk) colProps.push('fill:hsl(8,54%,50%)');
+      else if (fkMap[name] && fkMap[name][c.name]) colProps.push('fill:hsl(260,40%,52%)');
+      else colProps.push('fill:#666');
+
+      let label = c.name;
+      if (c.pk) label = '🔑 ' + label;
+      else if (fkMap[name] && fkMap[name][c.name]) label = '→ ' + label;
+
+      svg += `<text x="${cx}" y="${cy}" style="${colProps.join(';')}">${label}</text>`;
+    });
+  });
+
+  svg += `</svg>`;
+
+  // Relationship list
+  let relHtml = `<div class="er-section"><h3>表关系 &middot; ER 图</h3>`;
+  relHtml += `<div class="er-diagram">${svg}</div>`;
+  relHtml += `<div class="table-card"><div class="rel-list">`;
+  rels.forEach(r => {
+    relHtml += `<div class="rel-item">
+      <span class="rel-table">${r.from_table}.${r.from_col}</span>
+      <span class="rel-arrow">→</span>
+      <span class="rel-table">${r.to_table}.${r.to_col}</span>
+      ${r.on_delete === 'CASCADE' ? '<span class="badge fk">CASCADE</span>' : ''}
+      ${r.from_table === r.to_table ? '<span class="tag root">自引用</span>' : ''}
+    </div>`;
+  });
+  relHtml += `</div></div></div>`;
+  return relHtml;
+}
+
+function selectTable(name) {
+  if (activeTable === name) { activeTable = null; }
+  else { activeTable = name; }
+  searchTerm = document.getElementById('search')?.value || '';
+  renderAll(SCHEMA.tables, searchTerm);
+  renderSidebar(SCHEMA.tables, searchTerm);
+}
+
+function doSearch() {
+  searchTerm = document.getElementById('search').value;
+  activeTable = null;
+  renderAll(SCHEMA.tables, searchTerm);
+  renderSidebar(SCHEMA.tables, searchTerm);
+}
+
+function showAll() {
+  activeTable = null;
+  document.getElementById('search').value = '';
+  searchTerm = '';
+  renderAll(SCHEMA.tables, '');
+  renderSidebar(SCHEMA.tables, '');
+}
+
+function exportPDF() { window.print(); }
+
+function exportSQL() {
+  let sql = '-- LinkNest Database DDL\n-- Generated 2026-07-17\n\n';
+
+  SCHEMA.tables.forEach(t => {
+    sql += `-- Table: ${t.name}\n`;
+    if (t.notes) sql += `-- ${t.notes}\n`;
+    sql += `CREATE TABLE ${t.name} (\n`;
+    const cols = t.columns.map(c => {
+      let def = `  ${c.name} ${c.type}`;
+      if (c.pk) def += ' PRIMARY KEY';
+      if (c.notnull) def += ' NOT NULL';
+      if (c.dflt_value) def += ` DEFAULT ${c.dflt_value}`;
+      return def;
+    });
+
+    // Add foreign keys
+    t.foreign_keys.forEach(fk => {
+      cols.push(`  FOREIGN KEY (${fk.from_col}) REFERENCES ${fk.to_table}(${fk.to_col})${fk.on_delete === 'CASCADE' ? ' ON DELETE CASCADE' : ''}`);
+    });
+
+    // Add unique constraints for indexes
+    t.indexes.filter(i => i.unique && !i.name.includes('autoindex')).forEach(i => {
+      cols.push(`  UNIQUE (${i.columns.join(', ')})`);
+    });
+
+    sql += cols.join(',\n');
+    sql += '\n);\n\n';
+
+    // Non-unique indexes
+    t.indexes.filter(i => !i.unique).forEach(i => {
+      sql += `CREATE INDEX ${i.name} ON ${t.name} (${i.columns.join(', ')});\n`;
+    });
+    if (t.indexes.some(i => !i.unique)) sql += '\n';
+  });
+
+  document.getElementById('sql-content').textContent = sql;
+  document.getElementById('sql-modal').style.display = 'flex';
+}
+
+// Init
+renderSidebar(SCHEMA.tables, '');
+renderAll(SCHEMA.tables, '');
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import auth, tags, bookmarks
+from app.api import auth, tags, bookmarks, favorites, click_history
 from app.models.init_db import init_db
 
 app = FastAPI(title="LinkNest API", version="1.0.0")
@@ -16,7 +16,8 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(tags.router)
-app.include_router(bookmarks.router)
+app.include_router(favorites.router)
+app.include_router(click_history.router)
 
 
 @app.on_event("startup")

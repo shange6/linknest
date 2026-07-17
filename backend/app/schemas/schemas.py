@@ -107,3 +107,32 @@ class BookmarkListOut(BaseModel):
     total: int
     page: int
     page_size: int
+
+
+# --- Favorites ---
+class FavoriteCreate(BaseModel):
+    bookmark_id: int
+
+
+class FavoriteOut(BaseModel):
+    user_id: int
+    bookmark_id: int
+    bookmark: BookmarkOut
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+# --- Click History ---
+class ClickHistoryCreate(BaseModel):
+    bookmark_id: int
+
+
+class ClickHistoryOut(BaseModel):
+    id: int
+    user_id: int
+    bookmark_id: int
+    bookmark: BookmarkOut
+    clicked_at: datetime
+
+    model_config = {"from_attributes": True}

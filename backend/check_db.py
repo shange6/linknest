@@ -9,7 +9,7 @@ tables = c.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY n
 print("Tables:", [t[0] for t in tables])
 
 # Columns
-for tbl in ['users', 'tags', 'bookmarks', 'bookmark_tags']:
+for tbl in ['users', 'tags', 'bookmarks', 'bookmarks_tags']:
     cols = [col[1] for col in c.execute(f"PRAGMA table_info({tbl})").fetchall()]
     print(f"\n{tbl} columns: {cols}")
 

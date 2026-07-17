@@ -16,7 +16,7 @@ counts = c.execute("""
     SELECT t.name, COUNT(DISTINCT bt.bookmark_id) as cnt
     FROM tag_ancestors ta
     JOIN tags t ON t.id = ta.root_id
-    LEFT JOIN bookmark_tags bt ON bt.tag_id = ta.id
+    LEFT JOIN bookmarks_tags bt ON bt.tag_id = ta.id
     GROUP BY ta.root_id
     ORDER BY cnt DESC
 """).fetchall()

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 bookmark_tags = Table(
-    "bookmark_tags",
+    "bookmarks_tags",
     Base.metadata,
     Column("bookmark_id", Integer, ForeignKey("bookmarks.id", ondelete="CASCADE"), primary_key=True),
     Column("tag_id", Integer, ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True),
@@ -16,9 +16,9 @@ class Bookmark(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(500), nullable=False)
-    url = Column(String(2048), nullable=False)
-    description = Column(Text, nullable=True)
+    url = Column(String(2048), nullable=False, unique=True)
     favicon_url = Column(String(2048), nullable=True)
+    description = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
