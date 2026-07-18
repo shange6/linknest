@@ -12,7 +12,7 @@ class UserCategory(Base):
     name = Column(String(100), nullable=False)
     slug = Column(String(100), nullable=False)
     parent_id = Column(Integer, ForeignKey("user_categories.id"), nullable=True)
-    sort_order = Column(Integer, default=0)
+    sort = Column(Integer, default=0)
     description = Column(String(500), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)

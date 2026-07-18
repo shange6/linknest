@@ -22,7 +22,7 @@ class UserOut(BaseModel):
     email: str
     username: str
     role: str
-    is_active: bool
+    status: bool
     created_at: datetime
 
     model_config = {"from_attributes": True}
@@ -40,7 +40,8 @@ class CategoryCreate(BaseModel):
     slug: str
     parent_id: Optional[int] = None
     level: int = 1
-    sort_order: int = 0
+    sort: int = 0
+    status: bool = True
     description: Optional[str] = None
 
 
@@ -49,7 +50,8 @@ class CategoryUpdate(BaseModel):
     slug: Optional[str] = None
     parent_id: Optional[int] = None
     level: Optional[int] = None
-    sort_order: Optional[int] = None
+    sort: Optional[int] = None
+    status: Optional[bool] = None
     description: Optional[str] = None
 class CategoryOut(BaseModel):
     id: int
@@ -57,7 +59,8 @@ class CategoryOut(BaseModel):
     slug: str
     parent_id: Optional[int] = None
     level: int
-    sort_order: int
+    sort: int
+    status: bool
     description: Optional[str] = None
     updated_at: Optional[datetime] = None
     children: List["CategoryOut"] = []
@@ -79,6 +82,7 @@ class BookmarkCreate(BaseModel):
     title: str
     url: str
     description: Optional[str] = None
+    status: bool = True
     category_ids: List[int] = []
 
 
@@ -86,6 +90,7 @@ class BookmarkUpdate(BaseModel):
     title: Optional[str] = None
     url: Optional[str] = None
     description: Optional[str] = None
+    status: Optional[bool] = None
     category_ids: Optional[List[int]] = None
 
 
@@ -95,6 +100,7 @@ class BookmarkOut(BaseModel):
     url: str
     description: Optional[str] = None
     favicon_url: Optional[str] = None
+    status: bool
     created_at: datetime
     updated_at: datetime
     categories: List[CategoryBrief] = []
@@ -109,16 +115,32 @@ class BookmarkListOut(BaseModel):
     page_size: int
 
 
-# --- Favorites ---
-class FavoriteCreate(BaseModel):
-    bookmark_id: int
+# --- User Categories & Bookmarks ---
+class UserCategoryBrief(BaseModel):
+    id: int
+    name: str
+    slug: str
+
+    model_config = {"from_attributes": True}
 
 
-class FavoriteOut(BaseModel):
+class UserBookmarkCreate(BaseModel):
+    title: str
+    url: str
+    description: Optional[str] = None
+    category_ids: List[int] = []
+
+
+class UserBookmarkOut(BaseModel):
+    id: int
     user_id: int
-    bookmark_id: int
-    bookmark: BookmarkOut
+    title: str
+    url: str
+    favicon_url: Optional[str] = None
+    description: Optional[str] = None
     created_at: datetime
+    updated_at: datetime
+    categories: List[UserCategoryBrief] = []
 
     model_config = {"from_attributes": True}
 

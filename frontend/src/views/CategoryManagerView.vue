@@ -105,7 +105,7 @@ const parentCategory = ref(null)
 
 const form = ref({ name: '', slug: '', description: '' })
 
-// Flatten tree sorted by level + sort_order
+// Flatten tree sorted by level + sort
 const flatCategories = computed(() => {
   const result = []
   function walk(nodes, parent) {

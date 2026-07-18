@@ -16,6 +16,6 @@ class User(Base):
         CheckConstraint("role IN ('admin', 'user')", name="ck_users_role"),
         CheckConstraint("mobile IS NOT NULL OR email IS NOT NULL", name="ck_users_contact"),
     )
-    is_active = Column(Boolean, default=True, nullable=False)
+    status = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)

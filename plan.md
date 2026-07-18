@@ -92,7 +92,7 @@
 | `username` | VARCHAR(100) | NOT NULL | 显示名称 |
 | `password` | VARCHAR(255) | NOT NULL | bcrypt 密码哈希 |
 | `role` | VARCHAR(20) | NOT NULL, DEFAULT 'user' | 角色权限（'admin', 'user'） |
-| `is_active` | BOOLEAN | NOT NULL, DEFAULT TRUE | 是否激活 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 启用状态（1=启用，0=停用） |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 注册时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 更新时间 |
 
@@ -106,8 +106,9 @@
 | `name` | VARCHAR(100) | NOT NULL | 分类名称 |
 | `slug` | VARCHAR(100) | UNIQUE, NOT NULL, INDEX | URL 友好标识 |
 | `parent_id` | INTEGER | FK → categories.id, NULLABLE, INDEX | 父分类 ID |
-| `sort_order` | INTEGER | DEFAULT 0 | 同级排序 |
+| `sort` | INTEGER | DEFAULT 0 | 同级排序 |
 | `description` | VARCHAR(500) | NULLABLE | 分类说明 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 启用状态（1=启用，0=停用） |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 更新时间 |
 
@@ -122,6 +123,7 @@
 | `url` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
 | `description` | TEXT | NULLABLE | 描述/备注 |
 | `favicon_url` | VARCHAR(2048) | NULLABLE | 网站图标 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 启用状态（1=启用，0=停用） |
 | `created_at` | DATETIME | DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | DEFAULT UTC NOW | 更新时间 |
 
@@ -150,7 +152,7 @@
 | `name` | VARCHAR(100) | NOT NULL | 分类名称 |
 | `slug` | VARCHAR(100) | NOT NULL | 标识符 |
 | `parent_id` | INTEGER | FK → user_categories.id, NULLABLE | 父级 ID |
-| `sort_order` | INTEGER | DEFAULT 0 | 排序权重 |
+| `sort` | INTEGER | DEFAULT 0 | 排序权重 |
 | `description` | VARCHAR(500) | NULLABLE | 描述 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 更新时间 |

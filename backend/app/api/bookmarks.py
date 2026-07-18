@@ -75,6 +75,7 @@ def create_bookmark(
         title=data.title,
         url=data.url,
         description=data.description,
+        status=data.status,
     )
     if data.category_ids:
         categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
@@ -113,6 +114,8 @@ def update_bookmark(
         bookmark.url = data.url
     if data.description is not None:
         bookmark.description = data.description
+    if data.status is not None:
+        bookmark.status = data.status
     if data.category_ids is not None:
         categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
         bookmark.categories = categories

@@ -14,7 +14,7 @@ router = APIRouter(prefix="/api/categories", tags=["categories"])
 def build_category_tree(categories: list[Category], parent_id: Optional[int] = None) -> list[dict]:
     """Recursively build category tree from flat list."""
     children = [c for c in categories if c.parent_id == parent_id]
-    children.sort(key=lambda x: x.sort_order)
+    children.sort(key=lambda x: x.sort)
     result = []
     for child in children:
         node = {
@@ -22,7 +22,8 @@ def build_category_tree(categories: list[Category], parent_id: Optional[int] = N
             "name": child.name,
             "slug": child.slug,
             "parent_id": child.parent_id,
-            "sort_order": child.sort_order,
+            "sort": child.sort,
+            "status": child.status,
             "description": child.description,
             "updated_at": child.updated_at.isoformat() if child.updated_at else None,
             "children": build_category_tree(categories, child.id),
@@ -33,7 +34,7 @@ def build_category_tree(categories: list[Category], parent_id: Optional[int] = N
 
 @router.get("", response_model=list[dict])
 def get_categories(db: Session = Depends(get_db)):
-    categories = db.query(Category).order_by(Category.sort_order).all()
+    categories = db.query(Category).order_by(Category.sort).all()
     return build_category_tree(categories)
 
 
@@ -47,7 +48,7 @@ def get_category(category_id: int, db: Session = Depends(get_db)):
 
 @router.get("/{category_id}/children", response_model=list[CategoryOut])
 def get_category_children(category_id: int, db: Session = Depends(get_db)):
-    children = db.query(Category).filter(Category.parent_id == category_id).order_by(Category.sort_order).all()
+    children = db.query(Category).filter(Category.parent_id == category_id).order_by(Category.sort).all()
     return children
 
 

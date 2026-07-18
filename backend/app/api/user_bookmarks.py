@@ -1,91 +1,104 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.auth import get_current_user
 from app.models.user import User
-from app.models.bookmark import Bookmark
-from app.models.user_bookmark import UserFavorite
-from app.schemas.schemas import FavoriteCreate, FavoriteOut, BookmarkOut
+from app.models.user_category import UserCategory
+from app.models.user_bookmark import UserBookmark
+from app.schemas.schemas import UserBookmarkCreate, UserBookmarkOut
 
 router = APIRouter(prefix="/api/user_bookmarks", tags=["user_bookmarks"])
 
 
-@router.get("", response_model=list[FavoriteOut])
-def get_favorites(
+@router.get("", response_model=list[UserBookmarkOut])
+def get_userBookmark(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    favorites = (
-        db.query(UserFavorite)
-        .filter(UserFavorite.user_id == current_user.id)
-        .order_by(UserFavorite.created_at.desc())
+    bookmarks = (
+        db.query(UserBookmark)
+        .filter(UserBookmark.user_id == current_user.id)
+        .order_by(UserBookmark.created_at.desc())
         .all()
     )
-    return favorites
+    return bookmarks
 
 
-@router.post("", response_model=FavoriteOut, status_code=201)
-def add_favorite(
-    data: FavoriteCreate,
+@router.post("", response_model=UserBookmarkOut, status_code=201)
+def add_userBookmark(
+    data: UserBookmarkCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    bookmark = db.query(Bookmark).filter(Bookmark.id == data.bookmark_id).first()
-    if not bookmark:
-        raise HTTPException(status_code=404, detail="Bookmark not found")
-
     existing = (
-        db.query(UserFavorite)
+        db.query(UserBookmark)
         .filter(
-            UserFavorite.user_id == current_user.id,
-            UserFavorite.bookmark_id == data.bookmark_id,
+            UserBookmark.user_id == current_user.id,
+            UserBookmark.url == data.url,
         )
         .first()
     )
     if existing:
         raise HTTPException(status_code=409, detail="Already favorited")
 
-    fav = UserFavorite(user_id=current_user.id, bookmark_id=data.bookmark_id)
-    db.add(fav)
+    categories = []
+    if data.category_ids:
+        categories = (
+            db.query(UserCategory)
+            .filter(
+                UserCategory.user_id == current_user.id,
+                UserCategory.id.in_(data.category_ids),
+            )
+            .all()
+        )
+
+    bookmark = UserBookmark(
+        user_id=current_user.id,
+        title=data.title,
+        url=data.url,
+        description=data.description,
+        categories=categories,
+    )
+    db.add(bookmark)
     db.commit()
-    db.refresh(fav)
-    return fav
+    db.refresh(bookmark)
+    return bookmark
 
 
 @router.delete("/{bookmark_id}", status_code=204)
-def remove_favorite(
+def remonv_userBookmark(
     bookmark_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    fav = (
-        db.query(UserFavorite)
+    bookmark = (
+        db.query(UserBookmark)
         .filter(
-            UserFavorite.user_id == current_user.id,
-            UserFavorite.bookmark_id == bookmark_id,
+            UserBookmark.user_id == current_user.id,
+            UserBookmark.id == bookmark_id,
         )
         .first()
     )
-    if not fav:
-        raise HTTPException(status_code=404, detail="Favorite not found")
-    db.delete(fav)
+    if not bookmark:
+        raise HTTPException(status_code=404, detail="Bookmark not found")
+    db.delete(bookmark)
     db.commit()
     return None
 
 
-@router.get("/check/{bookmark_id}", response_model=dict)
-def check_favorite(
-    bookmark_id: int,
+@router.get("/check", response_model=dict)
+def check_userBookmark(
+    url: str = Query(...),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    fav = (
-        db.query(UserFavorite)
+    bookmark = (
+        db.query(UserBookmark)
         .filter(
-            UserFavorite.user_id == current_user.id,
-            UserFavorite.bookmark_id == bookmark_id,
+            UserBookmark.user_id == current_user.id,
+            UserBookmark.url == url,
         )
         .first()
     )
-    return {"favorited": fav is not None}
+    return {"favorited": bookmark is not None}

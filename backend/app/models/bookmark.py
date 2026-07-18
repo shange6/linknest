@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table, Boolean
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
@@ -19,6 +19,7 @@ class Bookmark(Base):
     url = Column(String(2048), nullable=False, unique=True)
     favicon_url = Column(String(2048), nullable=True)
     description = Column(Text, nullable=True)
+    status = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

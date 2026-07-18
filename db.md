@@ -11,7 +11,7 @@ erDiagram
         string username
         string password
         string role
-        boolean is_active
+        boolean status
         datetime created_at
         datetime updated_at
     }
@@ -20,8 +20,9 @@ erDiagram
         string name
         string slug UK
         int parent_id FK
-        int sort_order
+        int sort
         string description
+        boolean status
         datetime created_at
         datetime updated_at
     }
@@ -31,6 +32,7 @@ erDiagram
         string url UK
         string favicon_url
         string description
+        boolean status
         datetime created_at
         datetime updated_at
     }
@@ -50,7 +52,7 @@ erDiagram
         string name
         string slug
         int parent_id FK
-        int sort_order
+        int sort
         string description
         datetime created_at
         datetime updated_at
@@ -100,7 +102,7 @@ erDiagram
 | `username` | VARCHAR(100) | NOT NULL | 显示名称 |
 | `password` | VARCHAR(255) | NOT NULL | bcrypt 哈希（$2b$...格式） |
 | `role` | VARCHAR(20) | NOT NULL, DEFAULT 'user' | 角色类型，仅限 'admin' 或 'user' |
-| `is_active` | BOOLEAN | NOT NULL, DEFAULT TRUE | 账户激活状态 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 启用状态，1=启用，0=停用 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 注册时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后更新时间 |
 
@@ -118,8 +120,9 @@ erDiagram
 | `name` | VARCHAR(100) | NOT NULL | 分类显示名称（中文） |
 | `slug` | VARCHAR(100) | UNIQUE, NOT NULL, INDEX | URL 友好标识（英文） |
 | `parent_id` | INTEGER | FK → categories.id, NULLABLE, INDEX | 父分类 ID，NULL 表示根分类 |
-| `sort_order` | INTEGER | DEFAULT 0 | 同级排序权重，升序 |
+| `sort` | INTEGER | DEFAULT 0 | 同级排序权重，升序 |
 | `description` | VARCHAR(500) | NULLABLE | 分类说明文本 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 启用状态，1=启用，0=停用 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后修改时间 |
 
@@ -137,6 +140,7 @@ erDiagram
 | `url` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
 | `favicon_url` | VARCHAR(2048) | NULLABLE | 网站 favicon 地址 |
 | `description` | TEXT | NULLABLE | 书签描述/备注 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 启用状态，1=启用，0=停用 |
 | `created_at` | DATETIME | DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | DEFAULT UTC NOW | 最后修改时间 |
 
@@ -171,7 +175,7 @@ erDiagram
 | `name` | VARCHAR(100) | NOT NULL | 分类显示名称 |
 | `slug` | VARCHAR(100) | NOT NULL | 标识符（同一用户下不可重复） |
 | `parent_id` | INTEGER | FK → user_categories.id, NULLABLE | 父私有分类 ID |
-| `sort_order` | INTEGER | DEFAULT 0 | 排序权重 |
+| `sort` | INTEGER | DEFAULT 0 | 排序权重 |
 | `description` | VARCHAR(500) | NULLABLE | 说明文本 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后更新时间 |

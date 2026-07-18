@@ -1,434 +1,1190 @@
 [
   {
-    "name": "技术开发", "slug": "tech-dev", "level": 1, "sort_order": 1,
+    "name": "技术开发",
+    "slug": "tech-dev",
+    "level": 1,
     "description": "编程语言、框架、工具、技术社区",
     "children": [
       {
-        "name": "编程语言", "slug": "programming-languages", "level": 2, "sort_order": 1,
+        "name": "编程语言",
+        "slug": "programming-languages",
+        "level": 2,
         "description": "各类编程语言相关资源",
         "children": [
-          {"name": "Python", "slug": "python", "level": 3, "sort_order": 1, "description": "Python 语言与生态"},
-          {"name": "JavaScript / TypeScript", "slug": "javascript-typescript", "level": 3, "sort_order": 2, "description": "JS/TS 语言与运行时"},
-          {"name": "Java / Kotlin", "slug": "java-kotlin", "level": 3, "sort_order": 3, "description": "JVM 生态语言"},
-          {"name": "Go", "slug": "go", "level": 3, "sort_order": 4, "description": "Go 语言相关"},
-          {"name": "Rust", "slug": "rust", "level": 3, "sort_order": 5, "description": "Rust 语言相关"},
-          {"name": "C / C++", "slug": "c-cpp", "level": 3, "sort_order": 6, "description": "系统编程语言"}
-        ]
+          {
+            "name": "Python",
+            "slug": "python",
+            "level": 3,
+            "description": "Python 语言与生态",
+            "sort": 1
+          },
+          {
+            "name": "JavaScript / TypeScript",
+            "slug": "javascript-typescript",
+            "level": 3,
+            "description": "JS/TS 语言与运行时",
+            "sort": 2
+          },
+          {
+            "name": "Java / Kotlin",
+            "slug": "java-kotlin",
+            "level": 3,
+            "description": "JVM 生态语言",
+            "sort": 3
+          },
+          {
+            "name": "Go",
+            "slug": "go",
+            "level": 3,
+            "description": "Go 语言相关",
+            "sort": 4
+          },
+          {
+            "name": "Rust",
+            "slug": "rust",
+            "level": 3,
+            "description": "Rust 语言相关",
+            "sort": 5
+          },
+          {
+            "name": "C / C++",
+            "slug": "c-cpp",
+            "level": 3,
+            "description": "系统编程语言",
+            "sort": 6
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "前端开发", "slug": "frontend", "level": 2, "sort_order": 2,
+        "name": "前端开发",
+        "slug": "frontend",
+        "level": 2,
         "description": "Web 前端技术",
         "children": [
-          {"name": "Vue / Nuxt", "slug": "vue-nuxt", "level": 3, "sort_order": 1},
-          {"name": "React / Next.js", "slug": "react-nextjs", "level": 3, "sort_order": 2},
-          {"name": "CSS / 样式", "slug": "css-styling", "level": 3, "sort_order": 3},
-          {"name": "构建工具", "slug": "build-tools", "level": 3, "sort_order": 4}
-        ]
+          {
+            "name": "Vue / Nuxt",
+            "slug": "vue-nuxt",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "React / Next.js",
+            "slug": "react-nextjs",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "CSS / 样式",
+            "slug": "css-styling",
+            "level": 3,
+            "sort": 3
+          },
+          {
+            "name": "构建工具",
+            "slug": "build-tools",
+            "level": 3,
+            "sort": 4
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "后端开发", "slug": "backend", "level": 2, "sort_order": 3,
+        "name": "后端开发",
+        "slug": "backend",
+        "level": 2,
         "description": "服务端开发技术",
         "children": [
-          {"name": "框架", "slug": "backend-frameworks", "level": 3, "sort_order": 1},
-          {"name": "数据库", "slug": "database", "level": 3, "sort_order": 2},
-          {"name": "API 设计", "slug": "api-design", "level": 3, "sort_order": 3},
-          {"name": "消息队列", "slug": "message-queue", "level": 3, "sort_order": 4}
-        ]
+          {
+            "name": "框架",
+            "slug": "backend-frameworks",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "数据库",
+            "slug": "database",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "API 设计",
+            "slug": "api-design",
+            "level": 3,
+            "sort": 3
+          },
+          {
+            "name": "消息队列",
+            "slug": "message-queue",
+            "level": 3,
+            "sort": 4
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "开发工具", "slug": "dev-tools", "level": 2, "sort_order": 4,
+        "name": "开发工具",
+        "slug": "dev-tools",
+        "level": 2,
         "description": "开发者日常工具",
         "children": [
-          {"name": "Git / 版本控制", "slug": "git-version-control", "level": 3, "sort_order": 1},
-          {"name": "IDE / 编辑器", "slug": "ide-editor", "level": 3, "sort_order": 2},
-          {"name": "CI / CD", "slug": "ci-cd", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "Git / 版本控制",
+            "slug": "git-version-control",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "IDE / 编辑器",
+            "slug": "ide-editor",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "CI / CD",
+            "slug": "ci-cd",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 4
       },
       {
-        "name": "云计算", "slug": "cloud-computing", "level": 2, "sort_order": 5,
+        "name": "云计算",
+        "slug": "cloud-computing",
+        "level": 2,
         "description": "云平台与部署",
         "children": [
-          {"name": "AWS", "slug": "aws", "level": 3, "sort_order": 1},
-          {"name": "阿里云 / 腾讯云", "slug": "aliyun-tencent", "level": 3, "sort_order": 2},
-          {"name": "Vercel / Netlify", "slug": "vercel-netlify", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "AWS",
+            "slug": "aws",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "阿里云 / 腾讯云",
+            "slug": "aliyun-tencent",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "Vercel / Netlify",
+            "slug": "vercel-netlify",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 5
       },
       {
-        "name": "技术社区", "slug": "tech-community", "level": 2, "sort_order": 6,
+        "name": "技术社区",
+        "slug": "tech-community",
+        "level": 2,
         "description": "技术交流与学习平台",
         "children": [
-          {"name": "GitHub", "slug": "github", "level": 3, "sort_order": 1},
-          {"name": "Stack Overflow", "slug": "stack-overflow", "level": 3, "sort_order": 2},
-          {"name": "掘金 / 知乎", "slug": "juejin-zhihu", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "GitHub",
+            "slug": "github",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Stack Overflow",
+            "slug": "stack-overflow",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "掘金 / 知乎",
+            "slug": "juejin-zhihu",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 6
       }
-    ]
+    ],
+    "sort": 1
   },
   {
-    "name": "新闻资讯", "slug": "news-media", "level": 1, "sort_order": 2,
+    "name": "新闻资讯",
+    "slug": "news-media",
+    "level": 1,
     "description": "综合与垂直领域新闻媒体",
     "children": [
       {
-        "name": "综合新闻", "slug": "general-news", "level": 2, "sort_order": 1,
+        "name": "综合新闻",
+        "slug": "general-news",
+        "level": 2,
         "children": [
-          {"name": "国内新闻", "slug": "domestic-news", "level": 3, "sort_order": 1},
-          {"name": "国际新闻", "slug": "international-news", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "国内新闻",
+            "slug": "domestic-news",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "国际新闻",
+            "slug": "international-news",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "科技资讯", "slug": "tech-news", "level": 2, "sort_order": 2,
+        "name": "科技资讯",
+        "slug": "tech-news",
+        "level": 2,
         "children": [
-          {"name": "IT 资讯", "slug": "it-news", "level": 3, "sort_order": 1},
-          {"name": "产品发布", "slug": "product-launch", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "IT 资讯",
+            "slug": "it-news",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "产品发布",
+            "slug": "product-launch",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "财经新闻", "slug": "finance-news", "level": 2, "sort_order": 3,
+        "name": "财经新闻",
+        "slug": "finance-news",
+        "level": 2,
         "children": [
-          {"name": "股市资讯", "slug": "stock-news", "level": 3, "sort_order": 1},
-          {"name": "宏观经济", "slug": "macro-economy", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "股市资讯",
+            "slug": "stock-news",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "宏观经济",
+            "slug": "macro-economy",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "体育新闻", "slug": "sports-news", "level": 2, "sort_order": 4,
+        "name": "体育新闻",
+        "slug": "sports-news",
+        "level": 2,
         "children": [
-          {"name": "足球", "slug": "football-news", "level": 3, "sort_order": 1},
-          {"name": "篮球", "slug": "basketball-news", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "足球",
+            "slug": "football-news",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "篮球",
+            "slug": "basketball-news",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 2
   },
   {
-    "name": "社交媒体", "slug": "social", "level": 1, "sort_order": 3,
+    "name": "社交媒体",
+    "slug": "social",
+    "level": 1,
     "description": "社交网络、社区、即时通讯",
     "children": [
       {
-        "name": "社交平台", "slug": "social-platforms", "level": 2, "sort_order": 1,
+        "name": "社交平台",
+        "slug": "social-platforms",
+        "level": 2,
         "children": [
-          {"name": "微博 / 推特", "slug": "weibo-twitter", "level": 3, "sort_order": 1},
-          {"name": "微信 / 朋友圈", "slug": "wechat-moments", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "微博 / 推特",
+            "slug": "weibo-twitter",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "微信 / 朋友圈",
+            "slug": "wechat-moments",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "社区论坛", "slug": "community-forum", "level": 2, "sort_order": 2,
+        "name": "社区论坛",
+        "slug": "community-forum",
+        "level": 2,
         "children": [
-          {"name": "Reddit / 贴吧", "slug": "reddit-tieba", "level": 3, "sort_order": 1},
-          {"name": "V2EX / Hacker News", "slug": "v2ex-hn", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Reddit / 贴吧",
+            "slug": "reddit-tieba",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "V2EX / Hacker News",
+            "slug": "v2ex-hn",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "即时通讯", "slug": "instant-messaging", "level": 2, "sort_order": 3,
+        "name": "即时通讯",
+        "slug": "instant-messaging",
+        "level": 2,
         "children": [
-          {"name": "微信", "slug": "wechat", "level": 3, "sort_order": 1},
-          {"name": "Telegram / Discord", "slug": "telegram-discord", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "微信",
+            "slug": "wechat",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Telegram / Discord",
+            "slug": "telegram-discord",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "内容平台", "slug": "content-platforms", "level": 2, "sort_order": 4,
+        "name": "内容平台",
+        "slug": "content-platforms",
+        "level": 2,
         "children": [
-          {"name": "知乎", "slug": "zhihu", "level": 3, "sort_order": 1},
-          {"name": "小红书", "slug": "xiaohongshu", "level": 3, "sort_order": 2},
-          {"name": "B站 / 抖音", "slug": "bilibili-douyin", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "知乎",
+            "slug": "zhihu",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "小红书",
+            "slug": "xiaohongshu",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "B站 / 抖音",
+            "slug": "bilibili-douyin",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 3
   },
   {
-    "name": "学习教育", "slug": "education", "level": 1, "sort_order": 4,
+    "name": "学习教育",
+    "slug": "education",
+    "level": 1,
     "description": "在线课程、学术资源、知识平台",
     "children": [
       {
-        "name": "在线课程", "slug": "online-courses", "level": 2, "sort_order": 1,
+        "name": "在线课程",
+        "slug": "online-courses",
+        "level": 2,
         "children": [
-          {"name": "Coursera / edX", "slug": "coursera-edx", "level": 3, "sort_order": 1},
-          {"name": "中国大学 MOOC", "slug": "icourse", "level": 3, "sort_order": 2},
-          {"name": "Udemy / B站教程", "slug": "udemy-bilibili", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "Coursera / edX",
+            "slug": "coursera-edx",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "中国大学 MOOC",
+            "slug": "icourse",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "Udemy / B站教程",
+            "slug": "udemy-bilibili",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "编程学习", "slug": "coding-learning", "level": 2, "sort_order": 2,
+        "name": "编程学习",
+        "slug": "coding-learning",
+        "level": 2,
         "children": [
-          {"name": "LeetCode / 算法", "slug": "leetcode-algo", "level": 3, "sort_order": 1},
-          {"name": "文档 / 教程", "slug": "docs-tutorials", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "LeetCode / 算法",
+            "slug": "leetcode-algo",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "文档 / 教程",
+            "slug": "docs-tutorials",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "学术资源", "slug": "academic-resources", "level": 2, "sort_order": 3,
+        "name": "学术资源",
+        "slug": "academic-resources",
+        "level": 2,
         "children": [
-          {"name": "论文检索", "slug": "paper-search", "level": 3, "sort_order": 1},
-          {"name": "arXiv / Google Scholar", "slug": "arxiv-scholar", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "论文检索",
+            "slug": "paper-search",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "arXiv / Google Scholar",
+            "slug": "arxiv-scholar",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "语言学习", "slug": "language-learning", "level": 2, "sort_order": 4,
+        "name": "语言学习",
+        "slug": "language-learning",
+        "level": 2,
         "children": [
-          {"name": "英语", "slug": "english", "level": 3, "sort_order": 1},
-          {"name": "日语 / 韩语", "slug": "japanese-korean", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "英语",
+            "slug": "english",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "日语 / 韩语",
+            "slug": "japanese-korean",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 4
   },
   {
-    "name": "购物电商", "slug": "shopping", "level": 1, "sort_order": 5,
+    "name": "购物电商",
+    "slug": "shopping",
+    "level": 1,
     "description": "综合与垂直电商平台",
     "children": [
       {
-        "name": "综合电商", "slug": "general-ecommerce", "level": 2, "sort_order": 1,
+        "name": "综合电商",
+        "slug": "general-ecommerce",
+        "level": 2,
         "children": [
-          {"name": "淘宝 / 天猫", "slug": "taobao-tmall", "level": 3, "sort_order": 1},
-          {"name": "京东", "slug": "jd", "level": 3, "sort_order": 2},
-          {"name": "拼多多", "slug": "pinduoduo", "level": 3, "sort_order": 3},
-          {"name": "Amazon", "slug": "amazon", "level": 3, "sort_order": 4}
-        ]
+          {
+            "name": "淘宝 / 天猫",
+            "slug": "taobao-tmall",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "京东",
+            "slug": "jd",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "拼多多",
+            "slug": "pinduoduo",
+            "level": 3,
+            "sort": 3
+          },
+          {
+            "name": "Amazon",
+            "slug": "amazon",
+            "level": 3,
+            "sort": 4
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "垂直电商", "slug": "vertical-ecommerce", "level": 2, "sort_order": 2,
+        "name": "垂直电商",
+        "slug": "vertical-ecommerce",
+        "level": 2,
         "children": [
-          {"name": "数码产品", "slug": "digital-products", "level": 3, "sort_order": 1},
-          {"name": "图书 / 音像", "slug": "books-media", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "数码产品",
+            "slug": "digital-products",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "图书 / 音像",
+            "slug": "books-media",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "二手交易", "slug": "second-hand", "level": 2, "sort_order": 3,
+        "name": "二手交易",
+        "slug": "second-hand",
+        "level": 2,
         "children": [
-          {"name": "闲鱼", "slug": "xianyu", "level": 3, "sort_order": 1},
-          {"name": "转转会", "slug": "zhuanzhuan", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "闲鱼",
+            "slug": "xianyu",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "转转会",
+            "slug": "zhuanzhuan",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "海淘代购", "slug": "cross-border", "level": 2, "sort_order": 4,
+        "name": "海淘代购",
+        "slug": "cross-border",
+        "level": 2,
         "children": [
-          {"name": "考拉 / 洋码头", "slug": "kaola-yangmatou", "level": 3, "sort_order": 1}
-        ]
+          {
+            "name": "考拉 / 洋码头",
+            "slug": "kaola-yangmatou",
+            "level": 3,
+            "sort": 1
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 5
   },
   {
-    "name": "金融财经", "slug": "finance", "level": 1, "sort_order": 6,
+    "name": "金融财经",
+    "slug": "finance",
+    "level": 1,
     "description": "银行、证券、支付、投资理财",
     "children": [
       {
-        "name": "银行服务", "slug": "banking", "level": 2, "sort_order": 1,
+        "name": "银行服务",
+        "slug": "banking",
+        "level": 2,
         "children": [
-          {"name": "国有银行", "slug": "state-banks", "level": 3, "sort_order": 1},
-          {"name": "商业银行", "slug": "commercial-banks", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "国有银行",
+            "slug": "state-banks",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "商业银行",
+            "slug": "commercial-banks",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "证券投资", "slug": "securities", "level": 2, "sort_order": 2,
+        "name": "证券投资",
+        "slug": "securities",
+        "level": 2,
         "children": [
-          {"name": "A股 / 港股 / 美股", "slug": "stock-markets", "level": 3, "sort_order": 1},
-          {"name": "基金 / 理财", "slug": "fund-wealth", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "A股 / 港股 / 美股",
+            "slug": "stock-markets",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "基金 / 理财",
+            "slug": "fund-wealth",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "数字支付", "slug": "digital-payment", "level": 2, "sort_order": 3,
+        "name": "数字支付",
+        "slug": "digital-payment",
+        "level": 2,
         "children": [
-          {"name": "支付宝", "slug": "alipay", "level": 3, "sort_order": 1},
-          {"name": "微信支付", "slug": "wechat-pay", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "支付宝",
+            "slug": "alipay",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "微信支付",
+            "slug": "wechat-pay",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "财经资讯", "slug": "finance-info", "level": 2, "sort_order": 4,
+        "name": "财经资讯",
+        "slug": "finance-info",
+        "level": 2,
         "children": [
-          {"name": "雪球", "slug": "xueqiu", "level": 3, "sort_order": 1},
-          {"name": "东方财富", "slug": "eastmoney", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "雪球",
+            "slug": "xueqiu",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "东方财富",
+            "slug": "eastmoney",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 6
   },
   {
-    "name": "设计创意", "slug": "design", "level": 1, "sort_order": 7,
+    "name": "设计创意",
+    "slug": "design",
+    "level": 1,
     "description": "UI/UX、平面、插画、摄影、品牌",
     "children": [
       {
-        "name": "UI / UX 设计", "slug": "ui-ux-design", "level": 2, "sort_order": 1,
+        "name": "UI / UX 设计",
+        "slug": "ui-ux-design",
+        "level": 2,
         "children": [
-          {"name": "Dribbble / Behance", "slug": "dribbble-behance", "level": 3, "sort_order": 1},
-          {"name": "Figma / 设计工具", "slug": "figma-tools", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Dribbble / Behance",
+            "slug": "dribbble-behance",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Figma / 设计工具",
+            "slug": "figma-tools",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "平面设计", "slug": "graphic-design", "level": 2, "sort_order": 2,
+        "name": "平面设计",
+        "slug": "graphic-design",
+        "level": 2,
         "children": [
-          {"name": "版式 / 字体", "slug": "typography", "level": 3, "sort_order": 1},
-          {"name": "品牌 / VI", "slug": "brand-vi", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "版式 / 字体",
+            "slug": "typography",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "品牌 / VI",
+            "slug": "brand-vi",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "插画 / 3D", "slug": "illustration-3d", "level": 2, "sort_order": 3,
+        "name": "插画 / 3D",
+        "slug": "illustration-3d",
+        "level": 2,
         "children": [
-          {"name": "插画素材", "slug": "illustration-assets", "level": 3, "sort_order": 1},
-          {"name": "3D / Blender", "slug": "3d-blender", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "插画素材",
+            "slug": "illustration-assets",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "3D / Blender",
+            "slug": "3d-blender",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "摄影", "slug": "photography", "level": 2, "sort_order": 4,
+        "name": "摄影",
+        "slug": "photography",
+        "level": 2,
         "children": [
-          {"name": "图库 / Unsplash", "slug": "stock-photos", "level": 3, "sort_order": 1},
-          {"name": "摄影社区", "slug": "photo-community", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "图库 / Unsplash",
+            "slug": "stock-photos",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "摄影社区",
+            "slug": "photo-community",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 7
   },
   {
-    "name": "影音娱乐", "slug": "entertainment", "level": 1, "sort_order": 8,
+    "name": "影音娱乐",
+    "slug": "entertainment",
+    "level": 1,
     "description": "视频、音乐、游戏、动漫",
     "children": [
       {
-        "name": "视频平台", "slug": "video-platforms", "level": 2, "sort_order": 1,
+        "name": "视频平台",
+        "slug": "video-platforms",
+        "level": 2,
         "children": [
-          {"name": "Bilibili", "slug": "bilibili", "level": 3, "sort_order": 1},
-          {"name": "YouTube", "slug": "youtube", "level": 3, "sort_order": 2},
-          {"name": "腾讯视频 / 爱奇艺", "slug": "tencent-iqiyi", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "Bilibili",
+            "slug": "bilibili",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "YouTube",
+            "slug": "youtube",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "腾讯视频 / 爱奇艺",
+            "slug": "tencent-iqiyi",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "音乐 / 播客", "slug": "music-podcast", "level": 2, "sort_order": 2,
+        "name": "音乐 / 播客",
+        "slug": "music-podcast",
+        "level": 2,
         "children": [
-          {"name": "网易云音乐", "slug": "netease-music", "level": 3, "sort_order": 1},
-          {"name": "Spotify / Apple Music", "slug": "spotify-apple", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "网易云音乐",
+            "slug": "netease-music",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Spotify / Apple Music",
+            "slug": "spotify-apple",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "游戏", "slug": "games", "level": 2, "sort_order": 3,
+        "name": "游戏",
+        "slug": "games",
+        "level": 2,
         "children": [
-          {"name": "Steam / 主机", "slug": "steam-console", "level": 3, "sort_order": 1},
-          {"name": "手游", "slug": "mobile-games", "level": 3, "sort_order": 2},
-          {"name": "游戏资讯 / 社区", "slug": "game-community", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "Steam / 主机",
+            "slug": "steam-console",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "手游",
+            "slug": "mobile-games",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "游戏资讯 / 社区",
+            "slug": "game-community",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "动漫 / 二次元", "slug": "anime-acg", "level": 2, "sort_order": 4,
+        "name": "动漫 / 二次元",
+        "slug": "anime-acg",
+        "level": 2,
         "children": [
-          {"name": "追番 / 漫画", "slug": "anime-manga", "level": 3, "sort_order": 1},
-          {"name": "ACG 社区", "slug": "acg-community", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "追番 / 漫画",
+            "slug": "anime-manga",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "ACG 社区",
+            "slug": "acg-community",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 8
   },
   {
-    "name": "工具效率", "slug": "tools", "level": 1, "sort_order": 9,
+    "name": "工具效率",
+    "slug": "tools",
+    "level": 1,
     "description": "笔记、任务、文档、AI 工具",
     "children": [
       {
-        "name": "笔记 / 知识管理", "slug": "notes-knowledge", "level": 2, "sort_order": 1,
+        "name": "笔记 / 知识管理",
+        "slug": "notes-knowledge",
+        "level": 2,
         "children": [
-          {"name": "Notion / 飞书", "slug": "notion-feishu", "level": 3, "sort_order": 1},
-          {"name": "Obsidian / Logseq", "slug": "obsidian-logseq", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Notion / 飞书",
+            "slug": "notion-feishu",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Obsidian / Logseq",
+            "slug": "obsidian-logseq",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "任务管理", "slug": "task-management", "level": 2, "sort_order": 2,
+        "name": "任务管理",
+        "slug": "task-management",
+        "level": 2,
         "children": [
-          {"name": "Todoist / 滴答清单", "slug": "todoist-dida", "level": 3, "sort_order": 1},
-          {"name": "Trello / Jira", "slug": "trello-jira", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Todoist / 滴答清单",
+            "slug": "todoist-dida",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Trello / Jira",
+            "slug": "trello-jira",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "AI 工具", "slug": "ai-tools", "level": 2, "sort_order": 3,
+        "name": "AI 工具",
+        "slug": "ai-tools",
+        "level": 2,
         "children": [
-          {"name": "ChatGPT / Claude", "slug": "chatgpt-claude", "level": 3, "sort_order": 1},
-          {"name": "AI 绘图", "slug": "ai-image-gen", "level": 3, "sort_order": 2},
-          {"name": "AI 编程", "slug": "ai-coding", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "ChatGPT / Claude",
+            "slug": "chatgpt-claude",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "AI 绘图",
+            "slug": "ai-image-gen",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "AI 编程",
+            "slug": "ai-coding",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "在线文档", "slug": "online-docs", "level": 2, "sort_order": 4,
+        "name": "在线文档",
+        "slug": "online-docs",
+        "level": 2,
         "children": [
-          {"name": "Google Docs / 腾讯文档", "slug": "google-tencent-docs", "level": 3, "sort_order": 1},
-          {"name": "PDF 工具", "slug": "pdf-tools", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Google Docs / 腾讯文档",
+            "slug": "google-tencent-docs",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "PDF 工具",
+            "slug": "pdf-tools",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 9
   },
   {
-    "name": "科学学术", "slug": "science", "level": 1, "sort_order": 10,
+    "name": "科学学术",
+    "slug": "science",
+    "level": 1,
     "description": "论文、期刊、科普、学术研究",
     "children": [
       {
-        "name": "学术搜索", "slug": "academic-search", "level": 2, "sort_order": 1,
+        "name": "学术搜索",
+        "slug": "academic-search",
+        "level": 2,
         "children": [
-          {"name": "Google Scholar", "slug": "google-scholar", "level": 3, "sort_order": 1},
-          {"name": "知网 / 万方", "slug": "cnki-wanfang", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Google Scholar",
+            "slug": "google-scholar",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "知网 / 万方",
+            "slug": "cnki-wanfang",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "科普媒体", "slug": "science-media", "level": 2, "sort_order": 2,
+        "name": "科普媒体",
+        "slug": "science-media",
+        "level": 2,
         "children": [
-          {"name": "果壳 / 科学松鼠会", "slug": "guokr-songshuhui", "level": 3, "sort_order": 1},
-          {"name": "Nature / Science", "slug": "nature-science", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "果壳 / 科学松鼠会",
+            "slug": "guokr-songshuhui",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "Nature / Science",
+            "slug": "nature-science",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "开放数据", "slug": "open-data", "level": 2, "sort_order": 3,
+        "name": "开放数据",
+        "slug": "open-data",
+        "level": 2,
         "children": [
-          {"name": "Kaggle", "slug": "kaggle", "level": 3, "sort_order": 1},
-          {"name": "政府开放数据", "slug": "gov-open-data", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "Kaggle",
+            "slug": "kaggle",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "政府开放数据",
+            "slug": "gov-open-data",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       }
-    ]
+    ],
+    "sort": 10
   },
   {
-    "name": "生活服务", "slug": "life", "level": 1, "sort_order": 11,
+    "name": "生活服务",
+    "slug": "life",
+    "level": 1,
     "description": "出行、餐饮、健康、房产、求职",
     "children": [
       {
-        "name": "出行旅游", "slug": "travel", "level": 2, "sort_order": 1,
+        "name": "出行旅游",
+        "slug": "travel",
+        "level": 2,
         "children": [
-          {"name": "地图 / 导航", "slug": "maps-navigation", "level": 3, "sort_order": 1},
-          {"name": "机票 / 酒店", "slug": "flights-hotels", "level": 3, "sort_order": 2},
-          {"name": "打车 / 共享单车", "slug": "ride-sharing", "level": 3, "sort_order": 3}
-        ]
+          {
+            "name": "地图 / 导航",
+            "slug": "maps-navigation",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "机票 / 酒店",
+            "slug": "flights-hotels",
+            "level": 3,
+            "sort": 2
+          },
+          {
+            "name": "打车 / 共享单车",
+            "slug": "ride-sharing",
+            "level": 3,
+            "sort": 3
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "餐饮美食", "slug": "food-dining", "level": 2, "sort_order": 2,
+        "name": "餐饮美食",
+        "slug": "food-dining",
+        "level": 2,
         "children": [
-          {"name": "外卖", "slug": "food-delivery", "level": 3, "sort_order": 1},
-          {"name": "点评 / 菜谱", "slug": "reviews-recipes", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "外卖",
+            "slug": "food-delivery",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "点评 / 菜谱",
+            "slug": "reviews-recipes",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "健康医疗", "slug": "health", "level": 2, "sort_order": 3,
+        "name": "健康医疗",
+        "slug": "health",
+        "level": 2,
         "children": [
-          {"name": "在线问诊", "slug": "online-consultation", "level": 3, "sort_order": 1},
-          {"name": "健身 / 运动", "slug": "fitness-sports", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "在线问诊",
+            "slug": "online-consultation",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "健身 / 运动",
+            "slug": "fitness-sports",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       },
       {
-        "name": "求职招聘", "slug": "job-recruitment", "level": 2, "sort_order": 4,
+        "name": "求职招聘",
+        "slug": "job-recruitment",
+        "level": 2,
         "children": [
-          {"name": "综合招聘", "slug": "general-recruitment", "level": 3, "sort_order": 1},
-          {"name": "猎头 / 内推", "slug": "headhunter-referral", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "综合招聘",
+            "slug": "general-recruitment",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "猎头 / 内推",
+            "slug": "headhunter-referral",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 4
       }
-    ]
+    ],
+    "sort": 11
   },
   {
-    "name": "政府组织", "slug": "gov-org", "level": 1, "sort_order": 12,
+    "name": "政府组织",
+    "slug": "gov-org",
+    "level": 1,
     "description": "政府网站、国际组织、公共服务",
     "children": [
       {
-        "name": "中国政府", "slug": "china-gov", "level": 2, "sort_order": 1,
+        "name": "中国政府",
+        "slug": "china-gov",
+        "level": 2,
         "children": [
-          {"name": "中央门户", "slug": "central-gov", "level": 3, "sort_order": 1},
-          {"name": "地方政府", "slug": "local-gov", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "中央门户",
+            "slug": "central-gov",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "地方政府",
+            "slug": "local-gov",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 1
       },
       {
-        "name": "国际组织", "slug": "international-orgs", "level": 2, "sort_order": 2,
+        "name": "国际组织",
+        "slug": "international-orgs",
+        "level": 2,
         "children": [
-          {"name": "联合国 / WHO", "slug": "un-who", "level": 3, "sort_order": 1},
-          {"name": "世界银行 / IMF", "slug": "worldbank-imf", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "联合国 / WHO",
+            "slug": "un-who",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "世界银行 / IMF",
+            "slug": "worldbank-imf",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 2
       },
       {
-        "name": "公共查询", "slug": "public-services", "level": 2, "sort_order": 3,
+        "name": "公共查询",
+        "slug": "public-services",
+        "level": 2,
         "children": [
-          {"name": "社保 / 公积金", "slug": "social-security", "level": 3, "sort_order": 1},
-          {"name": "气象 / 环境", "slug": "weather-environment", "level": 3, "sort_order": 2}
-        ]
+          {
+            "name": "社保 / 公积金",
+            "slug": "social-security",
+            "level": 3,
+            "sort": 1
+          },
+          {
+            "name": "气象 / 环境",
+            "slug": "weather-environment",
+            "level": 3,
+            "sort": 2
+          }
+        ],
+        "sort": 3
       }
-    ]
+    ],
+    "sort": 12
   }
 ]
