@@ -15,11 +15,15 @@ class Bookmark(Base):
     __tablename__ = "bookmarks"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String(500), nullable=False)
-    url = Column(String(2048), nullable=False, unique=True)
-    favicon_url = Column(String(2048), nullable=True)
-    description = Column(Text, nullable=True)
+    title_zh = Column(String(500), nullable=False)
+    title_en = Column(String(500), nullable=True)
+    href = Column(String(2048), nullable=False, unique=True)
+    icon = Column(Text, nullable=True)
+    desc_zh = Column(Text, nullable=True)
+    desc_en = Column(Text, nullable=True)
     status = Column(Boolean, default=True, nullable=False)
+    sort_zh = Column(Integer, default=None, nullable=True)
+    sort_en = Column(Integer, default=None, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

@@ -8,7 +8,7 @@
             :checked="checkedIds.has(category.id)"
             @change="toggleCategory(category.id)"
           />
-          <span>{{ category.name }}</span>
+          <span>{{ auth.locale === 'en' ? (category.name_en || category.name_zh) : category.name_zh }}</span>
         </label>
       </div>
       <CategoryCheckboxGroup
@@ -24,12 +24,15 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useAuthStore } from '../stores/auth'
 
 const props = defineProps({
   categories: { type: Array, required: true },
   modelValue: { type: Array, required: true },
   depth: { type: Number, default: 0 },
 })
+
+const auth = useAuthStore()
 
 const emit = defineEmits(['update:modelValue'])
 

@@ -103,11 +103,14 @@
 | 字段 | 类型 | 约束 | 说明 |
 |---|---|---|---|
 | `id` | INTEGER | PK, AUTOINCREMENT | 分类 ID |
-| `name` | VARCHAR(100) | NOT NULL | 分类名称 |
+| `name_zh` | VARCHAR(100) | NOT NULL | 分类名称（中文） |
+| `name_en` | VARCHAR(100) | NULLABLE | 分类名称（英文） |
 | `slug` | VARCHAR(100) | UNIQUE, NOT NULL, INDEX | URL 友好标识 |
 | `parent_id` | INTEGER | FK → categories.id, NULLABLE, INDEX | 父分类 ID |
-| `sort` | INTEGER | DEFAULT 0 | 同级排序 |
-| `description` | VARCHAR(500) | NULLABLE | 分类说明 |
+| `sort_zh` | INTEGER | DEFAULT NULL | 同级中文排序（数字越小越靠前） |
+| `sort_en` | INTEGER | DEFAULT NULL | 同级英文排序（数字越小越靠前） |
+| `desc_zh` | TEXT | NULLABLE | 分类说明（中文） |
+| `desc_en` | TEXT | NULLABLE | 分类说明（英文） |
 | `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 启用状态（1=启用，0=停用） |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 更新时间 |
@@ -119,11 +122,15 @@
 | 字段 | 类型 | 约束 | 说明 |
 |---|---|---|---|
 | `id` | INTEGER | PK, AUTOINCREMENT | 书签 ID |
-| `title` | VARCHAR(500) | NOT NULL | 网页标题 |
-| `url` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
-| `description` | TEXT | NULLABLE | 描述/备注 |
-| `favicon_url` | VARCHAR(2048) | NULLABLE | 网站图标 |
+| `title_zh` | VARCHAR(500) | NOT NULL | 中文网页标题 |
+| `title_en` | VARCHAR(500) | NULLABLE | 英文网页标题 |
+| `href` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
+| `icon` | TEXT | DEFAULT NULL | Base64 Data URI 图标 |
+| `desc_zh` | TEXT | NULLABLE | 中文描述/备注 |
+| `desc_en` | TEXT | NULLABLE | 英文描述/备注 |
 | `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 启用状态（1=启用，0=停用） |
+| `sort_zh` | INTEGER | DEFAULT NULL | 同级中文排序权重 |
+| `sort_en` | INTEGER | DEFAULT NULL | 同级英文排序权重 |
 | `created_at` | DATETIME | DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | DEFAULT UTC NOW | 更新时间 |
 
@@ -134,16 +141,35 @@
 | `bookmark_id` | INTEGER | PK, FK → bookmarks.id, ON DELETE CASCADE | 书签 ID |
 | `category_id` | INTEGER | PK, FK → categories.id, ON DELETE CASCADE | 分类 ID |
 
-**5. user_bookmarks — 用户收藏表（多对多，带分类）**
+**5. category_managers — 分类管理员关联关系表（多对多）**
 
 | 字段 | 类型 | 约束 | 说明 |
 |---|---|---|---|
+| `category_id` | INTEGER | PK, FK → categories.id, ON DELETE CASCADE | 分类 ID |
 | `user_id` | INTEGER | PK, FK → users.id, ON DELETE CASCADE | 用户 ID |
-| `bookmark_id` | INTEGER | PK, FK → bookmarks.id, ON DELETE CASCADE | 书签 ID |
-| `category_id` | INTEGER | PK, FK → categories.id, ON DELETE CASCADE | 收藏夹关联分类 |
-| `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 收藏时间 |
+| `status` | BOOLEAN | NOT NULL, DEFAULT 1 | 关系状态（1=启用，0=停用） |
 
-**6. user_categories — 用户私有分类表**
+**6. user_bookmarks — 用户私有书签表**
+
+| 字段 | 类型 | 约束 | 说明 |
+|---|---|---|---|
+| `id` | INTEGER | PK, AUTOINCREMENT | 私有书签 ID |
+| `user_id` | INTEGER | FK → users.id, ON DELETE CASCADE, INDEX | 用户 ID |
+| `title` | VARCHAR(500) | NOT NULL | 网页标题 |
+| `href` | VARCHAR(2048) | UNIQUE, NOT NULL, INDEX | 唯一完整 URL |
+| `icon` | TEXT | DEFAULT NULL | Base64 Data URI 图标 |
+| `description` | TEXT | NULLABLE | 书签描述/备注 |
+| `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 收藏时间 |
+| `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后修改时间 |
+
+**7. user_bookmarks_categories — 用户书签-分类关联表（多对多）**
+
+| 字段 | 类型 | 约束 | 说明 |
+|---|---|---|---|
+| `bookmark_id` | INTEGER | PK, FK → user_bookmarks.id, ON DELETE CASCADE | 用户书签 ID |
+| `category_id` | INTEGER | PK, FK → user_categories.id, ON DELETE CASCADE | 用户分类 ID |
+
+**8. user_categories — 用户私有分类表**
 
 | 字段 | 类型 | 约束 | 说明 |
 |---|---|---|---|
@@ -153,13 +179,13 @@
 | `slug` | VARCHAR(100) | NOT NULL | 标识符 |
 | `parent_id` | INTEGER | FK → user_categories.id, NULLABLE | 父级 ID |
 | `sort` | INTEGER | DEFAULT 0 | 排序权重 |
-| `description` | VARCHAR(500) | NULLABLE | 描述 |
+| `description` | TEXT | NULLABLE | 描述 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 更新时间 |
 
 - **唯一约束**：`UNIQUE(user_id, slug)`
 
-**7. user_history — 用户点击流历史表**
+**9. user_history — 用户点击流历史表**
 
 | 字段 | 类型 | 约束 | 说明 |
 |---|---|---|---|

@@ -9,6 +9,9 @@
         </nav>
       </div>
       <div class="header-right">
+        <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
+          {{ auth.locale === 'zh' ? 'English' : '中文' }}
+        </button>
         <span class="user-info">{{ auth.username }}</span>
         <button @click="handleLogout" class="btn-text">登出</button>
       </div>

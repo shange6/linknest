@@ -34,14 +34,16 @@
         class="bookmark-card"
       >
         <div class="bookmark-main">
-          <a :href="bookmark.url" target="_blank" rel="noopener" class="bookmark-title">
-            {{ bookmark.title || bookmark.url }}
+          <a :href="bookmark.href" target="_blank" rel="noopener" class="bookmark-title">
+            {{ (auth.locale === 'en' ? (bookmark.title_en || bookmark.title_zh) : bookmark.title_zh) || bookmark.href }}
           </a>
-          <p v-if="bookmark.description" class="bookmark-desc">{{ bookmark.description }}</p>
-          <p class="bookmark-url">{{ bookmark.url }}</p>
+          <p v-if="auth.locale === 'en' ? (bookmark.desc_en || bookmark.desc_zh) : bookmark.desc_zh" class="bookmark-desc">
+            {{ auth.locale === 'en' ? (bookmark.desc_en || bookmark.desc_zh) : bookmark.desc_zh }}
+          </p>
+          <p class="bookmark-url">{{ bookmark.href }}</p>
           <div class="bookmark-categories" v-if="bookmark.categories?.length">
             <span v-for="category in bookmark.categories" :key="category.id" class="category-chip">
-              {{ category.name }}
+              {{ auth.locale === 'en' ? (category.name_en || category.name_zh) : category.name_zh }}
             </span>
           </div>
         </div>
@@ -67,8 +69,10 @@
 <script setup>
 import { ref, computed, inject } from 'vue'
 import { useBookmarkStore } from '../stores/bookmarks'
+import { useAuthStore } from '../stores/auth'
 
 const bookmarkStore = useBookmarkStore()
+const auth = useAuthStore()
 const openEditor = inject('openEditor')
 
 const searchInput = ref('')

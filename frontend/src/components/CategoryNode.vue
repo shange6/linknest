@@ -17,7 +17,7 @@
       </span>
       <span v-else class="expand-toggle placeholder"></span>
       <span class="category-name" @click="selectCategory(node)">
-        {{ node.name }}
+        {{ auth.locale === 'en' ? (node.name_en || node.name_zh) : node.name_zh }}
       </span>
       <span class="category-level">{{ 'L' + node.level }}</span>
     </div>
@@ -35,6 +35,7 @@
 <script setup>
 import { useCategoryStore } from '../stores/categories'
 import { useBookmarkStore } from '../stores/bookmarks'
+import { useAuthStore } from '../stores/auth'
 
 const props = defineProps({
   node: { type: Object, required: true },
@@ -43,6 +44,7 @@ const props = defineProps({
 
 const categoryStore = useCategoryStore()
 const bookmarkStore = useBookmarkStore()
+const auth = useAuthStore()
 
 function selectCategory(node) {
   categoryStore.selectNode(node)

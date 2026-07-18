@@ -17,22 +17,29 @@ erDiagram
     }
     categories {
         int id PK
-        string name
+        string name_zh
+        string name_en
         string slug UK
         int parent_id FK
-        int sort
-        string description
+        int sort_zh
+        int sort_en
+        string desc_zh
+        string desc_en
         boolean status
         datetime created_at
         datetime updated_at
     }
     bookmarks {
         int id PK
-        string title
-        string url UK
-        string favicon_url
-        string description
+        string title_zh
+        string title_en
+        string href UK
+        string icon
+        string desc_zh
+        string desc_en
         boolean status
+        int sort_zh
+        int sort_en
         datetime created_at
         datetime updated_at
     }
@@ -40,11 +47,24 @@ erDiagram
         int bookmark_id PK, FK
         int category_id PK, FK
     }
-    user_bookmarks {
+    category_managers {
+        int category_id PK, FK
         int user_id PK, FK
+        boolean status
+    }
+    user_bookmarks {
+        int id PK
+        int user_id FK
+        string title
+        string href UK
+        string icon
+        string description
+        datetime created_at
+        datetime updated_at
+    }
+    user_bookmarks_categories {
         int bookmark_id PK, FK
         int category_id PK, FK
-        datetime created_at
     }
     user_categories {
         int id PK
@@ -65,9 +85,9 @@ erDiagram
         datetime updated_at
     }
 
-    users ||--o{ user_bookmarks : "has"
-    bookmarks ||--o{ user_bookmarks : "referenced in"
-    categories ||--o{ user_bookmarks : "categorized by"
+    users ||--o{ user_bookmarks : "owns"
+    user_bookmarks ||--o{ user_bookmarks_categories : "has"
+    user_categories ||--o{ user_bookmarks_categories : "has"
     
     users ||--o{ user_categories : "owns"
     user_categories ||--o{ user_categories : "parent"
@@ -79,6 +99,9 @@ erDiagram
     categories ||--o{ bookmarks_categories : "has"
     
     categories ||--o{ categories : "parent"
+
+    users ||--o{ category_managers : "manages"
+    categories ||--o{ category_managers : "managed by"
 ```
 
 > **设计说明**：
@@ -117,11 +140,14 @@ erDiagram
 | 字段 | 类型 | 约束 | 说明 |
 |------|------|------|------|
 | `id` | INTEGER | PK, AUTOINCREMENT | 分类唯一 ID |
-| `name` | VARCHAR(100) | NOT NULL | 分类显示名称（中文） |
+| `name_zh` | VARCHAR(100) | NOT NULL | 分类显示名称（中文） |
+| `name_en` | VARCHAR(100) | NULLABLE | 分类显示名称（英文） |
 | `slug` | VARCHAR(100) | UNIQUE, NOT NULL, INDEX | URL 友好标识（英文） |
 | `parent_id` | INTEGER | FK → categories.id, NULLABLE, INDEX | 父分类 ID，NULL 表示根分类 |
-| `sort` | INTEGER | DEFAULT 0 | 同级排序权重，升序 |
-| `description` | VARCHAR(500) | NULLABLE | 分类说明文本 |
+| `sort_zh` | INTEGER | DEFAULT NULL | 中文同级排序权重，数字越小越靠前，NULL 表示未排序 |
+| `sort_en` | INTEGER | DEFAULT NULL | 英文同级排序权重，数字越小越靠前，NULL 表示未排序 |
+| `desc_zh` | TEXT | NULLABLE | 中文分类说明文本 |
+| `desc_en` | TEXT | NULLABLE | 英文分类说明文本 |
 | `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 启用状态，1=启用，0=停用 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后修改时间 |
@@ -136,11 +162,15 @@ erDiagram
 | 字段 | 类型 | 约束 | 说明 |
 |------|------|------|------|
 | `id` | INTEGER | PK, AUTOINCREMENT | 书签唯一 ID |
-| `title` | VARCHAR(500) | NOT NULL | 网页标题 |
-| `url` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
-| `favicon_url` | VARCHAR(2048) | NULLABLE | 网站 favicon 地址 |
-| `description` | TEXT | NULLABLE | 书签描述/备注 |
+| `title_zh` | VARCHAR(500) | NOT NULL | 中文网页标题 |
+| `title_en` | VARCHAR(500) | NULLABLE | 英文网页标题 |
+| `href` | VARCHAR(2048) | UNIQUE, NOT NULL | 唯一完整 URL |
+| `icon` | TEXT | NULLABLE | Base64 Data URI 图标 |
+| `desc_zh` | TEXT | NULLABLE | 中文书签描述/备注 |
+| `desc_en` | TEXT | NULLABLE | 英文书签描述/备注 |
 | `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 启用状态，1=启用，0=停用 |
+| `sort_zh` | INTEGER | DEFAULT NULL | 中文排序权重，数字越小越靠前，NULL 表示未排序 |
+| `sort_en` | INTEGER | DEFAULT NULL | 英文排序权重，数字越小越靠前，NULL 表示未排序 |
 | `created_at` | DATETIME | DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | DEFAULT UTC NOW | 最后修改时间 |
 
@@ -155,14 +185,39 @@ erDiagram
 
 ---
 
-### user_bookmarks — 用户收藏表（个性化书签关联）
+### category_managers — 分类管理员关联表（多对多关系表）
 
 | 字段 | 类型 | 约束 | 说明 |
 |------|------|------|------|
+| `category_id` | INTEGER | PK, FK → categories.id, CASCADE DELETE | 分类 ID |
 | `user_id` | INTEGER | PK, FK → users.id, CASCADE DELETE | 用户 ID |
-| `bookmark_id` | INTEGER | PK, FK → bookmarks.id, CASCADE DELETE | 书签 ID |
-| `category_id` | INTEGER | PK, FK → categories.id, CASCADE DELETE | 关联分类 ID |
+| `status` | BOOLEAN | NOT NULL, DEFAULT TRUE | 关系启用状态，1=启用，0=停用 |
+
+---
+
+---
+
+### user_bookmarks — 用户私有书签表
+
+| 字段 | 类型 | 约束 | 说明 |
+|------|------|------|------|
+| `id` | INTEGER | PK, AUTOINCREMENT | 私有书签 ID |
+| `user_id` | INTEGER | FK → users.id, CASCADE DELETE, INDEX | 用户 ID |
+| `title` | VARCHAR(500) | NOT NULL | 网页标题 |
+| `href` | VARCHAR(2048) | UNIQUE, NOT NULL, INDEX | 唯一完整 URL |
+| `icon` | TEXT | NULLABLE | Base64 Data URI 图标 |
+| `description` | TEXT | NULLABLE | 书签描述/备注 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 收藏时间 |
+| `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后修改时间 |
+
+---
+
+### user_bookmarks_categories — 用户书签-分类关联表（多对多关系表）
+
+| 字段 | 类型 | 约束 | 说明 |
+|------|------|------|------|
+| `bookmark_id` | INTEGER | PK, FK → user_bookmarks.id, CASCADE DELETE | 用户书签 ID |
+| `category_id` | INTEGER | PK, FK → user_categories.id, CASCADE DELETE | 用户分类 ID |
 
 ---
 
@@ -176,7 +231,7 @@ erDiagram
 | `slug` | VARCHAR(100) | NOT NULL | 标识符（同一用户下不可重复） |
 | `parent_id` | INTEGER | FK → user_categories.id, NULLABLE | 父私有分类 ID |
 | `sort` | INTEGER | DEFAULT 0 | 排序权重 |
-| `description` | VARCHAR(500) | NULLABLE | 说明文本 |
+| `description` | TEXT | NULLABLE | 说明文本 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 创建时间 |
 | `updated_at` | DATETIME | NOT NULL, DEFAULT UTC NOW | 最后更新时间 |
 

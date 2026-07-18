@@ -9,6 +9,7 @@ from app.models.bookmark import Bookmark
 from app.models.category import Category
 from app.models.user import User
 from app.schemas.schemas import BookmarkCreate, BookmarkUpdate, BookmarkOut, BookmarkListOut
+from app.core.favicon import fetch_favicon, download_and_convert_to_base64
 
 router = APIRouter(prefix="/api/bookmarks", tags=["bookmarks"])
 
@@ -42,7 +43,7 @@ def get_bookmarks(
     if search:
         like = f"%{search}%"
         query = query.filter(
-            (Bookmark.title.ilike(like)) | (Bookmark.url.ilike(like))
+            (Bookmark.title_zh.ilike(like)) | (Bookmark.title_en.ilike(like)) | (Bookmark.href.ilike(like))
         )
 
     total = query.count()
@@ -51,7 +52,11 @@ def get_bookmarks(
         page = total_pages
 
     items = (
-        query.order_by(Bookmark.created_at.desc())
+        query.order_by(
+            Bookmark.sort_zh.asc().nulls_last(),
+            Bookmark.sort_en.asc().nulls_last(),
+            Bookmark.created_at.desc()
+        )
         .offset((page - 1) * page_size)
         .limit(page_size)
         .all()
@@ -71,11 +76,22 @@ def create_bookmark(
     db: Session = Depends(get_db),
     _: User = Depends(require_admin),
 ):
+    resolved_icon = data.icon
+    if resolved_icon and (resolved_icon.startswith("http://") or resolved_icon.startswith("https://")):
+        resolved_icon = download_and_convert_to_base64(resolved_icon)
+    if not resolved_icon:
+        resolved_icon = fetch_favicon(data.href)
+
     bookmark = Bookmark(
-        title=data.title,
-        url=data.url,
-        description=data.description,
+        title_zh=data.title_zh,
+        title_en=data.title_en,
+        href=data.href,
+        icon=resolved_icon,
+        desc_zh=data.desc_zh,
+        desc_en=data.desc_en,
         status=data.status,
+        sort_zh=data.sort_zh,
+        sort_en=data.sort_en,
     )
     if data.category_ids:
         categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
@@ -108,14 +124,27 @@ def update_bookmark(
     if not bookmark:
         raise HTTPException(status_code=404, detail="Bookmark not found")
 
-    if data.title is not None:
-        bookmark.title = data.title
-    if data.url is not None:
-        bookmark.url = data.url
-    if data.description is not None:
-        bookmark.description = data.description
+    if data.title_zh is not None:
+        bookmark.title_zh = data.title_zh
+    if data.title_en is not None:
+        bookmark.title_en = data.title_en
+    if data.href is not None:
+        bookmark.href = data.href
+    if data.icon is not None:
+        resolved_icon = data.icon
+        if resolved_icon and (resolved_icon.startswith("http://") or resolved_icon.startswith("https://")):
+            resolved_icon = download_and_convert_to_base64(resolved_icon)
+        bookmark.icon = resolved_icon
+    if data.desc_zh is not None:
+        bookmark.desc_zh = data.desc_zh
+    if data.desc_en is not None:
+        bookmark.desc_en = data.desc_en
     if data.status is not None:
         bookmark.status = data.status
+    if data.sort_zh is not None:
+        bookmark.sort_zh = data.sort_zh
+    if data.sort_en is not None:
+        bookmark.sort_en = data.sort_en
     if data.category_ids is not None:
         categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
         bookmark.categories = categories

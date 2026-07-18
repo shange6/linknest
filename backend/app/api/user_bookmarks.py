@@ -7,6 +7,7 @@ from app.models.user import User
 from app.models.user_category import UserCategory
 from app.models.user_bookmark import UserBookmark
 from app.schemas.schemas import UserBookmarkCreate, UserBookmarkOut
+from app.core.favicon import fetch_favicon, download_and_convert_to_base64
 
 router = APIRouter(prefix="/api/user_bookmarks", tags=["user_bookmarks"])
 
@@ -35,7 +36,7 @@ def add_userBookmark(
         db.query(UserBookmark)
         .filter(
             UserBookmark.user_id == current_user.id,
-            UserBookmark.url == data.url,
+            UserBookmark.href == data.href,
         )
         .first()
     )
@@ -53,10 +54,17 @@ def add_userBookmark(
             .all()
         )
 
+    resolved_icon = data.icon
+    if resolved_icon and (resolved_icon.startswith("http://") or resolved_icon.startswith("https://")):
+        resolved_icon = download_and_convert_to_base64(resolved_icon)
+    if not resolved_icon:
+        resolved_icon = fetch_favicon(data.href)
+
     bookmark = UserBookmark(
         user_id=current_user.id,
         title=data.title,
-        url=data.url,
+        href=data.href,
+        icon=resolved_icon,
         description=data.description,
         categories=categories,
     )
@@ -89,7 +97,7 @@ def remonv_userBookmark(
 
 @router.get("/check", response_model=dict)
 def check_userBookmark(
-    url: str = Query(...),
+    href: str = Query(...),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -97,7 +105,7 @@ def check_userBookmark(
         db.query(UserBookmark)
         .filter(
             UserBookmark.user_id == current_user.id,
-            UserBookmark.url == url,
+            UserBookmark.href == href,
         )
         .first()
     )

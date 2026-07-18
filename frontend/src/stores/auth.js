@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user') || 'null'),
     token: localStorage.getItem('token') || null,
+    locale: localStorage.getItem('locale') || 'zh',
   }),
 
   getters: {
@@ -14,6 +15,11 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
+    setLocale(lang) {
+      this.locale = lang
+      localStorage.setItem('locale', lang)
+    },
+
     async register(data) {
       await authAPI.register(data)
     },

@@ -13,7 +13,17 @@ from app.models.category import Category
 def import_categories(data: list[dict], parent_id: int | None = None, db=None):
     for item in data:
         children = item.pop("children", [])
-        category = Category(parent_id=parent_id, **item)
+        level = item.pop("level", None)
+        name = item.pop("name", None)
+        description = item.pop("description", None)
+        sort = item.pop("sort", None)
+        category = Category(
+            parent_id=parent_id,
+            name_zh=name,
+            desc_zh=description,
+            sort_zh=sort,
+            **item
+        )
         db.add(category)
         db.flush()
         import_categories(children, parent_id=category.id, db=db)

@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, UniqueConstraint, CheckConstraint
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, UniqueConstraint, CheckConstraint, Text
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
@@ -13,7 +13,7 @@ class UserCategory(Base):
     slug = Column(String(100), nullable=False)
     parent_id = Column(Integer, ForeignKey("user_categories.id"), nullable=True)
     sort = Column(Integer, default=0)
-    description = Column(String(500), nullable=True)
+    description = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
