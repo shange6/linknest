@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, CheckConstraint
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
@@ -16,5 +16,9 @@ class Category(Base):
     status = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint("slug NOT GLOB '*[!a-zA-Z0-9-]*'", name="ck_categories_slug_format"),
+    )
 
     parent = relationship("Category", remote_side=[id], backref="children")

@@ -35,7 +35,7 @@ CREATE INDEX ix_bookmarks_url ON bookmarks(url);
 CREATE TABLE categories (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name VARCHAR(100) NOT NULL, 
-	slug VARCHAR(100) NOT NULL, 
+	slug VARCHAR(100) NOT NULL CHECK (slug NOT GLOB '*[!a-zA-Z0-9-]*'), 
 	parent_id INTEGER, 
 	sort INTEGER, 
 	description VARCHAR(500), 
@@ -75,7 +75,7 @@ CREATE TABLE user_categories (
 	id INTEGER NOT NULL, 
 	user_id INTEGER NOT NULL, 
 	name VARCHAR(100) NOT NULL, 
-	slug VARCHAR(100) NOT NULL, 
+	slug VARCHAR(100) NOT NULL CHECK (slug NOT GLOB '*[!a-zA-Z0-9-]*'), 
 	parent_id INTEGER, 
 	sort INTEGER, 
 	description VARCHAR(500), 
