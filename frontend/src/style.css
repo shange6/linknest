@@ -278,12 +278,12 @@ textarea {
   color: var(--c-text-secondary);
 }
 
-.tag-tree {
+.category-tree {
   padding: 0.5rem 0;
 }
 
-/* --- Tag Nodes --- */
-.tag-item {
+/* --- Category Nodes --- */
+.category-item {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -294,15 +294,15 @@ textarea {
   transition: background 0.1s;
 }
 
-.tag-item:hover {
+.category-item:hover {
   background: #eee;
 }
 
-.tag-item.selected {
+.category-item.selected {
   background: var(--c-selected-bg);
 }
 
-.tag-item.selected .tag-name {
+.category-item.selected .category-name {
   font-weight: 600;
 }
 
@@ -316,14 +316,14 @@ textarea {
 }
 .expand-toggle.placeholder { visibility: hidden; }
 
-.tag-name {
+.category-name {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.tag-level {
+.category-level {
   font-size: 0.65rem;
   color: var(--c-text-muted);
   font-family: var(--font-mono);
@@ -423,13 +423,13 @@ textarea {
   margin-bottom: 0.35rem;
 }
 
-.bookmark-tags {
+.bookmark-categories {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
 }
 
-.tag-chip {
+.category-chip {
   font-size: 0.7rem;
   padding: 0.15rem 0.5rem;
   border: 1px solid var(--c-border);
@@ -510,19 +510,19 @@ textarea {
   padding-top: 0.5rem;
 }
 
-/* --- Tag Selector (in modal) --- */
-.tag-selector {
+/* --- Category Selector (in modal) --- */
+.category-selector {
   max-height: 15rem;
   overflow-y: auto;
   border: 1px solid var(--c-border);
   padding: 0.5rem;
 }
 
-.tag-checkbox-row {
+.category-checkbox-row {
   padding: 0.2rem 0;
 }
 
-.tag-checkbox-label {
+.category-checkbox-label {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -530,7 +530,7 @@ textarea {
   cursor: pointer;
 }
 
-.tag-checkbox-label input[type="checkbox"] {
+.category-checkbox-label input[type="checkbox"] {
   accent-color: var(--c-text);
 }
 

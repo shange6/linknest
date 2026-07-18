@@ -5,7 +5,7 @@
         <button @click="openEditor(null)" class="btn-primary">+ 添加书签</button>
         <span v-if="bookmarkStore.total" class="result-count">
           {{ bookmarkStore.total }} 个书签
-          <span v-if="bookmarkStore.tagId" class="rich-muted">（已按标签筛选）</span>
+          <span v-if="bookmarkStore.categoryId" class="rich-muted">（已按分类筛选）</span>
         </span>
       </div>
       <div class="toolbar-right">
@@ -13,7 +13,7 @@
           v-model="searchInput"
           @input="onSearch"
           type="text"
-          placeholder="搜索标题或 URL..."
+          placeholder="搜索标题 or URL..."
           class="search-input"
         />
       </div>
@@ -22,7 +22,7 @@
     <div v-if="bookmarkStore.loading" class="loading-text">加载中...</div>
 
     <div v-else-if="bookmarkStore.items.length === 0" class="empty-state">
-      <p v-if="bookmarkStore.tagId">该标签下暂无书签</p>
+      <p v-if="bookmarkStore.categoryId">该分类下暂无书签</p>
       <p v-else-if="bookmarkStore.searchQuery">未找到匹配的书签</p>
       <p v-else>还没有书签，点击上方按钮添加一个</p>
     </div>
@@ -39,9 +39,9 @@
           </a>
           <p v-if="bookmark.description" class="bookmark-desc">{{ bookmark.description }}</p>
           <p class="bookmark-url">{{ bookmark.url }}</p>
-          <div class="bookmark-tags" v-if="bookmark.tags?.length">
-            <span v-for="tag in bookmark.tags" :key="tag.id" class="tag-chip">
-              {{ tag.name }}
+          <div class="bookmark-categories" v-if="bookmark.categories?.length">
+            <span v-for="category in bookmark.categories" :key="category.id" class="category-chip">
+              {{ category.name }}
             </span>
           </div>
         </div>

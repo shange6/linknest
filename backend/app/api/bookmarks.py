@@ -6,17 +6,17 @@ from math import ceil
 from app.core.database import get_db
 from app.core.auth import require_admin, get_current_user
 from app.models.bookmark import Bookmark
-from app.models.tag import Tag
+from app.models.category import Category
 from app.models.user import User
 from app.schemas.schemas import BookmarkCreate, BookmarkUpdate, BookmarkOut, BookmarkListOut
 
 router = APIRouter(prefix="/api/bookmarks", tags=["bookmarks"])
 
 
-def get_all_descendant_ids(db: Session, tag_id: int) -> list[int]:
-    """Get all descendant tag IDs (including the given tag_id)."""
-    ids = [tag_id]
-    children = db.query(Tag).filter(Tag.parent_id == tag_id).all()
+def get_all_descendant_ids(db: Session, category_id: int) -> list[int]:
+    """Get all descendant category IDs (including the given category_id)."""
+    ids = [category_id]
+    children = db.query(Category).filter(Category.parent_id == category_id).all()
     for child in children:
         ids.extend(get_all_descendant_ids(db, child.id))
     return ids
@@ -24,7 +24,7 @@ def get_all_descendant_ids(db: Session, tag_id: int) -> list[int]:
 
 @router.get("", response_model=BookmarkListOut)
 def get_bookmarks(
-    tag_id: Optional[int] = Query(None),
+    category_id: Optional[int] = Query(None),
     search: Optional[str] = Query(None),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
@@ -32,12 +32,12 @@ def get_bookmarks(
 ):
     query = db.query(Bookmark)
 
-    if tag_id:
-        tag = db.query(Tag).filter(Tag.id == tag_id).first()
-        if not tag:
-            raise HTTPException(status_code=404, detail="Tag not found")
-        descendant_ids = get_all_descendant_ids(db, tag_id)
-        query = query.filter(Bookmark.tags.any(Tag.id.in_(descendant_ids)))
+    if category_id:
+        category = db.query(Category).filter(Category.id == category_id).first()
+        if not category:
+            raise HTTPException(status_code=404, detail="Category not found")
+        descendant_ids = get_all_descendant_ids(db, category_id)
+        query = query.filter(Bookmark.categories.any(Category.id.in_(descendant_ids)))
 
     if search:
         like = f"%{search}%"
@@ -76,9 +76,9 @@ def create_bookmark(
         url=data.url,
         description=data.description,
     )
-    if data.tag_ids:
-        tags = db.query(Tag).filter(Tag.id.in_(data.tag_ids)).all()
-        bookmark.tags = tags
+    if data.category_ids:
+        categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
+        bookmark.categories = categories
     db.add(bookmark)
     db.commit()
     db.refresh(bookmark)
@@ -113,9 +113,9 @@ def update_bookmark(
         bookmark.url = data.url
     if data.description is not None:
         bookmark.description = data.description
-    if data.tag_ids is not None:
-        tags = db.query(Tag).filter(Tag.id.in_(data.tag_ids)).all()
-        bookmark.tags = tags
+    if data.category_ids is not None:
+        categories = db.query(Category).filter(Category.id.in_(data.category_ids)).all()
+        bookmark.categories = categories
 
     db.commit()
     db.refresh(bookmark)

@@ -3,11 +3,11 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Tabl
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
-bookmark_tags = Table(
-    "bookmarks_tags",
+bookmark_categories = Table(
+    "bookmarks_categories",
     Base.metadata,
     Column("bookmark_id", Integer, ForeignKey("bookmarks.id", ondelete="CASCADE"), primary_key=True),
-    Column("tag_id", Integer, ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True),
+    Column("category_id", Integer, ForeignKey("categories.id", ondelete="CASCADE"), primary_key=True),
 )
 
 
@@ -22,4 +22,4 @@ class Bookmark(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    tags = relationship("Tag", secondary=bookmark_tags, backref="bookmarks")
+    categories = relationship("Category", secondary=bookmark_categories, backref="bookmarks")

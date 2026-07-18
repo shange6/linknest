@@ -34,8 +34,8 @@ class TokenOut(BaseModel):
     user: UserOut
 
 
-# --- Tag ---
-class TagCreate(BaseModel):
+# --- Category ---
+class CategoryCreate(BaseModel):
     name: str
     slug: str
     parent_id: Optional[int] = None
@@ -44,14 +44,14 @@ class TagCreate(BaseModel):
     description: Optional[str] = None
 
 
-class TagUpdate(BaseModel):
+class CategoryUpdate(BaseModel):
     name: Optional[str] = None
     slug: Optional[str] = None
     parent_id: Optional[int] = None
     level: Optional[int] = None
     sort_order: Optional[int] = None
     description: Optional[str] = None
-class TagOut(BaseModel):
+class CategoryOut(BaseModel):
     id: int
     name: str
     slug: str
@@ -60,12 +60,12 @@ class TagOut(BaseModel):
     sort_order: int
     description: Optional[str] = None
     updated_at: Optional[datetime] = None
-    children: List["TagOut"] = []
+    children: List["CategoryOut"] = []
 
     model_config = {"from_attributes": True}
 
 
-class TagBrief(BaseModel):
+class CategoryBrief(BaseModel):
     id: int
     name: str
     slug: str
@@ -79,14 +79,14 @@ class BookmarkCreate(BaseModel):
     title: str
     url: str
     description: Optional[str] = None
-    tag_ids: List[int] = []
+    category_ids: List[int] = []
 
 
 class BookmarkUpdate(BaseModel):
     title: Optional[str] = None
     url: Optional[str] = None
     description: Optional[str] = None
-    tag_ids: Optional[List[int]] = None
+    category_ids: Optional[List[int]] = None
 
 
 class BookmarkOut(BaseModel):
@@ -97,7 +97,7 @@ class BookmarkOut(BaseModel):
     favicon_url: Optional[str] = None
     created_at: datetime
     updated_at: datetime
-    tags: List[TagBrief] = []
+    categories: List[CategoryBrief] = []
 
     model_config = {"from_attributes": True}
 

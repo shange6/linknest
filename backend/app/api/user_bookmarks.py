@@ -8,7 +8,7 @@ from app.models.bookmark import Bookmark
 from app.models.user_bookmark import UserFavorite
 from app.schemas.schemas import FavoriteCreate, FavoriteOut, BookmarkOut
 
-router = APIRouter(prefix="/api/favorites", tags=["favorites"])
+router = APIRouter(prefix="/api/user_bookmarks", tags=["user_bookmarks"])
 
 
 @router.get("", response_model=list[FavoriteOut])

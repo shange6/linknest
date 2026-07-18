@@ -5,7 +5,7 @@
         <h1 class="logo">LinkNest</h1>
         <nav class="header-nav">
           <a href="#" class="nav-item active">书签</a>
-          <router-link v-if="auth.isAdmin" to="/admin/tags" class="nav-item">标签管理</router-link>
+          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item">分类管理</router-link>
         </nav>
       </div>
       <div class="header-right">
@@ -17,20 +17,20 @@
     <div class="main-layout">
       <aside class="sidebar">
         <div class="sidebar-header">
-          <h2 class="sidebar-title">分类标签</h2>
-          <button v-if="tagStore.selectedNode" @click="tagStore.clearSelection(); bookmarkStore.setTagFilter(null)" class="btn-text-sm">
+          <h2 class="sidebar-title">书签分类</h2>
+          <button v-if="categoryStore.selectedNode" @click="categoryStore.clearSelection(); bookmarkStore.setCategoryFilter(null)" class="btn-text-sm">
             清除筛选
           </button>
         </div>
-        <div class="tag-tree" v-if="!tagStore.loading">
-          <TagNode
-            v-for="node in tagStore.tree"
+        <div class="category-tree" v-if="!categoryStore.loading">
+          <CategoryNode
+            v-for="node in categoryStore.tree"
             :key="node.id"
             :node="node"
             :depth="0"
           />
         </div>
-        <p v-else class="loading-text">加载标签中...</p>
+        <p v-else class="loading-text">加载分类中...</p>
       </aside>
 
       <main class="content">
@@ -51,15 +51,15 @@
 import { ref, onMounted, provide } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import { useTagStore } from '../stores/tags'
+import { useCategoryStore } from '../stores/categories'
 import { useBookmarkStore } from '../stores/bookmarks'
-import TagNode from '../components/TagNode.vue'
+import CategoryNode from '../components/CategoryNode.vue'
 import BookmarkList from '../components/BookmarkList.vue'
 import BookmarkEditor from '../components/BookmarkEditor.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
-const tagStore = useTagStore()
+const categoryStore = useCategoryStore()
 const bookmarkStore = useBookmarkStore()
 
 const editorVisible = ref(false)
@@ -87,7 +87,7 @@ async function handleLogout() {
 }
 
 onMounted(async () => {
-  await tagStore.fetchTree()
+  await categoryStore.fetchTree()
   await bookmarkStore.fetchBookmarks()
 })
 </script>

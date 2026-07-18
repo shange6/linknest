@@ -7,7 +7,7 @@ export const useBookmarkStore = defineStore('bookmarks', {
     total: 0,
     page: 1,
     pageSize: 20,
-    tagId: null,
+    categoryId: null,
     searchQuery: '',
     loading: false,
   }),
@@ -17,7 +17,7 @@ export const useBookmarkStore = defineStore('bookmarks', {
       this.loading = true
       try {
         const params = { page: this.page, page_size: this.pageSize }
-        if (this.tagId) params.tag_id = this.tagId
+        if (this.categoryId) params.category_id = this.categoryId
         if (this.searchQuery) params.search = this.searchQuery
         const res = await bookmarksAPI.list(params)
         this.items = res.data.items
@@ -43,8 +43,8 @@ export const useBookmarkStore = defineStore('bookmarks', {
       await this.fetchBookmarks()
     },
 
-    setTagFilter(tagId) {
-      this.tagId = tagId
+    setCategoryFilter(categoryId) {
+      this.categoryId = categoryId
       this.page = 1
       this.fetchBookmarks()
     },

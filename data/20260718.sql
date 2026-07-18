@@ -82,8 +82,4 @@ CREATE INDEX ix_bookmarks_url ON bookmarks(url);
 CREATE INDEX ix_history_user_count ON user_history(user_id, click_count DESC);
 CREATE INDEX ix_user_tags_user ON user_tags(user_id);
 CREATE INDEX ix_user_tags_parent ON user_tags(parent_id);
-DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('users',4);
-INSERT INTO "sqlite_sequence" VALUES('tags',504);
-INSERT INTO "sqlite_sequence" VALUES('bookmarks',2298);
 COMMIT;

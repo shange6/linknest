@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import HomeView from '../views/HomeView.vue'
-import TagManagerView from '../views/TagManagerView.vue'
+import CategoryManagerView from '../views/CategoryManagerView.vue'
 
 const routes = [
   { path: '/login', name: 'login', component: LoginView },
   { path: '/register', name: 'register', component: RegisterView },
   { path: '/', name: 'home', component: HomeView, meta: { requiresAuth: true } },
-  { path: '/admin/tags', name: 'tag-manager', component: TagManagerView, meta: { requiresAuth: true, requiresAdmin: true } },
+  { path: '/admin/categories', name: 'category-manager', component: CategoryManagerView, meta: { requiresAuth: true, requiresAdmin: true } },
 ]
 
 const router = createRouter({

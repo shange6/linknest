@@ -9,7 +9,7 @@ from app.models.bookmark import Bookmark
 from app.models.user_history import UserHistory
 from app.schemas.schemas import ClickHistoryCreate, ClickHistoryOut
 
-router = APIRouter(prefix="/api/history", tags=["click-history"])
+router = APIRouter(prefix="/api/user_history", tags=["user_history"])
 
 
 @router.get("", response_model=list[ClickHistoryOut])

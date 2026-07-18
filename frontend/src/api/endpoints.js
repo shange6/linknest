@@ -6,13 +6,13 @@ export const authAPI = {
   me() { return api.get('/auth/me') },
 }
 
-export const tagsAPI = {
-  getAll() { return api.get('/tags') },
-  getOne(id) { return api.get(`/tags/${id}`) },
-  getChildren(id) { return api.get(`/tags/${id}/children`) },
-  create(data) { return api.post('/tags', data) },
-  update(id, data) { return api.put(`/tags/${id}`, data) },
-  delete(id) { return api.delete(`/tags/${id}`) },
+export const categoriesAPI = {
+  getAll() { return api.get('/categories') },
+  getOne(id) { return api.get(`/categories/${id}`) },
+  getChildren(id) { return api.get(`/categories/${id}/children`) },
+  create(data) { return api.post('/categories', data) },
+  update(id, data) { return api.put(`/categories/${id}`, data) },
+  delete(id) { return api.delete(`/categories/${id}`) },
 }
 
 export const bookmarksAPI = {

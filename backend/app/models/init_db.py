@@ -1,7 +1,9 @@
 from app.core.database import Base, engine, SessionLocal
 from app.models.user import User
-from app.models.tag import Tag
+from app.models.category import Category
+from app.models.user_category import UserCategory
 from app.models.bookmark import Bookmark
+from app.models.user_bookmark import UserFavorite
 
 
 def init_db():

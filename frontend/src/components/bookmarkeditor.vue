@@ -16,11 +16,11 @@
           <textarea id="desc" v-model="form.description" rows="3" placeholder="可选描述..."></textarea>
         </div>
         <div class="form-group">
-          <label>选择标签</label>
-          <div class="tag-selector">
-            <TagCheckboxGroup
-              :tags="tagStore.tree"
-              v-model="form.tag_ids"
+          <label>选择分类</label>
+          <div class="category-selector">
+            <CategoryCheckboxGroup
+              :categories="categoryStore.tree"
+              v-model="form.category_ids"
             />
           </div>
         </div>
@@ -39,16 +39,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useBookmarkStore } from '../stores/bookmarks'
-import { useTagStore } from '../stores/tags'
-import TagCheckboxGroup from './TagCheckboxGroup.vue'
+import { useCategoryStore } from '../stores/categories'
+import CategoryCheckboxGroup from './CategoryCheckboxGroup.vue'
 
 const props = defineProps({ editing: { type: Object, default: null } })
 const emit = defineEmits(['close', 'saved'])
 
 const bookmarkStore = useBookmarkStore()
-const tagStore = useTagStore()
+const categoryStore = useCategoryStore()
 
-const form = ref({ title: '', url: '', description: '', tag_ids: [] })
+const form = ref({ title: '', url: '', description: '', category_ids: [] })
 const error = ref('')
 const saving = ref(false)
 
@@ -58,7 +58,7 @@ onMounted(() => {
       title: props.editing.title,
       url: props.editing.url,
       description: props.editing.description || '',
-      tag_ids: props.editing.tags?.map((t) => t.id) || [],
+      category_ids: props.editing.categories?.map((c) => c.id) || [],
     }
   }
 })

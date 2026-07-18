@@ -8,7 +8,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from app.core.database import Base, DATABASE_URL
 from app.models.user import User
-from app.models.tag import Tag
+from app.models.category import Category
+from app.models.user_category import UserCategory
 from app.models.bookmark import Bookmark
 
 config = context.config
