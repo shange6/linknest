@@ -215,11 +215,19 @@
             </button>
             <button
               type="button"
-              :class="{ active: activeTab === 'relocate' }"
-              @click="activeTab = 'relocate'"
+              :class="{ active: activeTab === 'parent' }"
+              @click="activeTab = 'parent'"
               class="tab-btn"
             >
-              层级与下级关联
+              父分类
+            </button>
+            <button
+              type="button"
+              :class="{ active: activeTab === 'children' }"
+              @click="activeTab = 'children'"
+              class="tab-btn"
+            >
+              子分类
             </button>
           </div>
 
@@ -331,12 +339,10 @@
             </div>
           </div>
 
-          <!-- Tab 2: Hierarchy & Parent Relocation & Children Assignment -->
-          <div v-show="activeTab === 'relocate'" class="tab-pane">
+          <!-- Tab 2: Parent Category -->
+          <div v-show="activeTab === 'parent'" class="tab-pane">
             <div class="form-group">
-              <label>
-                父级分类 (parent_id) — <span class="help-text">修改此项即可将当前分类及其子树迁移到新分类下</span>
-              </label>
+              <label>父分类</label>
               <!-- Clear button: set to root (null) -->
               <div style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
                 <button
@@ -358,16 +364,15 @@
                 :multiple="false"
                 :compact="true"
                 :disabled-ids="parentDisabledIds"
-                max-height="200px"
+                max-height="240px"
               />
             </div>
+          </div>
 
-            <!-- Children Assignment using CategoriesSelectorGrid component -->
-            <div class="form-group" style="margin-top: 1rem;">
-              <label style="margin-bottom: 0.5rem; display: block;">
-                指定/挂载下级子分类 (Assign Subcategories) —
-                <span class="help-text">已勾选 {{ selectedChildIds.length }} 项，保存后批量将其迁移为当前分类的子节点</span>
-              </label>
+          <!-- Tab 3: Children Assignment -->
+          <div v-show="activeTab === 'children'" class="tab-pane">
+            <div class="form-group">
+              <label style="margin-bottom: 0.5rem; display: block;">下级分类</label>
 
               <CategoriesSelectorGrid
                 :categories="rawTree"
