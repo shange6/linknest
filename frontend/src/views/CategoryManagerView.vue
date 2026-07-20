@@ -348,7 +348,7 @@
                 :multiple="false"
                 :compact="true"
                 :disabled-ids="parentDisabledIds"
-                max-height="280px"
+                max-height="400px"
               />
             </div>
           </div>
@@ -363,7 +363,7 @@
                 :show-slug="false"
                 :compact="true"
                 :disabled-ids="isEditing ? [editingCategory.id] : []"
-                max-height="280px"
+                max-height="400px"
               />
             </div>
           </div>
@@ -1229,6 +1229,10 @@ input:checked + .slider:before {
 .tab-btn.active {
   color: #2563eb;
   border-bottom-color: #2563eb;
+}
+
+.tab-pane {
+  min-height: 444px;
 }
 
 .form-row {
