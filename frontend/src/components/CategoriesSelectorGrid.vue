@@ -551,7 +551,7 @@ function handleSelect(id) {
   padding: 0.18rem 0.45rem;
   border-radius: 5px;
   border: 1px solid #e2e8f0;
-  background: #f8fafc;
+  background: transparent;
   cursor: pointer;
   transition: background-color 0.12s ease, border-color 0.12s ease;
   flex: 0 0 auto;   /* size to content, allow wrapping */
@@ -560,7 +560,7 @@ function handleSelect(id) {
 }
 
 .leaf-chip:hover {
-  background-color: #f1f5f9;
+  background-color: rgba(0, 0, 0, 0.03);
   border-color: #cbd5e1;
 }
 
