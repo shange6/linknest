@@ -88,7 +88,7 @@
               <!-- Category Info -->
               <span class="node-name-zh">{{ row.item.node.name_zh }}</span>
               <span v-if="row.item.node.name_en" class="node-name-en">({{ row.item.node.name_en }})</span>
-              <code v-if="row.item.node.slug" class="node-slug">{{ row.item.node.slug }}</code>
+              <code v-if="row.item.node.slug && !isCompactLayout" class="node-slug">{{ row.item.node.slug }}</code>
             </label>
           </div>
 
