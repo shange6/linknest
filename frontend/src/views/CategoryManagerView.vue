@@ -310,8 +310,8 @@
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group half">
+            <div class="form-row" style="margin-bottom: 0;">
+              <div class="form-group half" style="margin-bottom: 0;">
                 <label>中文说明 (desc_zh)</label>
                 <textarea
                   v-model="form.desc_zh"
@@ -320,7 +320,7 @@
                   placeholder="关于此分类的详细说明..."
                 ></textarea>
               </div>
-              <div class="form-group half">
+              <div class="form-group half" style="margin-bottom: 0;">
                 <label>英文说明 (desc_en)</label>
                 <textarea
                   v-model="form.desc_en"
@@ -348,7 +348,7 @@
                 :multiple="false"
                 :compact="true"
                 :disabled-ids="parentDisabledIds"
-                max-height="452px"
+                max-height="412px"
               />
             </div>
           </div>
@@ -363,7 +363,7 @@
                 :show-slug="false"
                 :compact="true"
                 :disabled-ids="isEditing ? [editingCategory.id] : []"
-                max-height="452px"
+                max-height="412px"
               />
             </div>
           </div>
@@ -1232,7 +1232,7 @@ input:checked + .slider:before {
 }
 
 .tab-pane {
-  height: 500px;
+  height: 460px;
   overflow: hidden;
 }
 
