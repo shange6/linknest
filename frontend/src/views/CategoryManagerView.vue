@@ -341,36 +341,21 @@
 
           <!-- Tab 2: Parent Category -->
           <div v-show="activeTab === 'parent'" class="tab-pane">
-            <div class="form-group">
-              <!-- Clear button: set to root (null) -->
-              <div style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
-                <button
-                  type="button"
-                  class="btn-secondary"
-                  style="font-size: 0.78rem; padding: 0.2rem 0.6rem;"
-                  @click="form.parent_id = null"
-                >
-                  ✕ 设为根分类（无父级）
-                </button>
-                <span v-if="form.parent_id" class="help-text">
-                  已选：ID {{ form.parent_id }}
-                </span>
-                <span v-else class="help-text" style="color: #64748b;">当前为根分类</span>
-              </div>
+            <div class="form-group" style="margin-bottom: 0;">
               <CategoriesSelectorGrid
                 :categories="rawTree"
                 v-model="form.parent_id"
                 :multiple="false"
                 :compact="true"
                 :disabled-ids="parentDisabledIds"
-                max-height="240px"
+                max-height="280px"
               />
             </div>
           </div>
 
           <!-- Tab 3: Children Assignment -->
           <div v-show="activeTab === 'children'" class="tab-pane">
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0;">
               <CategoriesSelectorGrid
                 :categories="rawTree"
                 v-model="selectedChildIds"
@@ -378,7 +363,7 @@
                 :show-slug="false"
                 :compact="true"
                 :disabled-ids="isEditing ? [editingCategory.id] : []"
-                max-height="240px"
+                max-height="280px"
               />
             </div>
           </div>
@@ -388,10 +373,28 @@
 
           <!-- Footer Actions -->
           <div class="modal-footer">
-            <button type="button" @click="showModal = false" class="btn-secondary">取消</button>
-            <button type="submit" :disabled="saving" class="btn-primary">
-              {{ saving ? '保存中...' : '保存更改' }}
-            </button>
+            <div class="modal-footer-left">
+              <template v-if="activeTab === 'parent'">
+                <button
+                  type="button"
+                  class="btn-secondary btn-compact"
+                  @click="form.parent_id = null"
+                >
+                  设为根分类
+                </button>
+                <span v-if="selectedParentCategory" class="help-text-highlight">
+                  已选父分类：{{ selectedParentCategory.name_zh }} (ID: {{ form.parent_id }})
+                </span>
+                <span v-else class="help-text" style="color: #64748b;">当前为根分类</span>
+              </template>
+            </div>
+
+            <div class="modal-footer-right">
+              <button type="button" @click="showModal = false" class="btn-secondary">取消</button>
+              <button type="submit" :disabled="saving" class="btn-primary">
+                {{ saving ? '保存中...' : '保存更改' }}
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -536,6 +539,13 @@ const parentDisabledIds = computed(() => {
   const selfNodeItem = flatList.value.find((i) => i.node.id === selfId)
   if (selfNodeItem) collectDescendants(selfNodeItem.node)
   return forbidden
+})
+
+// Currently selected parent category node
+const selectedParentCategory = computed(() => {
+  if (!form.parent_id) return null
+  const item = flatList.value.find((i) => i.node.id === form.parent_id)
+  return item ? item.node : null
 })
 
 // Parent selection options for Relocation (Excludes self and descendants)
@@ -1385,11 +1395,35 @@ input:checked + .slider:before {
 
 .modal-footer {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 1.25rem;
   padding-top: 1rem;
   border-top: 1px solid #e2e8f0;
+}
+
+.modal-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.modal-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-compact {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.65rem;
+}
+
+.help-text-highlight {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0f172a;
 }
 
 /* Button Styles */
