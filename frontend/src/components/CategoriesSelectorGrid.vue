@@ -1,6 +1,6 @@
 <template>
-  <div class="categories-selector-grid-container" :class="{ 'is-compact-mode': internalCompact }">
-    <!-- Header Control Bar (Search, Mode Toggles & Collapse All) -->
+  <div class="categories-selector-grid-container">
+    <!-- Header Control Bar (Search, Compact Toggle & Collapse All) -->
     <div class="selector-header">
       <div class="search-input-wrapper">
         <span class="search-icon">🔍</span>
@@ -14,16 +14,10 @@
       </div>
 
       <div class="header-actions">
-        <!-- Compact Mode Switch Toggle -->
-        <label class="toggle-mode-control" title="开启超紧凑树形流式排版">
-          <input type="checkbox" v-model="internalCompact" />
-          <span>紧凑模式</span>
-        </label>
-
-        <!-- Slug Switch Toggle -->
-        <label class="toggle-mode-control" title="切换是否在行视图中显示 Slug 标签">
-          <input type="checkbox" v-model="internalShowSlug" />
-          <span>显示 Slug</span>
+        <!-- Single Unified Compact Switch Toggle -->
+        <label class="toggle-mode-control" title="勾选开启紧凑视图，隐去 Slug 并缩小间距">
+          <input type="checkbox" v-model="isCompactLayout" />
+          <span>紧凑</span>
         </label>
 
         <button type="button" @click="toggleAllNodes" class="btn-toggle-all">
@@ -39,8 +33,8 @@
         {{ searchQuery ? `未找到匹配「${searchQuery}」的分类` : '暂无分类可选' }}
       </div>
 
-      <!-- MODE 1: Standard Table/List View (when showSlug is true AND not compact flow) -->
-      <div v-else-if="internalShowSlug && !internalCompact" class="nodes-list">
+      <!-- Standard Table/List View -->
+      <div v-else class="nodes-list" :class="{ 'is-compact-mode': isCompactLayout }">
         <div
           v-for="item in flattenedVisibleNodes"
           :key="item.node.id"
@@ -92,34 +86,16 @@
             <!-- Category Info -->
             <span class="node-name-zh">{{ item.node.name_zh }}</span>
             <span v-if="item.node.name_en" class="node-name-en">({{ item.node.name_en }})</span>
-            <code class="node-slug">{{ item.node.slug }}</code>
+            <code v-if="!isCompactLayout && item.node.slug" class="node-slug">{{ item.node.slug }}</code>
           </label>
         </div>
-      </div>
-
-      <!-- MODE 2: Compact Tree Flow Layout View (without Slug, tree hierarchy + flow inline layout) -->
-      <div v-else class="flow-tree-container">
-        <!-- Render Top Level Nodes Recursively -->
-        <FlowNodeBranch
-          :nodes="categories"
-          :depth="0"
-          :multiple="multiple"
-          :radio-name="radioName"
-          :model-value="modelValue"
-          :disabled-ids="disabledIds"
-          :expanded-map="expandedMap"
-          :match-ids="filteredMatchingIds"
-          :is-compact="internalCompact"
-          @select="handleSelect"
-          @toggle-expand="toggleExpand"
-        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, reactive, watch, defineComponent, h } from 'vue'
+import { ref, computed, reactive, watch } from 'vue'
 
 const props = defineProps({
   categories: {
@@ -140,7 +116,7 @@ const props = defineProps({
   },
   compact: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   disabledIds: {
     type: Array,
@@ -155,23 +131,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const searchQuery = ref('')
-const internalShowSlug = ref(props.showSlug)
-const internalCompact = ref(props.compact)
+const isCompactLayout = ref(props.compact)
 const expandedMap = reactive({})
 const allExpanded = ref(true)
 const radioName = 'cat_radio_' + Math.random().toString(36).substr(2, 9)
 
 watch(
-  () => props.showSlug,
-  (val) => {
-    internalShowSlug.value = val
-  }
-)
-
-watch(
   () => props.compact,
   (val) => {
-    internalCompact.value = val
+    isCompactLayout.value = val
   }
 )
 
@@ -281,181 +249,6 @@ function handleSelect(id) {
     emit('update:modelValue', id)
   }
 }
-
-// Inline Sub-component for Recursive Flow Tree Branch (without Slug, tree structure + flow layout)
-const FlowNodeBranch = defineComponent({
-  name: 'FlowNodeBranch',
-  props: {
-    nodes: Array,
-    depth: Number,
-    multiple: Boolean,
-    radioName: String,
-    modelValue: [Array, Number, String, Object],
-    disabledIds: Array,
-    expandedMap: Object,
-    matchIds: Set,
-    isCompact: Boolean,
-  },
-  emits: ['select', 'toggle-expand'],
-  setup(p, { emit }) {
-    return () => {
-      if (!p.nodes || !p.nodes.length) return null
-
-      // Filter visible nodes based on search match
-      const visibleNodes = p.nodes.filter((node) => {
-        if (!p.matchIds) return true
-        return p.matchIds.has(node.id)
-      })
-
-      if (!visibleNodes.length) return null
-
-      // Separate Parent Nodes (has children) and Leaf Nodes (no children)
-      const parentNodes = visibleNodes.filter((n) => n.children && n.children.length > 0)
-      const leafNodes = visibleNodes.filter((n) => !n.children || n.children.length === 0)
-
-      // Helper to check selection
-      const isSel = (id) => {
-        if (p.multiple) return Array.isArray(p.modelValue) && p.modelValue.includes(id)
-        return p.modelValue === id
-      }
-
-      // Helper to check disabled
-      const isDis = (id) => Array.isArray(p.disabledIds) && p.disabledIds.includes(id)
-
-      const elements = []
-
-      // 1. Render Leaf Chips Flow (Compact Flow Inline Wrap without Slug)
-      if (leafNodes.length > 0) {
-        elements.push(
-          h(
-            'div',
-            { class: 'flow-chips-wrap' },
-            leafNodes.map((cand) => {
-              const selected = isSel(cand.id)
-              const disabled = isDis(cand.id)
-              return h(
-                'label',
-                {
-                  key: cand.id,
-                  class: [
-                    'chip-card-item',
-                    p.isCompact ? 'compact-chip' : '',
-                    selected ? 'is-chip-selected' : '',
-                    disabled ? 'is-chip-disabled' : '',
-                  ],
-                },
-                [
-                  h('input', {
-                    type: p.multiple ? 'checkbox' : 'radio',
-                    name: p.radioName,
-                    value: cand.id,
-                    checked: selected,
-                    disabled: disabled,
-                    onChange: () => emit('select', cand.id),
-                    class: 'chip-input',
-                  }),
-                  h('span', { class: 'chip-text' }, cand.name_zh),
-                  cand.name_en
-                    ? h('span', { class: 'chip-name-en' }, `(${cand.name_en})`)
-                    : null,
-                ]
-              )
-            })
-          )
-        )
-      }
-
-      // 2. Render Parent Header Lines with Tree Indent
-      parentNodes.forEach((parent) => {
-        const selected = isSel(parent.id)
-        const disabled = isDis(parent.id)
-        const isExpanded = p.expandedMap[parent.id] !== false
-
-        elements.push(
-          h(
-            'div',
-            { key: parent.id, class: 'flow-parent-card' },
-            [
-              // Tree Branch Header Line
-              h('div', { class: ['flow-parent-header', p.isCompact ? 'compact-parent' : ''] }, [
-                h(
-                  'button',
-                  {
-                    type: 'button',
-                    class: 'node-expand-btn',
-                    onClick: (e) => {
-                      e.stopPropagation()
-                      emit('toggle-expand', parent.id)
-                    },
-                  },
-                  isExpanded ? '▼' : '▶'
-                ),
-                h(
-                  'label',
-                  {
-                    class: [
-                      'flow-parent-label',
-                      selected ? 'is-parent-selected' : '',
-                      disabled ? 'is-chip-disabled' : '',
-                    ],
-                  },
-                  [
-                    h('input', {
-                      type: p.multiple ? 'checkbox' : 'radio',
-                      name: p.radioName,
-                      value: parent.id,
-                      checked: selected,
-                      disabled: disabled,
-                      onChange: () => emit('select', parent.id),
-                      class: 'selection-input',
-                    }),
-                    h(
-                      'span',
-                      { class: ['level-badge', 'lvl-' + Math.min(p.depth, 4)] },
-                      `L${p.depth + 1}`
-                    ),
-                    h('span', { class: 'parent-name-zh' }, parent.name_zh),
-                    parent.name_en
-                      ? h('span', { class: 'parent-name-en' }, `(${parent.name_en})`)
-                      : null,
-                  ]
-                ),
-              ]),
-
-              // Tree Branch Subtree Indent Flow Container
-              isExpanded
-                ? h(
-                    'div',
-                    {
-                      class: 'flow-children-indent',
-                      style: { paddingLeft: p.isCompact ? '12px' : '16px' },
-                    },
-                    [
-                      h(FlowNodeBranch, {
-                        nodes: parent.children,
-                        depth: p.depth + 1,
-                        multiple: p.multiple,
-                        radioName: p.radioName,
-                        modelValue: p.modelValue,
-                        disabledIds: p.disabledIds,
-                        expandedMap: p.expandedMap,
-                        matchIds: p.matchIds,
-                        isCompact: p.isCompact,
-                        onSelect: (id) => emit('select', id),
-                        onToggleExpand: (id) => emit('toggle-expand', id),
-                      }),
-                    ]
-                  )
-                : null,
-            ]
-          )
-        )
-      })
-
-      return h('div', { class: 'flow-branch-group' }, elements)
-    }
-  },
-})
 </script>
 
 <style scoped>
@@ -464,10 +257,6 @@ const FlowNodeBranch = defineComponent({
   border-radius: 8px;
   background: #ffffff;
   overflow: hidden;
-}
-
-.categories-selector-grid-container.is-compact-mode {
-  border-color: #cbd5e1;
 }
 
 /* Header Control Bar */
@@ -535,6 +324,7 @@ const FlowNodeBranch = defineComponent({
   color: #475569;
   cursor: pointer;
   user-select: none;
+  font-weight: 500;
 }
 
 .toggle-mode-control input {
@@ -571,7 +361,7 @@ const FlowNodeBranch = defineComponent({
   color: #94a3b8;
 }
 
-/* MODE 1: Standard Tree View */
+/* Standard Tree View */
 .nodes-list {
   display: flex;
   flex-direction: column;
@@ -583,6 +373,10 @@ const FlowNodeBranch = defineComponent({
   padding: 0.35rem 0.5rem;
   transition: background-color 0.15s ease;
   user-select: none;
+}
+
+.nodes-list.is-compact-mode .node-row {
+  padding: 0.2rem 0.4rem;
 }
 
 .node-row:hover {
@@ -656,6 +450,7 @@ const FlowNodeBranch = defineComponent({
 .node-name-zh {
   font-weight: 500;
   color: #0f172a;
+  font-size: 0.84rem;
   white-space: nowrap;
 }
 
@@ -663,8 +458,6 @@ const FlowNodeBranch = defineComponent({
   color: #64748b;
   font-size: 0.78rem;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .node-slug {
@@ -676,156 +469,5 @@ const FlowNodeBranch = defineComponent({
   color: #475569;
   white-space: nowrap;
   margin-left: auto;
-}
-
-/* MODE 2: Compact Tree Flow Layout View */
-.flow-tree-container {
-  padding: 0.5rem 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.is-compact-mode .flow-tree-container {
-  padding: 0.4rem 0.6rem;
-  gap: 0.35rem;
-}
-
-.flow-branch-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.flow-parent-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.flow-parent-header {
-  display: flex;
-  align-items: center;
-  padding: 0.2rem 0.35rem;
-  border-radius: 4px;
-  gap: 0.35rem;
-  transition: background-color 0.15s ease;
-}
-
-.flow-parent-header.compact-parent {
-  padding: 0.1rem 0.25rem;
-}
-
-.flow-parent-header:hover {
-  background-color: #f8fafc;
-}
-
-.flow-parent-label {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.84rem;
-  cursor: pointer;
-  flex: 1;
-}
-
-.is-compact-mode .flow-parent-label {
-  font-size: 0.8rem;
-}
-
-.flow-parent-label.is-parent-selected {
-  color: #2563eb;
-  font-weight: 600;
-}
-
-.node-name-zh,
-.chip-text,
-.parent-name-zh {
-  font-weight: 500;
-  color: #0f172a;
-  font-size: 0.84rem;
-  white-space: nowrap;
-}
-
-.node-name-en,
-.chip-name-en,
-.parent-name-en {
-  color: #64748b;
-  font-size: 0.78rem;
-  white-space: nowrap;
-}
-
-.is-compact-mode .node-name-zh,
-.is-compact-mode .chip-text,
-.is-compact-mode .parent-name-zh {
-  font-size: 0.81rem;
-}
-
-.is-compact-mode .node-name-en,
-.is-compact-mode .chip-name-en,
-.is-compact-mode .parent-name-en {
-  font-size: 0.75rem;
-}
-
-/* Clean Indent Container for Leaf Chips Flow */
-.flow-children-indent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-top: 0.1rem;
-}
-
-/* Leaf Chips Flow Grid */
-.flow-chips-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.5rem;
-}
-
-.is-compact-mode .flow-chips-wrap {
-  gap: 0.25rem 0.4rem;
-}
-
-.chip-card-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.15s ease;
-}
-
-.chip-card-item.compact-chip {
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  gap: 0.25rem;
-}
-
-.chip-card-item:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
-}
-
-.chip-card-item.is-chip-selected {
-  background: #eff6ff;
-  border-color: #3b82f6;
-  color: #1d4ed8;
-  font-weight: 600;
-}
-
-.chip-card-item.is-chip-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: #f1f5f9;
-}
-
-.chip-input {
-  cursor: pointer;
-  margin: 0;
-  flex-shrink: 0;
 }
 </style>

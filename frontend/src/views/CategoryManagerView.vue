@@ -362,7 +362,7 @@
                 v-model="selectedChildIds"
                 :multiple="true"
                 :show-slug="false"
-                :compact="true"
+                :compact="false"
                 :disabled-ids="isEditing ? [editingCategory.id] : []"
                 max-height="240px"
               />
