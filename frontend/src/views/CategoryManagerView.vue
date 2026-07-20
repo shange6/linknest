@@ -227,7 +227,7 @@
               @click="activeTab = 'children'"
               class="tab-btn"
             >
-              子分类
+              挂载子分类
             </button>
           </div>
 
@@ -342,7 +342,6 @@
           <!-- Tab 2: Parent Category -->
           <div v-show="activeTab === 'parent'" class="tab-pane">
             <div class="form-group">
-              <label>父分类</label>
               <!-- Clear button: set to root (null) -->
               <div style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
                 <button
@@ -372,8 +371,6 @@
           <!-- Tab 3: Children Assignment -->
           <div v-show="activeTab === 'children'" class="tab-pane">
             <div class="form-group">
-              <label style="margin-bottom: 0.5rem; display: block;">下级分类</label>
-
               <CategoriesSelectorGrid
                 :categories="rawTree"
                 v-model="selectedChildIds"
