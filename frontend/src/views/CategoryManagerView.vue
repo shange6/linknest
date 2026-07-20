@@ -356,8 +356,7 @@
                 :categories="rawTree"
                 v-model="form.parent_id"
                 :multiple="false"
-                :show-slug="true"
-                :compact="false"
+                :compact="true"
                 :disabled-ids="parentDisabledIds"
                 max-height="200px"
               />
