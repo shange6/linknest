@@ -92,7 +92,7 @@ CREATE TABLE user_categories (
 	id INTEGER NOT NULL, 
 	user_id INTEGER NOT NULL, 
 	name VARCHAR(100) NOT NULL, 
-	slug VARCHAR(100) NOT NULL CHECK (slug NOT GLOB '*[!a-zA-Z0-9-]*'), 
+	slug VARCHAR(100) NOT NULL CHECK (slug NOT GLOB '*[^a-zA-Z0-9-]*'), 
 	parent_id INTEGER, 
 	sort INTEGER, 
 	description TEXT, 

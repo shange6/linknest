@@ -36,11 +36,11 @@ class TokenOut(BaseModel):
 
 # --- Category ---
 class CategoryCreate(BaseModel):
+    id: Optional[int] = None
     name_zh: str
     name_en: Optional[str] = None
     slug: str
     parent_id: Optional[int] = None
-    level: int = 1
     sort_zh: Optional[int] = None
     sort_en: Optional[int] = None
     status: bool = True
@@ -50,11 +50,11 @@ class CategoryCreate(BaseModel):
 
 
 class CategoryUpdate(BaseModel):
+    id: Optional[int] = None
     name_zh: Optional[str] = None
     name_en: Optional[str] = None
     slug: Optional[str] = None
     parent_id: Optional[int] = None
-    level: Optional[int] = None
     sort_zh: Optional[int] = None
     sort_en: Optional[int] = None
     status: Optional[bool] = None
@@ -69,7 +69,6 @@ class CategoryOut(BaseModel):
     name_en: Optional[str] = None
     slug: str
     parent_id: Optional[int] = None
-    level: int
     sort_zh: Optional[int] = None
     sort_en: Optional[int] = None
     status: bool
@@ -87,7 +86,6 @@ class CategoryBrief(BaseModel):
     name_zh: str
     name_en: Optional[str] = None
     slug: str
-    level: int
 
     model_config = {"from_attributes": True}
 

@@ -3,5 +3,14 @@
 </template>
 
 <script setup>
-// No setup needed — router-view handles everything
+import { onMounted } from 'vue'
+import { useAuthStore } from './stores/auth'
+
+const auth = useAuthStore()
+
+onMounted(() => {
+  if (auth.isLoggedIn) {
+    auth.fetchUser()
+  }
+})
 </script>

@@ -19,7 +19,7 @@ class UserCategory(Base):
 
     __table_args__ = (
         UniqueConstraint("user_id", "slug", name="uq_user_category_slug"),
-        CheckConstraint("slug NOT GLOB '*[!a-zA-Z0-9-]*'", name="ck_user_categories_slug_format"),
+        CheckConstraint("slug NOT GLOB '*[^a-zA-Z0-9-]*'", name="ck_user_categories_slug_format"),
     )
 
     user = relationship("User", backref="user_categories")

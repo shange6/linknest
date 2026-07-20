@@ -18,11 +18,15 @@ def register(data: UserRegister, db: Session = Depends(get_db)):
     if len(data.password) < 6:
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
 
+    user_count = db.query(User).count()
+    role = "admin" if user_count == 0 else "user"
+
     user = User(
         mobile=data.mobile,
         email=data.email,
         username=data.username,
         password=get_password_hash(data.password),
+        role=role,
     )
     db.add(user)
     db.commit()

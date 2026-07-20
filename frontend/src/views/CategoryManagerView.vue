@@ -1,5 +1,6 @@
 <template>
-  <div class="category-manager">
+  <div class="category-manager-page">
+    <!-- Header Navigation -->
     <header class="app-header">
       <div class="header-left">
         <h1 class="logo">LinkNest</h1>
@@ -12,90 +13,370 @@
         <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
           {{ auth.locale === 'zh' ? 'English' : '中文' }}
         </button>
-        <span class="user-info">{{ auth.username }} <span class="rich-badge">管理员</span></span>
+        <span class="user-info">{{ auth.username }} <span class="badge-admin">管理员</span></span>
         <button @click="handleLogout" class="btn-text">登出</button>
       </div>
     </header>
 
-    <div class="category-manager-body">
-      <div class="category-manager-toolbar">
-        <button @click="openCreate(null)" class="btn-primary">+ 添加根分类</button>
-        <span class="rich-muted">共 {{ flatCategories.length }} 个分类</span>
+    <div class="main-container">
+      <!-- Dashboard Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">总分类数 (Total)</div>
+          <div class="metric-value">{{ stats.total }}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">根分类数 (Roots)</div>
+          <div class="metric-value">{{ stats.roots }}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">启用中 (Active)</div>
+          <div class="metric-value text-success">{{ stats.active }}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">已禁用 (Disabled)</div>
+          <div class="metric-value text-muted">{{ stats.disabled }}</div>
+        </div>
       </div>
 
-      <div v-if="loading" class="loading-text">加载中...</div>
+      <!-- Action & Filter Toolbar -->
+      <div class="toolbar-card">
+        <div class="toolbar-left">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input
+              v-model="searchQuery"
+              type="text"
+              class="search-input"
+              placeholder="搜索分类名称 / Slug / 描述..."
+            />
+            <button v-if="searchQuery" @click="searchQuery = ''" class="clear-btn">✕</button>
+          </div>
 
-      <table v-else class="category-table">
-        <thead>
-          <tr>
-            <th>名称</th>
-            <th>Slug</th>
-            <th>层级</th>
-            <th>父分类</th>
-            <th>说明</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="category in flatCategories" :key="category.id">
-            <td>
-              <span :style="{ paddingLeft: (category.level - 1) * 24 + 'px' }">
-                <span v-if="category.level > 1" class="tree-line">└ </span>
-                {{ auth.locale === 'en' ? (category.name_en || category.name_zh) : category.name_zh }}
-              </span>
-            </td>
-            <td><code>{{ category.slug }}</code></td>
-            <td>L{{ category.level }}</td>
-            <td>{{ category.parent ? (auth.locale === 'en' ? (category.parent.name_en || category.parent.name_zh) : category.parent.name_zh) : '-' }}</td>
-            <td class="desc-cell">{{ auth.locale === 'en' ? (category.desc_en || category.desc_zh) : (category.desc_zh || '-') }}</td>
-            <td class="actions-cell">
-              <button @click="openCreate(category)" class="btn-text-sm">+子</button>
-              <button @click="openEdit(category)" class="btn-text-sm">编辑</button>
-              <button @click="handleDelete(category)" class="btn-text-sm danger">删除</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <button @click="toggleAllNodes" class="btn-secondary">
+            {{ allExpanded ? '折叠全部' : '展开全部' }}
+          </button>
+
+          <!-- Toggle Timestamp Column Control -->
+          <label class="toggle-timestamp-label" title="控制是否在表格中显示时间戳列">
+            <input type="checkbox" v-model="showTimestamps" />
+            <span>显示时间戳</span>
+          </label>
+        </div>
+
+        <div class="toolbar-right">
+          <button @click="openCreateModal(null)" class="btn-primary">
+            + 新建分类
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Category Tree Table -->
+      <div class="table-container">
+        <div v-if="loading" class="state-box">
+          <div class="spinner"></div>
+          <p>加载分类数据中...</p>
+        </div>
+
+        <div v-else-if="filteredCategories.length === 0" class="state-box">
+          <p class="empty-text">未找到匹配的分类数据</p>
+        </div>
+
+        <table v-else class="tree-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">ID</th>
+              <th>分类名称</th>
+              <th style="width: 68px;">统计</th>
+              <th>Slug</th>
+              <th style="width: 68px;">排序</th>
+              <th>说明</th>
+              <!-- Optional Timestamps Column (Default Hidden) -->
+              <th v-if="showTimestamps" style="min-width: 160px;">时间戳</th>
+              <th style="width: 75px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="item in visibleRows"
+              :key="item.node.id"
+              :class="{ 'row-disabled': !item.node.status }"
+            >
+              <!-- ID Column -->
+              <td class="id-cell">
+                <span class="id-tag">{{ item.node.id }}</span>
+              </td>
+
+              <!-- Name Column (2 Rows: Zh / En) -->
+              <td class="name-cell">
+                <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
+                  <!-- Expand/Collapse toggle button -->
+                  <button
+                    v-if="item.node.children && item.node.children.length > 0"
+                    @click="toggleExpand(item.node.id)"
+                    class="toggle-btn"
+                  >
+                    {{ expandedMap[item.node.id] ? '▼' : '▶' }}
+                  </button>
+                  <span v-else class="toggle-spacer">•</span>
+
+                  <span class="depth-badge" :class="'depth-' + Math.min(item.depth, 4)">
+                    L{{ item.depth + 1 }}
+                  </span>
+
+                  <div class="name-stacked">
+                    <div class="name-zh">{{ item.node.name_zh }}</div>
+                    <div class="name-en">{{ item.node.name_en || '-' }}</div>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Subcategory Count Column (Header: 统计, Width 55px, Centered) -->
+              <td class="count-cell text-center">
+                <span :class="['count-badge', { 'count-zero': countSubtree(item.node) === 0 }]">
+                  {{ countSubtree(item.node) }}
+                </span>
+              </td>
+
+              <!-- Slug -->
+              <td>
+                <code class="slug-tag">{{ item.node.slug }}</code>
+              </td>
+
+              <!-- Sort Weights (Width 55px, Centered, Nowrap for 9999) -->
+              <td class="sort-cell text-center">
+                <div class="stacked-row sort-val">{{ item.node.sort_zh ?? 'NULL' }}</div>
+                <div class="stacked-row sub-text sort-val">{{ item.node.sort_en ?? 'NULL' }}</div>
+              </td>
+
+              <!-- Description (2 Rows: Zh / En) -->
+              <td class="desc-cell">
+                <div class="stacked-row text-ellipsis" :title="item.node.desc_zh || ''">
+                  {{ item.node.desc_zh || '-' }}
+                </div>
+                <div class="stacked-row sub-text text-ellipsis" :title="item.node.desc_en || ''">
+                  {{ item.node.desc_en || '-' }}
+                </div>
+              </td>
+
+              <!-- Optional Timestamps (Uniform font size, Default Hidden) -->
+              <td v-if="showTimestamps" class="time-cell">
+                <div class="time-row" title="创建时间">创建: {{ formatDate(item.node.created_at) }}</div>
+                <div class="time-row" title="更新时间">更新: {{ formatDate(item.node.updated_at) }}</div>
+              </td>
+
+              <!-- Actions (Width 75px, Centered Title Alignment) -->
+              <td class="actions-cell text-center">
+                <div class="actions-stacked">
+                  <div class="actions-row">
+                    <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
+                    <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
+                  </div>
+                  <div class="actions-row">
+                    <!-- Status Switch Toggle embedded before '删' -->
+                    <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
+                      <input
+                        type="checkbox"
+                        :checked="item.node.status"
+                        @change.stop="toggleStatus(item.node)"
+                      />
+                      <span class="slider"></span>
+                    </label>
+                    <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Edit / Create Modal -->
-    <div v-if="showModal" class="modal-overlay" @click.self="showModal = false">
-      <div class="modal">
-        <h2 class="modal-title">{{ isEditing ? (auth.locale === 'en' ? 'Edit Category' : '编辑分类') : (parentCategory ? (auth.locale === 'en' ? 'Add Subcategory → ' + (parentCategory.name_en || parentCategory.name_zh) : '添加子分类 → ' + parentCategory.name_zh) : (auth.locale === 'en' ? 'Add Root Category' : '添加根分类')) }}</h2>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'Chinese Name *' : '中文名称 *' }}</label>
-            <input v-model="form.name_zh" type="text" required :placeholder="auth.locale === 'en' ? 'Category Name (Chinese)' : '分类中文名称'" />
+    <!-- Create / Edit / Relocate Modal -->
+    <div v-if="showModal" class="modal-backdrop" @click.self="showModal = false">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            {{ isEditing ? `编辑分类 (ID: ${editingCategory.id})` : (presetParent ? `添加「${presetParent.name_zh}」的子分类` : '新建分类') }}
+          </h3>
+          <button @click="showModal = false" class="close-btn">✕</button>
+        </div>
+
+        <form @submit.prevent="handleFormSubmit" class="modal-form">
+          <!-- Tab Navigation inside Modal -->
+          <div class="form-tabs">
+            <button
+              type="button"
+              :class="{ active: activeTab === 'base' }"
+              @click="activeTab = 'base'"
+              class="tab-btn"
+            >
+              基本属性
+            </button>
+            <button
+              type="button"
+              :class="{ active: activeTab === 'relocate' }"
+              @click="activeTab = 'relocate'"
+              class="tab-btn"
+            >
+              层级与下级关联
+            </button>
           </div>
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'English Name' : '英文名称' }}</label>
-            <input v-model="form.name_en" type="text" :placeholder="auth.locale === 'en' ? 'Category Name (English)' : '分类英文名称'" />
+
+          <!-- Tab 1: Base & Meta Combined -->
+          <div v-show="activeTab === 'base'" class="tab-pane">
+            <div class="form-row">
+              <div class="form-group half">
+                <label>
+                  分类 ID (id) —
+                  <span class="help-text">{{ isEditing ? '修改将更新自身及子分类引用' : '选填，留空自动生成' }}</span>
+                </label>
+                <input
+                  v-model.number="form.id"
+                  type="number"
+                  class="form-control"
+                  :placeholder="isEditing ? '修改分类ID' : '留空或指定数字ID'"
+                />
+              </div>
+
+              <div class="form-group half">
+                <label>启用状态 (status)</label>
+                <div class="checkbox-inline" style="margin-top: 0.35rem;">
+                  <input id="status-checkbox" v-model="form.status" type="checkbox" />
+                  <label for="status-checkbox">{{ form.status ? '启用 (True)' : '禁用 (False)' }}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label>中文名称 (name_zh) <span class="required">*</span></label>
+                <input
+                  v-model="form.name_zh"
+                  type="text"
+                  required
+                  class="form-control"
+                  placeholder="例：前端开发"
+                />
+              </div>
+              <div class="form-group half">
+                <label>英文名称 (name_en)</label>
+                <input
+                  v-model="form.name_en"
+                  type="text"
+                  class="form-control"
+                  placeholder="例：Frontend Development"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>URL 标识符 (slug) <span class="required">*</span></label>
+              <input
+                v-model="form.slug"
+                type="text"
+                required
+                class="form-control"
+                placeholder="例：frontend-dev (仅限字母数字中划线)"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label>中文排序权重 (sort_zh)</label>
+                <input
+                  v-model.number="form.sort_zh"
+                  type="number"
+                  class="form-control"
+                  placeholder="数字越小越靠前"
+                />
+              </div>
+              <div class="form-group half">
+                <label>英文排序权重 (sort_en)</label>
+                <input
+                  v-model.number="form.sort_en"
+                  type="number"
+                  class="form-control"
+                  placeholder="数字越小越靠前"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label>中文说明 (desc_zh)</label>
+                <textarea
+                  v-model="form.desc_zh"
+                  rows="2"
+                  class="form-control"
+                  placeholder="关于此分类的详细说明..."
+                ></textarea>
+              </div>
+              <div class="form-group half">
+                <label>英文说明 (desc_en)</label>
+                <textarea
+                  v-model="form.desc_en"
+                  rows="2"
+                  class="form-control"
+                  placeholder="Category description in English..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Readonly Audit Metadata when editing -->
+            <div v-if="isEditing" class="readonly-audit">
+              <span><strong>ID:</strong> {{ editingCategory.id }}</span>
+              <span><strong>创建时间:</strong> {{ formatDate(editingCategory.created_at) }}</span>
+              <span><strong>更新时间:</strong> {{ formatDate(editingCategory.updated_at) }}</span>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Slug <span class="required">*</span></label>
-            <input v-model="form.slug" type="text" required placeholder="url-friendly-identifier" />
+
+          <!-- Tab 2: Hierarchy & Parent Relocation & Children Assignment -->
+          <div v-show="activeTab === 'relocate'" class="tab-pane">
+            <!-- Parent Relocation (Migration) -->
+            <div class="form-group">
+              <label>
+                父级分类 (parent_id) — <span class="help-text">修改此项即可将当前分类及其子树迁移到新分类下</span>
+              </label>
+              <select v-model="form.parent_id" class="form-control">
+                <option :value="null">-- 无 (设为根分类) --</option>
+                <option
+                  v-for="opt in validParentOptions"
+                  :key="opt.id"
+                  :value="opt.id"
+                >
+                  {{ opt.prefix }} {{ opt.name_zh }} ({{ opt.slug }})
+                </option>
+              </select>
+            </div>
+
+            <!-- Children Assignment using CategoriesSelectorGrid component -->
+            <div class="form-group" style="margin-top: 1rem;">
+              <label style="margin-bottom: 0.5rem; display: block;">
+                指定/挂载下级子分类 (Assign Subcategories) —
+                <span class="help-text">已勾选 {{ selectedChildIds.length }} 项，保存后批量将其迁移为当前分类的子节点</span>
+              </label>
+
+              <CategoriesSelectorGrid
+                :categories="rawTree"
+                v-model="selectedChildIds"
+                :multiple="true"
+                :show-slug="false"
+                :compact="true"
+                :disabled-ids="isEditing ? [editingCategory.id] : []"
+                max-height="240px"
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'Chinese Description' : '中文说明' }}</label>
-            <input v-model="form.desc_zh" type="text" :placeholder="auth.locale === 'en' ? 'Category Description (Chinese)' : '分类中文说明'" />
-          </div>
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'English Description' : '英文说明' }}</label>
-            <input v-model="form.desc_en" type="text" :placeholder="auth.locale === 'en' ? 'Category Description (English)' : '分类英文说明'" />
-          </div>
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'Chinese Sort Weight' : '中文排序权重' }}</label>
-            <input v-model.number="form.sort_zh" type="number" :placeholder="auth.locale === 'en' ? 'Leave empty or enter integer' : '留空或输入排序数字'" />
-          </div>
-          <div class="form-group">
-            <label>{{ auth.locale === 'en' ? 'English Sort Weight' : '英文排序权重' }}</label>
-            <input v-model.number="form.sort_en" type="number" :placeholder="auth.locale === 'en' ? 'Leave empty or enter integer' : '留空或输入排序数字'" />
-          </div>
-          <p v-if="error" class="form-error">{{ error }}</p>
-          <div class="form-actions">
-            <button type="button" @click="showModal = false" class="btn-text">{{ auth.locale === 'en' ? 'Cancel' : '取消' }}</button>
+
+          <!-- Error Alert -->
+          <p v-if="modalError" class="form-error-alert">{{ modalError }}</p>
+
+          <!-- Footer Actions -->
+          <div class="modal-footer">
+            <button type="button" @click="showModal = false" class="btn-secondary">取消</button>
             <button type="submit" :disabled="saving" class="btn-primary">
-              {{ saving ? (auth.locale === 'en' ? 'Saving...' : '保存中...') : (auth.locale === 'en' ? 'Save' : '保存') }}
+              {{ saving ? '保存中...' : '保存更改' }}
             </button>
           </div>
         </form>
@@ -105,107 +386,340 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { categoriesAPI } from '../api/endpoints'
+import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
 
-const tree = ref([])
+// State
+const rawTree = ref([])
 const loading = ref(false)
+const searchQuery = ref('')
+const expandedMap = reactive({})
+const allExpanded = ref(true)
+const showTimestamps = ref(false) // Controls timestamps column visibility (default hidden)
+
+// Modal State
 const showModal = ref(false)
+const activeTab = ref('base')
 const saving = ref(false)
-const error = ref('')
+const modalError = ref('')
 const isEditing = ref(false)
-const editingId = ref(null)
-const parentCategory = ref(null)
+const editingCategory = ref(null)
+const presetParent = ref(null)
+const selectedChildIds = ref([])
 
-const form = ref({ name_zh: '', name_en: '', slug: '', desc_zh: '', desc_en: '', sort_zh: null, sort_en: null })
-
-// Flatten tree sorted by level + sort
-const flatCategories = computed(() => {
-  const result = []
-  function walk(nodes, parent) {
-    for (const node of nodes) {
-      result.push({ ...node, parent: parent || null })
-      if (node.children?.length) walk(node.children, node)
-    }
-  }
-  walk(tree.value, null)
-  return result
+// Form state reflecting 100% DB schema fields (including id)
+const form = reactive({
+  id: null,
+  name_zh: '',
+  name_en: '',
+  slug: '',
+  parent_id: null,
+  sort_zh: null,
+  sort_en: null,
+  status: true,
+  desc_zh: '',
+  desc_en: '',
 })
 
+// Flatten Tree Data Helper with Depth & Parent tracking
+function flattenNodes(nodes, depth = 0, parentNode = null, result = []) {
+  for (const node of nodes) {
+    result.push({
+      node,
+      depth,
+      parent: parentNode,
+    })
+    if (node.children && node.children.length > 0) {
+      flattenNodes(node.children, depth + 1, node, result)
+    }
+  }
+  return result
+}
+
+// Helper: Calculate total subtree categories count (all descendants)
+function countSubtree(node) {
+  if (!node.children || node.children.length === 0) return 0
+  let count = node.children.length
+  for (const child of node.children) {
+    count += countSubtree(child)
+  }
+  return count
+}
+
+// Flat list of all category nodes
+const flatList = computed(() => flattenNodes(rawTree.value))
+
+// Stats computation for Metrics Cards
+const stats = computed(() => {
+  const all = flatList.value
+  const total = all.length
+  const roots = rawTree.value.length
+  const active = all.filter((i) => i.node.status).length
+  const disabled = total - active
+  return { total, roots, active, disabled }
+})
+
+// Filter & Search Logic
+const filteredCategories = computed(() => {
+  if (!searchQuery.value.trim()) return flatList.value
+  const query = searchQuery.value.trim().toLowerCase()
+
+  // Collect matching IDs & ancestor IDs
+  const matchIds = new Set()
+  function checkNode(item) {
+    const n = item.node
+    const text = `${n.id || ''} ${n.name_zh || ''} ${n.name_en || ''} ${n.slug || ''} ${n.desc_zh || ''} ${n.desc_en || ''}`.toLowerCase()
+    if (text.includes(query)) {
+      matchIds.add(n.id)
+      // Expand parents
+      let currParent = item.parent
+      while (currParent) {
+        matchIds.add(currParent.id)
+        expandedMap[currParent.id] = true
+        currParent = flatList.value.find((x) => x.node.id === currParent.id)?.parent
+      }
+    }
+  }
+  flatList.value.forEach(checkNode)
+
+  return flatList.value.filter((item) => matchIds.has(item.node.id))
+})
+
+// Rows visible based on expansion state
+const visibleRows = computed(() => {
+  if (searchQuery.value.trim()) {
+    return filteredCategories.value
+  }
+  return filteredCategories.value.filter((item) => {
+    let curr = item.parent
+    while (curr) {
+      if (expandedMap[curr.id] === false) return false
+      curr = flatList.value.find((x) => x.node.id === curr.id)?.parent
+    }
+    return true
+  })
+})
+
+// Parent selection options for Relocation (Excludes self and descendants)
+const validParentOptions = computed(() => {
+  if (!isEditing.value || !editingCategory.value) {
+    return flatList.value.map((item) => ({
+      id: item.node.id,
+      name_zh: item.node.name_zh,
+      slug: item.node.slug,
+      prefix: '—'.repeat(item.depth) + ' ',
+    }))
+  }
+
+  const selfId = editingCategory.value.id
+  // Find all descendant IDs of self to prevent cyclic relocation
+  const forbiddenIds = new Set([selfId])
+  function markDescendants(node) {
+    if (node.children) {
+      for (const child of node.children) {
+        forbiddenIds.add(child.id)
+        markDescendants(child)
+      }
+    }
+  }
+
+  const selfNodeItem = flatList.value.find((i) => i.node.id === selfId)
+  if (selfNodeItem) markDescendants(selfNodeItem.node)
+
+  return flatList.value
+    .filter((item) => !forbiddenIds.has(item.node.id))
+    .map((item) => ({
+      id: item.node.id,
+      name_zh: item.node.name_zh,
+      slug: item.node.slug,
+      prefix: '—'.repeat(item.depth) + ' ',
+    }))
+})
+
+// Child search query inside Modal
+const childSearchQuery = ref('')
+
+// Candidates for assigning subcategories
+const assignableChildrenOptions = computed(() => {
+  const currentEditingId = editingCategory.value?.id
+  return flatList.value
+    .filter((item) => {
+      // Exclude current category itself
+      if (currentEditingId && item.node.id === currentEditingId) return false
+      return true
+    })
+    .map((item) => item.node)
+})
+
+// Filtered candidates for assigning subcategories
+const filteredAssignableChildren = computed(() => {
+  const options = assignableChildrenOptions.value
+  if (!childSearchQuery.value.trim()) return options
+  const query = childSearchQuery.value.trim().toLowerCase()
+  return options.filter((item) => {
+    const text = `${item.id || ''} ${item.name_zh || ''} ${item.name_en || ''} ${item.slug || ''}`.toLowerCase()
+    return text.includes(query)
+  })
+})
+
+// Methods
 async function loadCategories() {
   loading.value = true
   try {
     const res = await categoriesAPI.getAll()
-    tree.value = res.data
+    rawTree.value = res.data
+    // Initialize expand map for all nodes
+    flatList.value.forEach((item) => {
+      if (expandedMap[item.node.id] === undefined) {
+        expandedMap[item.node.id] = true
+      }
+    })
+  } catch (err) {
+    alert('加载分类树失败: ' + (err.response?.data?.detail || err.message))
   } finally {
     loading.value = false
   }
 }
 
-function openCreate(parent = null) {
-  parentCategory.value = parent
-  isEditing.value = false
-  editingId.value = null
-  form.value = { name_zh: '', name_en: '', slug: '', desc_zh: '', desc_en: '', sort_zh: null, sort_en: null }
-  showModal.value = true
+function toggleExpand(id) {
+  expandedMap[id] = !expandedMap[id]
 }
 
-function openEdit(category) {
-  isEditing.value = true
-  editingId.value = category.id
-  form.value = {
-    name_zh: category.name_zh,
-    name_en: category.name_en || '',
-    slug: category.slug,
-    desc_zh: category.desc_zh || '',
-    desc_en: category.desc_en || '',
-    sort_zh: category.sort_zh,
-    sort_en: category.sort_en,
-  }
-  parentCategory.value = null
-  showModal.value = true
+function toggleAllNodes() {
+  allExpanded.value = !allExpanded.value
+  flatList.value.forEach((item) => {
+    expandedMap[item.node.id] = allExpanded.value
+  })
 }
 
-async function handleSubmit() {
-  error.value = ''
-  saving.value = true
+// Quick status toggle
+async function toggleStatus(category) {
+  const newStatus = !category.status
   try {
+    await categoriesAPI.update(category.id, { status: newStatus })
+    category.status = newStatus
+  } catch (err) {
+    alert('状态更新失败: ' + (err.response?.data?.detail || err.message))
+  }
+}
+
+// Open Modal for Create
+function openCreateModal(parent = null) {
+  isEditing.value = false
+  editingCategory.value = null
+  presetParent.value = parent
+  activeTab.value = 'base'
+  modalError.value = ''
+  selectedChildIds.value = []
+  childSearchQuery.value = ''
+
+  form.id = null
+  form.name_zh = ''
+  form.name_en = ''
+  form.slug = ''
+  form.parent_id = parent ? parent.id : null
+  form.sort_zh = null
+  form.sort_en = null
+  form.status = true
+  form.desc_zh = ''
+  form.desc_en = ''
+
+  showModal.value = true
+}
+
+// Open Modal for Edit & Relocate
+function openEditModal(category) {
+  isEditing.value = true
+  editingCategory.value = category
+  presetParent.value = null
+  activeTab.value = 'base'
+  modalError.value = ''
+  childSearchQuery.value = ''
+
+  form.id = category.id
+  form.name_zh = category.name_zh || ''
+  form.name_en = category.name_en || ''
+  form.slug = category.slug || ''
+  form.parent_id = category.parent_id || null
+  form.sort_zh = category.sort_zh
+  form.sort_en = category.sort_en
+  form.status = category.status ?? true
+  form.desc_zh = category.desc_zh || ''
+  form.desc_en = category.desc_en || ''
+
+  // Pre-select existing children
+  selectedChildIds.value = (category.children || []).map((c) => c.id)
+
+  showModal.value = true
+}
+
+// Form Submission & Batch Children Assignment
+async function handleFormSubmit() {
+  modalError.value = ''
+  saving.value = true
+
+  try {
+    let targetCatId = null
+    const payload = { ...form }
+    if (!payload.id) delete payload.id // remove null id if empty in create
+
     if (isEditing.value) {
-      await categoriesAPI.update(editingId.value, form.value)
+      const res = await categoriesAPI.update(editingCategory.value.id, payload)
+      targetCatId = res.data.id
     } else {
-      const payload = { ...form.value }
-      if (parentCategory.value) {
-        payload.parent_id = parentCategory.value.id
-        payload.level = parentCategory.value.level + 1
-      }
-      await categoriesAPI.create(payload)
+      const res = await categoriesAPI.create(payload)
+      targetCatId = res.data.id
     }
+
+    // Batch update assigned children parent_id
+    if (selectedChildIds.value.length > 0 && targetCatId) {
+      const updatePromises = selectedChildIds.value.map((childId) =>
+        categoriesAPI.update(childId, { parent_id: targetCatId })
+      )
+      await Promise.all(updatePromises)
+    }
+
     showModal.value = false
     await loadCategories()
-  } catch (e) {
-    error.value = e.response?.data?.detail || '保存失败'
+  } catch (err) {
+    modalError.value = err.response?.data?.detail || err.message || '保存操作失败'
   } finally {
     saving.value = false
   }
 }
 
+// Delete Category
 async function handleDelete(category) {
-  const catName = auth.locale === 'en' ? (category.name_en || category.name_zh) : category.name_zh
-  const confirmMsg = auth.locale === 'en'
-    ? `Are you sure you want to delete category "${catName}" and all its subcategories? This cannot be undone.`
-    : `确定删除分类「${catName}」及其所有子分类？此操作不可撤销。`
+  const childCount = category.children?.length || 0
+  const confirmMsg = childCount > 0
+    ? `确认删除分类「${category.name_zh}」？\n警告：该分类包含 ${childCount} 个子分类，删除将连同子分类一并彻底移除！`
+    : `确认删除分类「${category.name_zh}」？`
+
   if (!confirm(confirmMsg)) return
+
   try {
     await categoriesAPI.delete(category.id)
     await loadCategories()
-  } catch (e) {
-    alert(e.response?.data?.detail || '删除失败')
+  } catch (err) {
+    alert('删除失败: ' + (err.response?.data?.detail || err.message))
   }
+}
+
+function formatDate(isoStr) {
+  if (!isoStr) return '-'
+  const d = new Date(isoStr)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  const hh = String(d.getHours()).padStart(2, '0')
+  const mm = String(d.getMinutes()).padStart(2, '0')
+  return `${y}/${m}/${day} ${hh}:${mm}`
 }
 
 function handleLogout() {
@@ -217,51 +731,693 @@ onMounted(loadCategories)
 </script>
 
 <style scoped>
-.category-manager-body {
-  padding: 1.5rem;
-  max-width: 64rem;
+.category-manager-page {
+  min-height: 100vh;
+  background-color: var(--c-bg, #f8fafc);
+  color: var(--c-text, #0f172a);
 }
-.category-manager-toolbar {
+
+.main-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* Metrics Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.metric-label {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+  color: #0f172a;
+}
+
+.text-success { color: #16a34a; }
+.text-muted { color: #94a3b8; }
+
+.text-center {
+  text-align: center !important;
+}
+
+/* Toolbar */
+.toolbar-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.toolbar-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+  gap: 0.85rem;
 }
-.category-table {
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.search-input {
+  padding: 0.45rem 2.2rem 0.45rem 2.2rem;
+  font-size: 0.88rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  width: 280px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.toggle-timestamp-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: #475569;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-timestamp-label input {
+  cursor: pointer;
+}
+
+/* Tree Table */
+.table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+}
+
+.tree-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
 }
-.category-table th {
-  text-align: left;
-  padding: 0.6rem 0.75rem;
-  border-bottom: 2px solid var(--c-border);
+
+.tree-table th {
+  background: #f8fafc;
+  padding: 0.75rem 0.75rem;
+  text-align: center;
   font-weight: 600;
-  color: var(--c-text-secondary);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  font-size: 0.82rem;
 }
-.category-table td {
-  padding: 0.55rem 0.75rem;
-  border-bottom: 1px solid var(--c-border);
+
+.tree-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+  border-right: 1px solid #f1f5f9;
   vertical-align: middle;
 }
-.category-table code {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+
+.tree-table th:last-child,
+.tree-table td:last-child {
+  border-right: none;
 }
+
+.tree-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.row-disabled {
+  opacity: 0.6;
+  background-color: #fcfcfc;
+}
+
+.id-cell {
+  text-align: right;
+}
+
+.id-tag {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Indentation & Tree Guide */
+.indent-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: #64748b;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+
+.toggle-spacer {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  color: #cbd5e1;
+  margin-right: 4px;
+}
+
+.depth-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.depth-0 { background: #e0f2fe; color: #0369a1; }
+.depth-1 { background: #f0fdf4; color: #15803d; }
+.depth-2 { background: #fef3c7; color: #b45309; }
+.depth-3 { background: #f3e8ff; color: #6b21a8; }
+.depth-4 { background: #ffe4e6; color: #be123c; }
+
+/* Stacked 2-row styling */
+.name-stacked {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.name-zh {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.name-en {
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.stacked-row {
+  line-height: 1.35;
+  color: #334155;
+  font-size: 0.84rem;
+}
+
+.count-cell, .sort-cell {
+  white-space: nowrap;
+  width: 68px;
+}
+
+.sort-val {
+  white-space: nowrap;
+  font-family: monospace;
+  font-size: 0.82rem;
+}
+
+.sub-text {
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.time-cell {
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.time-row {
+  font-size: 0.78rem;
+  color: #475569;
+  white-space: nowrap;
+}
+
 .desc-cell {
-  color: var(--c-text-secondary);
-  max-width: 200px;
+  max-width: 380px;
+}
+
+.text-ellipsis {
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* Subcategory Count Badge */
+.count-badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.count-zero {
+  background: #f1f5f9;
+  color: #94a3b8;
+  font-weight: normal;
+}
+
+.slug-tag {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+/* Switch Toggle */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #cbd5e1;
+  transition: .2s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #16a34a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Action Links (Centered Title Alignment & Compact 75px Width) */
 .actions-cell {
   white-space: nowrap;
+  text-align: center !important;
+  width: 75px;
 }
-.tree-line {
-  color: var(--c-text-muted);
+
+.actions-stacked {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  line-height: 1.3;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.action-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 1px 3px;
+}
+
+.action-link:hover {
+  text-decoration: underline;
+}
+
+.action-link.danger {
+  color: #dc2626;
+}
+
+/* Modal Styling */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background: #ffffff;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 620px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.modal-form {
+  padding: 1.25rem 1.5rem;
+}
+
+.form-tabs {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.25rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.help-text {
+  font-weight: normal;
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.88rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #2563eb;
+}
+
+.checkbox-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.children-assign-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.cand-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.cand-search-icon {
+  position: absolute;
+  left: 0.6rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.cand-search-input {
+  width: 100%;
+  padding: 0.35rem 1.8rem 0.35rem 1.8rem;
+  font-size: 0.82rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.cand-search-input:focus {
+  border-color: #2563eb;
+}
+
+.cand-clear-btn {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.children-selector-grid {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+  background: #f8fafc;
+}
+
+.cand-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.cand-checkbox-item.cand-selected {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.cand-slug {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.muted-box {
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.readonly-audit {
+  display: flex;
+  gap: 1rem;
+  background: #f1f5f9;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: #475569;
+  margin-top: 1rem;
+}
+
+.form-error-alert {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  margin-bottom: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Button Styles */
+.btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.badge-admin {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+
+.state-box {
+  padding: 3rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 </style>

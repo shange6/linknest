@@ -43,6 +43,7 @@ def build_category_tree(categories: list[Category], parent_id: Optional[int] = N
             "status": child.status,
             "desc_zh": child.desc_zh,
             "desc_en": child.desc_en,
+            "created_at": child.created_at.isoformat() if child.created_at else None,
             "updated_at": child.updated_at.isoformat() if child.updated_at else None,
             "managers": [{"id": m.id, "username": m.username, "email": m.email} for m in child.managers],
             "children": build_category_tree(categories, child.id),
@@ -78,6 +79,11 @@ def create_category(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    if data.id:
+        existing_id = db.query(Category).filter(Category.id == data.id).first()
+        if existing_id:
+            raise HTTPException(status_code=400, detail="ID already exists")
+
     existing = db.query(Category).filter(Category.slug == data.slug).first()
     if existing:
         raise HTTPException(status_code=400, detail="Slug already exists")
@@ -97,19 +103,22 @@ def create_category(
     if data.manager_ids:
         managers = db.query(User).filter(User.id.in_(data.manager_ids)).all()
 
-    category = Category(
-        name_zh=data.name_zh,
-        name_en=data.name_en,
-        slug=data.slug,
-        parent_id=data.parent_id,
-        level=data.level,
-        sort_zh=data.sort_zh,
-        sort_en=data.sort_en,
-        status=data.status,
-        desc_zh=data.desc_zh,
-        desc_en=data.desc_en,
-        managers=managers,
-    )
+    category_kwargs = {
+        "name_zh": data.name_zh,
+        "name_en": data.name_en,
+        "slug": data.slug,
+        "parent_id": data.parent_id,
+        "sort_zh": data.sort_zh,
+        "sort_en": data.sort_en,
+        "status": data.status,
+        "desc_zh": data.desc_zh,
+        "desc_en": data.desc_en,
+        "managers": managers,
+    }
+    if data.id:
+        category_kwargs["id"] = data.id
+
+    category = Category(**category_kwargs)
     db.add(category)
     db.commit()
     db.refresh(category)
@@ -131,6 +140,17 @@ def update_category(
     if not check_category_permission(db, category, current_user):
         raise HTTPException(status_code=403, detail="Permission denied to manage this category")
 
+    # Handle custom ID update
+    if data.id is not None and data.id != category.id:
+        existing_id = db.query(Category).filter(Category.id == data.id).first()
+        if existing_id:
+            raise HTTPException(status_code=400, detail="Target ID already exists")
+        old_id = category.id
+        new_id = data.id
+        # Update child categories parent_id
+        db.query(Category).filter(Category.parent_id == old_id).update({"parent_id": new_id})
+        category.id = new_id
+
     # If changing parent, check permission on the new parent
     if data.parent_id is not None and data.parent_id != category.parent_id:
         if data.parent_id == 0 or data.parent_id is None:
@@ -148,8 +168,8 @@ def update_category(
         if existing:
             raise HTTPException(status_code=400, detail="Slug already exists")
 
-    # Update simple fields
-    for field, value in data.model_dump(exclude={"manager_ids"}, exclude_unset=True).items():
+    # Update simple fields (exclude invalid ORM fields: level, id, manager_ids)
+    for field, value in data.model_dump(exclude={"id", "level", "manager_ids"}, exclude_unset=True).items():
         setattr(category, field, value)
 
     # Update managers if provided
