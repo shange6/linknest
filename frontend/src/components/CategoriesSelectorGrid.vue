@@ -15,7 +15,7 @@
 
       <div class="header-actions">
         <!-- Single Unified Compact Switch Toggle -->
-        <label class="toggle-mode-control" title="勾选开启紧凑视图，隐去 Slug 并缩小间距">
+        <label class="toggle-mode-control" title="勾选后末级分类改为流式布局，其他级别保持不变">
           <input type="checkbox" v-model="isCompactLayout" />
           <span>紧凑</span>
         </label>
@@ -29,66 +29,122 @@
     <!-- Tree Body List Container -->
     <div class="selector-grid-body" :style="{ maxHeight: maxHeight }">
       <!-- Empty Search State -->
-      <div v-if="flattenedVisibleNodes.length === 0" class="empty-state">
+      <div v-if="renderedRows.length === 0" class="empty-state">
         {{ searchQuery ? `未找到匹配「${searchQuery}」的分类` : '暂无分类可选' }}
       </div>
 
-      <!-- Standard Table/List View -->
-      <div v-else class="nodes-list" :class="{ 'is-compact-mode': isCompactLayout }">
-        <div
-          v-for="item in flattenedVisibleNodes"
-          :key="item.node.id"
-          class="node-row"
-          :class="{
-            'is-selected': isSelected(item.node.id),
-            'is-disabled': isDisabled(item.node.id)
-          }"
-          :style="{ paddingLeft: (item.depth * 18 + 8) + 'px' }"
-        >
-          <!-- Expand/Collapse Toggle Button -->
-          <button
-            v-if="item.node.children && item.node.children.length > 0"
-            type="button"
-            @click.stop="toggleExpand(item.node.id)"
-            class="node-expand-btn"
+      <!-- Tree View -->
+      <div v-else class="nodes-list">
+        <template v-for="(row, idx) in renderedRows" :key="idx">
+
+          <!-- Non-leaf row (or compact=false leaf row): standard single-line layout -->
+          <div
+            v-if="row.type === 'node'"
+            class="node-row"
+            :class="{
+              'is-selected': isSelected(row.item.node.id),
+              'is-disabled': isDisabled(row.item.node.id)
+            }"
+            :style="{ paddingLeft: (row.item.depth * 18 + 8) + 'px' }"
           >
-            {{ expandedMap[item.node.id] ? '▼' : '▶' }}
-          </button>
-          <span v-else class="expand-spacer">•</span>
+            <!-- Expand/Collapse Toggle Button -->
+            <button
+              v-if="row.item.node.children && row.item.node.children.length > 0"
+              type="button"
+              @click.stop="toggleExpand(row.item.node.id)"
+              class="node-expand-btn"
+            >
+              {{ expandedMap[row.item.node.id] ? '▼' : '▶' }}
+            </button>
+            <span v-else class="expand-spacer">•</span>
 
-          <!-- Checkbox or Radio Selection Element -->
-          <label class="node-label">
-            <input
-              v-if="multiple"
-              type="checkbox"
-              :value="item.node.id"
-              :checked="isSelected(item.node.id)"
-              :disabled="isDisabled(item.node.id)"
-              @change="handleSelect(item.node.id)"
-              class="selection-input"
-            />
-            <input
-              v-else
-              type="radio"
-              :name="radioName"
-              :value="item.node.id"
-              :checked="isSelected(item.node.id)"
-              :disabled="isDisabled(item.node.id)"
-              @change="handleSelect(item.node.id)"
-              class="selection-input"
-            />
+            <!-- Checkbox or Radio Selection Element -->
+            <label class="node-label">
+              <input
+                v-if="multiple"
+                type="checkbox"
+                :value="row.item.node.id"
+                :checked="isSelected(row.item.node.id)"
+                :disabled="isDisabled(row.item.node.id)"
+                @change="handleSelect(row.item.node.id)"
+                class="selection-input"
+              />
+              <input
+                v-else
+                type="radio"
+                :name="radioName"
+                :value="row.item.node.id"
+                :checked="isSelected(row.item.node.id)"
+                :disabled="isDisabled(row.item.node.id)"
+                @change="handleSelect(row.item.node.id)"
+                class="selection-input"
+              />
 
-            <!-- Level Depth Tag -->
-            <span class="level-badge" :class="'lvl-' + Math.min(item.depth, 4)">
-              L{{ item.depth + 1 }}
-            </span>
+              <!-- Level Depth Tag -->
+              <span class="level-badge" :class="'lvl-' + Math.min(row.item.depth, 4)">
+                L{{ row.item.depth + 1 }}
+              </span>
 
-            <!-- Category Info -->
-            <span class="node-name-zh">{{ item.node.name_zh }}</span>
-            <span v-if="item.node.name_en" class="node-name-en">({{ item.node.name_en }})</span>
-            <code v-if="!isCompactLayout && item.node.slug" class="node-slug">{{ item.node.slug }}</code>
-          </label>
-        </div>
+              <!-- Category Info -->
+              <span class="node-name-zh">{{ row.item.node.name_zh }}</span>
+              <span v-if="row.item.node.name_en" class="node-name-en">({{ row.item.node.name_en }})</span>
+              <code v-if="row.item.node.slug" class="node-slug">{{ row.item.node.slug }}</code>
+            </label>
+          </div>
+
+          <!-- Compact leaf group: flow layout for leaf nodes under the same parent at same depth -->
+          <div
+            v-else-if="row.type === 'leaf-group'"
+            class="leaf-flow-row"
+            :style="{ paddingLeft: (row.depth * 18 + 8) + 'px' }"
+          >
+            <!-- Spacer to align with expand button -->
+            <span class="expand-spacer leaf-group-spacer"></span>
+
+            <!-- Flow chips container -->
+            <div class="leaf-chips-wrap">
+              <label
+                v-for="leaf in row.leaves"
+                :key="leaf.node.id"
+                class="node-label leaf-chip"
+                :class="{
+                  'is-selected': isSelected(leaf.node.id),
+                  'is-disabled': isDisabled(leaf.node.id)
+                }"
+              >
+                <input
+                  v-if="multiple"
+                  type="checkbox"
+                  :value="leaf.node.id"
+                  :checked="isSelected(leaf.node.id)"
+                  :disabled="isDisabled(leaf.node.id)"
+                  @change="handleSelect(leaf.node.id)"
+                  class="selection-input"
+                />
+                <input
+                  v-else
+                  type="radio"
+                  :name="radioName"
+                  :value="leaf.node.id"
+                  :checked="isSelected(leaf.node.id)"
+                  :disabled="isDisabled(leaf.node.id)"
+                  @change="handleSelect(leaf.node.id)"
+                  class="selection-input"
+                />
+
+                <!-- Level Depth Tag -->
+                <span class="level-badge" :class="'lvl-' + Math.min(leaf.depth, 4)">
+                  L{{ leaf.depth + 1 }}
+                </span>
+
+                <!-- Category Info -->
+                <span class="node-name-zh">{{ leaf.node.name_zh }}</span>
+                <span v-if="leaf.node.name_en" class="node-name-en">({{ leaf.node.name_en }})</span>
+              </label>
+            </div>
+          </div>
+
+        </template>
       </div>
     </div>
   </div>
@@ -186,7 +242,7 @@ const filteredMatchingIds = computed(() => {
   return matchIds
 })
 
-// Nodes that should be displayed in Standard Mode
+// Nodes that should be displayed in Standard Mode (flat, filtered, visibility-resolved)
 const flattenedVisibleNodes = computed(() => {
   const matchIds = filteredMatchingIds.value
 
@@ -205,6 +261,59 @@ const flattenedVisibleNodes = computed(() => {
     }
     return true
   })
+})
+
+// Helper: is a node a leaf (no children)?
+function isLeaf(node) {
+  return !node.children || node.children.length === 0
+}
+
+// Rendered rows: in compact mode, group consecutive leaf siblings into flow rows.
+// A "leaf group" = contiguous leaf nodes that share the same parent at the same depth.
+const renderedRows = computed(() => {
+  const visible = flattenedVisibleNodes.value
+  if (!isCompactLayout.value) {
+    // Non-compact: each node is an individual row
+    return visible.map((item) => ({ type: 'node', item }))
+  }
+
+  // Compact mode: accumulate leaves by (parentId, depth), emit as a group when broken
+  const rows = []
+  let leafBuffer = []    // current buffer of leaf items
+  let bufferParentId = null
+  let bufferDepth = null
+
+  function flushBuffer() {
+    if (leafBuffer.length === 0) return
+    rows.push({
+      type: 'leaf-group',
+      depth: bufferDepth,
+      leaves: [...leafBuffer],
+    })
+    leafBuffer = []
+    bufferParentId = null
+    bufferDepth = null
+  }
+
+  for (const item of visible) {
+    if (isLeaf(item.node)) {
+      const parentId = item.parent ? item.parent.id : null
+      if (parentId !== bufferParentId || item.depth !== bufferDepth) {
+        // Different group: flush previous buffer first
+        flushBuffer()
+        bufferParentId = parentId
+        bufferDepth = item.depth
+      }
+      leafBuffer.push(item)
+    } else {
+      // Non-leaf: flush current leaf buffer, then emit as normal node
+      flushBuffer()
+      rows.push({ type: 'node', item })
+    }
+  }
+  flushBuffer()
+
+  return rows
 })
 
 // Expand/Collapse methods
@@ -367,16 +476,13 @@ function handleSelect(id) {
   flex-direction: column;
 }
 
+/* Standard single-line node row */
 .node-row {
   display: flex;
   align-items: center;
   padding: 0.35rem 0.5rem;
   transition: background-color 0.15s ease;
   user-select: none;
-}
-
-.nodes-list.is-compact-mode .node-row {
-  padding: 0.2rem 0.4rem;
 }
 
 .node-row:hover {
@@ -392,6 +498,59 @@ function handleSelect(id) {
   cursor: not-allowed;
 }
 
+/* Compact leaf group row: aligns with tree indentation */
+.leaf-flow-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.25rem 0.5rem;
+  user-select: none;
+}
+
+/* Spacer matches the expand button width */
+.leaf-group-spacer {
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+}
+
+/* Flow wrap container for leaf chips */
+.leaf-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.4rem;
+  flex: 1;
+}
+
+/* Individual leaf chip — same visual style as node-label but displayed inline-flex */
+.leaf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: 5px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+  flex: none;       /* don't stretch, chip sits naturally */
+  overflow: visible;
+}
+
+.leaf-chip:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.leaf-chip.is-selected {
+  background-color: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.leaf-chip.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Expand / collapse toggle button */
 .node-expand-btn {
   background: none;
   border: none;
@@ -417,6 +576,7 @@ function handleSelect(id) {
   flex-shrink: 0;
 }
 
+/* Standard node label (non-compact or non-leaf) */
 .node-label {
   display: flex;
   align-items: center;
