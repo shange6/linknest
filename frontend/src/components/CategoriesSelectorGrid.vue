@@ -98,8 +98,6 @@
             class="leaf-flow-row"
             :style="{ paddingLeft: (row.depth * 18 + 8) + 'px' }"
           >
-            <!-- Spacer to align with expand button -->
-            <span class="expand-spacer leaf-group-spacer"></span>
 
             <!-- Flow chips container -->
             <div class="leaf-chips-wrap">
@@ -528,11 +526,6 @@ function handleSelect(id) {
   user-select: none;
 }
 
-/* Spacer matches the expand button width */
-.leaf-group-spacer {
-  flex-shrink: 0;
-  margin-top: 0.3rem;
-}
 
 /* Flow wrap container for leaf chips */
 .leaf-chips-wrap {
