@@ -103,44 +103,60 @@
 
             <!-- Flow chips container -->
             <div class="leaf-chips-wrap">
-              <label
+              <div
                 v-for="leaf in row.leaves"
                 :key="leaf.node.id"
-                class="leaf-chip"
-                :class="{
-                  'is-selected': isSelected(leaf.node.id),
-                  'is-disabled': isDisabled(leaf.node.id)
-                }"
+                class="leaf-chip-wrapper"
               >
-                <input
-                  v-if="multiple"
-                  type="checkbox"
-                  :value="leaf.node.id"
-                  :checked="isSelected(leaf.node.id)"
-                  :disabled="isDisabled(leaf.node.id)"
-                  @change="handleSelect(leaf.node.id)"
-                  class="selection-input"
-                />
-                <input
-                  v-else
-                  type="radio"
-                  :name="radioName"
-                  :value="leaf.node.id"
-                  :checked="isSelected(leaf.node.id)"
-                  :disabled="isDisabled(leaf.node.id)"
-                  @change="handleSelect(leaf.node.id)"
-                  class="selection-input"
-                />
+                <!-- Expand button for collapsed parents shown as chips -->
+                <button
+                  v-if="leaf.node.children && leaf.node.children.length > 0"
+                  type="button"
+                  class="chip-expand-btn"
+                  :title="expandedMap[leaf.node.id] === true ? '折叠' : '展开子分类'"
+                  @click.stop="toggleExpand(leaf.node.id)"
+                >
+                  {{ expandedMap[leaf.node.id] === true ? '▼' : '▶' }}
+                </button>
 
-                <!-- Level Depth Tag -->
-                <span class="level-badge" :class="'lvl-' + Math.min(leaf.depth, 4)">
-                  L{{ leaf.depth + 1 }}
-                </span>
+                <label
+                  class="leaf-chip"
+                  :class="{
+                    'is-selected': isSelected(leaf.node.id),
+                    'is-disabled': isDisabled(leaf.node.id),
+                    'has-children': leaf.node.children && leaf.node.children.length > 0
+                  }"
+                >
+                  <input
+                    v-if="multiple"
+                    type="checkbox"
+                    :value="leaf.node.id"
+                    :checked="isSelected(leaf.node.id)"
+                    :disabled="isDisabled(leaf.node.id)"
+                    @change="handleSelect(leaf.node.id)"
+                    class="selection-input"
+                  />
+                  <input
+                    v-else
+                    type="radio"
+                    :name="radioName"
+                    :value="leaf.node.id"
+                    :checked="isSelected(leaf.node.id)"
+                    :disabled="isDisabled(leaf.node.id)"
+                    @change="handleSelect(leaf.node.id)"
+                    class="selection-input"
+                  />
 
-                <!-- Category Info -->
-                <span class="node-name-zh">{{ leaf.node.name_zh }}</span>
-                <span v-if="leaf.node.name_en" class="node-name-en">({{ leaf.node.name_en }})</span>
-              </label>
+                  <!-- Level Depth Tag -->
+                  <span class="level-badge" :class="'lvl-' + Math.min(leaf.depth, 4)">
+                    L{{ leaf.depth + 1 }}
+                  </span>
+
+                  <!-- Category Info -->
+                  <span class="node-name-zh">{{ leaf.node.name_zh }}</span>
+                  <span v-if="leaf.node.name_en" class="node-name-en">({{ leaf.node.name_en }})</span>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -263,13 +279,9 @@ const flattenedVisibleNodes = computed(() => {
   })
 })
 
-// Helper: is a node a leaf (no children)?
-function isLeaf(node) {
-  return !node.children || node.children.length === 0
-}
-
-// Rendered rows: in compact mode, group consecutive leaf siblings into flow rows.
-// A "leaf group" = contiguous leaf nodes that share the same parent at the same depth.
+// Rendered rows: in compact mode, group "terminal" nodes (no visible children) into flow rows.
+// A node is terminal if it has no children currently visible in the list
+// (either true leaf, or collapsed parent whose children are hidden).
 const renderedRows = computed(() => {
   const visible = flattenedVisibleNodes.value
   if (!isCompactLayout.value) {
@@ -277,9 +289,18 @@ const renderedRows = computed(() => {
     return visible.map((item) => ({ type: 'node', item }))
   }
 
-  // Compact mode: accumulate leaves by (parentId, depth), emit as a group when broken
+  // Build a set of IDs that have at least one visible child in the current view
+  const hasVisibleChild = new Set()
+  visible.forEach((item) => {
+    if (item.parent) {
+      hasVisibleChild.add(item.parent.id)
+    }
+  })
+
+  // Compact mode: accumulate terminal nodes (no visible children) by (parentId, depth),
+  // emit as a flow group; non-terminal nodes (expanded parents) stay as normal rows.
   const rows = []
-  let leafBuffer = []    // current buffer of leaf items
+  let leafBuffer = []
   let bufferParentId = null
   let bufferDepth = null
 
@@ -296,7 +317,8 @@ const renderedRows = computed(() => {
   }
 
   for (const item of visible) {
-    if (isLeaf(item.node)) {
+    const isTerminal = !hasVisibleChild.has(item.node.id)
+    if (isTerminal) {
       const parentId = item.parent ? item.parent.id : null
       if (parentId !== bufferParentId || item.depth !== bufferDepth) {
         // Different group: flush previous buffer first
@@ -306,7 +328,7 @@ const renderedRows = computed(() => {
       }
       leafBuffer.push(item)
     } else {
-      // Non-leaf: flush current leaf buffer, then emit as normal node
+      // Has visible children (expanded parent): flush buffer and emit as normal row
       flushBuffer()
       rows.push({ type: 'node', item })
     }
@@ -550,6 +572,45 @@ function handleSelect(id) {
 .leaf-chip.is-disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Wrapper for chip + expand button pair */
+.leaf-chip-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+}
+
+/* Expand arrow button shown before collapsed-parent chips */
+.chip-expand-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+  font-size: 0.6rem;
+  color: #64748b;
+  width: 18px;
+  height: 100%;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.chip-expand-btn:hover {
+  background: rgba(37, 99, 235, 0.06);
+  color: #1e40af;
+}
+
+/* When chip has an expand button beside it, adjust left border-radius */
+.leaf-chip-wrapper .chip-expand-btn + .leaf-chip {
+  border-left: none;
+  border-radius: 0 5px 5px 0;
 }
 
 /* Expand / collapse toggle button */
