@@ -219,7 +219,7 @@
               @click="activeTab = 'parent'"
               class="tab-btn"
             >
-              父分类
+              选择父分类
             </button>
             <button
               type="button"
@@ -383,7 +383,7 @@
                   设为根分类
                 </button>
                 <span class="help-text-highlight">
-                  当前：{{ selectedParentCategory ? `${selectedParentCategory.name_zh} (ID: ${form.parent_id})` : '根分类' }}
+                  当前：<span class="help-text-value">{{ selectedParentCategory ? `${selectedParentCategory.name_zh} (ID: ${form.parent_id})` : '根分类' }}</span>
                 </span>
               </template>
             </div>
@@ -1431,6 +1431,11 @@ input:checked + .slider:before {
   display: inline-flex;
   align-items: center;
   transform: translateY(1.5px);
+}
+
+.help-text-value {
+  color: #dc2626;
+  font-weight: 600;
 }
 
 /* Button Styles */
