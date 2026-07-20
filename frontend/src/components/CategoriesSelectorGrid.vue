@@ -106,7 +106,7 @@
               <label
                 v-for="leaf in row.leaves"
                 :key="leaf.node.id"
-                class="node-label leaf-chip"
+                class="leaf-chip"
                 :class="{
                   'is-selected': isSelected(leaf.node.id),
                   'is-disabled': isDisabled(leaf.node.id)
@@ -518,9 +518,10 @@ function handleSelect(id) {
   flex-wrap: wrap;
   gap: 0.25rem 0.4rem;
   flex: 1;
+  min-width: 0;
 }
 
-/* Individual leaf chip — same visual style as node-label but displayed inline-flex */
+/* Individual leaf chip — inline-flex, wraps naturally in the chips container */
 .leaf-chip {
   display: inline-flex;
   align-items: center;
@@ -531,8 +532,9 @@ function handleSelect(id) {
   background: #f8fafc;
   cursor: pointer;
   transition: background-color 0.12s ease, border-color 0.12s ease;
-  flex: none;       /* don't stretch, chip sits naturally */
-  overflow: visible;
+  flex: 0 0 auto;   /* size to content, allow wrapping */
+  user-select: none;
+  font-size: 0.84rem;
 }
 
 .leaf-chip:hover {
