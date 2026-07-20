@@ -333,21 +333,34 @@
 
           <!-- Tab 2: Hierarchy & Parent Relocation & Children Assignment -->
           <div v-show="activeTab === 'relocate'" class="tab-pane">
-            <!-- Parent Relocation (Migration) -->
             <div class="form-group">
               <label>
                 父级分类 (parent_id) — <span class="help-text">修改此项即可将当前分类及其子树迁移到新分类下</span>
               </label>
-              <select v-model="form.parent_id" class="form-control">
-                <option :value="null">-- 无 (设为根分类) --</option>
-                <option
-                  v-for="opt in validParentOptions"
-                  :key="opt.id"
-                  :value="opt.id"
+              <!-- Clear button: set to root (null) -->
+              <div style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  style="font-size: 0.78rem; padding: 0.2rem 0.6rem;"
+                  @click="form.parent_id = null"
                 >
-                  {{ opt.prefix }} {{ opt.name_zh }} ({{ opt.slug }})
-                </option>
-              </select>
+                  ✕ 设为根分类（无父级）
+                </button>
+                <span v-if="form.parent_id" class="help-text">
+                  已选：ID {{ form.parent_id }}
+                </span>
+                <span v-else class="help-text" style="color: #64748b;">当前为根分类</span>
+              </div>
+              <CategoriesSelectorGrid
+                :categories="rawTree"
+                v-model="form.parent_id"
+                :multiple="false"
+                :show-slug="true"
+                :compact="false"
+                :disabled-ids="parentDisabledIds"
+                max-height="200px"
+              />
             </div>
 
             <!-- Children Assignment using CategoriesSelectorGrid component -->
@@ -504,6 +517,24 @@ const visibleRows = computed(() => {
     }
     return true
   })
+})
+
+// Disabled IDs for parent selector: self + all descendants
+const parentDisabledIds = computed(() => {
+  if (!isEditing.value || !editingCategory.value) return []
+  const selfId = editingCategory.value.id
+  const forbidden = [selfId]
+  function collectDescendants(node) {
+    if (node.children) {
+      for (const child of node.children) {
+        forbidden.push(child.id)
+        collectDescendants(child)
+      }
+    }
+  }
+  const selfNodeItem = flatList.value.find((i) => i.node.id === selfId)
+  if (selfNodeItem) collectDescendants(selfNodeItem.node)
+  return forbidden
 })
 
 // Parent selection options for Relocation (Excludes self and descendants)
