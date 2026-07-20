@@ -63,6 +63,12 @@
             <input type="checkbox" v-model="showTimestamps" />
             <span>显示时间戳</span>
           </label>
+
+          <!-- Toggle Description Column Control -->
+          <label class="toggle-timestamp-label" title="控制是否在表格中显示说明列">
+            <input type="checkbox" v-model="showDescription" />
+            <span>显示说明</span>
+          </label>
         </div>
 
         <div class="toolbar-right">
@@ -92,7 +98,9 @@
               <th style="width: 68px;">统计</th>
               <th style="width: 90px;">排序</th>
               <!-- Optional Timestamps Column (Default Hidden) -->
-              <th v-if="showTimestamps" style="min-width: 160px;">时间戳</th>
+              <th v-if="showTimestamps" style="width: 130px;">时间戳</th>
+              <!-- Optional Description Column (Default Hidden) -->
+              <th v-if="showDescription" style="width: 140px;">说明</th>
               <th style="width: 140px;">操作</th>
             </tr>
           </thead>
@@ -155,6 +163,14 @@
               <td v-if="showTimestamps" class="time-cell">
                 <div class="time-row" title="创建时间">创建: {{ formatDate(item.node.created_at) }}</div>
                 <div class="time-row" title="更新时间">更新: {{ formatDate(item.node.updated_at) }}</div>
+              </td>
+
+              <!-- Optional Description (2 Rows: Zh / En, Default Hidden) -->
+              <td v-if="showDescription" class="desc-cell">
+                <div class="desc-stacked">
+                  <div class="desc-zh text-ellipsis" :title="item.node.desc_zh || ''">{{ item.node.desc_zh || '-' }}</div>
+                  <div class="desc-en text-ellipsis" :title="item.node.desc_en || ''">{{ (item.node.desc_en && item.node.desc_en.trim()) ? item.node.desc_en : '-' }}</div>
+                </div>
               </td>
 
               <!-- Actions (Single Row) -->
@@ -406,6 +422,7 @@ const searchQuery = ref('')
 const expandedMap = reactive({})
 const allExpanded = ref(true)
 const showTimestamps = ref(false) // Controls timestamps column visibility (default hidden)
+const showDescription = ref(false) // Controls description column visibility (default hidden)
 
 // Modal State
 const showModal = ref(false)
@@ -1030,9 +1047,30 @@ onMounted(loadCategories)
   font-size: 0.78rem;
 }
 
-.time-cell {
+.time-cell, .desc-cell {
   font-size: 0.78rem;
   line-height: 1.35;
+}
+
+.desc-cell {
+  width: 200px;
+  max-width: 260px;
+}
+
+.desc-stacked {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.desc-zh {
+  color: #334155;
+  font-size: 0.78rem;
+}
+
+.desc-en {
+  color: #64748b;
+  font-size: 0.78rem;
 }
 
 .time-row {
