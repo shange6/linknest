@@ -9,6 +9,7 @@
         </nav>
       </div>
       <div class="header-right">
+        <ColorThemeSelector />
         <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
           {{ auth.locale === 'zh' ? 'English' : '中文' }}
         </button>
@@ -59,6 +60,7 @@ import { useBookmarkStore } from '../stores/bookmarks'
 import CategoryNode from '../components/CategoryNode.vue'
 import BookmarkList from '../components/BookmarkList.vue'
 import BookmarkEditor from '../components/BookmarkEditor.vue'
+import ColorThemeSelector from '../components/ColorThemeSelector.vue'
 
 const router = useRouter()
 const auth = useAuthStore()

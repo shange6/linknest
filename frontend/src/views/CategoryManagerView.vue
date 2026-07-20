@@ -10,6 +10,7 @@
         </nav>
       </div>
       <div class="header-right">
+        <ColorThemeSelector />
         <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
           {{ auth.locale === 'zh' ? 'English' : '中文' }}
         </button>
@@ -407,6 +408,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { categoriesAPI } from '../api/endpoints'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
+import ColorThemeSelector from '../components/ColorThemeSelector.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -1227,8 +1229,8 @@ input:checked + .slider:before {
 }
 
 .tab-btn.active {
-  color: #2563eb;
-  border-bottom-color: #2563eb;
+  color: var(--c-primary, #2563eb);
+  border-bottom-color: var(--c-primary, #2563eb);
 }
 
 .tab-pane {
@@ -1434,13 +1436,13 @@ input:checked + .slider:before {
 }
 
 .help-text-value {
-  color: #dc2626;
+  color: var(--c-primary, #2563eb);
   font-weight: 600;
 }
 
 /* Button Styles */
 .btn-primary {
-  background: #2563eb;
+  background: var(--c-primary, #2563eb);
   color: #ffffff;
   border: none;
   padding: 0.5rem 1rem;
@@ -1451,7 +1453,7 @@ input:checked + .slider:before {
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  background: var(--c-primary-hover, #1d4ed8);
 }
 
 .btn-secondary {
@@ -1470,9 +1472,9 @@ input:checked + .slider:before {
 }
 
 .badge-admin {
-  background: #eff6ff;
-  color: #2563eb;
-  border: 1px solid #bfdbfe;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--c-primary, #2563eb);
+  border: 1px solid var(--c-primary, #bfdbfe);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -1490,7 +1492,7 @@ input:checked + .slider:before {
   width: 24px;
   height: 24px;
   border: 3px solid #e2e8f0;
-  border-top-color: #2563eb;
+  border-top-color: var(--c-primary, #2563eb);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
