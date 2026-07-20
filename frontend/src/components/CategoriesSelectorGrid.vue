@@ -21,7 +21,7 @@
         </label>
 
         <button type="button" @click="toggleAllNodes" class="btn-toggle-all">
-          {{ allExpanded ? '一键折叠' : '一键展开' }}
+          {{ allExpanded ? '折叠全部' : '展开全部' }}
         </button>
       </div>
     </div>
@@ -426,7 +426,7 @@ function handleSelect(id) {
 }
 
 .selector-search-input:focus {
-  border-color: #2563eb;
+  border-color: var(--c-primary, #2563eb);
 }
 
 .clear-search-btn {
@@ -454,10 +454,19 @@ function handleSelect(id) {
   cursor: pointer;
   user-select: none;
   font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.toggle-mode-control:has(input:checked) span {
+  color: var(--c-primary, #2563eb);
+  font-weight: 600;
 }
 
 .toggle-mode-control input {
   cursor: pointer;
+  accent-color: var(--c-primary, #2563eb);
+  width: 14px;
+  height: 14px;
 }
 
 .btn-toggle-all {
@@ -470,11 +479,13 @@ function handleSelect(id) {
   cursor: pointer;
   white-space: nowrap;
   font-weight: 500;
+  transition: all 0.15s ease;
 }
 
 .btn-toggle-all:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: rgba(37, 99, 235, 0.06);
+  border-color: var(--c-primary, #2563eb);
+  color: var(--c-primary, #2563eb);
 }
 
 /* Body Items List */
@@ -558,8 +569,8 @@ function handleSelect(id) {
 }
 
 .leaf-chip.is-selected {
-  background-color: #eff6ff;
-  border-color: #93c5fd;
+  background-color: rgba(37, 99, 235, 0.1);
+  border-color: var(--c-primary, #2563eb);
 }
 
 .leaf-chip.is-disabled {
@@ -647,6 +658,7 @@ function handleSelect(id) {
   cursor: pointer;
   margin: 0;
   flex-shrink: 0;
+  accent-color: var(--c-primary, #2563eb);
 }
 
 .level-badge {

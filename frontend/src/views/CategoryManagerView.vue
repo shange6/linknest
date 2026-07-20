@@ -890,10 +890,19 @@ onMounted(loadCategories)
   color: #475569;
   cursor: pointer;
   user-select: none;
+  transition: color 0.15s ease;
+}
+
+.toggle-timestamp-label:has(input:checked) span {
+  color: var(--c-primary, #2563eb);
+  font-weight: 600;
 }
 
 .toggle-timestamp-label input {
   cursor: pointer;
+  accent-color: var(--c-primary, #2563eb);
+  width: 14px;
+  height: 14px;
 }
 
 /* Tree Table */
@@ -1491,10 +1500,13 @@ input:checked + .slider:before {
   font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: rgba(37, 99, 235, 0.06);
+  border-color: var(--c-primary, #2563eb);
+  color: var(--c-primary, #2563eb);
 }
 
 .badge-admin {
