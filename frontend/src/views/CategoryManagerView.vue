@@ -88,13 +88,12 @@
             <tr>
               <th style="width: 50px;">ID</th>
               <th>分类名称</th>
-              <th style="width: 68px;">统计</th>
               <th>Slug</th>
-              <th style="width: 68px;">排序</th>
-              <th>说明</th>
+              <th style="width: 68px;">统计</th>
+              <th style="width: 90px;">排序</th>
               <!-- Optional Timestamps Column (Default Hidden) -->
               <th v-if="showTimestamps" style="min-width: 160px;">时间戳</th>
-              <th style="width: 75px;">操作</th>
+              <th style="width: 140px;">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -108,7 +107,7 @@
                 <span class="id-tag">{{ item.node.id }}</span>
               </td>
 
-              <!-- Name Column (2 Rows: Zh / En) -->
+              <!-- Name Column (Single Row: Zh / En) -->
               <td class="name-cell">
                 <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
                   <!-- Expand/Collapse toggle button -->
@@ -125,11 +124,17 @@
                     L{{ item.depth + 1 }}
                   </span>
 
-                  <div class="name-stacked">
-                    <div class="name-zh">{{ item.node.name_zh }}</div>
-                    <div class="name-en">{{ item.node.name_en || '-' }}</div>
+                  <div class="name-inline">
+                    <span class="name-zh">{{ item.node.name_zh }}</span>
+                    <span class="name-divider">/</span>
+                    <span class="name-en">{{ (item.node.name_en && item.node.name_en.trim()) ? item.node.name_en : '-' }}</span>
                   </div>
                 </div>
+              </td>
+
+              <!-- Slug -->
+              <td>
+                <code class="slug-tag">{{ item.node.slug }}</code>
               </td>
 
               <!-- Subcategory Count Column (Header: 统计, Width 55px, Centered) -->
@@ -139,25 +144,11 @@
                 </span>
               </td>
 
-              <!-- Slug -->
-              <td>
-                <code class="slug-tag">{{ item.node.slug }}</code>
-              </td>
-
-              <!-- Sort Weights (Width 55px, Centered, Nowrap for 9999) -->
+              <!-- Sort Weights (Single Row: Zh / En) -->
               <td class="sort-cell text-center">
-                <div class="stacked-row sort-val">{{ item.node.sort_zh ?? 'NULL' }}</div>
-                <div class="stacked-row sub-text sort-val">{{ item.node.sort_en ?? 'NULL' }}</div>
-              </td>
-
-              <!-- Description (2 Rows: Zh / En) -->
-              <td class="desc-cell">
-                <div class="stacked-row text-ellipsis" :title="item.node.desc_zh || ''">
-                  {{ item.node.desc_zh || '-' }}
-                </div>
-                <div class="stacked-row sub-text text-ellipsis" :title="item.node.desc_en || ''">
-                  {{ item.node.desc_en || '-' }}
-                </div>
+                <span class="sort-val">{{ item.node.sort_zh ?? '-' }}</span>
+                <span class="sort-divider">/</span>
+                <span class="sort-val sub-text">{{ item.node.sort_en ?? '-' }}</span>
               </td>
 
               <!-- Optional Timestamps (Uniform font size, Default Hidden) -->
@@ -166,25 +157,20 @@
                 <div class="time-row" title="更新时间">更新: {{ formatDate(item.node.updated_at) }}</div>
               </td>
 
-              <!-- Actions (Width 75px, Centered Title Alignment) -->
+              <!-- Actions (Single Row) -->
               <td class="actions-cell text-center">
-                <div class="actions-stacked">
-                  <div class="actions-row">
-                    <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
-                    <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
-                  </div>
-                  <div class="actions-row">
-                    <!-- Status Switch Toggle embedded before '删' -->
-                    <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
-                      <input
-                        type="checkbox"
-                        :checked="item.node.status"
-                        @change.stop="toggleStatus(item.node)"
-                      />
-                      <span class="slider"></span>
-                    </label>
-                    <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
-                  </div>
+                <div class="actions-inline">
+                  <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
+                  <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
+                  <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
+                  <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
+                    <input
+                      type="checkbox"
+                      :checked="item.node.status"
+                      @change.stop="toggleStatus(item.node)"
+                    />
+                    <span class="slider"></span>
+                  </label>
                 </div>
               </td>
             </tr>
@@ -993,10 +979,11 @@ onMounted(loadCategories)
 .depth-3 { background: #f3e8ff; color: #6b21a8; }
 .depth-4 { background: #ffe4e6; color: #be123c; }
 
-/* Stacked 2-row styling */
-.name-stacked {
-  display: flex;
-  flex-direction: column;
+/* Inline 1-row name styling */
+.name-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   line-height: 1.35;
 }
 
@@ -1005,9 +992,15 @@ onMounted(loadCategories)
   color: #0f172a;
 }
 
+.name-divider {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  margin: 0 2px;
+}
+
 .name-en {
   color: #64748b;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
 }
 
 .stacked-row {
@@ -1018,7 +1011,12 @@ onMounted(loadCategories)
 
 .count-cell, .sort-cell {
   white-space: nowrap;
-  width: 68px;
+}
+
+.sort-divider {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin: 0 2px;
 }
 
 .sort-val {
@@ -1041,10 +1039,6 @@ onMounted(loadCategories)
   font-size: 0.78rem;
   color: #475569;
   white-space: nowrap;
-}
-
-.desc-cell {
-  max-width: 380px;
 }
 
 .text-ellipsis {
@@ -1123,26 +1117,18 @@ input:checked + .slider:before {
   transform: translateX(14px);
 }
 
-/* Action Links (Centered Title Alignment & Compact 75px Width) */
+/* Action Links (Single Line Row) */
 .actions-cell {
   white-space: nowrap;
   text-align: center !important;
-  width: 75px;
+  width: 140px;
 }
 
-.actions-stacked {
+.actions-inline {
   display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  line-height: 1.3;
-}
-
-.actions-row {
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .action-link {
@@ -1277,10 +1263,12 @@ input:checked + .slider:before {
   border-radius: 6px;
   outline: none;
   box-sizing: border-box;
+  color: var(--c-primary, #2563eb);
+  font-weight: 500;
 }
 
 .form-control:focus {
-  border-color: #2563eb;
+  border-color: var(--c-primary, #2563eb);
 }
 
 .checkbox-inline {
