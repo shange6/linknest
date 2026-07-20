@@ -1207,19 +1207,19 @@ input:checked + .slider:before {
 }
 
 .modal-form {
-  padding: 1.25rem 1.5rem;
+  padding: 0.65rem 1.5rem 1.25rem 1.5rem;
 }
 
 .form-tabs {
   display: flex;
   border-bottom: 1px solid #e2e8f0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .tab-btn {
   background: none;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.4rem 0.85rem 0.5rem 0.85rem;
   font-size: 0.88rem;
   font-weight: 500;
   color: #64748b;
