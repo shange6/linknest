@@ -186,7 +186,7 @@ const props = defineProps({
   },
   compact: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   disabledIds: {
     type: Array,
