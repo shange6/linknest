@@ -382,10 +382,9 @@
                 >
                   设为根分类
                 </button>
-                <span v-if="selectedParentCategory" class="help-text-highlight">
-                  已选父分类：{{ selectedParentCategory.name_zh }} (ID: {{ form.parent_id }})
+                <span class="help-text-highlight">
+                  当前：{{ selectedParentCategory ? `${selectedParentCategory.name_zh} (ID: ${form.parent_id})` : '根分类' }}
                 </span>
-                <span v-else class="help-text" style="color: #64748b;">当前为根分类</span>
               </template>
             </div>
 
@@ -1207,7 +1206,7 @@ input:checked + .slider:before {
 }
 
 .modal-form {
-  padding: 0.65rem 1.5rem 1.25rem 1.5rem;
+  padding: 0.65rem 1.5rem 0.65rem 1.5rem;
 }
 
 .form-tabs {
@@ -1397,8 +1396,8 @@ input:checked + .slider:before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #e2e8f0;
 }
 
@@ -1424,6 +1423,9 @@ input:checked + .slider:before {
   font-size: 0.82rem;
   font-weight: 600;
   color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  transform: translateY(1.5px);
 }
 
 /* Button Styles */
