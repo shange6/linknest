@@ -15,9 +15,9 @@
 
       <div class="header-actions">
         <!-- Single Unified Compact Switch Toggle -->
-        <label class="toggle-mode-control" title="勾选后末级分类改为流式布局，其他级别保持不变">
-          <input type="checkbox" v-model="isCompactLayout" />
-          <span>紧凑</span>
+        <label class="toggle-mode-control" title="勾选后采用宽松模式展示">
+          <input type="checkbox" v-model="isLooseLayout" />
+          <span>宽松</span>
         </label>
 
         <button type="button" @click="toggleAllNodes" class="btn-toggle-all">
@@ -201,7 +201,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const searchQuery = ref('')
-const isCompactLayout = ref(props.compact)
+const isLooseLayout = ref(!props.compact)
+const isCompactLayout = computed(() => !isLooseLayout.value)
 const expandedMap = reactive({})
 const allExpanded = ref(true)
 const radioName = 'cat_radio_' + Math.random().toString(36).substr(2, 9)
@@ -209,7 +210,7 @@ const radioName = 'cat_radio_' + Math.random().toString(36).substr(2, 9)
 watch(
   () => props.compact,
   (val) => {
-    isCompactLayout.value = val
+    isLooseLayout.value = !val
   }
 )
 
