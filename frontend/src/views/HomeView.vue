@@ -1,10 +1,16 @@
+<!-- LinkNest Home Landing View (Updated: 2026-07-21) -->
 <template>
   <div class="home-landing">
     <!-- Header Navbar -->
     <header class="app-header">
       <div class="header-left">
-        <h1 class="logo">LinkNest</h1>
-        <span class="logo-sub">多层级导航与书签管理平台</span>
+        <router-link to="/" class="logo-link">
+          <h1 class="logo">LinkNest</h1>
+        </router-link>
+        <nav class="header-nav">
+          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
+          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
+        </nav>
       </div>
       <div class="header-right">
         <ColorThemeSelector />
@@ -172,6 +178,7 @@ function handleLogout() {
 .gradient-text {
   background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

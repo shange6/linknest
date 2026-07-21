@@ -7,8 +7,8 @@
           <h1 class="logo">LinkNest</h1>
         </router-link>
         <nav class="header-nav">
-          <router-link to="/admin/bookmarks" class="nav-item">书签</router-link>
-          <router-link to="/admin/categories" class="nav-item active">分类管理</router-link>
+          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
+          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
         </nav>
       </div>
       <div class="header-right">
