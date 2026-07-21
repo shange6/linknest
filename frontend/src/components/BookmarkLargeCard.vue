@@ -205,7 +205,6 @@ const displayUrl = computed(() => {
   gap: 8px;
   margin-top: 4px;
   padding-left: 20px;
-  padding-right: 70px;
 }
 
 .bm-card__icon {
@@ -233,6 +232,7 @@ const displayUrl = computed(() => {
   overflow: hidden;
   transition: color 0.15s;
   flex: 1;
+  word-break: break-word;
 }
 
 .bm-card__title:hover {
@@ -287,6 +287,7 @@ const displayUrl = computed(() => {
   margin-top: auto;
   padding-top: 8px;
   border-top: 1px solid #f1f5f9;
+  max-width: 100%;
 }
 
 .bm-card__tag {
@@ -297,5 +298,9 @@ const displayUrl = computed(() => {
   padding: 2px 7px;
   border-radius: 4px;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 </style>
