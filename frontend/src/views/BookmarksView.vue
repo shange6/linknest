@@ -24,27 +24,13 @@
     <div class="main-layout">
       <!-- Sidebar Category Tree -->
       <aside class="sidebar-panel">
-        <div class="sidebar-header">
-          <div class="sidebar-title-group">
-            <span class="sidebar-icon">📁</span>
-            <h2 class="sidebar-title">分类筛选器</h2>
-          </div>
-          <button
-            v-if="selectedCategoryIds && (Array.isArray(selectedCategoryIds) ? selectedCategoryIds.length : selectedCategoryIds)"
-            @click="clearCategorySelection"
-            class="btn-clear-selection"
-            title="重置选中的分类"
-          >
-            清除选中
-          </button>
-        </div>
-
         <!-- Categories Selector Grid Container -->
         <div class="category-tree-body" v-if="!categoryStore.loading">
           <CategoriesSelectorGrid
             :categories="categoryStore.tree"
             v-model="selectedCategoryIds"
             :multiple="true"
+            :showCount="true"
             maxHeight="calc(100vh - 220px)"
           />
         </div>

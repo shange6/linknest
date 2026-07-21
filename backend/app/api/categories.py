@@ -45,6 +45,7 @@ def build_category_tree(categories: list[Category], parent_id: Optional[int] = N
             "desc_en": child.desc_en,
             "created_at": child.created_at.isoformat() if child.created_at else None,
             "updated_at": child.updated_at.isoformat() if child.updated_at else None,
+            "bookmarks_count": len(child.bookmarks),
             "managers": [{"id": m.id, "username": m.username, "email": m.email} for m in child.managers],
             "children": build_category_tree(categories, child.id),
         }

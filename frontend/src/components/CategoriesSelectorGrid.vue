@@ -88,6 +88,7 @@
               <!-- Category Info -->
               <span class="node-name-zh">{{ row.item.node.name_zh }}</span>
               <span class="node-name-en"> / {{ (row.item.node.name_en && row.item.node.name_en.trim()) ? row.item.node.name_en : '-' }}</span>
+              <span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
               <code v-if="row.item.node.slug && !isCompactLayout" class="node-slug">{{ row.item.node.slug }}</code>
             </label>
           </div>
@@ -153,6 +154,7 @@
                   <!-- Category Info -->
                   <span class="node-name-zh">{{ leaf.node.name_zh }}</span>
                   <span v-if="leaf.node.name_en" class="node-name-en">({{ leaf.node.name_en }})</span>
+                  <span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>
                 </label>
               </div>
             </div>
@@ -181,6 +183,10 @@ const props = defineProps({
     default: true,
   },
   showSlug: {
+    type: Boolean,
+    default: false,
+  },
+  showCount: {
     type: Boolean,
     default: false,
   },
@@ -336,6 +342,15 @@ const renderedRows = computed(() => {
 
   return rows
 })
+
+// Get bookmark count for a category node
+function getItemCount(node) {
+  if (!node) return 0
+  if (node.bookmarks_count !== undefined) return node.bookmarks_count
+  if (node.count !== undefined) return node.count
+  if (Array.isArray(node.bookmarks)) return node.bookmarks.length
+  return 0
+}
 
 // Expand/Collapse methods
 function toggleExpand(id) {
@@ -698,5 +713,18 @@ function handleSelect(id) {
   color: #475569;
   white-space: nowrap;
   margin-left: auto;
+}
+
+.item-count-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--c-primary, var(--primary-color, var(--c-accent, #4338ca)));
+  background-color: #e2e8f0;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 </style>
