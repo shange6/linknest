@@ -1,6 +1,6 @@
 <template>
   <div class="bookmark-list-section">
-    <!-- Top Action Toolbar -->
+    <!-- Unified Top Action Toolbar Box -->
     <div class="list-toolbar">
       <div class="toolbar-left">
         <button @click="openEditor(null)" class="btn-primary-add">
@@ -12,6 +12,19 @@
             📌 分类筛选中
             <button @click="clearCategoryFilter" class="chip-clear-btn" title="清除分类筛选">✕</button>
           </span>
+        </div>
+
+        <!-- Integrated Batch Selection Controls inside the same toolbar -->
+        <div v-if="selectedIds.length > 0" class="integrated-batch-controls">
+          <span class="batch-info-badge">
+            已选中 <strong class="highlight-count">{{ selectedIds.length }}</strong> 项
+          </span>
+          <button @click="handleBatchDelete" class="btn-danger-sm">
+            🗑️ 批量删除
+          </button>
+          <button @click="selectedIds = []" class="btn-secondary-sm">
+            取消选择
+          </button>
         </div>
       </div>
 
@@ -50,21 +63,6 @@
             ☰
           </button>
         </div>
-      </div>
-    </div>
-
-    <!-- Batch Selection Bar (Floating Toolbar when selected > 0) -->
-    <div v-if="selectedIds.length > 0" class="batch-action-bar">
-      <div class="batch-info">
-        已选中 <strong class="highlight-count">{{ selectedIds.length }}</strong> 项书签
-      </div>
-      <div class="batch-buttons">
-        <button @click="handleBatchDelete" class="btn-danger-sm">
-          🗑️ 批量删除 ({{ selectedIds.length }})
-        </button>
-        <button @click="selectedIds = []" class="btn-secondary-sm">
-          取消选择
-        </button>
       </div>
     </div>
 
@@ -346,19 +344,79 @@ async function handleBatchDelete() {
   gap: 16px;
 }
 
-/* Toolbar */
+/* Toolbar Box */
 .list-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .toolbar-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.integrated-batch-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-color, #e2e8f0);
+}
+
+.batch-info-badge {
+  font-size: 13px;
+  color: #475569;
+  background-color: #eef2ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #c7d2fe;
+}
+
+.highlight-count {
+  color: #4f46e5;
+  font-size: 14px;
+}
+
+.btn-danger-sm {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-danger-sm:hover {
+  background-color: #dc2626;
+}
+
+.btn-secondary-sm {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-secondary-sm:hover {
+  background-color: #f8fafc;
 }
 
 .btn-primary-add {
@@ -474,52 +532,6 @@ async function handleBatchDelete() {
 .view-mode-btn.active {
   background-color: #4f46e5;
   color: #ffffff;
-}
-
-/* Batch Action Bar */
-.batch-action-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #eef2ff;
-  border: 1px solid #c7d2fe;
-  padding: 10px 16px;
-  border-radius: 8px;
-  animation: fadeIn 0.2s ease-in-out;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 12px;
-}
-
-.highlight-count {
-  color: #4f46e5;
-  font-size: 15px;
-}
-
-.batch-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-danger-sm {
-  background-color: #ef4444;
-  color: #ffffff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-secondary-sm {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #334155;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
 }
 
 /* Loading & Empty */

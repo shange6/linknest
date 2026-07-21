@@ -2,22 +2,24 @@
   <div class="bookmarks-page">
     <!-- Header Navigation -->
     <header class="app-header">
-      <div class="header-left">
-        <router-link to="/" class="logo-link">
-          <h1 class="logo">LinkNest</h1>
-        </router-link>
-        <nav class="header-nav">
-          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
-          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
-        </nav>
-      </div>
-      <div class="header-right">
-        <ColorThemeSelector />
-        <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
-          {{ auth.locale === 'zh' ? 'English' : '中文' }}
-        </button>
-        <span class="user-info">{{ auth.username }} <span class="badge-admin" v-if="auth.isAdmin">管理员</span></span>
-        <button @click="handleLogout" class="btn-text">登出</button>
+      <div class="header-container">
+        <div class="header-left">
+          <router-link to="/" class="logo-link">
+            <h1 class="logo">LinkNest</h1>
+          </router-link>
+          <nav class="header-nav">
+            <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
+            <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
+          </nav>
+        </div>
+        <div class="header-right">
+          <ColorThemeSelector />
+          <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
+            {{ auth.locale === 'zh' ? 'English' : '中文' }}
+          </button>
+          <span class="user-info">{{ auth.username }} <span class="badge-admin" v-if="auth.isAdmin">管理员</span></span>
+          <button @click="handleLogout" class="btn-text">登出</button>
+        </div>
       </div>
     </header>
 
@@ -125,6 +127,23 @@ onMounted(async () => {
   background-color: #ffffff;
 }
 
+.app-header {
+  border-bottom: 1px solid var(--c-border, #e2e8f0);
+  background: var(--c-bg-secondary, #ffffff);
+  width: 100%;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 24px;
+  box-sizing: border-box;
+}
+
 .logo-link {
   text-decoration: none;
   color: inherit;
@@ -142,12 +161,13 @@ onMounted(async () => {
 /* Layout */
 .main-layout {
   display: flex;
+  justify-content: center;
   flex: 1;
-  max-width: 100%;
   width: 100%;
-  margin: 0;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 24px;
-  gap: 16px;
+  gap: 20px;
   box-sizing: border-box;
 }
 
