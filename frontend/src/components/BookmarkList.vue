@@ -89,62 +89,16 @@
 
     <!-- Grid View Mode -->
     <div v-else-if="viewMode === 'grid'" class="bookmark-grid-view">
-      <div
+      <BookmarkLargeCard
         v-for="bookmark in bookmarkStore.items"
         :key="bookmark.id"
-        class="bm-card"
-        :class="{ 'bm-card--selected': selectedIds.includes(bookmark.id) }"
-      >
-        <!-- Selection Checkbox (top-left absolute) -->
-        <input
-          type="checkbox"
-          :value="bookmark.id"
-          v-model="selectedIds"
-          class="bm-card__checkbox"
-        />
-
-        <!-- Quick Actions (hover top-right) -->
-        <div class="bm-card__actions">
-          <button @click="copyLink(bookmark.href)" class="bm-action-btn" title="复制链接">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </button>
-          <button @click="openEditor(bookmark)" class="bm-action-btn" title="编辑">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </button>
-          <button @click="handleDelete(bookmark.id)" class="bm-action-btn bm-action-btn--danger" title="删除">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-          </button>
-        </div>
-
-        <!-- Card Icon Row -->
-        <div class="bm-card__icon-row">
-          <div class="bm-card__icon" :style="{ backgroundColor: getAvatarBg(bookmark) }">
-            {{ getBookmarkIcon(bookmark) }}
-          </div>
-          <div class="bm-card__domain">{{ formatDisplayUrl(bookmark.href) }}</div>
-        </div>
-
-        <!-- Title -->
-        <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title">
-          {{ getTitle(bookmark) }}
-        </a>
-
-        <!-- Description -->
-        <p class="bm-card__desc">
-          {{ getDesc(bookmark) || '暂无描述' }}
-        </p>
-
-        <!-- Category Tags -->
-        <div class="bm-card__tags" v-if="bookmark.categories?.length">
-          <span
-            v-for="cat in bookmark.categories.slice(0, 3)"
-            :key="cat.id"
-            class="bm-card__tag"
-          >
-            {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
-          </span>
-        </div>
-      </div>
+        :bookmark="bookmark"
+        :selected="selectedIds.includes(bookmark.id)"
+        @update:selected="val => toggleBookmarkSelect(bookmark.id, val)"
+        @copy="copyLink"
+        @edit="openEditor"
+        @delete="handleDelete"
+      />
     </div>
 
     <!-- Table View Mode -->
@@ -246,6 +200,7 @@
 import { ref, computed, inject } from 'vue'
 import { useBookmarkStore } from '../stores/bookmarks'
 import { useAuthStore } from '../stores/auth'
+import BookmarkLargeCard from './BookmarkLargeCard.vue'
 
 const bookmarkStore = useBookmarkStore()
 const auth = useAuthStore()
@@ -270,6 +225,16 @@ function toggleSelectAll() {
     selectedIds.value = []
   } else {
     selectedIds.value = bookmarkStore.items.map((item) => item.id)
+  }
+}
+
+function toggleBookmarkSelect(id, val) {
+  if (val) {
+    if (!selectedIds.value.includes(id)) {
+      selectedIds.value.push(id)
+    }
+  } else {
+    selectedIds.value = selectedIds.value.filter((i) => i !== id)
   }
 }
 
@@ -572,16 +537,9 @@ async function handleBatchDelete() {
 
 /* ─── Bookmark Grid ─── */
 .bookmark-grid-view {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 14px;
-}
-
-@media (max-width: 900px) {
-  .bookmark-grid-view { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .bookmark-grid-view { grid-template-columns: 1fr; }
 }
 
 /* ─── Card Box ─── */
