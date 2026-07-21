@@ -92,50 +92,57 @@
       <div
         v-for="bookmark in bookmarkStore.items"
         :key="bookmark.id"
-        class="bookmark-card-modern"
-        :class="{ 'is-selected': selectedIds.includes(bookmark.id) }"
+        class="bm-card"
+        :class="{ 'bm-card--selected': selectedIds.includes(bookmark.id) }"
       >
-        <div class="card-header">
-          <div class="card-header-left">
-            <input
-              type="checkbox"
-              :value="bookmark.id"
-              v-model="selectedIds"
-              class="card-checkbox"
-            />
-            <div class="favicon-avatar" :style="{ backgroundColor: getAvatarBg(bookmark) }">
-              {{ getBookmarkIcon(bookmark) }}
-            </div>
-          </div>
+        <!-- Selection Checkbox (top-left absolute) -->
+        <input
+          type="checkbox"
+          :value="bookmark.id"
+          v-model="selectedIds"
+          class="bm-card__checkbox"
+        />
 
-          <div class="card-actions-quick">
-            <button @click="copyLink(bookmark.href)" class="icon-btn" title="复制链接">📋</button>
-            <button @click="openEditor(bookmark)" class="icon-btn" title="编辑">✏️</button>
-            <button @click="handleDelete(bookmark.id)" class="icon-btn danger" title="删除">🗑️</button>
-          </div>
+        <!-- Quick Actions (hover top-right) -->
+        <div class="bm-card__actions">
+          <button @click="copyLink(bookmark.href)" class="bm-action-btn" title="复制链接">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <button @click="openEditor(bookmark)" class="bm-action-btn" title="编辑">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button @click="handleDelete(bookmark.id)" class="bm-action-btn bm-action-btn--danger" title="删除">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
         </div>
 
-        <div class="card-body">
-          <a :href="bookmark.href" target="_blank" rel="noopener" class="card-title-link">
-            {{ getTitle(bookmark) }}
-          </a>
-
-          <p class="card-desc" :title="getDesc(bookmark)">
-            {{ getDesc(bookmark) || '暂无详细描述信息' }}
-          </p>
-
-          <div class="card-url-bar">
-            <span class="link-icon">🔗</span>
-            <span class="url-text" :title="bookmark.href">{{ formatDisplayUrl(bookmark.href) }}</span>
+        <!-- Card Icon Row -->
+        <div class="bm-card__icon-row">
+          <div class="bm-card__icon" :style="{ backgroundColor: getAvatarBg(bookmark) }">
+            {{ getBookmarkIcon(bookmark) }}
           </div>
+          <div class="bm-card__domain">{{ formatDisplayUrl(bookmark.href) }}</div>
         </div>
 
-        <div class="card-footer" v-if="bookmark.categories?.length">
-          <div class="categories-chips">
-            <span v-for="cat in bookmark.categories" :key="cat.id" class="chip-badge">
-              {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
-            </span>
-          </div>
+        <!-- Title -->
+        <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title">
+          {{ getTitle(bookmark) }}
+        </a>
+
+        <!-- Description -->
+        <p class="bm-card__desc">
+          {{ getDesc(bookmark) || '暂无描述' }}
+        </p>
+
+        <!-- Category Tags -->
+        <div class="bm-card__tags" v-if="bookmark.categories?.length">
+          <span
+            v-for="cat in bookmark.categories.slice(0, 3)"
+            :key="cat.id"
+            class="bm-card__tag"
+          >
+            {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
+          </span>
         </div>
       </div>
     </div>
@@ -563,169 +570,184 @@ async function handleBatchDelete() {
   margin-bottom: 12px;
 }
 
-/* Modern Grid View */
+/* ─── Bookmark Grid ─── */
 .bookmark-grid-view {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
-.bookmark-card-modern {
-  background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 12px;
+@media (max-width: 900px) {
+  .bookmark-grid-view { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .bookmark-grid-view { grid-template-columns: 1fr; }
+}
+
+/* ─── Card Box ─── */
+.bm-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-  position: relative;
+  gap: 8px;
+  cursor: default;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  min-height: 148px;
 }
 
-.bookmark-card-modern:hover {
+.bm-card:hover {
+  border-color: var(--c-primary, #6366f1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.08);
-  border-color: #cbd5e1;
 }
 
-.bookmark-card-modern.is-selected {
-  border-color: #6366f1;
-  background-color: rgba(99, 102, 241, 0.02);
+.bm-card--selected {
+  border-color: var(--c-primary, #6366f1);
+  background: rgba(99, 102, 241, 0.03);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.card-checkbox {
-  width: 16px;
-  height: 16px;
+/* ─── Checkbox ─── */
+.bm-card__checkbox {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
+  accent-color: var(--c-primary, #6366f1);
+  z-index: 1;
 }
 
-.favicon-avatar {
-  width: 34px;
-  height: 34px;
+/* ─── Hover Actions ─── */
+.bm-card__actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.bm-card:hover .bm-card__actions {
+  opacity: 1;
+}
+
+.bm-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.bm-action-btn:hover {
+  background: #f1f5f9;
+  color: var(--c-primary, #6366f1);
+}
+
+.bm-action-btn--danger:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ─── Icon Row ─── */
+.bm-card__icon-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding-left: 20px; /* offset for checkbox */
+}
+
+.bm-card__icon {
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
   color: #ffffff;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.card-actions-quick {
-  display: flex;
-  gap: 4px;
-  opacity: 0.8;
+.bm-card__domain {
+  font-size: 11px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 44px);
+  font-family: ui-monospace, monospace;
 }
 
-.bookmark-card-modern:hover .card-actions-quick {
-  opacity: 1;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  padding: 4px 6px;
-  cursor: pointer;
-  border-radius: 4px;
+/* ─── Title ─── */
+.bm-card__title {
   font-size: 14px;
-  transition: background-color 0.15s;
-}
-
-.icon-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.icon-btn.danger:hover {
-  background-color: rgba(239, 68, 68, 0.1);
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.card-title-link {
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--text-color, #0f172a);
+  font-weight: 600;
+  color: #0f172a;
   text-decoration: none;
-  line-height: 1.3;
-
-  /* Line clamp 2 */
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.15s;
 }
 
-.card-title-link:hover {
-  color: #4f46e5;
+.bm-card__title:hover {
+  color: var(--c-primary, #6366f1);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.card-desc {
-  font-size: 13px;
-  color: var(--text-muted, #64748b);
-  line-height: 1.4;
-
-  /* Line clamp 2 */
+/* ─── Description ─── */
+.bm-card__desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
+  flex: 1;
 }
 
-.card-url-bar {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  color: #94a3b8;
-  margin-top: 4px;
-}
-
-.url-text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-footer {
-  margin-top: auto;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-color, #f1f5f9);
-}
-
-.categories-chips {
+/* ─── Tags ─── */
+.bm-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
 }
 
-.chip-badge {
-  background-color: rgba(79, 70, 229, 0.08);
-  color: #4f46e5;
+.bm-card__tag {
   font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 4px;
   font-weight: 500;
+  color: var(--c-primary, #4f46e5);
+  background: rgba(99, 102, 241, 0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
-
-/* Modern Table View */
 .bookmark-table-view {
   background-color: var(--card-bg, #ffffff);
   border: 1px solid var(--border-color, #e2e8f0);
