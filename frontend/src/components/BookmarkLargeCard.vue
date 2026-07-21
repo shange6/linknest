@@ -48,14 +48,16 @@
 
     <!-- Category Tags -->
     <div class="bm-card__tags" v-if="bookmark.categories?.length">
-      <span
+      <div
         v-for="cat in bookmark.categories.slice(0, 3)"
         :key="cat.id"
-        class="bm-card__tag"
+        class="bm-card__tag-path"
         :title="getCategoryFullPath(cat)"
       >
-        {{ getCategoryFullPath(cat) }}
-      </span>
+        <span v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx" class="bm-card__tag-chip">
+          {{ name }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -97,14 +99,16 @@ function getCategoryPathNodes(catId, tree) {
   return []
 }
 
-function getCategoryFullPath(cat) {
+function getCategoryPathNames(cat) {
   const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
   if (pathNodes.length > 0) {
-    return pathNodes
-      .map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh) : node.name_zh))
-      .join(' -> ')
+    return pathNodes.map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh) : node.name_zh))
   }
-  return auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh
+  return [auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh]
+}
+
+function getCategoryFullPath(cat) {
+  return getCategoryPathNames(cat).join(' ')
 }
 
 const title = computed(() => {
@@ -312,19 +316,28 @@ const displayUrl = computed(() => {
 .bm-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
   margin-top: auto;
   padding-top: 8px;
   border-top: 1px solid #f1f5f9;
   max-width: 100%;
 }
 
-.bm-card__tag {
+.bm-card__tag-path {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.bm-card__tag-chip {
   font-size: 11px;
   font-weight: 500;
   color: #64748b;
   background: #f1f5f9;
-  padding: 2px 7px;
+  padding: 2px 6px;
   border-radius: 4px;
   white-space: nowrap;
   max-width: 100%;
