@@ -106,13 +106,13 @@
       <table class="modern-table">
         <thead>
           <tr>
-            <th style="width: 40px;">
+            <th style="width: 42px; text-align: center;">
               <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" />
             </th>
-            <th>标题与描述</th>
-            <th>网站链接</th>
-            <th>关联分类</th>
-            <th style="width: 130px; text-align: right;">操作</th>
+            <th style="text-align: center;">标题与描述</th>
+            <th style="width: 140px; text-align: center;">网站链接</th>
+            <th style="width: 180px; text-align: center;">分类</th>
+            <th style="width: 75px; text-align: center;">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +121,7 @@
             :key="bookmark.id"
             :class="{ 'row-selected': selectedIds.includes(bookmark.id) }"
           >
-            <td>
+            <td style="text-align: center; padding: 10px 4px;">
               <input type="checkbox" :value="bookmark.id" v-model="selectedIds" />
             </td>
             <td>
@@ -137,12 +137,12 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td style="text-align: center;">
               <a :href="bookmark.href" target="_blank" rel="noopener" class="table-url-link">
                 {{ formatDisplayUrl(bookmark.href) }}
               </a>
             </td>
-            <td>
+            <td style="text-align: center;">
               <div class="table-categories">
                 <span v-for="cat in bookmark.categories" :key="cat.id" class="chip-badge-sm">
                   {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
@@ -150,11 +150,15 @@
                 <span v-if="!bookmark.categories?.length" class="text-muted-sm">未归类</span>
               </div>
             </td>
-            <td style="text-align: right;">
-              <div class="table-actions">
-                <button @click="copyLink(bookmark.href)" class="icon-btn-sm" title="复制">📋</button>
-                <button @click="openEditor(bookmark)" class="icon-btn-sm" title="编辑">✏️</button>
-                <button @click="handleDelete(bookmark.id)" class="icon-btn-sm danger" title="删除">🗑️</button>
+            <td style="text-align: center; padding: 6px 4px;">
+              <div class="table-actions-2rows">
+                <div class="actions-row">
+                  <button @click="copyLink(bookmark.href)" class="icon-btn-sm" title="复制">📋</button>
+                  <button @click="openEditor(bookmark)" class="icon-btn-sm" title="编辑">✏️</button>
+                </div>
+                <div class="actions-row">
+                  <button @click="handleDelete(bookmark.id)" class="icon-btn-sm danger" title="删除">🗑️</button>
+                </div>
               </div>
             </td>
           </tr>
@@ -559,14 +563,15 @@ async function handleBatchDelete() {
 
 .modern-table th {
   background-color: var(--hover-bg, #f8fafc);
-  padding: 12px 16px;
+  padding: 12px 8px;
   font-weight: 600;
   color: #64748b;
   border-bottom: 1px solid var(--border-color, #e2e8f0);
+  text-align: center;
 }
 
 .modern-table td {
-  padding: 12px 16px;
+  padding: 10px 8px;
   border-bottom: 1px solid var(--border-color, #f1f5f9);
   vertical-align: middle;
 }
@@ -621,7 +626,7 @@ async function handleBatchDelete() {
   text-decoration: none;
 
   display: inline-block;
-  max-width: 240px;
+  max-width: 130px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -630,6 +635,7 @@ async function handleBatchDelete() {
 .table-categories {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 4px;
 }
 
@@ -646,19 +652,29 @@ async function handleBatchDelete() {
   color: #94a3b8;
 }
 
-.table-actions {
+.table-actions-2rows {
   display: flex;
-  justify-content: flex-end;
-  gap: 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.actions-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
 }
 
 .icon-btn-sm {
   background: none;
   border: none;
-  padding: 4px 6px;
+  padding: 3px 5px;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1;
 }
 
 .icon-btn-sm:hover {

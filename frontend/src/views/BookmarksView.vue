@@ -153,7 +153,7 @@ onMounted(async () => {
 
 /* Sidebar */
 .sidebar-panel {
-  width: 350px;
+  width: 340px;
   flex-shrink: 0;
   background-color: var(--card-bg, #ffffff);
   border: none;
