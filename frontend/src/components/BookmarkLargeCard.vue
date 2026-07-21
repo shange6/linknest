@@ -54,9 +54,7 @@
         class="bm-card__tag-path"
         :title="getCategoryFullPath(cat)"
       >
-        <span v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx" class="bm-card__tag-chip">
-          {{ name }}
-        </span>
+        <template v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx"><span class="bm-card__tag-chip">{{ name }}</span><span v-if="idx < getCategoryPathNames(cat).length - 1" class="bm-card__tag-arrow">-</span></template>
       </div>
     </div>
   </div>
@@ -108,7 +106,7 @@ function getCategoryPathNames(cat) {
 }
 
 function getCategoryFullPath(cat) {
-  return getCategoryPathNames(cat).join(' ')
+  return getCategoryPathNames(cat).join('-')
 }
 
 const title = computed(() => {
@@ -157,15 +155,15 @@ const displayUrl = computed(() => {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
-  padding: 10px 14px 14px;
+  padding: 10px 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   cursor: default;
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  width: 260px;
-  min-width: 260px;
-  max-width: 260px;
+  width: 244px;
+  min-width: 244px;
+  max-width: 244px;
   box-sizing: border-box;
 }
 
@@ -264,7 +262,7 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__title {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: #0f172a;
   text-decoration: none;
@@ -285,7 +283,7 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__domain {
-  font-size: 11px;
+  font-size: 12px;
   color: #94a3b8;
   white-space: nowrap;
   overflow: hidden;
@@ -318,8 +316,7 @@ const displayUrl = computed(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: -4px;
-  margin-bottom: 0;
+  margin: 0;
   flex: 1;
 }
 
@@ -327,9 +324,6 @@ const displayUrl = computed(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: auto;
-  padding-top: 8px;
-  border-top: 1px solid #f1f5f9;
   max-width: 100%;
 }
 
@@ -337,22 +331,30 @@ const displayUrl = computed(() => {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 3px;
+  gap: 0;
   max-width: 100%;
   box-sizing: border-box;
 }
 
 .bm-card__tag-chip {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: #64748b;
-  background: #f1f5f9;
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: transparent;
+  padding: 0;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
+}
+
+.bm-card__tag-arrow {
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  padding: 0;
+  user-select: none;
 }
 </style>
