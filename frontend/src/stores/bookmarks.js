@@ -43,6 +43,16 @@ export const useBookmarkStore = defineStore('bookmarks', {
       await this.fetchBookmarks()
     },
 
+    async bulkRemove(ids) {
+      if (!ids || !ids.length) return
+      this.loading = true
+      try {
+        await Promise.all(ids.map((id) => bookmarksAPI.delete(id)))
+      } finally {
+        await this.fetchBookmarks()
+      }
+    },
+
     setCategoryFilter(categoryId) {
       this.categoryId = categoryId
       this.page = 1

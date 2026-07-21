@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <div class="bookmarks-page">
+    <!-- Header Navigation -->
     <header class="app-header">
       <div class="header-left">
         <router-link to="/" class="logo-link">
@@ -21,14 +22,34 @@
     </header>
 
     <div class="main-layout">
-      <aside class="sidebar">
+      <!-- Sidebar Category Tree -->
+      <aside class="sidebar-panel">
         <div class="sidebar-header">
-          <h2 class="sidebar-title">书签分类</h2>
-          <button v-if="categoryStore.selectedNode" @click="categoryStore.clearSelection(); bookmarkStore.setCategoryFilter(null)" class="btn-text-sm">
-            清除筛选
+          <div class="sidebar-title-group">
+            <span class="sidebar-icon">📁</span>
+            <h2 class="sidebar-title">分类结构树</h2>
+          </div>
+          <button
+            v-if="categoryStore.selectedNode"
+            @click="clearCategorySelection"
+            class="btn-clear-selection"
+            title="重置选中的分类"
+          >
+            清除选中
           </button>
         </div>
-        <div class="category-tree" v-if="!categoryStore.loading">
+
+        <!-- Tree Area -->
+        <div class="category-tree-body" v-if="!categoryStore.loading">
+          <div
+            class="all-categories-item"
+            :class="{ 'is-selected': !categoryStore.selectedNode }"
+            @click="clearCategorySelection"
+          >
+            <span class="item-icon">🌐</span>
+            <span class="item-text">全部分类</span>
+          </div>
+
           <CategoryNode
             v-for="node in categoryStore.tree"
             :key="node.id"
@@ -36,14 +57,18 @@
             :depth="0"
           />
         </div>
-        <p v-else class="loading-text">加载分类中...</p>
+        <div v-else class="tree-loading">
+          <span class="loading-spinner"></span> 加载分类中...
+        </div>
       </aside>
 
-      <main class="content">
+      <!-- Main Content Bookmark List -->
+      <main class="content-panel">
         <BookmarkList />
       </main>
     </div>
 
+    <!-- Bookmark Form Editor Modal -->
     <BookmarkEditor
       v-if="editorVisible"
       :editing="editingBookmark"
@@ -85,6 +110,11 @@ function onSaved() {
   bookmarkStore.fetchBookmarks()
 }
 
+function clearCategorySelection() {
+  categoryStore.clearSelection()
+  bookmarkStore.setCategoryFilter(null)
+}
+
 provide('openEditor', openEditor)
 provide('closeEditor', closeEditor)
 
@@ -100,16 +130,150 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.bookmarks-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color, #f8fafc);
+}
+
 .logo-link {
   text-decoration: none;
   color: inherit;
 }
+
 .badge-admin {
-  background-color: var(--primary-color, #4f46e5);
-  color: #fff;
+  background-color: #4f46e5;
+  color: #ffffff;
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 4px;
   margin-left: 4px;
+}
+
+/* Layout */
+.main-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* Sidebar */
+.sidebar-panel {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  max-height: calc(100vh - 120px);
+  position: sticky;
+  top: 80px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #f1f5f9);
+}
+
+.sidebar-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-icon {
+  font-size: 16px;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-color, #0f172a);
+}
+
+.btn-clear-selection {
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.btn-clear-selection:hover {
+  background-color: rgba(79, 70, 229, 0.08);
+}
+
+.category-tree-body {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.all-categories-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color, #334155);
+  transition: background-color 0.15s;
+}
+
+.all-categories-item:hover {
+  background-color: var(--hover-bg, #f1f5f9);
+}
+
+.all-categories-item.is-selected {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.tree-loading {
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Content */
+.content-panel {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .sidebar-panel {
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
 }
 </style>
