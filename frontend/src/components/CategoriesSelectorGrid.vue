@@ -86,9 +86,7 @@
               </span>
 
               <!-- Category Info -->
-              <span class="node-name-zh">{{ row.item.node.name_zh }}</span>
-              <span class="node-name-en"> / {{ (row.item.node.name_en && row.item.node.name_en.trim()) ? row.item.node.name_en : '-' }}</span>
-              <span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
+              <span class="node-name">{{ getCategoryLabel(row.item.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
               <code v-if="row.item.node.slug && !isCompactLayout" class="node-slug">{{ row.item.node.slug }}</code>
             </label>
           </div>
@@ -152,9 +150,7 @@
                   </span>
 
                   <!-- Category Info -->
-                  <span class="node-name-zh">{{ leaf.node.name_zh }}</span>
-                  <span v-if="leaf.node.name_en" class="node-name-en">({{ leaf.node.name_en }})</span>
-                  <span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>
+                  <span class="node-name">{{ getCategoryLabel(leaf.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>
                 </label>
               </div>
             </div>
@@ -189,6 +185,11 @@ const props = defineProps({
   showCount: {
     type: Boolean,
     default: false,
+  },
+  langMode: {
+    type: String,
+    default: 'zh', // 'zh' (仅中文) | 'en' (仅英文) | 'both' (中英双语)
+    validator: (val) => ['zh', 'en', 'both'].includes(val),
   },
   compact: {
     type: Boolean,
@@ -342,6 +343,23 @@ const renderedRows = computed(() => {
 
   return rows
 })
+
+// Get category display label based on langMode ('zh' | 'en' | 'both')
+function getCategoryLabel(node) {
+  if (!node) return ''
+  const zh = (node.name_zh || '').trim()
+  const en = (node.name_en || '').trim()
+
+  if (props.langMode === 'en') {
+    return en || zh
+  }
+  if (props.langMode === 'both') {
+    if (zh && en) return `${zh} / ${en}`
+    return zh || en
+  }
+  // Default: 'zh'
+  return zh || en
+}
 
 // Get bookmark count for a category node
 function getItemCount(node) {
@@ -691,16 +709,10 @@ function handleSelect(id) {
 .lvl-3 { background: #f3e8ff; color: #6b21a8; }
 .lvl-4 { background: #ffe4e6; color: #be123c; }
 
-.node-name-zh {
+.node-name {
   font-weight: 500;
   color: #0f172a;
   font-size: 0.84rem;
-  white-space: nowrap;
-}
-
-.node-name-en {
-  color: #64748b;
-  font-size: 0.78rem;
   white-space: nowrap;
 }
 
@@ -719,11 +731,11 @@ function handleSelect(id) {
   font-size: 0.68rem;
   font-weight: 600;
   color: var(--c-primary, var(--primary-color, var(--c-accent, #4338ca)));
-  background-color: #e2e8f0;
+  background-color: #f1f5f9;
   border: 1px solid rgba(0, 0, 0, 0.04);
   padding: 1px 5px;
   border-radius: 4px;
-  margin-left: 4px;
+  margin-left: 0;
   white-space: nowrap;
   flex-shrink: 0;
 }

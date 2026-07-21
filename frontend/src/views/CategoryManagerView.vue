@@ -1100,12 +1100,12 @@ onMounted(loadCategories)
 /* Subcategory Count Badge */
 .count-badge {
   display: inline-block;
-  background: #e0f2fe;
-  color: #0369a1;
+  background: #f1f5f9;
+  color: var(--c-primary, #2563eb);
   font-weight: 600;
-  font-size: 0.78rem;
-  padding: 2px 8px;
-  border-radius: 12px;
+  font-size: 0.75rem;
+  padding: 1px 5px;
+  border-radius: 4px;
 }
 
 .count-zero {

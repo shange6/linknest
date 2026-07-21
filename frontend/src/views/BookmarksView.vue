@@ -122,7 +122,7 @@ onMounted(async () => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-color, #f8fafc);
+  background-color: #ffffff;
 }
 
 .logo-link {
@@ -153,7 +153,7 @@ onMounted(async () => {
 
 /* Sidebar */
 .sidebar-panel {
-  width: 280px;
+  width: 350px;
   flex-shrink: 0;
   background-color: var(--card-bg, #ffffff);
   border: 1px solid var(--border-color, #e2e8f0);
