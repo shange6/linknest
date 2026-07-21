@@ -156,7 +156,7 @@ onMounted(async () => {
   width: 350px;
   flex-shrink: 0;
   background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: none;
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -165,7 +165,7 @@ onMounted(async () => {
   max-height: calc(100vh - 120px);
   position: sticky;
   top: 80px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 .sidebar-header {
