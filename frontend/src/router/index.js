@@ -2,12 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import HomeView from '../views/HomeView.vue'
+import BookmarksView from '../views/BookmarksView.vue'
 import CategoryManagerView from '../views/CategoryManagerView.vue'
 
 const routes = [
+  { path: '/', name: 'home', component: HomeView },
   { path: '/login', name: 'login', component: LoginView },
   { path: '/register', name: 'register', component: RegisterView },
-  { path: '/', name: 'home', component: HomeView, meta: { requiresAuth: true } },
+  { path: '/admin/bookmarks', name: 'bookmarks', component: BookmarksView, meta: { requiresAuth: true, requiresAdmin: true } },
   { path: '/admin/categories', name: 'category-manager', component: CategoryManagerView, meta: { requiresAuth: true, requiresAdmin: true } },
 ]
 

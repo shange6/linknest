@@ -3,9 +3,11 @@
     <!-- Header Navigation -->
     <header class="app-header">
       <div class="header-left">
-        <h1 class="logo">LinkNest</h1>
+        <router-link to="/" class="logo-link">
+          <h1 class="logo">LinkNest</h1>
+        </router-link>
         <nav class="header-nav">
-          <router-link to="/" class="nav-item">书签</router-link>
+          <router-link to="/admin/bookmarks" class="nav-item">书签</router-link>
           <router-link to="/admin/categories" class="nav-item active">分类管理</router-link>
         </nav>
       </div>
