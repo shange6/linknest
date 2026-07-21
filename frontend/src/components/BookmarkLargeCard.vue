@@ -157,7 +157,7 @@ const displayUrl = computed(() => {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
-  padding: 14px;
+  padding: 10px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -183,13 +183,23 @@ const displayUrl = computed(() => {
 
 .bm-card__checkbox {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 15px;
-  height: 15px;
+  top: 6px;
+  left: 8px;
+  margin: 0;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   accent-color: var(--c-primary, #6366f1);
-  z-index: 1;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.bm-card:hover .bm-card__checkbox,
+.bm-card--selected .bm-card__checkbox {
+  opacity: 1;
 }
 
 .bm-card__actions {
@@ -234,10 +244,10 @@ const displayUrl = computed(() => {
 
 .bm-card__header-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  margin-top: 4px;
-  padding-left: 20px;
+  margin-top: 0;
+  padding-left: 0;
 }
 
 .bm-card__icon {
