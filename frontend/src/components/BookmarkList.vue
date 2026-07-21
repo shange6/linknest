@@ -486,6 +486,9 @@ async function handleBatchDelete() {
   padding: 10px 16px;
   border-radius: 8px;
   animation: fadeIn 0.2s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
 }
 
 .highlight-count {

@@ -416,9 +416,9 @@ function handleSelect(id) {
 
 <style scoped>
 .categories-selector-grid-container {
-  border: 1px solid #cbd5e1;
+  border: 1px solid #bbf7d0;
   border-radius: 8px;
-  background: #ffffff;
+  background: #f0fdf4;
   overflow: hidden;
 }
 
@@ -428,8 +428,8 @@ function handleSelect(id) {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  background: #dcfce7;
+  border-bottom: 1px solid #bbf7d0;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
@@ -551,11 +551,11 @@ function handleSelect(id) {
 }
 
 .node-row:hover {
-  background-color: #f8fafc;
+  background-color: #dcfce7;
 }
 
 .node-row.is-selected {
-  background-color: #eff6ff;
+  background-color: #bbf7d0;
 }
 
 .node-row.is-disabled {
@@ -588,8 +588,8 @@ function handleSelect(id) {
   gap: 0.3rem;
   padding: 0.18rem 0.45rem;
   border-radius: 5px;
-  border: 1px solid #e2e8f0;
-  background: transparent;
+  border: 1px solid #bbf7d0;
+  background: #ffffff;
   cursor: pointer;
   transition: background-color 0.12s ease, border-color 0.12s ease;
   flex: 0 0 auto;   /* size to content, allow wrapping */
@@ -598,13 +598,13 @@ function handleSelect(id) {
 }
 
 .leaf-chip:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-  border-color: #cbd5e1;
+  background-color: #dcfce7;
+  border-color: #86efac;
 }
 
 .leaf-chip.is-selected {
-  background-color: rgba(37, 99, 235, 0.1);
-  border-color: var(--c-primary, #2563eb);
+  background-color: #bbf7d0;
+  border-color: #4ade80;
 }
 
 .leaf-chip.is-disabled {

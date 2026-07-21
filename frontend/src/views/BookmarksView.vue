@@ -143,22 +143,22 @@ onMounted(async () => {
 .main-layout {
   display: flex;
   flex: 1;
-  max-width: 1440px;
+  max-width: 100%;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding: 24px;
-  gap: 24px;
+  gap: 16px;
   box-sizing: border-box;
 }
 
 /* Sidebar */
 .sidebar-panel {
-  width: 340px;
+  width: 300px;
   flex-shrink: 0;
-  background-color: var(--card-bg, #ffffff);
+  background-color: transparent;
   border: none;
   border-radius: 12px;
-  padding: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   height: fit-content;
