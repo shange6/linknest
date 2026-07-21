@@ -27,10 +27,10 @@
         <div class="sidebar-header">
           <div class="sidebar-title-group">
             <span class="sidebar-icon">📁</span>
-            <h2 class="sidebar-title">分类结构树</h2>
+            <h2 class="sidebar-title">分类筛选器</h2>
           </div>
           <button
-            v-if="categoryStore.selectedNode"
+            v-if="selectedCategoryIds && (Array.isArray(selectedCategoryIds) ? selectedCategoryIds.length : selectedCategoryIds)"
             @click="clearCategorySelection"
             class="btn-clear-selection"
             title="重置选中的分类"
@@ -39,22 +39,13 @@
           </button>
         </div>
 
-        <!-- Tree Area -->
+        <!-- Categories Selector Grid Container -->
         <div class="category-tree-body" v-if="!categoryStore.loading">
-          <div
-            class="all-categories-item"
-            :class="{ 'is-selected': !categoryStore.selectedNode }"
-            @click="clearCategorySelection"
-          >
-            <span class="item-icon">🌐</span>
-            <span class="item-text">全部分类</span>
-          </div>
-
-          <CategoryNode
-            v-for="node in categoryStore.tree"
-            :key="node.id"
-            :node="node"
-            :depth="0"
+          <CategoriesSelectorGrid
+            :categories="categoryStore.tree"
+            v-model="selectedCategoryIds"
+            :multiple="true"
+            maxHeight="calc(100vh - 220px)"
           />
         </div>
         <div v-else class="tree-loading">
@@ -79,12 +70,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, provide } from 'vue'
+import { ref, onMounted, provide, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { useCategoryStore } from '../stores/categories'
 import { useBookmarkStore } from '../stores/bookmarks'
-import CategoryNode from '../components/CategoryNode.vue'
+import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
 import BookmarkList from '../components/BookmarkList.vue'
 import BookmarkEditor from '../components/BookmarkEditor.vue'
 import ColorThemeSelector from '../components/ColorThemeSelector.vue'
@@ -96,6 +87,16 @@ const bookmarkStore = useBookmarkStore()
 
 const editorVisible = ref(false)
 const editingBookmark = ref(null)
+const selectedCategoryIds = ref([])
+
+watch(selectedCategoryIds, (val) => {
+  if (val && val.length > 0) {
+    // 按最新选中的分类进行书签筛选
+    bookmarkStore.setCategoryFilter(val[val.length - 1])
+  } else {
+    bookmarkStore.setCategoryFilter(null)
+  }
+})
 
 function openEditor(bookmark = null) {
   editingBookmark.value = bookmark
@@ -111,6 +112,7 @@ function onSaved() {
 }
 
 function clearCategorySelection() {
+  selectedCategoryIds.value = []
   categoryStore.clearSelection()
   bookmarkStore.setCategoryFilter(null)
 }
