@@ -52,8 +52,9 @@
         v-for="cat in bookmark.categories.slice(0, 3)"
         :key="cat.id"
         class="bm-card__tag"
+        :title="getCategoryFullPath(cat)"
       >
-        {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
+        {{ getCategoryFullPath(cat) }}
       </span>
     </div>
   </div>
@@ -62,6 +63,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAuthStore } from '../stores/auth'
+import { useCategoryStore } from '../stores/categories'
 
 const props = defineProps({
   bookmark: {
@@ -77,6 +79,33 @@ const props = defineProps({
 defineEmits(['update:selected', 'copy', 'edit', 'delete'])
 
 const auth = useAuthStore()
+const categoryStore = useCategoryStore()
+
+function getCategoryPathNodes(catId, tree) {
+  if (!tree || !Array.isArray(tree)) return []
+  for (const node of tree) {
+    if (node.id === catId) {
+      return [node]
+    }
+    if (node.children && node.children.length > 0) {
+      const subPath = getCategoryPathNodes(catId, node.children)
+      if (subPath.length > 0) {
+        return [node, ...subPath]
+      }
+    }
+  }
+  return []
+}
+
+function getCategoryFullPath(cat) {
+  const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
+  if (pathNodes.length > 0) {
+    return pathNodes
+      .map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh) : node.name_zh))
+      .join(' -> ')
+  }
+  return auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh
+}
 
 const title = computed(() => {
   if (auth.locale === 'en') {
@@ -293,8 +322,8 @@ const displayUrl = computed(() => {
 .bm-card__tag {
   font-size: 11px;
   font-weight: 500;
-  color: var(--c-primary, #4f46e5);
-  background: rgba(99, 102, 241, 0.08);
+  color: #64748b;
+  background: #f1f5f9;
   padding: 2px 7px;
   border-radius: 4px;
   white-space: nowrap;
