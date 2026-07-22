@@ -7,8 +7,6 @@
       class="btn-text theme-trigger-btn"
       :title="auth.locale === 'zh' ? '切换配色与主题' : 'Switch Color Theme'"
     >
-      <span class="theme-icon">🎨</span>
-      <span class="color-dot" :style="{ backgroundColor: themeStore.activePrimary }"></span>
       <span class="theme-btn-label">{{ auth.locale === 'zh' ? '配色' : 'Theme' }}</span>
     </button>
 
@@ -159,36 +157,25 @@ onUnmounted(() => {
 .theme-trigger-btn {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
   font-size: 0.88rem;
   cursor: pointer;
   background: none;
   border: none;
-  color: var(--c-text-secondary, #64748b);
   padding: 0.3rem 0.5rem;
   border-radius: 4px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, opacity 0.15s ease;
 }
 
 .theme-trigger-btn:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: var(--c-text, #0f172a);
-}
-
-.theme-icon {
-  font-size: 0.95rem;
-}
-
-.color-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  opacity: 0.85;
 }
 
 .theme-btn-label {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--c-primary, #2563eb);
+  transition: color 0.2s ease;
 }
 
 /* Popover Dropdown Styling */
@@ -228,7 +215,7 @@ onUnmounted(() => {
 }
 
 .popover-title {
-  font-size: 0.84rem;
+  font-size: 0.80rem;
   font-weight: 600;
   color: var(--c-text, #0f172a);
 }
@@ -238,7 +225,7 @@ onUnmounted(() => {
   border: none;
   cursor: pointer;
   color: var(--c-text-muted, #94a3b8);
-  font-size: 0.85rem;
+  font-size: 0.80rem;
 }
 
 .popover-section {
@@ -259,7 +246,8 @@ onUnmounted(() => {
 .section-label {
   display: block;
   font-size: 0.80rem;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 1.2;
   color: var(--c-text, #0f172a);
   margin-bottom: 0.4rem;
 }
@@ -284,7 +272,7 @@ onUnmounted(() => {
 }
 
 .toggle-label-text {
-  font-size: 0.76rem;
+  font-size: 0.80rem;
   font-weight: 500;
   color: var(--c-text-secondary, #64748b);
 }
@@ -337,7 +325,7 @@ onUnmounted(() => {
   border: 1px solid var(--c-border, #e2e8f0);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.80rem;
   color: var(--c-text, #334155);
   transition: all 0.15s ease;
 }
@@ -426,7 +414,7 @@ onUnmounted(() => {
 
 .color-hex-badge {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 0.76rem;
+  font-size: 0.80rem;
   font-weight: 500;
   color: var(--c-text-secondary, #64748b);
   letter-spacing: 0.5px;
