@@ -612,8 +612,16 @@ async function handleBatchDelete() {
   vertical-align: middle;
 }
 
+.modern-table input[type="checkbox"] {
+  accent-color: var(--c-primary, #2563eb);
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
 .modern-table tr.row-selected {
-  background-color: rgba(99, 102, 241, 0.04);
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 6%, transparent);
 }
 
 .table-title-cell {
@@ -642,7 +650,7 @@ async function handleBatchDelete() {
 }
 
 .table-link:hover {
-  color: #4f46e5;
+  color: var(--c-primary, #2563eb);
 }
 
 .table-desc {
@@ -676,8 +684,8 @@ async function handleBatchDelete() {
 }
 
 .chip-badge-sm {
-  background-color: rgba(79, 70, 229, 0.08);
-  color: #4f46e5;
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 10%, transparent);
+  color: var(--c-primary, #2563eb);
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 4px;
