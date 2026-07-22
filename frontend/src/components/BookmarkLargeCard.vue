@@ -47,16 +47,15 @@
       {{ description || '暂无描述' }}
     </p>
 
-    <!-- Category Tags (Only First Category) -->
+    <!-- Category Tags -->
     <div class="bm-card__tags" v-if="bookmark.categories?.length">
       <div
         class="bm-card__tag-path"
-        :title="getCategoryFullPath(bookmark.categories[0])"
+        :title="categoriesTooltip"
       >
-        <template v-for="(name, idx) in getCategoryPathNames(bookmark.categories[0])" :key="idx">
-          <span class="bm-card__tag-chip">{{ name }}</span>
-          <span v-if="idx < getCategoryPathNames(bookmark.categories[0]).length - 1" class="bm-card__tag-arrow">-</span>
-        </template>
+        <span class="bm-card__tag-chip">
+          <bdi dir="ltr">{{ displayCategoryPath }}</bdi>
+        </span>
       </div>
     </div>
   </div>
@@ -121,6 +120,20 @@ function getCategoryPathNames(cat) {
 function getCategoryFullPath(cat) {
   return getCategoryPathNames(cat).join(' - ')
 }
+
+const displayCategoryPath = computed(() => {
+  if (!props.bookmark.categories || props.bookmark.categories.length === 0) return ''
+  const firstPath = getCategoryFullPath(props.bookmark.categories[0])
+  if (props.bookmark.categories.length > 1) {
+    return `... ${firstPath}`
+  }
+  return firstPath
+})
+
+const categoriesTooltip = computed(() => {
+  if (!props.bookmark.categories || props.bookmark.categories.length === 0) return ''
+  return props.bookmark.categories.map(cat => getCategoryFullPath(cat)).join('\n')
+})
 
 const title = computed(() => {
   return props.bookmark.title || props.bookmark.name || props.bookmark.href
@@ -334,49 +347,41 @@ const displayUrl = computed(() => {
   flex: 1;
 }
 
-/* 第 4 行：分类标签（靠右对齐，严格保在单行呈现） */
+/* 第 4 行：分类标签（靠右对齐；显示不开时优先显示右侧末级分类，左侧祖先节点截断并显示 ...） */
 .bm-card__tags {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 6px;
-  max-width: 100%;
+  width: 100%;
   overflow: hidden;
   align-items: center;
   justify-content: flex-end;
 }
 
 .bm-card__tag-path {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 0;
-  max-width: 100%;
+  display: block;
+  width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
 }
 
 .bm-card__tag-chip {
-  font-size: 11px;
+  display: block;
+  width: 100%;
+  font-size: 12px;
   font-weight: 500;
   color: var(--c-text-secondary, #64748b);
   background: transparent;
   padding: 0;
   white-space: nowrap;
-  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  direction: rtl;
+  text-align: right;
   box-sizing: border-box;
 }
 
-.bm-card__tag-arrow {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--c-text-secondary, #94a3b8);
-  background: transparent;
-  padding: 0 2px;
-  user-select: none;
+.bm-card__tag-chip bdi {
+  unicode-bidi: isolate;
 }
 </style>
 
