@@ -388,8 +388,13 @@ async function handleBatchDelete() {
 .btn-danger-sm {
   background-color: #ef4444;
   color: #ffffff;
-  border: none;
-  padding: 6px 12px;
+  border: 1px solid transparent;
+  padding: 0 12px;
+  height: 32px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
@@ -405,7 +410,12 @@ async function handleBatchDelete() {
   background-color: #ffffff;
   border: 1px solid #cbd5e1;
   color: #334155;
-  padding: 6px 12px;
+  padding: 0 12px;
+  height: 32px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
@@ -428,14 +438,17 @@ async function handleBatchDelete() {
 .btn-primary-add {
   background-color: var(--c-primary, #2563eb);
   color: #ffffff;
-  border: none;
-  padding: 6px 14px;
+  border: 1px solid transparent;
+  padding: 0 14px;
+  height: 32px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
   gap: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
