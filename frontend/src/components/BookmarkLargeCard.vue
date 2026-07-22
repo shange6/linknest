@@ -220,8 +220,8 @@ const displayUrl = computed(() => {
 
 .bm-card__actions {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   display: flex;
   gap: 3px;
   opacity: 0;
@@ -236,16 +236,17 @@ const displayUrl = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 23px;
+  height: 23px;
+  padding: 0;
   border: 1px solid var(--c-border, #e2e8f0);
-  border-radius: 6px;
+  border-radius: 5px;
   background: var(--c-bg-secondary, rgba(255, 255, 255, 0.9));
   backdrop-filter: blur(4px);
   color: var(--c-text-secondary, #475569);
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 }
 
 .bm-action-btn:hover {
