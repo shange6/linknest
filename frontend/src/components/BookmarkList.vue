@@ -99,8 +99,11 @@
             <th v-if="settingsStore.bookmarkColumns?.includes('checkbox')" style="width: 40px; text-align: center;">
               <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" />
             </th>
-            <th v-if="settingsStore.bookmarkColumns?.includes('title')" style="width: 45%; text-align: center;">标题与描述</th>
-            <th v-if="settingsStore.bookmarkColumns?.includes('url')" style="width: 20%; text-align: center;">网站链接</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('icon')" style="width: 45px; text-align: center;">图标</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('name')" style="width: 18%; text-align: center;">名称</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('title')" style="width: 22%; text-align: center;">标题</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('url')" style="width: 18%; text-align: center;">网站链接</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('description')" style="width: 22%; text-align: center;">说明</th>
             <th v-if="settingsStore.bookmarkColumns?.includes('categories')" style="width: 10%; text-align: center;">分类</th>
             <th v-if="settingsStore.bookmarkColumns?.includes('actions')" style="width: 50px; text-align: center;">操作</th>
           </tr>
@@ -114,24 +117,27 @@
             <td v-if="settingsStore.bookmarkColumns?.includes('checkbox')" style="text-align: center; padding: 10px 4px;">
               <input type="checkbox" :value="bookmark.id" v-model="selectedIds" />
             </td>
-            <td v-if="settingsStore.bookmarkColumns?.includes('title')">
-              <div class="table-title-cell">
-                <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(bookmark) ? 'transparent' : getAvatarBg(bookmark) }">
-                  <img v-if="isImgIcon(bookmark)" :src="bookmark.icon" alt="" class="table-img-icon" />
-                  <span v-else>{{ getBookmarkIcon(bookmark) }}</span>
-                </div>
-                <div class="title-meta">
-                  <a :href="bookmark.href" target="_blank" rel="noopener" class="table-link">
-                    {{ getTitle(bookmark) }}
-                  </a>
-                  <p v-if="getDesc(bookmark)" class="table-desc">{{ getDesc(bookmark) }}</p>
-                </div>
+            <td v-if="settingsStore.bookmarkColumns?.includes('icon')" style="text-align: center; padding: 6px 4px;">
+              <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(bookmark) ? 'transparent' : getAvatarBg(bookmark) }">
+                <img v-if="isImgIcon(bookmark)" :src="bookmark.icon" alt="" class="table-img-icon" />
+                <span v-else>{{ getBookmarkIcon(bookmark) }}</span>
               </div>
             </td>
+            <td v-if="settingsStore.bookmarkColumns?.includes('name')">
+              <a :href="bookmark.href" target="_blank" rel="noopener" class="table-link" :title="getName(bookmark)">
+                {{ getName(bookmark) }}
+              </a>
+            </td>
+            <td v-if="settingsStore.bookmarkColumns?.includes('title')">
+              <span class="table-text-title" :title="getTitle(bookmark)">{{ getTitle(bookmark) || '-' }}</span>
+            </td>
             <td v-if="settingsStore.bookmarkColumns?.includes('url')" style="text-align: center;">
-              <a :href="bookmark.href" target="_blank" rel="noopener" class="table-url-link">
+              <a :href="bookmark.href" target="_blank" rel="noopener" class="table-url-link" :title="bookmark.href">
                 {{ formatDisplayUrl(bookmark.href) }}
               </a>
+            </td>
+            <td v-if="settingsStore.bookmarkColumns?.includes('description')">
+              <span class="table-text-desc" :title="getDesc(bookmark)">{{ getDesc(bookmark) || '-' }}</span>
             </td>
             <td v-if="settingsStore.bookmarkColumns?.includes('categories')" style="text-align: center;">
               <div class="table-categories">
@@ -256,8 +262,12 @@ function isImgIcon(bookmark) {
   return icon && (icon.startsWith('http://') || icon.startsWith('https://') || icon.startsWith('data:image/'))
 }
 
+function getName(bookmark) {
+  return bookmark.name || bookmark.title || bookmark.href
+}
+
 function getTitle(bookmark) {
-  return bookmark.title || bookmark.name || bookmark.href
+  return bookmark.title || ''
 }
 
 function getDesc(bookmark) {
@@ -265,8 +275,8 @@ function getDesc(bookmark) {
 }
 
 function getBookmarkIcon(bookmark) {
-  const title = getTitle(bookmark)
-  return title.charAt(0).toUpperCase() || '🔗'
+  const text = getName(bookmark)
+  return text.charAt(0).toUpperCase() || '🔗'
 }
 
 function getAvatarBg(bookmark) {
@@ -277,7 +287,7 @@ function getAvatarBg(bookmark) {
     'color-mix(in srgb, var(--c-primary, #2563eb) 90%, #059669)',
     'color-mix(in srgb, var(--c-primary, #2563eb) 80%, #7c3aed)',
   ]
-  const charCode = getTitle(bookmark).charCodeAt(0) || 0
+  const charCode = getName(bookmark).charCodeAt(0) || 0
   return colors[charCode % colors.length]
 }
 
@@ -651,6 +661,24 @@ async function handleBatchDelete() {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.table-text-title {
+  font-size: 13px;
+  color: var(--c-text, #0f172a);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-text-desc {
+  font-size: 12.5px;
+  color: var(--c-text-secondary, #64748b);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table-url-link {

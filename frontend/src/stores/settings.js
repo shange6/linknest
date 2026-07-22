@@ -3,8 +3,11 @@ import { useThemeStore } from './theme'
 
 export const DEFAULT_BOOKMARK_COLUMNS = [
   { key: 'checkbox', label_zh: '多选', label_en: 'Select' },
-  { key: 'title', label_zh: '标题与描述', label_en: 'Title & Desc' },
+  { key: 'icon', label_zh: '图标', label_en: 'Icon' },
+  { key: 'name', label_zh: '名称', label_en: 'Name' },
+  { key: 'title', label_zh: '标题', label_en: 'Title' },
   { key: 'url', label_zh: '网站链接', label_en: 'URL' },
+  { key: 'description', label_zh: '说明', label_en: 'Desc' },
   { key: 'categories', label_zh: '所属分类', label_en: 'Categories' },
   { key: 'actions', label_zh: '操作', label_en: 'Actions' }
 ]
@@ -24,6 +27,24 @@ function getLocalJSON(key, defaultVal) {
   } catch {
     return defaultVal
   }
+}
+
+function getLocalBookmarkColumns() {
+  try {
+    const val = localStorage.getItem('setting_bookmark_columns')
+    if (val) {
+      const parsed = JSON.parse(val)
+      if (Array.isArray(parsed)) {
+        if (parsed.includes('title') && !parsed.includes('name')) {
+          const idx = parsed.indexOf('title')
+          parsed.splice(idx, 1, 'icon', 'name', 'title', 'description')
+          localStorage.setItem('setting_bookmark_columns', JSON.stringify(parsed))
+        }
+        return parsed
+      }
+    }
+  } catch {}
+  return ['checkbox', 'icon', 'name', 'title', 'url', 'description', 'categories', 'actions']
 }
 
 export const useSettingsStore = defineStore('settings', {
@@ -47,7 +68,7 @@ export const useSettingsStore = defineStore('settings', {
     categoryColumns: getLocalJSON('setting_category_columns', ['id', 'name', 'slug', 'status', 'actions']),
 
     // 9. Bookmark Table View Columns
-    bookmarkColumns: getLocalJSON('setting_bookmark_columns', ['checkbox', 'title', 'url', 'categories', 'actions'])
+    bookmarkColumns: getLocalBookmarkColumns()
   }),
 
   actions: {
@@ -108,7 +129,7 @@ export const useSettingsStore = defineStore('settings', {
       this.setShowCardDesc(true)
       this.setCategoryLooseMode(false)
       this.setCategoryFoldAll(false)
-      this.bookmarkColumns = ['checkbox', 'title', 'url', 'categories', 'actions']
+      this.bookmarkColumns = ['checkbox', 'icon', 'name', 'title', 'url', 'description', 'categories', 'actions']
       this.categoryColumns = ['id', 'name', 'slug', 'status', 'actions']
       localStorage.setItem('setting_bookmark_columns', JSON.stringify(this.bookmarkColumns))
       localStorage.setItem('setting_category_columns', JSON.stringify(this.categoryColumns))
