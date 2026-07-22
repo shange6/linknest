@@ -164,6 +164,9 @@
 
 <script setup>
 import { ref, computed, reactive, watch } from 'vue'
+import { useSettingsStore } from '../stores/settings'
+
+const settingsStore = useSettingsStore()
 
 const props = defineProps({
   categories: {
@@ -188,7 +191,7 @@ const props = defineProps({
   },
   langMode: {
     type: String,
-    default: 'zh', // 'zh' (仅中文) | 'en' (仅英文) | 'both' (中英双语)
+    default: 'zh',
     validator: (val) => ['zh', 'en', 'both'].includes(val),
   },
   compact: {
@@ -208,17 +211,33 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const searchQuery = ref('')
-const isLooseLayout = ref(!props.compact)
+const isLooseLayout = computed({
+  get: () => settingsStore.categoryLooseMode,
+  set: (val) => settingsStore.setCategoryLooseMode(val)
+})
 const isCompactLayout = computed(() => !isLooseLayout.value)
 const expandedMap = reactive({})
-const allExpanded = ref(true)
+const allExpanded = ref(!settingsStore.categoryFoldAll)
 const radioName = 'cat_radio_' + Math.random().toString(36).substr(2, 9)
 
 watch(
-  () => props.compact,
-  (val) => {
-    isLooseLayout.value = !val
-  }
+  () => settingsStore.categoryFoldAll,
+  (foldAll) => {
+    if (foldAll) {
+      allExpanded.value = false
+      Object.keys(expandedMap).forEach(key => {
+        expandedMap[key] = false
+      })
+    } else {
+      allExpanded.value = true
+      if (flatList.value) {
+        flatList.value.forEach(item => {
+          if (item.node.id) expandedMap[item.node.id] = true
+        })
+      }
+    }
+  },
+  { immediate: true }
 )
 
 // Recursively flatten tree with depth & parent tracking

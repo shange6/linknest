@@ -27,6 +27,7 @@
 
       <div class="header-right">
         <ColorThemeSelector />
+        <SettingsSelector />
         <button
           @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')"
           class="btn-text"
@@ -55,6 +56,7 @@
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import ColorThemeSelector from './ColorThemeSelector.vue'
+import SettingsSelector from './SettingsSelector.vue'
 
 const router = useRouter()
 const auth = useAuthStore()

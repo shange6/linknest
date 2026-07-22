@@ -47,8 +47,8 @@
       {{ title }}
     </div>
 
-    <!-- Description -->
-    <p class="bm-card__desc" :title="description || '暂无描述'">
+    <!-- Description (Controlled by showDesc prop) -->
+    <p class="bm-card__desc" v-if="showDesc" :title="description || '暂无描述'">
       {{ description || '暂无描述' }}
     </p>
 
@@ -81,6 +81,10 @@ const props = defineProps({
     default: false
   },
   showHref: {
+    type: Boolean,
+    default: true
+  },
+  showDesc: {
     type: Boolean,
     default: true
   }

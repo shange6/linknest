@@ -428,6 +428,7 @@
 import { ref, computed, reactive, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import { useSettingsStore } from '../stores/settings'
 import { categoriesAPI } from '../api/endpoints'
 import AppHeader from '../components/AppHeader.vue'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
@@ -435,6 +436,7 @@ import ColorThemeSelector from '../components/ColorThemeSelector.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
+const settingsStore = useSettingsStore()
 
 // State
 const rawTree = ref([])
@@ -443,24 +445,24 @@ const searchQuery = ref('')
 const expandedMap = reactive({})
 const allExpanded = ref(true)
 
-// Table Column Visibility State with LocalStorage Persistence
-const columnsVisible = reactive({
-  id: localStorage.getItem('cat_col_id') !== 'false',
-  name: localStorage.getItem('cat_col_name') !== 'false',
-  slug: localStorage.getItem('cat_col_slug') !== 'false',
-  count: localStorage.getItem('cat_col_count') !== 'false',
-  sort: localStorage.getItem('cat_col_sort') !== 'false',
-  timestamps: localStorage.getItem('cat_col_timestamps') === 'true', // default false
-  description: localStorage.getItem('cat_col_description') === 'true', // default false
-  actions: localStorage.getItem('cat_col_actions') !== 'false'
-})
+// Table Column Visibility State synced with settingsStore
+const columnsVisible = computed(() => ({
+  id: settingsStore.categoryColumns.includes('id'),
+  name: settingsStore.categoryColumns.includes('name'),
+  slug: settingsStore.categoryColumns.includes('slug'),
+  status: settingsStore.categoryColumns.includes('status'),
+  count: settingsStore.categoryColumns.includes('count'),
+  sort: settingsStore.categoryColumns.includes('sort'),
+  timestamps: settingsStore.categoryColumns.includes('timestamps'),
+  description: settingsStore.categoryColumns.includes('description'),
+  actions: settingsStore.categoryColumns.includes('actions')
+}))
 
 const isColumnDropdownOpen = ref(false)
 const columnDropdownRef = ref(null)
 
 function toggleColumnVisibility(colKey) {
-  columnsVisible[colKey] = !columnsVisible[colKey]
-  localStorage.setItem(`cat_col_${colKey}`, columnsVisible[colKey] ? 'true' : 'false')
+  settingsStore.toggleCategoryColumn(colKey)
 }
 
 function handleClickOutsideColumns(e) {

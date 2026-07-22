@@ -36,8 +36,8 @@
         <div class="view-mode-toggle">
           <button
             type="button"
-            :class="{ active: viewMode === 'grid' }"
-            @click="viewMode = 'grid'"
+            :class="{ active: settingsStore.bookmarkViewMode === 'grid' }"
+            @click="settingsStore.setBookmarkViewMode('grid')"
             class="view-mode-btn"
             title="网格大卡片视图"
           >
@@ -45,8 +45,8 @@
           </button>
           <button
             type="button"
-            :class="{ active: viewMode === 'table' }"
-            @click="viewMode = 'table'"
+            :class="{ active: settingsStore.bookmarkViewMode === 'table' }"
+            @click="settingsStore.setBookmarkViewMode('table')"
             class="view-mode-btn"
             title="列表明细视图"
           >
@@ -76,12 +76,14 @@
     </div>
 
     <!-- Grid View Mode -->
-    <div v-else-if="viewMode === 'grid'" class="bookmark-grid-view">
+    <div v-else-if="settingsStore.bookmarkViewMode === 'grid'" class="bookmark-grid-view">
       <BookmarkLargeCard
         v-for="bookmark in bookmarkStore.items"
         :key="bookmark.id"
         :bookmark="bookmark"
         :selected="selectedIds.includes(bookmark.id)"
+        :show-href="settingsStore.showCardHref"
+        :show-desc="settingsStore.showCardDesc"
         @update:selected="val => toggleBookmarkSelect(bookmark.id, val)"
         @copy="copyLink"
         @edit="openEditor"
@@ -94,13 +96,13 @@
       <table class="modern-table">
         <thead>
           <tr>
-            <th style="width: 40px; text-align: center;">
+            <th v-if="settingsStore.bookmarkColumns.includes('checkbox')" style="width: 40px; text-align: center;">
               <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" />
             </th>
-            <th style="width: 45%; text-align: center;">标题与描述</th>
-            <th style="width: 20%; text-align: center;">网站链接</th>
-            <th style="width: 10%; text-align: center;">分类</th>
-            <th style="width: 50px; text-align: center;">操作</th>
+            <th v-if="settingsStore.bookmarkColumns.includes('title')" style="width: 45%; text-align: center;">标题与描述</th>
+            <th v-if="settingsStore.bookmarkColumns.includes('url')" style="width: 20%; text-align: center;">网站链接</th>
+            <th v-if="settingsStore.bookmarkColumns.includes('categories')" style="width: 10%; text-align: center;">分类</th>
+            <th v-if="settingsStore.bookmarkColumns.includes('actions')" style="width: 50px; text-align: center;">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -109,10 +111,10 @@
             :key="bookmark.id"
             :class="{ 'row-selected': selectedIds.includes(bookmark.id) }"
           >
-            <td style="text-align: center; padding: 10px 4px;">
+            <td v-if="settingsStore.bookmarkColumns.includes('checkbox')" style="text-align: center; padding: 10px 4px;">
               <input type="checkbox" :value="bookmark.id" v-model="selectedIds" />
             </td>
-            <td>
+            <td v-if="settingsStore.bookmarkColumns.includes('title')">
               <div class="table-title-cell">
                 <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(bookmark) ? 'transparent' : getAvatarBg(bookmark) }">
                   <img v-if="isImgIcon(bookmark)" :src="bookmark.icon" alt="" class="table-img-icon" />
@@ -126,12 +128,12 @@
                 </div>
               </div>
             </td>
-            <td style="text-align: center;">
+            <td v-if="settingsStore.bookmarkColumns.includes('url')" style="text-align: center;">
               <a :href="bookmark.href" target="_blank" rel="noopener" class="table-url-link">
                 {{ formatDisplayUrl(bookmark.href) }}
               </a>
             </td>
-            <td style="text-align: center;">
+            <td v-if="settingsStore.bookmarkColumns.includes('categories')" style="text-align: center;">
               <div class="table-categories">
                 <span v-for="cat in bookmark.categories" :key="cat.id" class="chip-badge-sm">
                   {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh || cat.name) : (cat.name_zh || cat.name) }}
@@ -139,7 +141,7 @@
                 <span v-if="!bookmark.categories?.length" class="text-muted-sm">未归类</span>
               </div>
             </td>
-            <td style="text-align: center; padding: 6px 4px;">
+            <td v-if="settingsStore.bookmarkColumns.includes('actions')" style="text-align: center; padding: 6px 4px;">
               <div class="table-actions-2rows">
                 <div class="actions-row">
                   <button @click="copyLink(bookmark.href)" class="icon-btn-sm" title="复制">📋</button>
@@ -190,20 +192,16 @@
 </template>
 
 <script setup>
-import { ref, computed, inject, watch } from 'vue'
+import { ref, computed, inject } from 'vue'
 import { useBookmarkStore } from '../stores/bookmarks'
 import { useAuthStore } from '../stores/auth'
+import { useSettingsStore } from '../stores/settings'
 import BookmarkLargeCard from './BookmarkLargeCard.vue'
 
 const bookmarkStore = useBookmarkStore()
 const auth = useAuthStore()
+const settingsStore = useSettingsStore()
 const openEditor = inject('openEditor')
-
-const viewMode = ref(localStorage.getItem('bookmark_view_mode') || 'grid')
-
-watch(viewMode, (newMode) => {
-  localStorage.setItem('bookmark_view_mode', newMode)
-})
 const searchInput = ref('')
 const selectedIds = ref([])
 const toastMessage = ref('')
