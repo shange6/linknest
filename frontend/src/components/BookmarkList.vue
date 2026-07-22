@@ -495,8 +495,9 @@ async function handleBatchDelete() {
   background-color: var(--card-bg, #ffffff);
   color: var(--text-color, #0f172a);
   font-size: 13px;
-  width: 260px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 320px;
+  max-width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s, width 0.2s;
 }
 
 .search-box-input:focus {
