@@ -24,22 +24,27 @@
       </button>
     </div>
 
-    <!-- Header: Icon & Title/Name -->
+    <!-- Header: Icon & Name -->
     <div class="bm-card__header-row">
       <div class="bm-card__icon" :style="{ backgroundColor: isImageIcon ? 'transparent' : avatarBg }">
         <img v-if="isImageIcon" :src="bookmark.icon" alt="" class="bm-card__img-icon" @error="handleImgError" />
         <span v-else>{{ firstChar }}</span>
       </div>
-      <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title">
-        {{ title }}
+      <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title" :title="name">
+        {{ name }}
       </a>
     </div>
 
-    <!-- URL Domain -->
-    <div class="bm-card__domain">
+    <!-- URL Domain (Controlled by showHref prop) -->
+    <div class="bm-card__domain" v-if="showHref">
       <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__url-link" :title="bookmark.href">
         {{ displayUrl }}
       </a>
+    </div>
+
+    <!-- Title (New Row under URL) -->
+    <div class="bm-card__title-row" v-if="title" :title="title">
+      {{ title }}
     </div>
 
     <!-- Description -->
@@ -74,6 +79,10 @@ const props = defineProps({
   selected: {
     type: Boolean,
     default: false
+  },
+  showHref: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -135,8 +144,12 @@ const categoriesTooltip = computed(() => {
   return props.bookmark.categories.map(cat => getCategoryFullPath(cat)).join('\n')
 })
 
+const name = computed(() => {
+  return props.bookmark.name || props.bookmark.title || props.bookmark.href
+})
+
 const title = computed(() => {
-  return props.bookmark.title || props.bookmark.name || props.bookmark.href
+  return props.bookmark.title || ''
 })
 
 const description = computed(() => {
@@ -144,7 +157,7 @@ const description = computed(() => {
 })
 
 const firstChar = computed(() => {
-  return title.value.charAt(0).toUpperCase() || '🔗'
+  return name.value.charAt(0).toUpperCase() || '🔗'
 })
 
 const avatarBg = computed(() => {
@@ -175,10 +188,10 @@ const displayUrl = computed(() => {
   background: var(--c-table-body-bg, #ffffff);
   border: 1.5px solid var(--c-border, #e2e8f0);
   border-radius: 10px;
-  padding: 10px 14px 10px;
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   cursor: default;
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
   width: 100%;
@@ -265,8 +278,8 @@ const displayUrl = computed(() => {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin-top: 0;
-  padding-left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .bm-card__icon {
@@ -312,24 +325,25 @@ const displayUrl = computed(() => {
 
 .bm-card__domain {
   font-size: 12px;
+  line-height: 1.4;
   color: var(--c-text-secondary, #94a3b8);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: ui-monospace, monospace;
   max-width: 100%;
+  margin: 0;
 }
 
 .bm-card__url-link {
   color: var(--c-text-secondary, #94a3b8);
   text-decoration: none;
   transition: color 0.15s;
-  display: inline-block;
+  display: inline;
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  vertical-align: bottom;
 }
 
 .bm-card__url-link:hover {
@@ -337,8 +351,20 @@ const displayUrl = computed(() => {
   text-decoration: underline;
 }
 
+.bm-card__title-row {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--c-text-secondary, #64748b);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
 .bm-card__desc {
   font-size: 12px;
+  font-weight: 400;
   color: var(--c-text-secondary, #64748b);
   line-height: 1.4;
   white-space: nowrap;
@@ -348,7 +374,7 @@ const displayUrl = computed(() => {
   flex: 1;
 }
 
-/* 第 4 行：分类标签（靠右对齐；显示不开时优先显示右侧末级分类，左侧祖先节点截断并显示 ...） */
+/* 分类标签（靠右对齐；显示不开时优先显示右侧末级分类，左侧祖先节点截断并显示 ...） */
 .bm-card__tags {
   display: flex;
   width: 100%;
@@ -369,8 +395,9 @@ const displayUrl = computed(() => {
   display: block;
   width: 100%;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--c-text-secondary, #64748b);
+  line-height: 1.4;
   background: transparent;
   padding: 0;
   white-space: nowrap;
