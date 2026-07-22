@@ -4,7 +4,7 @@
     <div class="list-toolbar">
       <div class="toolbar-left">
         <button @click="openEditor(null)" class="btn-primary-add">
-          <span class="btn-icon">＋</span> 新建书签
+          新建书签
         </button>
 
         <div class="filter-status-info" v-if="bookmarkStore.categoryId">
@@ -426,24 +426,25 @@ async function handleBatchDelete() {
 }
 
 .btn-primary-add {
-  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  background-color: var(--c-primary, #2563eb);
   color: #ffffff;
   border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 6px 14px;
+  border-radius: 6px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
-  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
 }
 
 .btn-primary-add:hover {
+  background-color: var(--c-primary-hover, #1d4ed8);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .filter-chip {
