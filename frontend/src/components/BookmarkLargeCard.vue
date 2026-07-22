@@ -161,9 +161,7 @@ const displayUrl = computed(() => {
   gap: 6px;
   cursor: default;
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  width: 244px;
-  min-width: 244px;
-  max-width: 244px;
+  width: 100%;
   box-sizing: border-box;
 }
 

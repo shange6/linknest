@@ -578,9 +578,10 @@ async function handleBatchDelete() {
 
 /* ─── Bookmark Grid ─── */
 .bookmark-grid-view {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 14px;
+  width: 100%;
 }
 
 /* ─── Bookmark List Section ─── */
