@@ -12,7 +12,7 @@
             class="nav-item"
             :class="{ active: $route.path === '/admin/bookmarks' }"
           >
-            书签
+            书签管理
           </router-link>
           <router-link
             v-if="auth.isAdmin"
