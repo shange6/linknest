@@ -338,7 +338,7 @@ async function handleBatchDelete() {
 .bookmark-list-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0px;
 }
 
 /* ─── 工具栏 ─── */
@@ -354,6 +354,7 @@ async function handleBatchDelete() {
   padding: 10px 14px;
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 16px;
 }
 
 .toolbar-left {

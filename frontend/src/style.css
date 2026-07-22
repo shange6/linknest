@@ -358,8 +358,7 @@ textarea {
 
 /* --- Bookmark List --- */
 .bookmark-list-section {
-  padding: 1.5rem;
-  max-width: 56rem;
+  width: 100%;
 }
 
 .list-toolbar {
@@ -367,7 +366,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   flex-wrap: wrap;
 }
 
