@@ -94,13 +94,13 @@
       <table class="modern-table">
         <thead>
           <tr>
-            <th style="width: 42px; text-align: center;">
+            <th style="width: 40px; text-align: center;">
               <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" />
             </th>
-            <th style="text-align: center;">标题与描述</th>
-            <th style="width: 140px; text-align: center;">网站链接</th>
-            <th style="width: 180px; text-align: center;">分类</th>
-            <th style="width: 75px; text-align: center;">操作</th>
+            <th style="width: 45%; text-align: center;">标题与描述</th>
+            <th style="width: 20%; text-align: center;">网站链接</th>
+            <th style="width: 10%; text-align: center;">分类</th>
+            <th style="width: 50px; text-align: center;">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -595,6 +595,7 @@ async function handleBatchDelete() {
   border-collapse: collapse;
   text-align: left;
   font-size: 14px;
+  table-layout: fixed;
 }
 
 .modern-table th {
@@ -633,6 +634,13 @@ async function handleBatchDelete() {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.title-meta {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .favicon-avatar-sm {
@@ -652,6 +660,10 @@ async function handleBatchDelete() {
   font-weight: 600;
   color: var(--text-color, #0f172a);
   text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table-link:hover {
@@ -675,10 +687,16 @@ async function handleBatchDelete() {
   text-decoration: none;
 
   display: inline-block;
-  max-width: 130px;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.15s ease;
+}
+
+.table-url-link:hover {
+  color: var(--c-primary, #2563eb);
+  text-decoration: underline;
 }
 
 .table-categories {
