@@ -189,7 +189,7 @@
 </template>
 
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, watch } from 'vue'
 import { useBookmarkStore } from '../stores/bookmarks'
 import { useAuthStore } from '../stores/auth'
 import BookmarkLargeCard from './BookmarkLargeCard.vue'
@@ -198,7 +198,12 @@ const bookmarkStore = useBookmarkStore()
 const auth = useAuthStore()
 const openEditor = inject('openEditor')
 
-const viewMode = ref('grid') // 'grid' | 'table'
+// Persistent View Mode State (LocalStorage)
+const viewMode = ref(localStorage.getItem('bookmark_view_mode') || 'grid') // 'grid' | 'table'
+
+watch(viewMode, (newMode) => {
+  localStorage.setItem('bookmark_view_mode', newMode)
+})
 const searchInput = ref('')
 const selectedIds = ref([])
 const toastMessage = ref('')

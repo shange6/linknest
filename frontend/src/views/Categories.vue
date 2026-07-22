@@ -42,17 +42,55 @@
             {{ allExpanded ? '折叠全部' : '展开全部' }}
           </button>
 
-          <!-- Toggle Timestamp Column Control -->
-          <label class="toggle-timestamp-label" title="控制是否在表格中显示时间戳列">
-            <input type="checkbox" v-model="showTimestamps" />
-            <span>显示时间戳</span>
-          </label>
+          <!-- Columns Visibility Dropdown Control -->
+          <div class="columns-dropdown-wrapper" ref="columnDropdownRef">
+            <button
+              type="button"
+              @click="isColumnDropdownOpen = !isColumnDropdownOpen"
+              class="btn-secondary columns-trigger-btn"
+              title="选择要在表格中显示的列"
+            >
+              <span>显示列</span>
+              <span class="dropdown-caret">▼</span>
+            </button>
 
-          <!-- Toggle Description Column Control -->
-          <label class="toggle-timestamp-label" title="控制是否在表格中显示说明列">
-            <input type="checkbox" v-model="showDescription" />
-            <span>显示说明</span>
-          </label>
+            <div v-if="isColumnDropdownOpen" class="columns-popover-menu">
+              <div class="columns-popover-body">
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.id" @change="toggleColumnVisibility('id')" />
+                  <span>ID</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.name" @change="toggleColumnVisibility('name')" />
+                  <span>分类名称</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.slug" @change="toggleColumnVisibility('slug')" />
+                  <span>Slug</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.count" @change="toggleColumnVisibility('count')" />
+                  <span>统计</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.sort" @change="toggleColumnVisibility('sort')" />
+                  <span>排序</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.timestamps" @change="toggleColumnVisibility('timestamps')" />
+                  <span>时间戳</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.description" @change="toggleColumnVisibility('description')" />
+                  <span>说明</span>
+                </label>
+                <label class="column-checkbox-item">
+                  <input type="checkbox" :checked="columnsVisible.actions" @change="toggleColumnVisibility('actions')" />
+                  <span>操作</span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="toolbar-right">
@@ -76,16 +114,14 @@
         <table v-else class="tree-table">
           <thead>
             <tr>
-              <th style="width: 50px;">ID</th>
-              <th>分类名称</th>
-              <th>Slug</th>
-              <th style="width: 68px;">统计</th>
-              <th style="width: 90px;">排序</th>
-              <!-- Optional Timestamps Column (Default Hidden) -->
-              <th v-if="showTimestamps" style="width: 130px;">时间戳</th>
-              <!-- Optional Description Column (Default Hidden) -->
-              <th v-if="showDescription" style="width: 140px;">说明</th>
-              <th style="width: 140px;">操作</th>
+              <th v-if="columnsVisible.id" style="width: 50px;">ID</th>
+              <th v-if="columnsVisible.name">分类名称</th>
+              <th v-if="columnsVisible.slug">Slug</th>
+              <th v-if="columnsVisible.count" style="width: 68px;">统计</th>
+              <th v-if="columnsVisible.sort" style="width: 90px;">排序</th>
+              <th v-if="columnsVisible.timestamps" style="width: 130px;">时间戳</th>
+              <th v-if="columnsVisible.description" style="width: 140px;">说明</th>
+              <th v-if="columnsVisible.actions" style="width: 140px;">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -95,12 +131,12 @@
               :class="{ 'row-disabled': !item.node.status }"
             >
               <!-- ID Column -->
-              <td class="id-cell">
+              <td v-if="columnsVisible.id" class="id-cell">
                 <span class="id-tag">{{ item.node.id }}</span>
               </td>
 
-              <!-- Name Column (Single Row: Zh / En) -->
-              <td class="name-cell">
+              <!-- Name Column -->
+              <td v-if="columnsVisible.name" class="name-cell">
                 <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
                   <!-- Expand/Collapse toggle button -->
                   <button
@@ -125,40 +161,40 @@
               </td>
 
               <!-- Slug -->
-              <td>
+              <td v-if="columnsVisible.slug">
                 <code class="slug-tag">{{ item.node.slug }}</code>
               </td>
 
-              <!-- Subcategory Count Column (Header: 统计, Width 55px, Centered) -->
-              <td class="count-cell text-center">
+              <!-- Subcategory Count Column -->
+              <td v-if="columnsVisible.count" class="count-cell text-center">
                 <span :class="['count-badge', { 'count-zero': countSubtree(item.node) === 0 }]">
                   {{ countSubtree(item.node) }}
                 </span>
               </td>
 
-              <!-- Sort Weights (Single Row: Zh / En) -->
-              <td class="sort-cell text-center">
+              <!-- Sort Weights -->
+              <td v-if="columnsVisible.sort" class="sort-cell text-center">
                 <span class="sort-val">{{ item.node.sort_zh ?? '-' }}</span>
                 <span class="sort-divider">/</span>
                 <span class="sort-val sub-text">{{ item.node.sort_en ?? '-' }}</span>
               </td>
 
-              <!-- Optional Timestamps (Uniform font size, Default Hidden) -->
-              <td v-if="showTimestamps" class="time-cell">
+              <!-- Optional Timestamps -->
+              <td v-if="columnsVisible.timestamps" class="time-cell">
                 <div class="time-row" title="创建时间">创建: {{ formatDate(item.node.created_at) }}</div>
                 <div class="time-row" title="更新时间">更新: {{ formatDate(item.node.updated_at) }}</div>
               </td>
 
-              <!-- Optional Description (2 Rows: Zh / En, Default Hidden) -->
-              <td v-if="showDescription" class="desc-cell">
+              <!-- Optional Description -->
+              <td v-if="columnsVisible.description" class="desc-cell">
                 <div class="desc-stacked">
                   <div class="desc-zh text-ellipsis" :title="item.node.desc_zh || ''">{{ item.node.desc_zh || '-' }}</div>
                   <div class="desc-en text-ellipsis" :title="item.node.desc_en || ''">{{ (item.node.desc_en && item.node.desc_en.trim()) ? item.node.desc_en : '-' }}</div>
                 </div>
               </td>
 
-              <!-- Actions (Single Row) -->
-              <td class="actions-cell text-center">
+              <!-- Actions -->
+              <td v-if="columnsVisible.actions" class="actions-cell text-center">
                 <div class="actions-inline">
                   <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
                   <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
@@ -389,7 +425,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue'
+import { ref, computed, reactive, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { categoriesAPI } from '../api/endpoints'
@@ -406,8 +442,32 @@ const loading = ref(false)
 const searchQuery = ref('')
 const expandedMap = reactive({})
 const allExpanded = ref(true)
-const showTimestamps = ref(false) // Controls timestamps column visibility (default hidden)
-const showDescription = ref(false) // Controls description column visibility (default hidden)
+
+// Table Column Visibility State with LocalStorage Persistence
+const columnsVisible = reactive({
+  id: localStorage.getItem('cat_col_id') !== 'false',
+  name: localStorage.getItem('cat_col_name') !== 'false',
+  slug: localStorage.getItem('cat_col_slug') !== 'false',
+  count: localStorage.getItem('cat_col_count') !== 'false',
+  sort: localStorage.getItem('cat_col_sort') !== 'false',
+  timestamps: localStorage.getItem('cat_col_timestamps') === 'true', // default false
+  description: localStorage.getItem('cat_col_description') === 'true', // default false
+  actions: localStorage.getItem('cat_col_actions') !== 'false'
+})
+
+const isColumnDropdownOpen = ref(false)
+const columnDropdownRef = ref(null)
+
+function toggleColumnVisibility(colKey) {
+  columnsVisible[colKey] = !columnsVisible[colKey]
+  localStorage.setItem(`cat_col_${colKey}`, columnsVisible[colKey] ? 'true' : 'false')
+}
+
+function handleClickOutsideColumns(e) {
+  if (columnDropdownRef.value && !columnDropdownRef.value.contains(e.target)) {
+    isColumnDropdownOpen.value = false
+  }
+}
 
 // Modal State
 const showModal = ref(false)
@@ -758,7 +818,14 @@ function handleLogout() {
   router.push('/login')
 }
 
-onMounted(loadCategories)
+onMounted(() => {
+  loadCategories()
+  document.addEventListener('click', handleClickOutsideColumns)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutsideColumns)
+})
 </script>
 
 <style scoped>
@@ -1527,5 +1594,66 @@ input:checked + .slider:before {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Column Visibility Dropdown Styling */
+.columns-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.columns-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdown-caret {
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+
+.columns-popover-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 120px;
+  background: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #cbd5e1);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  padding: 0.45rem 0.55rem;
+  animation: popoverFadeIn 0.15s ease-out;
+}
+
+.columns-popover-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.column-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--c-text, #0f172a);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.column-checkbox-item:hover {
+  background-color: var(--c-bg-secondary, #f8fafc);
+}
+
+.column-checkbox-item input {
+  cursor: pointer;
+  accent-color: var(--c-primary, #2563eb);
 }
 </style>
