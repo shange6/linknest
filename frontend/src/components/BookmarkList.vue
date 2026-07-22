@@ -114,8 +114,9 @@
             </td>
             <td>
               <div class="table-title-cell">
-                <div class="favicon-avatar-sm" :style="{ backgroundColor: getAvatarBg(bookmark) }">
-                  {{ getBookmarkIcon(bookmark) }}
+                <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(bookmark) ? 'transparent' : getAvatarBg(bookmark) }">
+                  <img v-if="isImgIcon(bookmark)" :src="bookmark.icon" alt="" class="table-img-icon" />
+                  <span v-else>{{ getBookmarkIcon(bookmark) }}</span>
                 </div>
                 <div class="title-meta">
                   <a :href="bookmark.href" target="_blank" rel="noopener" class="table-link">
@@ -133,7 +134,7 @@
             <td style="text-align: center;">
               <div class="table-categories">
                 <span v-for="cat in bookmark.categories" :key="cat.id" class="chip-badge-sm">
-                  {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh }}
+                  {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh || cat.name) : (cat.name_zh || cat.name) }}
                 </span>
                 <span v-if="!bookmark.categories?.length" class="text-muted-sm">未归类</span>
               </div>
@@ -198,8 +199,7 @@ const bookmarkStore = useBookmarkStore()
 const auth = useAuthStore()
 const openEditor = inject('openEditor')
 
-// Persistent View Mode State (LocalStorage)
-const viewMode = ref(localStorage.getItem('bookmark_view_mode') || 'grid') // 'grid' | 'table'
+const viewMode = ref(localStorage.getItem('bookmark_view_mode') || 'grid')
 
 watch(viewMode, (newMode) => {
   localStorage.setItem('bookmark_view_mode', newMode)
@@ -247,42 +247,43 @@ function clearSearch() {
   bookmarkStore.setSearch('')
 }
 
-function clearCategoryFilter() {
-  bookmarkStore.setCategoryFilter(null)
-}
-
 function resetFilters() {
   searchInput.value = ''
   bookmarkStore.setSearch('')
   bookmarkStore.setCategoryFilter(null)
 }
 
+function isImgIcon(bookmark) {
+  const icon = bookmark.icon
+  return icon && (icon.startsWith('http://') || icon.startsWith('https://') || icon.startsWith('data:image/'))
+}
+
 function getTitle(bookmark) {
   if (auth.locale === 'en') {
-    return bookmark.title_en || bookmark.title_zh || bookmark.href
+    return bookmark.title_en || bookmark.title_zh || bookmark.title || bookmark.name || bookmark.href
   }
-  return bookmark.title_zh || bookmark.title_en || bookmark.href
+  return bookmark.title_zh || bookmark.title_en || bookmark.title || bookmark.name || bookmark.href
 }
 
 function getDesc(bookmark) {
   if (auth.locale === 'en') {
-    return bookmark.desc_en || bookmark.desc_zh || ''
+    return bookmark.desc_en || bookmark.desc_zh || bookmark.description || ''
   }
-  return bookmark.desc_zh || bookmark.desc_en || ''
+  return bookmark.desc_zh || bookmark.desc_en || bookmark.description || ''
 }
 
 function getBookmarkIcon(bookmark) {
-  if (bookmark.icon && bookmark.icon.trim()) {
-    return bookmark.icon
-  }
   const title = getTitle(bookmark)
   return title.charAt(0).toUpperCase() || '🔗'
 }
 
 function getAvatarBg(bookmark) {
   const colors = [
-    '#4f46e5', '#3b82f6', '#06b6d4', '#10b981',
-    '#8b5cf6', '#ec4899', '#f59e0b', '#6366f1'
+    'var(--c-primary, #2563eb)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 85%, #000000)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 70%, #ffffff)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 90%, #059669)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 80%, #7c3aed)',
   ]
   const charCode = getTitle(bookmark).charCodeAt(0) || 0
   return colors[charCode % colors.length]
@@ -353,6 +354,7 @@ async function handleBatchDelete() {
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 16px;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .toolbar-left {
@@ -367,21 +369,7 @@ async function handleBatchDelete() {
   align-items: center;
   gap: 8px;
   padding-left: 10px;
-  border-left: 1px solid var(--border-color, #e2e8f0);
-}
-
-.batch-info-badge {
-  font-size: 13px;
-  color: #475569;
-  background-color: #eef2ff;
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid #c7d2fe;
-}
-
-.highlight-count {
-  color: #4f46e5;
-  font-size: 14px;
+  border-left: 1px solid var(--c-border, #e2e8f0);
 }
 
 .btn-danger-sm {
@@ -406,9 +394,9 @@ async function handleBatchDelete() {
 }
 
 .btn-secondary-sm {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #334155;
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #cbd5e1);
+  color: var(--c-text, #334155);
   padding: 0 12px;
   height: 32px;
   box-sizing: border-box;
@@ -418,18 +406,20 @@ async function handleBatchDelete() {
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .btn-secondary-sm:hover {
-  background-color: #f8fafc;
+  background-color: var(--c-table-row-hover-bg, #f8fafc);
+  border-color: var(--c-primary, #2563eb);
+  color: var(--c-primary, #2563eb);
 }
 
 .btn-danger-sm:disabled,
 .btn-secondary-sm:disabled {
-  background-color: #f1f5f9;
-  color: #94a3b8;
-  border: 1px solid #e2e8f0;
+  background-color: var(--c-bg-secondary, #f1f5f9);
+  color: var(--c-text-secondary, #94a3b8);
+  border: 1px solid var(--c-border, #e2e8f0);
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -449,35 +439,14 @@ async function handleBatchDelete() {
   font-size: 13px;
   cursor: pointer;
   gap: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-primary, #2563eb) 25%, transparent);
   transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
 }
 
 .btn-primary-add:hover {
   background-color: var(--c-primary-hover, #1d4ed8);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: rgba(79, 70, 229, 0.1);
-  color: #4f46e5;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-
-.chip-clear-btn {
-  background: none;
-  border: none;
-  color: #4f46e5;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0 2px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--c-primary, #2563eb) 35%, transparent);
 }
 
 .toolbar-right {
@@ -497,26 +466,26 @@ async function handleBatchDelete() {
   position: absolute;
   left: 12px;
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
   pointer-events: none;
 }
 
 .search-box-input {
   padding: 8px 32px 8px 34px;
   border-radius: 8px;
-  border: 1px solid var(--border-color, #e2e8f0);
-  background-color: var(--card-bg, #ffffff);
-  color: var(--text-color, #0f172a);
+  border: 1px solid var(--c-border, #e2e8f0);
+  background-color: var(--c-bg, #ffffff);
+  color: var(--c-text, #0f172a);
   font-size: 13px;
   width: 320px;
   max-width: 100%;
-  transition: border-color 0.2s, box-shadow 0.2s, width 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s, color 0.2s;
 }
 
 .search-box-input:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  border-color: var(--c-primary, #2563eb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary, #2563eb) 18%, transparent);
 }
 
 .search-box-clear {
@@ -524,7 +493,7 @@ async function handleBatchDelete() {
   right: 10px;
   background: none;
   border: none;
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
   cursor: pointer;
   font-size: 12px;
 }
@@ -532,8 +501,8 @@ async function handleBatchDelete() {
 /* View Mode Toggle */
 .view-mode-toggle {
   display: flex;
-  background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
+  background-color: var(--c-bg-secondary, #f8fafc);
+  border: 1px solid var(--c-border, #e2e8f0);
   border-radius: 8px;
   padding: 2px;
 }
@@ -544,13 +513,13 @@ async function handleBatchDelete() {
   padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   border-radius: 6px;
   transition: all 0.2s;
 }
 
 .view-mode-btn.active {
-  background-color: #4f46e5;
+  background-color: var(--c-primary, #2563eb);
   color: #ffffff;
 }
 
@@ -558,15 +527,16 @@ async function handleBatchDelete() {
 .loading-container {
   padding: 60px 0;
   text-align: center;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
 }
 
 .empty-state-container {
   text-align: center;
   padding: 60px 20px;
-  background-color: var(--card-bg, #ffffff);
-  border: 1px dashed var(--border-color, #e2e8f0);
+  background-color: var(--c-bg, #ffffff);
+  border: 1px dashed var(--c-border, #e2e8f0);
   border-radius: 12px;
+  color: var(--c-text, #0f172a);
 }
 
 .empty-icon {
@@ -582,12 +552,13 @@ async function handleBatchDelete() {
   width: 100%;
 }
 
-/* ─── Bookmark List Section ─── */
+/* ─── Bookmark Table View ─── */
 .bookmark-table-view {
-  background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-table-border, var(--c-border, #e2e8f0));
   border-radius: 12px;
   overflow-x: auto;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .modern-table {
@@ -610,8 +581,10 @@ async function handleBatchDelete() {
 .modern-table td {
   background-color: var(--c-table-body-bg, #ffffff);
   padding: 10px 8px;
-  border-bottom: 1px solid var(--c-border, #f1f5f9);
+  border-bottom: 1px solid var(--c-table-border, #f1f5f9);
+  color: var(--c-text, #0f172a);
   vertical-align: middle;
+  transition: background-color 0.15s;
 }
 
 .modern-table input[type="checkbox"] {
@@ -654,16 +627,24 @@ async function handleBatchDelete() {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.table-img-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .table-link {
   font-weight: 600;
-  color: var(--text-color, #0f172a);
+  color: var(--c-text, #0f172a);
   text-decoration: none;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.15s;
 }
 
 .table-link:hover {
@@ -672,9 +653,8 @@ async function handleBatchDelete() {
 
 .table-desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   margin: 2px 0 0;
-
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -682,10 +662,9 @@ async function handleBatchDelete() {
 }
 
 .table-url-link {
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   font-size: 13px;
   text-decoration: none;
-
   display: inline-block;
   max-width: 100%;
   white-space: nowrap;
@@ -707,16 +686,17 @@ async function handleBatchDelete() {
 }
 
 .chip-badge-sm {
-  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 10%, transparent);
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
   color: var(--c-primary, #2563eb);
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 4px;
+  font-weight: 500;
 }
 
 .text-muted-sm {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
 }
 
 .table-actions-2rows {
@@ -742,14 +722,18 @@ async function handleBatchDelete() {
   border-radius: 4px;
   font-size: 12px;
   line-height: 1;
+  color: var(--c-text-secondary, #64748b);
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .icon-btn-sm:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+  color: var(--c-primary, #2563eb);
 }
 
 .icon-btn-sm.danger:hover {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
 }
 
 /* Pagination Footer */
@@ -759,7 +743,7 @@ async function handleBatchDelete() {
   align-items: center;
   padding: 12px 0;
   font-size: 13px;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -771,13 +755,19 @@ async function handleBatchDelete() {
 }
 
 .btn-page {
-  background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #cbd5e1);
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #cbd5e1);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
-  color: var(--text-color, #1e293b);
+  color: var(--c-text, #1e293b);
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-page:hover:not(:disabled) {
+  border-color: var(--c-primary, #2563eb);
+  color: var(--c-primary, #2563eb);
 }
 
 .btn-page:disabled {
@@ -788,7 +778,7 @@ async function handleBatchDelete() {
 .page-current {
   font-weight: 700;
   padding: 4px 8px;
-  color: #4f46e5;
+  color: var(--c-primary, #2563eb);
 }
 
 /* Toast Notification Popup */
@@ -796,7 +786,7 @@ async function handleBatchDelete() {
   position: fixed;
   bottom: 28px;
   right: 28px;
-  background-color: #0f172a;
+  background-color: var(--c-primary, #2563eb);
   color: #ffffff;
   padding: 12px 20px;
   border-radius: 8px;
@@ -820,3 +810,4 @@ async function handleBatchDelete() {
   transform: translateY(20px);
 }
 </style>
+

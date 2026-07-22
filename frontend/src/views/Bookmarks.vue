@@ -103,6 +103,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   background-color: var(--c-bg-secondary, #f8fafc);
+  color: var(--c-text, #0f172a);
 }
 
 /* ─── 主体布局 ─── */
@@ -145,6 +146,7 @@ onMounted(async () => {
   position: sticky;
   top: 68px;
   box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .category-tree-body {
@@ -157,7 +159,7 @@ onMounted(async () => {
   padding: 20px;
   text-align: center;
   font-size: 13px;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -26,8 +26,9 @@
 
     <!-- Header: Icon & Title/Name -->
     <div class="bm-card__header-row">
-      <div class="bm-card__icon" :style="{ backgroundColor: avatarBg }">
-        {{ bookmarkIcon }}
+      <div class="bm-card__icon" :style="{ backgroundColor: isImageIcon ? 'transparent' : avatarBg }">
+        <img v-if="isImageIcon" :src="bookmark.icon" alt="" class="bm-card__img-icon" @error="handleImgError" />
+        <span v-else>{{ firstChar }}</span>
       </div>
       <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title">
         {{ title }}
@@ -54,14 +55,17 @@
         class="bm-card__tag-path"
         :title="getCategoryFullPath(cat)"
       >
-        <template v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx"><span class="bm-card__tag-chip">{{ name }}</span><span v-if="idx < getCategoryPathNames(cat).length - 1" class="bm-card__tag-arrow">-</span></template>
+        <template v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx">
+          <span class="bm-card__tag-chip">{{ name }}</span>
+          <span v-if="idx < getCategoryPathNames(cat).length - 1" class="bm-card__tag-arrow">-</span>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useCategoryStore } from '../stores/categories'
 
@@ -80,6 +84,17 @@ defineEmits(['update:selected', 'copy', 'edit', 'delete'])
 
 const auth = useAuthStore()
 const categoryStore = useCategoryStore()
+const imgError = ref(false)
+
+function handleImgError() {
+  imgError.value = true
+}
+
+const isImageIcon = computed(() => {
+  if (imgError.value) return false
+  const icon = props.bookmark.icon
+  return icon && (icon.startsWith('http://') || icon.startsWith('https://') || icon.startsWith('data:image/'))
+})
 
 function getCategoryPathNodes(catId, tree) {
   if (!tree || !Array.isArray(tree)) return []
@@ -100,9 +115,9 @@ function getCategoryPathNodes(catId, tree) {
 function getCategoryPathNames(cat) {
   const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
   if (pathNodes.length > 0) {
-    return pathNodes.map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh) : node.name_zh))
+    return pathNodes.map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh || node.name) : (node.name_zh || node.name)))
   }
-  return [auth.locale === 'en' ? (cat.name_en || cat.name_zh) : cat.name_zh]
+  return [auth.locale === 'en' ? (cat.name_en || cat.name_zh || cat.name) : (cat.name_zh || cat.name)]
 }
 
 function getCategoryFullPath(cat) {
@@ -111,29 +126,29 @@ function getCategoryFullPath(cat) {
 
 const title = computed(() => {
   if (auth.locale === 'en') {
-    return props.bookmark.title_en || props.bookmark.title_zh || props.bookmark.href
+    return props.bookmark.title_en || props.bookmark.title_zh || props.bookmark.title || props.bookmark.name || props.bookmark.href
   }
-  return props.bookmark.title_zh || props.bookmark.title_en || props.bookmark.href
+  return props.bookmark.title_zh || props.bookmark.title_en || props.bookmark.title || props.bookmark.name || props.bookmark.href
 })
 
 const description = computed(() => {
   if (auth.locale === 'en') {
-    return props.bookmark.desc_en || props.bookmark.desc_zh || ''
+    return props.bookmark.desc_en || props.bookmark.desc_zh || props.bookmark.description || ''
   }
-  return props.bookmark.desc_zh || props.bookmark.desc_en || ''
+  return props.bookmark.desc_zh || props.bookmark.desc_en || props.bookmark.description || ''
 })
 
-const bookmarkIcon = computed(() => {
-  if (props.bookmark.icon && props.bookmark.icon.trim()) {
-    return props.bookmark.icon
-  }
+const firstChar = computed(() => {
   return title.value.charAt(0).toUpperCase() || '🔗'
 })
 
 const avatarBg = computed(() => {
   const colors = [
-    '#4f46e5', '#3b82f6', '#06b6d4', '#10b981',
-    '#8b5cf6', '#ec4899', '#f59e0b', '#6366f1'
+    'var(--c-primary, #2563eb)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 85%, #000000)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 70%, #ffffff)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 90%, #059669)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 80%, #7c3aed)',
   ]
   const charCode = title.value.charCodeAt(0) || 0
   return colors[charCode % colors.length]
@@ -152,29 +167,29 @@ const displayUrl = computed(() => {
 <style scoped>
 .bm-card {
   position: relative;
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  background: var(--c-bg, #ffffff);
+  border: 1.5px solid var(--c-border, #e2e8f0);
   border-radius: 10px;
   padding: 10px 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   cursor: default;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
 
 .bm-card:hover {
-  border-color: var(--c-primary, #6366f1);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border-color: var(--c-primary, #2563eb);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--c-primary, #2563eb) 15%, transparent);
   transform: translateY(-2px);
 }
 
 .bm-card--selected {
-  border-color: var(--c-primary, #6366f1);
-  background: rgba(99, 102, 241, 0.03);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+  border-color: var(--c-primary, #2563eb);
+  background: color-mix(in srgb, var(--c-primary, #2563eb) 8%, var(--c-bg, #ffffff));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary, #2563eb) 20%, transparent);
 }
 
 .bm-card__checkbox {
@@ -185,7 +200,7 @@ const displayUrl = computed(() => {
   width: 16px;
   height: 16px;
   cursor: pointer;
-  accent-color: var(--c-primary, #6366f1);
+  accent-color: var(--c-primary, #2563eb);
   z-index: 2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
@@ -218,24 +233,26 @@ const displayUrl = computed(() => {
   justify-content: center;
   width: 26px;
   height: 26px;
-  border: none;
+  border: 1px solid var(--c-border, #e2e8f0);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--c-bg-secondary, rgba(255, 255, 255, 0.9));
   backdrop-filter: blur(4px);
-  color: #475569;
+  color: var(--c-text-secondary, #475569);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .bm-action-btn:hover {
-  background: #f1f5f9;
-  color: var(--c-primary, #6366f1);
+  background: var(--c-table-row-hover-bg, #f1f5f9);
+  color: var(--c-primary, #2563eb);
+  border-color: var(--c-primary, #2563eb);
 }
 
 .bm-action-btn--danger:hover {
   background: #fee2e2;
   color: #dc2626;
+  border-color: #fca5a5;
 }
 
 .bm-card__header-row {
@@ -257,12 +274,19 @@ const displayUrl = computed(() => {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.bm-card__img-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .bm-card__title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--c-text, #0f172a);
   text-decoration: none;
   line-height: 1.35;
   display: -webkit-box;
@@ -275,14 +299,14 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__title:hover {
-  color: var(--c-primary, #6366f1);
+  color: var(--c-primary, #2563eb);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .bm-card__domain {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -291,7 +315,7 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__url-link {
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
   text-decoration: none;
   transition: color 0.15s;
   display: inline-block;
@@ -303,13 +327,13 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__url-link:hover {
-  color: var(--c-primary, #6366f1);
+  color: var(--c-primary, #2563eb);
   text-decoration: underline;
 }
 
 .bm-card__desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -335,11 +359,12 @@ const displayUrl = computed(() => {
 }
 
 .bm-card__tag-chip {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  color: #64748b;
-  background: transparent;
-  padding: 0;
+  color: var(--c-primary, #2563eb);
+  background: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+  border-radius: 4px;
+  padding: 2px 6px;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
@@ -350,9 +375,10 @@ const displayUrl = computed(() => {
 .bm-card__tag-arrow {
   font-size: 11px;
   font-weight: 500;
-  color: #94a3b8;
+  color: var(--c-text-secondary, #94a3b8);
   background: transparent;
-  padding: 0;
+  padding: 0 2px;
   user-select: none;
 }
 </style>
+
