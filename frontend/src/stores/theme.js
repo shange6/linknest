@@ -6,7 +6,9 @@ export const PRESET_THEMES = [
   { id: 'purple', name_zh: '优雅紫', name_en: 'Violet Purple', primary: '#7c3aed', hover: '#6d28d9', headerBg: '#f3e8ff', bodyBg: '#faf5ff', headerBgDark: '#3b0764', bodyBgDark: '#1b092b' },
   { id: 'coral', name_zh: '活力红', name_en: 'Coral Red', primary: '#dc2626', hover: '#b91c1c', headerBg: '#fee2e2', bodyBg: '#fef2f2', headerBgDark: '#450a0a', bodyBgDark: '#210505' },
   { id: 'amber', name_zh: '琥珀金', name_en: 'Amber Gold', primary: '#d97706', hover: '#b45309', headerBg: '#fef3c7', bodyBg: '#fffbeb', headerBgDark: '#451a03', bodyBgDark: '#220e03' },
-  { id: 'teal', name_zh: '青蓝', name_en: 'Teal Blue', primary: '#0d9488', hover: '#0f766e', headerBg: '#ccfbf1', bodyBg: '#f0fdfa', headerBgDark: '#042f2e', bodyBgDark: '#021817' }
+  { id: 'teal', name_zh: '青蓝', name_en: 'Teal Blue', primary: '#0d9488', hover: '#0f766e', headerBg: '#ccfbf1', bodyBg: '#f0fdfa', headerBgDark: '#042f2e', bodyBgDark: '#021817' },
+  { id: 'black', name_zh: '极夜黑', name_en: 'Classic Black', primary: '#18181b', hover: '#09090b', headerBg: '#e4e4e7', bodyBg: '#f4f4f5', headerBgDark: '#18181b', bodyBgDark: '#09090b' },
+  { id: 'gray', name_zh: '高级灰', name_en: 'Graphite Gray', primary: '#64748b', hover: '#475569', headerBg: '#f1f5f9', bodyBg: '#f8fafc', headerBgDark: '#334155', bodyBgDark: '#1e293b' }
 ]
 
 function hexToRgb(hex) {

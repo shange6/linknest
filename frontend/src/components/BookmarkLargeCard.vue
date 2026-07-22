@@ -172,7 +172,7 @@ const displayUrl = computed(() => {
 <style scoped>
 .bm-card {
   position: relative;
-  background: var(--c-bg, #ffffff);
+  background: var(--c-table-body-bg, #ffffff);
   border: 1.5px solid var(--c-border, #e2e8f0);
   border-radius: 10px;
   padding: 10px 14px 10px;
@@ -193,7 +193,7 @@ const displayUrl = computed(() => {
 
 .bm-card--selected {
   border-color: var(--c-primary, #2563eb);
-  background: color-mix(in srgb, var(--c-primary, #2563eb) 8%, var(--c-bg, #ffffff));
+  background: color-mix(in srgb, var(--c-primary, #2563eb) 8%, var(--c-table-body-bg, #ffffff));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary, #2563eb) 20%, transparent);
 }
 

@@ -69,15 +69,15 @@
         </div>
       </div>
 
-      <!-- Unified Table Background Tint Section -->
+      <!-- Unified Secondary Accent Color (附属配色) Section -->
       <div class="popover-section border-top">
         <div class="section-header-with-toggle">
-          <label class="section-label">{{ auth.locale === 'zh' ? '表格底色' : 'Table Background' }}</label>
+          <label class="section-label">{{ auth.locale === 'zh' ? '附属配色' : 'Secondary Color' }}</label>
           
           <label
             class="table-auto-toggle-label"
             @click.prevent="toggleTableAutoTheme"
-            title="开启后表格底色自动跟随主主题色"
+            title="开启后附属配色自动跟随主主题色"
           >
             <span class="toggle-label-text">{{ auth.locale === 'zh' ? '跟随主题' : 'Follow Theme' }}</span>
             <div class="mini-switch-track" :class="{ 'is-on': themeStore.tableThemeId === 'auto' }">
@@ -94,7 +94,7 @@
             @click="themeStore.setTableTheme(preset.id)"
             class="preset-item-btn"
             :class="{ active: themeStore.tableThemeId === preset.id }"
-            :title="auth.locale === 'zh' ? preset.name_zh + '底色' : preset.name_en + ' Tint'"
+            :title="auth.locale === 'zh' ? preset.name_zh + '附属配色' : preset.name_en + ' Secondary'"
           >
             <span class="preset-swatch" :style="{ backgroundColor: (themeStore.isDarkMode ? preset.headerBgDark : preset.headerBg) || preset.primary }"></span>
             <span class="preset-name">{{ auth.locale === 'zh' ? preset.name_zh : preset.name_en }}</span>
