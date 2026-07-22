@@ -47,17 +47,15 @@
       {{ description || '暂无描述' }}
     </p>
 
-    <!-- Category Tags -->
+    <!-- Category Tags (Only First Category) -->
     <div class="bm-card__tags" v-if="bookmark.categories?.length">
       <div
-        v-for="cat in bookmark.categories.slice(0, 3)"
-        :key="cat.id"
         class="bm-card__tag-path"
-        :title="getCategoryFullPath(cat)"
+        :title="getCategoryFullPath(bookmark.categories[0])"
       >
-        <template v-for="(name, idx) in getCategoryPathNames(cat)" :key="idx">
+        <template v-for="(name, idx) in getCategoryPathNames(bookmark.categories[0])" :key="idx">
           <span class="bm-card__tag-chip">{{ name }}</span>
-          <span v-if="idx < getCategoryPathNames(cat).length - 1" class="bm-card__tag-arrow">-</span>
+          <span v-if="idx < getCategoryPathNames(bookmark.categories[0]).length - 1" class="bm-card__tag-arrow">-</span>
         </template>
       </div>
     </div>
@@ -115,27 +113,21 @@ function getCategoryPathNodes(catId, tree) {
 function getCategoryPathNames(cat) {
   const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
   if (pathNodes.length > 0) {
-    return pathNodes.map(node => (auth.locale === 'en' ? (node.name_en || node.name_zh || node.name) : (node.name_zh || node.name)))
+    return pathNodes.map(node => node.name || '')
   }
-  return [auth.locale === 'en' ? (cat.name_en || cat.name_zh || cat.name) : (cat.name_zh || cat.name)]
+  return [cat.name || '']
 }
 
 function getCategoryFullPath(cat) {
-  return getCategoryPathNames(cat).join('-')
+  return getCategoryPathNames(cat).join(' - ')
 }
 
 const title = computed(() => {
-  if (auth.locale === 'en') {
-    return props.bookmark.title_en || props.bookmark.title_zh || props.bookmark.title || props.bookmark.name || props.bookmark.href
-  }
-  return props.bookmark.title_zh || props.bookmark.title_en || props.bookmark.title || props.bookmark.name || props.bookmark.href
+  return props.bookmark.title || props.bookmark.name || props.bookmark.href
 })
 
 const description = computed(() => {
-  if (auth.locale === 'en') {
-    return props.bookmark.desc_en || props.bookmark.desc_zh || props.bookmark.description || ''
-  }
-  return props.bookmark.desc_zh || props.bookmark.desc_en || props.bookmark.description || ''
+  return props.bookmark.description || ''
 })
 
 const firstChar = computed(() => {
@@ -342,29 +334,35 @@ const displayUrl = computed(() => {
   flex: 1;
 }
 
+/* 第 4 行：分类标签（靠右对齐，严格保在单行呈现） */
 .bm-card__tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   max-width: 100%;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .bm-card__tag-path {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0;
   max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   box-sizing: border-box;
 }
 
 .bm-card__tag-chip {
   font-size: 11px;
   font-weight: 500;
-  color: var(--c-primary, #2563eb);
-  background: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
-  border-radius: 4px;
-  padding: 2px 6px;
+  color: var(--c-text-secondary, #64748b);
+  background: transparent;
+  padding: 0;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;

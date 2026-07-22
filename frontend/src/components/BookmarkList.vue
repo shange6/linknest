@@ -259,17 +259,11 @@ function isImgIcon(bookmark) {
 }
 
 function getTitle(bookmark) {
-  if (auth.locale === 'en') {
-    return bookmark.title_en || bookmark.title_zh || bookmark.title || bookmark.name || bookmark.href
-  }
-  return bookmark.title_zh || bookmark.title_en || bookmark.title || bookmark.name || bookmark.href
+  return bookmark.title || bookmark.name || bookmark.href
 }
 
 function getDesc(bookmark) {
-  if (auth.locale === 'en') {
-    return bookmark.desc_en || bookmark.desc_zh || bookmark.description || ''
-  }
-  return bookmark.desc_zh || bookmark.desc_en || bookmark.description || ''
+  return bookmark.description || ''
 }
 
 function getBookmarkIcon(bookmark) {
