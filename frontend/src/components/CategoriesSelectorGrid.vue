@@ -220,26 +220,6 @@ const expandedMap = reactive({})
 const allExpanded = ref(!settingsStore.categoryFoldAll)
 const radioName = 'cat_radio_' + Math.random().toString(36).substr(2, 9)
 
-watch(
-  () => settingsStore.categoryFoldAll,
-  (foldAll) => {
-    if (foldAll) {
-      allExpanded.value = false
-      Object.keys(expandedMap).forEach(key => {
-        expandedMap[key] = false
-      })
-    } else {
-      allExpanded.value = true
-      if (flatList.value) {
-        flatList.value.forEach(item => {
-          if (item.node.id) expandedMap[item.node.id] = true
-        })
-      }
-    }
-  },
-  { immediate: true }
-)
-
 // Recursively flatten tree with depth & parent tracking
 function flattenNodes(nodes, depth = 0, parentNode = null, result = []) {
   if (!nodes || !Array.isArray(nodes)) return result
@@ -258,6 +238,26 @@ function flattenNodes(nodes, depth = 0, parentNode = null, result = []) {
 
 // Flat list of all categories
 const flatList = computed(() => flattenNodes(props.categories))
+
+watch(
+  () => settingsStore.categoryFoldAll,
+  (foldAll) => {
+    if (foldAll) {
+      allExpanded.value = false
+      Object.keys(expandedMap).forEach(key => {
+        expandedMap[key] = false
+      })
+    } else {
+      allExpanded.value = true
+      if (flatList.value && Array.isArray(flatList.value)) {
+        flatList.value.forEach(item => {
+          if (item?.node?.id) expandedMap[item.node.id] = true
+        })
+      }
+    }
+  },
+  { immediate: true }
+)
 
 // Search & Filter matching logic
 const filteredMatchingIds = computed(() => {

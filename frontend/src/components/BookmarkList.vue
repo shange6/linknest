@@ -96,13 +96,13 @@
       <table class="modern-table">
         <thead>
           <tr>
-            <th v-if="settingsStore.bookmarkColumns.includes('checkbox')" style="width: 40px; text-align: center;">
+            <th v-if="settingsStore.bookmarkColumns?.includes('checkbox')" style="width: 40px; text-align: center;">
               <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" />
             </th>
-            <th v-if="settingsStore.bookmarkColumns.includes('title')" style="width: 45%; text-align: center;">标题与描述</th>
-            <th v-if="settingsStore.bookmarkColumns.includes('url')" style="width: 20%; text-align: center;">网站链接</th>
-            <th v-if="settingsStore.bookmarkColumns.includes('categories')" style="width: 10%; text-align: center;">分类</th>
-            <th v-if="settingsStore.bookmarkColumns.includes('actions')" style="width: 50px; text-align: center;">操作</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('title')" style="width: 45%; text-align: center;">标题与描述</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('url')" style="width: 20%; text-align: center;">网站链接</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('categories')" style="width: 10%; text-align: center;">分类</th>
+            <th v-if="settingsStore.bookmarkColumns?.includes('actions')" style="width: 50px; text-align: center;">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -111,10 +111,10 @@
             :key="bookmark.id"
             :class="{ 'row-selected': selectedIds.includes(bookmark.id) }"
           >
-            <td v-if="settingsStore.bookmarkColumns.includes('checkbox')" style="text-align: center; padding: 10px 4px;">
+            <td v-if="settingsStore.bookmarkColumns?.includes('checkbox')" style="text-align: center; padding: 10px 4px;">
               <input type="checkbox" :value="bookmark.id" v-model="selectedIds" />
             </td>
-            <td v-if="settingsStore.bookmarkColumns.includes('title')">
+            <td v-if="settingsStore.bookmarkColumns?.includes('title')">
               <div class="table-title-cell">
                 <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(bookmark) ? 'transparent' : getAvatarBg(bookmark) }">
                   <img v-if="isImgIcon(bookmark)" :src="bookmark.icon" alt="" class="table-img-icon" />
@@ -128,12 +128,12 @@
                 </div>
               </div>
             </td>
-            <td v-if="settingsStore.bookmarkColumns.includes('url')" style="text-align: center;">
+            <td v-if="settingsStore.bookmarkColumns?.includes('url')" style="text-align: center;">
               <a :href="bookmark.href" target="_blank" rel="noopener" class="table-url-link">
                 {{ formatDisplayUrl(bookmark.href) }}
               </a>
             </td>
-            <td v-if="settingsStore.bookmarkColumns.includes('categories')" style="text-align: center;">
+            <td v-if="settingsStore.bookmarkColumns?.includes('categories')" style="text-align: center;">
               <div class="table-categories">
                 <span v-for="cat in bookmark.categories" :key="cat.id" class="chip-badge-sm">
                   {{ auth.locale === 'en' ? (cat.name_en || cat.name_zh || cat.name) : (cat.name_zh || cat.name) }}
@@ -141,7 +141,7 @@
                 <span v-if="!bookmark.categories?.length" class="text-muted-sm">未归类</span>
               </div>
             </td>
-            <td v-if="settingsStore.bookmarkColumns.includes('actions')" style="text-align: center; padding: 6px 4px;">
+            <td v-if="settingsStore.bookmarkColumns?.includes('actions')" style="text-align: center; padding: 6px 4px;">
               <div class="table-actions-2rows">
                 <div class="actions-row">
                   <button @click="copyLink(bookmark.href)" class="icon-btn-sm" title="复制">📋</button>
