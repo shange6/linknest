@@ -5,27 +5,31 @@
 
     <div class="main-layout">
       <div class="layout-container">
-        <!-- Sidebar Category Tree -->
-        <aside class="sidebar-panel">
-          <!-- Categories Selector Grid Container -->
-          <div class="category-tree-body" v-if="!categoryStore.loading">
-            <CategoriesSelectorGrid
-              :categories="categoryStore.tree"
-              v-model="selectedCategoryIds"
-              :multiple="true"
-              :showCount="true"
-              maxHeight="calc(100vh - 220px)"
-            />
-          </div>
-          <div v-else class="tree-loading">
-            <span class="loading-spinner"></span> 加载分类中...
-          </div>
-        </aside>
+        <!-- Sidebar Wrapper -->
+        <div class="sidebar-wrapper">
+          <aside class="sidebar-panel">
+            <!-- Categories Selector Grid Container -->
+            <div class="category-tree-body" v-if="!categoryStore.loading">
+              <CategoriesSelectorGrid
+                :categories="categoryStore.tree"
+                v-model="selectedCategoryIds"
+                :multiple="true"
+                :showCount="true"
+                maxHeight="calc(100vh - 220px)"
+              />
+            </div>
+            <div v-else class="tree-loading">
+              <span class="loading-spinner"></span> 加载分类中...
+            </div>
+          </aside>
+        </div>
 
-        <!-- Main Content Bookmark List -->
-        <main class="content-panel">
-          <BookmarkList />
-        </main>
+        <!-- Main Content Wrapper -->
+        <div class="content-wrapper">
+          <main class="content-panel">
+            <BookmarkList />
+          </main>
+        </div>
       </div>
     </div>
 
@@ -121,9 +125,15 @@ onMounted(async () => {
 }
 
 /* ─── 侧边栏 ─── */
-.sidebar-panel {
-  width: 240px;
+.sidebar-wrapper {
+  width: 300px;
+  min-width: 300px;
   flex-shrink: 0;
+}
+
+.sidebar-panel {
+  width: 100%;
+  min-width: 300px;
   background-color: var(--c-bg, #ffffff);
   border: 1px solid var(--c-border, #e2e8f0);
   border-radius: 10px;
@@ -155,9 +165,13 @@ onMounted(async () => {
 }
 
 /* ─── 主内容区 ─── */
-.content-panel {
+.content-wrapper {
   flex: 1;
   min-width: 0;
+}
+
+.content-panel {
+  width: 100%;
 }
 
 /* ─── 响应式 ─── */
@@ -172,8 +186,14 @@ onMounted(async () => {
     gap: 12px;
   }
 
+  .sidebar-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
   .sidebar-panel {
     width: 100%;
+    min-width: 0;
     position: static;
     max-height: 260px;
   }
