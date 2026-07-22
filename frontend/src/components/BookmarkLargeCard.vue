@@ -24,32 +24,41 @@
       </button>
     </div>
 
-    <!-- Header: Icon & Name -->
+    <!-- Header: Icon on Left, Name & SubLine on Right -->
     <div class="bm-card__header-row">
       <div class="bm-card__icon" :style="{ backgroundColor: isImageIcon ? 'transparent' : avatarBg }">
         <img v-if="isImageIcon" :src="bookmark.icon" alt="" class="bm-card__img-icon" @error="handleImgError" />
         <span v-else>{{ firstChar }}</span>
       </div>
-      <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title" :title="name">
-        {{ name }}
-      </a>
+
+      <div class="bm-card__info">
+        <!-- 图标右侧 第 1 行：Name (单行截断 ...) -->
+        <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__title" :title="name">
+          {{ name }}
+        </a>
+
+        <!-- 图标右侧 第 2 行：动态回退 (href -> title -> desc -> keyword)，样式与 Name 完全一致 -->
+        <a
+          v-if="subLineItem"
+          :href="bookmark.href"
+          target="_blank"
+          rel="noopener"
+          class="bm-card__sub-line"
+          :title="subLineItem.fullText"
+        >
+          {{ subLineItem.text }}
+        </a>
+      </div>
     </div>
 
-    <!-- URL Domain (Controlled by showHref prop) -->
-    <div class="bm-card__domain" v-if="showHref">
-      <a :href="bookmark.href" target="_blank" rel="noopener" class="bm-card__url-link" :title="bookmark.href">
-        {{ displayUrl }}
-      </a>
-    </div>
-
-    <!-- Title (New Row under URL) -->
-    <div class="bm-card__title-row" v-if="title" :title="title">
+    <!-- Title Row (If href was used for Line 2 and title exists) -->
+    <div class="bm-card__title-row" v-if="showTitleRow" :title="title">
       {{ title }}
     </div>
 
-    <!-- Description (Controlled by showDesc prop) -->
-    <p class="bm-card__desc" v-if="showDesc" :title="description || '暂无描述'">
-      {{ description || '暂无描述' }}
+    <!-- Description Row (If showDesc is true and not used in Line 2) -->
+    <p class="bm-card__desc" v-if="showDescRow" :title="description">
+      {{ description }}
     </p>
 
     <!-- Category Tags -->
@@ -160,6 +169,39 @@ const description = computed(() => {
   return props.bookmark.description || ''
 })
 
+const keywordsText = computed(() => {
+  if (!props.bookmark.keywords) return ''
+  if (Array.isArray(props.bookmark.keywords)) return props.bookmark.keywords.join(', ')
+  return String(props.bookmark.keywords)
+})
+
+// Line 2 Dynamic Priority Fallback (href -> title -> desc -> keyword)
+const subLineItem = computed(() => {
+  if (props.showHref && props.bookmark.href) {
+    return { type: 'href', text: displayUrl.value, fullText: props.bookmark.href }
+  }
+  if (title.value && title.value !== name.value) {
+    return { type: 'title', text: title.value, fullText: title.value }
+  }
+  if (description.value) {
+    return { type: 'desc', text: description.value, fullText: description.value }
+  }
+  if (keywordsText.value) {
+    return { type: 'keyword', text: keywordsText.value, fullText: keywordsText.value }
+  }
+  return null
+})
+
+// Show Title Row under Line 2 only if Line 2 was href and title exists and is different from name
+const showTitleRow = computed(() => {
+  return subLineItem.value?.type === 'href' && title.value && title.value !== name.value
+})
+
+// Show Description Row only if showDesc is true, description exists, and it wasn't already used as Line 2
+const showDescRow = computed(() => {
+  return props.showDesc && description.value && subLineItem.value?.type !== 'desc'
+})
+
 const firstChar = computed(() => {
   return name.value.charAt(0).toUpperCase() || '🔗'
 })
@@ -172,7 +214,7 @@ const avatarBg = computed(() => {
     'color-mix(in srgb, var(--c-primary, #2563eb) 90%, #059669)',
     'color-mix(in srgb, var(--c-primary, #2563eb) 80%, #7c3aed)',
   ]
-  const charCode = title.value.charCodeAt(0) || 0
+  const charCode = name.value.charCodeAt(0) || 0
   return colors[charCode % colors.length]
 })
 
@@ -281,9 +323,10 @@ const displayUrl = computed(() => {
 .bm-card__header-row {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .bm-card__icon {
@@ -306,22 +349,53 @@ const displayUrl = computed(() => {
   object-fit: contain;
 }
 
+.bm-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
 .bm-card__title {
   font-size: 13px;
   font-weight: 600;
   color: var(--c-text, #0f172a);
   text-decoration: none;
   line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   transition: color 0.15s;
-  flex: 1;
-  word-break: break-word;
+  display: block;
+  width: 100%;
+  margin: 0;
 }
 
 .bm-card__title:hover {
+  color: var(--c-primary, #2563eb);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 图标右侧 第 2 行：与 Name 样式 100% 完全一致 */
+.bm-card__sub-line {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text, #0f172a);
+  text-decoration: none;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.bm-card__sub-line:hover {
   color: var(--c-primary, #2563eb);
   text-decoration: underline;
   text-underline-offset: 2px;
