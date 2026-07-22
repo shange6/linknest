@@ -341,17 +341,17 @@ async function handleBatchDelete() {
   gap: 16px;
 }
 
-/* Toolbar Box */
+/* ─── 工具栏 ─── */
 .list-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  background-color: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 12px;
-  padding: 12px 16px;
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #e2e8f0);
+  border-radius: 10px;
+  padding: 10px 14px;
   box-sizing: border-box;
   width: 100%;
 }

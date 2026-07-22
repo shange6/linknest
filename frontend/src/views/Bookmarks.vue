@@ -24,27 +24,29 @@
     </header>
 
     <div class="main-layout">
-      <!-- Sidebar Category Tree -->
-      <aside class="sidebar-panel">
-        <!-- Categories Selector Grid Container -->
-        <div class="category-tree-body" v-if="!categoryStore.loading">
-          <CategoriesSelectorGrid
-            :categories="categoryStore.tree"
-            v-model="selectedCategoryIds"
-            :multiple="true"
-            :showCount="true"
-            maxHeight="calc(100vh - 220px)"
-          />
-        </div>
-        <div v-else class="tree-loading">
-          <span class="loading-spinner"></span> 加载分类中...
-        </div>
-      </aside>
+      <div class="layout-container">
+        <!-- Sidebar Category Tree -->
+        <aside class="sidebar-panel">
+          <!-- Categories Selector Grid Container -->
+          <div class="category-tree-body" v-if="!categoryStore.loading">
+            <CategoriesSelectorGrid
+              :categories="categoryStore.tree"
+              v-model="selectedCategoryIds"
+              :multiple="true"
+              :showCount="true"
+              maxHeight="calc(100vh - 220px)"
+            />
+          </div>
+          <div v-else class="tree-loading">
+            <span class="loading-spinner"></span> 加载分类中...
+          </div>
+        </aside>
 
-      <!-- Main Content Bookmark List -->
-      <main class="content-panel">
-        <BookmarkList />
-      </main>
+        <!-- Main Content Bookmark List -->
+        <main class="content-panel">
+          <BookmarkList />
+        </main>
+      </div>
     </div>
 
     <!-- Bookmark Form Editor Modal -->
@@ -120,17 +122,22 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+/* ─── 页面基础 ─── */
 .bookmarks-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--c-bg-secondary, #f8fafc);
 }
 
+/* ─── 顶部导航 ─── */
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--c-bg, #ffffff);
   border-bottom: 1px solid var(--c-border, #e2e8f0);
-  background: var(--c-bg-secondary, #ffffff);
-  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .header-container {
@@ -140,8 +147,15 @@ onMounted(async () => {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 12px 24px;
+  padding: 0 24px;
+  height: 52px;
   box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .logo-link {
@@ -149,115 +163,106 @@ onMounted(async () => {
   color: inherit;
 }
 
-.badge-admin {
-  background-color: #4f46e5;
-  color: #ffffff;
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-left: 4px;
+.logo {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--c-primary, #2563eb);
+  letter-spacing: -0.3px;
 }
 
-/* Layout */
-.main-layout {
+.header-nav {
   display: flex;
-  justify-content: center;
-  flex: 1;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px;
-  gap: 20px;
-  box-sizing: border-box;
-}
-
-/* Sidebar */
-.sidebar-panel {
-  width: 300px;
-  flex-shrink: 0;
-  background-color: transparent;
-  border: none;
-  border-radius: 12px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  max-height: calc(100vh - 120px);
-  position: sticky;
-  top: 80px;
-  box-shadow: none;
-}
-
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-color, #f1f5f9);
+  gap: 4px;
 }
 
-.sidebar-title-group {
+.nav-item {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--c-text-secondary, #64748b);
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: 6px;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.nav-item:hover {
+  background-color: var(--c-bg-secondary, #f1f5f9);
+  color: var(--c-text, #0f172a);
+}
+
+.nav-item.active {
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 10%, transparent);
+  color: var(--c-primary, #2563eb);
+  font-weight: 600;
+}
+
+.header-right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.sidebar-icon {
-  font-size: 16px;
+.user-info {
+  font-size: 13px;
+  color: var(--c-text-secondary, #64748b);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.sidebar-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-  color: var(--text-color, #0f172a);
-}
-
-.btn-clear-selection {
-  background: none;
-  border: none;
-  color: #4f46e5;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
+.badge-admin {
+  background-color: var(--c-primary, #2563eb);
+  color: #ffffff;
+  font-size: 10px;
   padding: 2px 6px;
   border-radius: 4px;
-  transition: background-color 0.15s;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-.btn-clear-selection:hover {
-  background-color: rgba(79, 70, 229, 0.08);
+/* ─── 主体布局 ─── */
+.main-layout {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.layout-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* ─── 侧边栏 ─── */
+.sidebar-panel {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #e2e8f0);
+  border-radius: 10px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  max-height: calc(100vh - 90px);
+  position: sticky;
+  top: 68px;
+  box-sizing: border-box;
 }
 
 .category-tree-body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.all-categories-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-color, #334155);
-  transition: background-color 0.15s;
-}
-
-.all-categories-item:hover {
-  background-color: var(--hover-bg, #f1f5f9);
-}
-
-.all-categories-item.is-selected {
-  background-color: rgba(79, 70, 229, 0.1);
-  color: #4f46e5;
-  font-weight: 700;
 }
 
 .tree-loading {
@@ -265,23 +270,34 @@ onMounted(async () => {
   text-align: center;
   font-size: 13px;
   color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-/* Content */
+/* ─── 主内容区 ─── */
 .content-panel {
   flex: 1;
   min-width: 0;
 }
 
+/* ─── 响应式 ─── */
 @media (max-width: 768px) {
-  .main-layout {
-    flex-direction: column;
-    padding: 16px;
+  .header-container {
+    padding: 0 16px;
   }
+
+  .layout-container {
+    flex-direction: column;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
   .sidebar-panel {
     width: 100%;
     position: static;
-    max-height: none;
+    max-height: 260px;
   }
 }
 </style>
