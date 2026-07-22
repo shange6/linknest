@@ -7,13 +7,6 @@
           新建书签
         </button>
 
-        <div class="filter-status-info" v-if="bookmarkStore.categoryId">
-          <span class="filter-chip">
-            📌 分类筛选中
-            <button @click="clearCategoryFilter" class="chip-clear-btn" title="清除分类筛选">✕</button>
-          </span>
-        </div>
-
         <!-- Integrated Batch Selection Controls inside the same toolbar -->
         <div class="integrated-batch-controls">
           <button @click="handleBatchDelete" class="btn-danger-sm" :disabled="selectedIds.length === 0">

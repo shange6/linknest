@@ -209,8 +209,8 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--c-border, #e2e8f0);
 }
 
@@ -244,23 +244,26 @@ onUnmounted(() => {
 }
 
 .section-label {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-size: 0.80rem;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1;
   color: var(--c-text, #0f172a);
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.4rem 0;
 }
 
-.section-header-with-toggle {
+.section-header-with-toggle,
+.custom-color-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
-.section-header-with-toggle .section-label {
-  margin-bottom: 0;
+.section-header-with-toggle .section-label,
+.custom-color-header-row .section-label {
+  margin: 0;
 }
 
 .table-auto-toggle-label {
@@ -269,12 +272,16 @@ onUnmounted(() => {
   gap: 6px;
   cursor: pointer;
   user-select: none;
+  line-height: 1;
 }
 
 .toggle-label-text {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.80rem;
   font-weight: 500;
   color: var(--c-text-secondary, #64748b);
+  line-height: 1;
 }
 
 .mini-switch-track {
@@ -313,7 +320,8 @@ onUnmounted(() => {
 .preset-color-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.4rem;
+  column-gap: 0.75rem;
+  row-gap: 0.45rem;
 }
 
 .preset-item-btn {
@@ -355,24 +363,12 @@ onUnmounted(() => {
   text-overflow: ellipsis;
 }
 
-/* Custom Color & Dark Mode Row */
-.custom-and-dark-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 /* Custom Color Row Styling */
 .custom-color-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-}
-
-.custom-color-header-row .section-label {
-  margin-bottom: 0;
 }
 
 .custom-color-picker-wrapper {
@@ -418,48 +414,5 @@ onUnmounted(() => {
   font-weight: 500;
   color: var(--c-text-secondary, #64748b);
   letter-spacing: 0.5px;
-}
-
-/* Modern Animated Toggle Switch */
-.toggle-switch-wrapper {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-switch-track {
-  width: 46px;
-  height: 26px;
-  background-color: #cbd5e1;
-  border-radius: 13px;
-  padding: 2px;
-  box-sizing: border-box;
-  transition: background-color 0.25s ease;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.toggle-switch-track.is-dark {
-  background-color: var(--c-primary, #2563eb);
-}
-
-.toggle-switch-thumb {
-  width: 22px;
-  height: 22px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  transform: translateX(0);
-}
-
-.toggle-switch-track.is-dark .toggle-switch-thumb {
-  transform: translateX(20px);
 }
 </style>

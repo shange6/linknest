@@ -79,11 +79,9 @@ export const useThemeStore = defineStore('theme', {
       
       this.currentThemeId = themeId
       this.customPrimary = ''
-      this.isDarkMode = !!preset.isDark
       
       localStorage.setItem('theme_id', themeId)
       localStorage.removeItem('theme_custom_primary')
-      localStorage.setItem('theme_dark_mode', this.isDarkMode ? 'true' : 'false')
       
       this.applyTheme()
     },
