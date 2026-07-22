@@ -21,7 +21,21 @@
 
       <!-- Preset Themes Section -->
       <div class="popover-section">
-        <label class="section-label">{{ auth.locale === 'zh' ? '预置主题' : 'Presets' }}</label>
+        <div class="section-header-with-toggle">
+          <label class="section-label">{{ auth.locale === 'zh' ? '主题配色' : 'Theme Presets' }}</label>
+
+          <label
+            class="table-auto-toggle-label"
+            @click.prevent="themeStore.toggleDarkMode()"
+            title="切换夜间模式"
+          >
+            <span class="toggle-label-text">{{ auth.locale === 'zh' ? '夜间模式' : 'Night Mode' }}</span>
+            <div class="mini-switch-track" :class="{ 'is-on': themeStore.isDarkMode }">
+              <div class="mini-switch-thumb"></div>
+            </div>
+          </label>
+        </div>
+
         <div class="preset-color-grid">
           <button
             v-for="preset in PRESET_THEMES"
@@ -38,94 +52,53 @@
         </div>
       </div>
 
-      <!-- Custom Color Picker & Dark Mode Switch Section -->
+      <!-- Custom Color Picker Section -->
       <div class="popover-section border-top">
-        <div class="custom-and-dark-row">
-          <div class="custom-color-group">
-            <label class="section-label">{{ auth.locale === 'zh' ? '自定义主色' : 'Custom Color' }}</label>
-            <div class="custom-color-row">
+        <div class="custom-color-header-row">
+          <label class="section-label mb-0">{{ auth.locale === 'zh' ? '自定义配色' : 'Custom Accent' }}</label>
+
+          <div class="custom-color-picker-wrapper" title="点击自定义主主题色">
+            <span class="color-hex-badge">{{ themeStore.activePrimary ? themeStore.activePrimary.toUpperCase() : '' }}</span>
+            <div class="color-picker-swatch-box" :style="{ backgroundColor: themeStore.activePrimary }">
               <input
                 type="color"
                 :value="themeStore.activePrimary"
                 @input="onCustomColorChange"
-                class="color-picker-input"
+                class="hidden-color-input"
               />
-              <span class="color-hex-code">{{ themeStore.activePrimary }}</span>
-            </div>
-          </div>
-
-          <div class="dark-mode-group">
-            <label class="section-label">{{ auth.locale === 'zh' ? '深浅模式' : 'Mode' }}</label>
-            <div
-              class="toggle-switch-wrapper"
-              @click="themeStore.toggleDarkMode()"
-              :title="themeStore.isDarkMode ? '已开启深色模式，点击切换为浅色模式' : '已开启浅色模式，点击切换为深色模式'"
-            >
-              <div class="toggle-switch-track" :class="{ 'is-dark': themeStore.isDarkMode }">
-                <div class="toggle-switch-thumb">
-                  <span>{{ themeStore.isDarkMode ? '🌙' : '☀️' }}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Table Header Background Tint Section -->
+      <!-- Unified Table Background Tint Section -->
       <div class="popover-section border-top">
-        <label class="section-label">{{ auth.locale === 'zh' ? '表头底色' : 'Header Background' }}</label>
-        <div class="preset-color-grid">
-          <button
-            type="button"
-            @click="themeStore.setTableHeaderTheme('auto')"
-            class="preset-item-btn"
-            :class="{ active: themeStore.tableHeaderThemeId === 'auto' }"
-            :title="auth.locale === 'zh' ? '跟随主主题色' : 'Follow Main Theme'"
+        <div class="section-header-with-toggle">
+          <label class="section-label">{{ auth.locale === 'zh' ? '表格底色' : 'Table Background' }}</label>
+          
+          <label
+            class="table-auto-toggle-label"
+            @click.prevent="toggleTableAutoTheme"
+            title="开启后表格底色自动跟随主主题色"
           >
-            <span class="preset-swatch" :style="{ backgroundColor: themeStore.activePrimary }"></span>
-            <span class="preset-name">{{ auth.locale === 'zh' ? '跟随主色' : 'Auto' }}</span>
-          </button>
+            <span class="toggle-label-text">{{ auth.locale === 'zh' ? '跟随主题' : 'Follow Theme' }}</span>
+            <div class="mini-switch-track" :class="{ 'is-on': themeStore.tableThemeId === 'auto' }">
+              <div class="mini-switch-thumb"></div>
+            </div>
+          </label>
+        </div>
 
+        <div class="preset-color-grid" v-if="themeStore.tableThemeId !== 'auto'">
           <button
-            v-for="preset in PRESET_THEMES.filter(p => !p.isDark)"
-            :key="'hdr-' + preset.id"
+            v-for="preset in PRESET_THEMES"
+            :key="'tbl-' + preset.id"
             type="button"
-            @click="themeStore.setTableHeaderTheme(preset.id)"
+            @click="themeStore.setTableTheme(preset.id)"
             class="preset-item-btn"
-            :class="{ active: themeStore.tableHeaderThemeId === preset.id }"
-            :title="auth.locale === 'zh' ? preset.name_zh + '表头' : preset.name_en + ' Header'"
+            :class="{ active: themeStore.tableThemeId === preset.id }"
+            :title="auth.locale === 'zh' ? preset.name_zh + '底色' : preset.name_en + ' Tint'"
           >
             <span class="preset-swatch" :style="{ backgroundColor: (themeStore.isDarkMode ? preset.headerBgDark : preset.headerBg) || preset.primary }"></span>
-            <span class="preset-name">{{ auth.locale === 'zh' ? preset.name_zh : preset.name_en }}</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Table Body Background Tint Section -->
-      <div class="popover-section border-top">
-        <label class="section-label">{{ auth.locale === 'zh' ? '表格/列表体底色' : 'Body Background' }}</label>
-        <div class="preset-color-grid">
-          <button
-            type="button"
-            @click="themeStore.setTableBodyTheme('auto')"
-            class="preset-item-btn"
-            :class="{ active: themeStore.tableBodyThemeId === 'auto' }"
-            :title="auth.locale === 'zh' ? '跟随主主题色' : 'Follow Main Theme'"
-          >
-            <span class="preset-swatch" :style="{ backgroundColor: themeStore.activePrimary }"></span>
-            <span class="preset-name">{{ auth.locale === 'zh' ? '跟随主色' : 'Auto' }}</span>
-          </button>
-
-          <button
-            v-for="preset in PRESET_THEMES.filter(p => !p.isDark)"
-            :key="'bdy-' + preset.id"
-            type="button"
-            @click="themeStore.setTableBodyTheme(preset.id)"
-            class="preset-item-btn"
-            :class="{ active: themeStore.tableBodyThemeId === preset.id }"
-            :title="auth.locale === 'zh' ? preset.name_zh + '表格体' : preset.name_en + ' Body'"
-          >
-            <span class="preset-swatch" :style="{ backgroundColor: (themeStore.isDarkMode ? preset.bodyBgDark : preset.bodyBg) || preset.primary }"></span>
             <span class="preset-name">{{ auth.locale === 'zh' ? preset.name_zh : preset.name_en }}</span>
           </button>
         </div>
@@ -151,6 +124,14 @@ function selectPreset(presetId) {
 
 function onCustomColorChange(e) {
   themeStore.setCustomColor(e.target.value)
+}
+
+function toggleTableAutoTheme() {
+  if (themeStore.tableThemeId === 'auto') {
+    themeStore.setTableTheme(themeStore.currentThemeId !== 'custom' ? themeStore.currentThemeId : 'emerald')
+  } else {
+    themeStore.setTableTheme('auto')
+  }
 }
 
 // Click outside handler
@@ -266,7 +247,12 @@ onUnmounted(() => {
 
 .popover-section.border-top {
   border-top: 1px solid var(--c-border, #e2e8f0);
-  padding-top: 0.65rem;
+  padding-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.popover-section:last-child,
+.popover-section.border-top:last-child {
   margin-bottom: 0;
 }
 
@@ -275,6 +261,62 @@ onUnmounted(() => {
   font-size: 0.76rem;
   color: var(--c-text-secondary, #64748b);
   margin-bottom: 0.4rem;
+}
+
+.section-header-with-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.section-header-with-toggle .section-label {
+  margin-bottom: 0;
+}
+
+.table-auto-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-label-text {
+  font-size: 0.76rem;
+  color: var(--c-text-secondary, #64748b);
+}
+
+.mini-switch-track {
+  width: 36px;
+  height: 20px;
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mini-switch-track.is-on {
+  background-color: var(--c-primary, #2563eb);
+}
+
+.mini-switch-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(0);
+}
+
+.mini-switch-track.is-on .mini-switch-thumb {
+  transform: translateX(16px);
 }
 
 /* Preset Color Grid */
@@ -330,32 +372,61 @@ onUnmounted(() => {
   gap: 12px;
 }
 
-.custom-color-group,
-.dark-mode-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.custom-color-row {
+/* Custom Color Row Styling */
+.custom-color-header-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.color-picker-input {
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: 1px solid var(--c-border, #cbd5e1);
-  border-radius: 6px;
-  cursor: pointer;
+.custom-color-header-row .section-label {
+  margin-bottom: 0;
+}
+
+.custom-color-picker-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.color-hex-code {
-  font-family: monospace;
-  font-size: 0.8rem;
+.custom-color-picker-wrapper:hover {
+  opacity: 0.85;
+}
+
+.color-picker-swatch-box {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.hidden-color-input {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 60px;
+  height: 45px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-hex-badge {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
   color: var(--c-text-secondary, #64748b);
+  letter-spacing: 0.5px;
 }
 
 /* Modern Animated Toggle Switch */
