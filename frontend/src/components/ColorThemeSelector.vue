@@ -202,7 +202,7 @@ onUnmounted(() => {
   border-radius: 8px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   z-index: 2000;
-  padding: 0.85rem;
+  padding: 0.75rem;
   color: var(--c-text, #0f172a);
   animation: popoverFadeIn 0.15s ease-out;
 }
@@ -258,8 +258,9 @@ onUnmounted(() => {
 
 .section-label {
   display: block;
-  font-size: 0.76rem;
-  color: var(--c-text-secondary, #64748b);
+  font-size: 0.80rem;
+  font-weight: 400;
+  color: var(--c-text, #0f172a);
   margin-bottom: 0.4rem;
 }
 
@@ -284,6 +285,7 @@ onUnmounted(() => {
 
 .toggle-label-text {
   font-size: 0.76rem;
+  font-weight: 500;
   color: var(--c-text-secondary, #64748b);
 }
 
@@ -351,11 +353,12 @@ onUnmounted(() => {
 }
 
 .preset-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  width: 20px;
+  height: 11px;
+  border-radius: 5px;
   display: inline-block;
   flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .preset-name {
@@ -423,8 +426,8 @@ onUnmounted(() => {
 
 .color-hex-badge {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 0.74rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 500;
   color: var(--c-text-secondary, #64748b);
   letter-spacing: 0.5px;
 }
