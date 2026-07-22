@@ -182,6 +182,7 @@ onMounted(async () => {
 
   .layout-container {
     flex-direction: column;
+    align-items: stretch;
     padding: 12px 16px;
     gap: 12px;
   }
@@ -196,6 +197,10 @@ onMounted(async () => {
     min-width: 0;
     position: static;
     max-height: 260px;
+  }
+
+  .content-wrapper {
+    width: 100%;
   }
 }
 </style>
