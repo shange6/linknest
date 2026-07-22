@@ -910,17 +910,18 @@ onMounted(loadCategories)
 }
 
 .tree-table th {
-  background: #f8fafc;
+  background-color: var(--c-table-header-bg, #f8fafc);
   padding: 0.75rem 0.75rem;
   text-align: center;
   font-weight: 600;
   color: #475569;
-  border-bottom: 2px solid #e2e8f0;
-  border-right: 1px solid #e2e8f0;
+  border-bottom: 2px solid var(--c-table-border, #e2e8f0);
+  border-right: 1px solid var(--c-table-border, #e2e8f0);
   font-size: 0.82rem;
 }
 
 .tree-table td {
+  background-color: var(--c-table-body-bg, #ffffff);
   padding: 0.65rem 0.75rem;
   border-bottom: 1px solid #f1f5f9;
   border-right: 1px solid #f1f5f9;
@@ -932,8 +933,8 @@ onMounted(loadCategories)
   border-right: none;
 }
 
-.tree-table tr:hover {
-  background-color: #f8fafc;
+.tree-table tr:hover td {
+  background-color: var(--c-table-row-hover-bg, #f8fafc);
 }
 
 .row-disabled {

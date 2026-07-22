@@ -38,30 +38,97 @@
         </div>
       </div>
 
-      <!-- Custom Color Picker Section -->
-      <div class="popover-section">
-        <label class="section-label">{{ auth.locale === 'zh' ? '自定义主色' : 'Custom Color' }}</label>
-        <div class="custom-color-row">
-          <input
-            type="color"
-            :value="themeStore.activePrimary"
-            @input="onCustomColorChange"
-            class="color-picker-input"
-          />
-          <span class="color-hex-code">{{ themeStore.activePrimary }}</span>
+      <!-- Custom Color Picker & Dark Mode Switch Section -->
+      <div class="popover-section border-top">
+        <div class="custom-and-dark-row">
+          <div class="custom-color-group">
+            <label class="section-label">{{ auth.locale === 'zh' ? '自定义主色' : 'Custom Color' }}</label>
+            <div class="custom-color-row">
+              <input
+                type="color"
+                :value="themeStore.activePrimary"
+                @input="onCustomColorChange"
+                class="color-picker-input"
+              />
+              <span class="color-hex-code">{{ themeStore.activePrimary }}</span>
+            </div>
+          </div>
+
+          <div class="dark-mode-group">
+            <label class="section-label">{{ auth.locale === 'zh' ? '深浅模式' : 'Mode' }}</label>
+            <div
+              class="toggle-switch-wrapper"
+              @click="themeStore.toggleDarkMode()"
+              :title="themeStore.isDarkMode ? '已开启深色模式，点击切换为浅色模式' : '已开启浅色模式，点击切换为深色模式'"
+            >
+              <div class="toggle-switch-track" :class="{ 'is-dark': themeStore.isDarkMode }">
+                <div class="toggle-switch-thumb">
+                  <span>{{ themeStore.isDarkMode ? '🌙' : '☀️' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Dark Mode Switch -->
+      <!-- Table Header Background Tint Section -->
       <div class="popover-section border-top">
-        <label class="dark-mode-row">
-          <input
-            type="checkbox"
-            :checked="themeStore.isDarkMode"
-            @change="themeStore.toggleDarkMode($event.target.checked)"
-          />
-          <span>{{ auth.locale === 'zh' ? '开启深色模式 (Dark Mode)' : 'Enable Dark Mode' }}</span>
-        </label>
+        <label class="section-label">{{ auth.locale === 'zh' ? '表头底色' : 'Header Background' }}</label>
+        <div class="preset-color-grid">
+          <button
+            type="button"
+            @click="themeStore.setTableHeaderTheme('auto')"
+            class="preset-item-btn"
+            :class="{ active: themeStore.tableHeaderThemeId === 'auto' }"
+            :title="auth.locale === 'zh' ? '跟随主主题色' : 'Follow Main Theme'"
+          >
+            <span class="preset-swatch" :style="{ backgroundColor: themeStore.activePrimary }"></span>
+            <span class="preset-name">{{ auth.locale === 'zh' ? '跟随主色' : 'Auto' }}</span>
+          </button>
+
+          <button
+            v-for="preset in PRESET_THEMES.filter(p => !p.isDark)"
+            :key="'hdr-' + preset.id"
+            type="button"
+            @click="themeStore.setTableHeaderTheme(preset.id)"
+            class="preset-item-btn"
+            :class="{ active: themeStore.tableHeaderThemeId === preset.id }"
+            :title="auth.locale === 'zh' ? preset.name_zh + '表头' : preset.name_en + ' Header'"
+          >
+            <span class="preset-swatch" :style="{ backgroundColor: (themeStore.isDarkMode ? preset.headerBgDark : preset.headerBg) || preset.primary }"></span>
+            <span class="preset-name">{{ auth.locale === 'zh' ? preset.name_zh : preset.name_en }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Body Background Tint Section -->
+      <div class="popover-section border-top">
+        <label class="section-label">{{ auth.locale === 'zh' ? '表格/列表体底色' : 'Body Background' }}</label>
+        <div class="preset-color-grid">
+          <button
+            type="button"
+            @click="themeStore.setTableBodyTheme('auto')"
+            class="preset-item-btn"
+            :class="{ active: themeStore.tableBodyThemeId === 'auto' }"
+            :title="auth.locale === 'zh' ? '跟随主主题色' : 'Follow Main Theme'"
+          >
+            <span class="preset-swatch" :style="{ backgroundColor: themeStore.activePrimary }"></span>
+            <span class="preset-name">{{ auth.locale === 'zh' ? '跟随主色' : 'Auto' }}</span>
+          </button>
+
+          <button
+            v-for="preset in PRESET_THEMES.filter(p => !p.isDark)"
+            :key="'bdy-' + preset.id"
+            type="button"
+            @click="themeStore.setTableBodyTheme(preset.id)"
+            class="preset-item-btn"
+            :class="{ active: themeStore.tableBodyThemeId === preset.id }"
+            :title="auth.locale === 'zh' ? preset.name_zh + '表格体' : preset.name_en + ' Body'"
+          >
+            <span class="preset-swatch" :style="{ backgroundColor: (themeStore.isDarkMode ? preset.bodyBgDark : preset.bodyBg) || preset.primary }"></span>
+            <span class="preset-name">{{ auth.locale === 'zh' ? preset.name_zh : preset.name_en }}</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -255,16 +322,29 @@ onUnmounted(() => {
   text-overflow: ellipsis;
 }
 
-/* Custom Color Input */
+/* Custom Color & Dark Mode Row */
+.custom-and-dark-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.custom-color-group,
+.dark-mode-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .custom-color-row {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .color-picker-input {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   border: 1px solid var(--c-border, #cbd5e1);
   border-radius: 6px;
@@ -274,18 +354,50 @@ onUnmounted(() => {
 
 .color-hex-code {
   font-family: monospace;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--c-text-secondary, #64748b);
 }
 
-/* Dark mode checkbox row */
-.dark-mode-row {
-  display: flex;
+/* Modern Animated Toggle Switch */
+.toggle-switch-wrapper {
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  color: var(--c-text, #334155);
   cursor: pointer;
   user-select: none;
+}
+
+.toggle-switch-track {
+  width: 46px;
+  height: 26px;
+  background-color: #cbd5e1;
+  border-radius: 13px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: background-color 0.25s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-switch-track.is-dark {
+  background-color: var(--c-primary, #2563eb);
+}
+
+.toggle-switch-thumb {
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transform: translateX(0);
+}
+
+.toggle-switch-track.is-dark .toggle-switch-thumb {
+  transform: translateX(20px);
 }
 </style>

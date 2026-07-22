@@ -600,17 +600,18 @@ async function handleBatchDelete() {
 }
 
 .modern-table th {
-  background-color: var(--hover-bg, #f8fafc);
+  background-color: var(--c-table-header-bg, #f8fafc);
   padding: 12px 8px;
   font-weight: 600;
-  color: #64748b;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  color: var(--c-text-secondary, #64748b);
+  border-bottom: 1px solid var(--c-table-border, #e2e8f0);
   text-align: center;
 }
 
 .modern-table td {
+  background-color: var(--c-table-body-bg, #ffffff);
   padding: 10px 8px;
-  border-bottom: 1px solid var(--border-color, #f1f5f9);
+  border-bottom: 1px solid var(--c-border, #f1f5f9);
   vertical-align: middle;
 }
 
@@ -622,8 +623,12 @@ async function handleBatchDelete() {
   vertical-align: middle;
 }
 
-.modern-table tr.row-selected {
-  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 6%, transparent);
+.modern-table tr:hover td {
+  background-color: var(--c-table-row-hover-bg, #f1f5f9);
+}
+
+.modern-table tr.row-selected td {
+  background-color: var(--c-table-row-selected-bg, #bbf7d0);
 }
 
 .table-title-cell {
