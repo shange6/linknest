@@ -322,7 +322,7 @@ const displayUrl = computed(() => {
 
 .bm-card__header-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   margin: 0;
   padding: 0;
@@ -352,7 +352,7 @@ const displayUrl = computed(() => {
 .bm-card__info {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
   flex: 1;
   min-width: 0;
   overflow: hidden;
