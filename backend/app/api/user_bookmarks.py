@@ -12,7 +12,22 @@ from app.core.favicon import fetch_favicon, download_and_convert_to_base64
 router = APIRouter(prefix="/api/user_bookmarks", tags=["user_bookmarks"])
 
 
-@router.get("", response_model=list[UserBookmarkOut])
+def format_user_bookmark(b: UserBookmark) -> dict:
+    return {
+        "id": b.id,
+        "user_id": b.user_id,
+        "name": b.name,
+        "title": b.name,
+        "href": b.href,
+        "icon": b.icon,
+        "description": b.description,
+        "created_at": b.created_at,
+        "updated_at": b.updated_at,
+        "categories": [{"id": c.id, "name": c.name, "slug": c.slug} for c in b.categories],
+    }
+
+
+@router.get("", response_model=list[dict])
 def get_userBookmark(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -23,10 +38,10 @@ def get_userBookmark(
         .order_by(UserBookmark.created_at.desc())
         .all()
     )
-    return bookmarks
+    return [format_user_bookmark(b) for b in bookmarks]
 
 
-@router.post("", response_model=UserBookmarkOut, status_code=201)
+@router.post("", response_model=dict, status_code=201)
 def add_userBookmark(
     data: UserBookmarkCreate,
     db: Session = Depends(get_db),
@@ -60,9 +75,10 @@ def add_userBookmark(
     if not resolved_icon:
         resolved_icon = fetch_favicon(data.href)
 
+    bookmark_name = data.name or data.title or ""
     bookmark = UserBookmark(
         user_id=current_user.id,
-        title=data.title,
+        name=bookmark_name,
         href=data.href,
         icon=resolved_icon,
         description=data.description,
@@ -71,7 +87,7 @@ def add_userBookmark(
     db.add(bookmark)
     db.commit()
     db.refresh(bookmark)
-    return bookmark
+    return format_user_bookmark(bookmark)
 
 
 @router.delete("/{bookmark_id}", status_code=204)

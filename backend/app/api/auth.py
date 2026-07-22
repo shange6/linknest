@@ -11,9 +11,12 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 @router.post("/register", response_model=UserOut, status_code=201)
 def register(data: UserRegister, db: Session = Depends(get_db)):
-    existing = db.query(User).filter(User.email == data.email).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="Email already registered")
+    if data.email:
+        if db.query(User).filter(User.email == data.email).first():
+            raise HTTPException(status_code=400, detail="Email already registered")
+    if data.mobile:
+        if db.query(User).filter(User.mobile == data.mobile).first():
+            raise HTTPException(status_code=400, detail="Mobile number already registered")
 
     if len(data.password) < 6:
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
@@ -36,9 +39,16 @@ def register(data: UserRegister, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=TokenOut)
 def login(data: UserLogin, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.email == data.email).first()
+    user = None
+    if data.email:
+        user = db.query(User).filter(User.email == data.email).first()
+    if not user and data.mobile:
+        user = db.query(User).filter(User.mobile == data.mobile).first()
+    if not user and data.username:
+        user = db.query(User).filter(User.username == data.username).first()
+
     if not user or not verify_password(data.password, user.password):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
 
     token = create_access_token(data={"sub": str(user.id)})
     return TokenOut(

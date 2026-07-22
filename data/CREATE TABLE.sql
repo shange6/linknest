@@ -15,7 +15,10 @@ CREATE TABLE users (
 	status BOOLEAN NOT NULL DEFAULT 1,
 	created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CHECK (mobile IS NOT NULL OR email IS NOT NULL)
+	CHECK (
+        (mobile IS NOT NULL AND trim(mobile) != '') OR 
+        (email IS NOT NULL AND trim(email) != '')
+    )
 );
 
 --分类表

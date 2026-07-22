@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.core.database import SessionLocal
 from app.models.init_db import init_db
-from app.models.category import Category
+from app.models.category import Category, CategoryTranslation
 
 
 def import_categories(data: list[dict], parent_id: int | None = None, db=None):
@@ -17,15 +17,25 @@ def import_categories(data: list[dict], parent_id: int | None = None, db=None):
         name = item.pop("name", None)
         description = item.pop("description", None)
         sort = item.pop("sort", None)
+        
         category = Category(
             parent_id=parent_id,
-            name_zh=name,
-            desc_zh=description,
-            sort_zh=sort,
-            **item
+            slug=item.get("slug"),
+            status=item.get("status", True),
         )
         db.add(category)
         db.flush()
+
+        if name:
+            trans = CategoryTranslation(
+                category_id=category.id,
+                language_code="zh",
+                name=name,
+                description=description,
+                sort=sort,
+            )
+            db.add(trans)
+
         import_categories(children, parent_id=category.id, db=db)
 
 
