@@ -1,25 +1,7 @@
 <template>
   <div class="category-manager-page">
-    <!-- Header Navigation -->
-    <header class="app-header">
-      <div class="header-left">
-        <router-link to="/" class="logo-link">
-          <h1 class="logo">LinkNest</h1>
-        </router-link>
-        <nav class="header-nav">
-          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
-          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
-        </nav>
-      </div>
-      <div class="header-right">
-        <ColorThemeSelector />
-        <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
-          {{ auth.locale === 'zh' ? 'English' : '中文' }}
-        </button>
-        <span class="user-info">{{ auth.username }} <span class="badge-admin">管理员</span></span>
-        <button @click="handleLogout" class="btn-text">登出</button>
-      </div>
-    </header>
+    <!-- Header Navigation Component -->
+    <AppHeader />
 
     <div class="main-container">
       <!-- Dashboard Metric Cards -->
@@ -411,6 +393,7 @@ import { ref, computed, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { categoriesAPI } from '../api/endpoints'
+import AppHeader from '../components/AppHeader.vue'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
 import ColorThemeSelector from '../components/ColorThemeSelector.vue'
 
@@ -781,14 +764,18 @@ onMounted(loadCategories)
 <style scoped>
 .category-manager-page {
   min-height: 100vh;
-  background-color: var(--c-bg, #f8fafc);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--c-bg-secondary, #f8fafc);
   color: var(--c-text, #0f172a);
 }
 
 .main-container {
-  max-width: 1320px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 20px 24px;
+  box-sizing: border-box;
 }
 
 /* Metrics Cards */

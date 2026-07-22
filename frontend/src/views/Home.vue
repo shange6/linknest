@@ -1,36 +1,8 @@
 <!-- LinkNest Home Landing View (Updated: 2026-07-21) -->
 <template>
   <div class="home-landing">
-    <!-- Header Navbar -->
-    <header class="app-header">
-      <div class="header-left">
-        <router-link to="/" class="logo-link">
-          <h1 class="logo">LinkNest</h1>
-        </router-link>
-        <nav class="header-nav">
-          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="nav-item" :class="{ active: $route.path === '/admin/bookmarks' }">书签</router-link>
-          <router-link v-if="auth.isAdmin" to="/admin/categories" class="nav-item" :class="{ active: $route.path === '/admin/categories' }">分类管理</router-link>
-        </nav>
-      </div>
-      <div class="header-right">
-        <ColorThemeSelector />
-        <button @click="auth.setLocale(auth.locale === 'zh' ? 'en' : 'zh')" class="btn-text" style="margin-right: 12px;">
-          {{ auth.locale === 'zh' ? 'English' : '中文' }}
-        </button>
-
-        <template v-if="auth.isLoggedIn">
-          <span class="user-greeting">欢迎，{{ auth.username }}</span>
-          <router-link v-if="auth.isAdmin" to="/admin/bookmarks" class="btn-primary-sm">
-            管理后台
-          </router-link>
-          <button @click="handleLogout" class="btn-text" style="margin-left: 12px;">登出</button>
-        </template>
-        <template v-else>
-          <router-link to="/login" class="btn-text" style="margin-right: 8px;">登录</router-link>
-          <router-link to="/register" class="btn-primary-sm">注册账号</router-link>
-        </template>
-      </div>
-    </header>
+    <!-- Header Navigation Component -->
+    <AppHeader />
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -99,17 +71,10 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import ColorThemeSelector from '../components/ColorThemeSelector.vue'
+import AppHeader from '../components/AppHeader.vue'
 
-const router = useRouter()
 const auth = useAuthStore()
-
-function handleLogout() {
-  auth.logout()
-  router.push('/login')
-}
 </script>
 
 <style scoped>
