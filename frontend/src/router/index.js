@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '../views/LoginView.vue'
-import RegisterView from '../views/RegisterView.vue'
-import HomeView from '../views/HomeView.vue'
-import BookmarksView from '../views/BookmarksView.vue'
-import CategoryManagerView from '../views/CategoryManagerView.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import Home from '../views/Home.vue'
+import Bookmarks from '../views/Bookmarks.vue'
+import Categories from '../views/Categories.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
-  { path: '/login', name: 'login', component: LoginView },
-  { path: '/register', name: 'register', component: RegisterView },
-  { path: '/admin/bookmarks', name: 'bookmarks', component: BookmarksView, meta: { requiresAuth: true, requiresAdmin: true } },
-  { path: '/admin/categories', name: 'category-manager', component: CategoryManagerView, meta: { requiresAuth: true, requiresAdmin: true } },
+  { path: '/', name: 'home', component: Home },
+  { path: '/login', name: 'login', component: Login },
+  { path: '/register', name: 'register', component: Register },
+  { path: '/admin/bookmarks', name: 'bookmarks', component: Bookmarks, meta: { requiresAuth: true, requiresAdmin: true } },
+  { path: '/admin/categories', name: 'categories', component: Categories, meta: { requiresAuth: true, requiresAdmin: true } },
 ]
 
 const router = createRouter({

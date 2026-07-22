@@ -15,15 +15,12 @@
         </div>
 
         <!-- Integrated Batch Selection Controls inside the same toolbar -->
-        <div v-if="selectedIds.length > 0" class="integrated-batch-controls">
-          <span class="batch-info-badge">
-            已选中 <strong class="highlight-count">{{ selectedIds.length }}</strong> 项
-          </span>
-          <button @click="handleBatchDelete" class="btn-danger-sm">
-            🗑️ 批量删除
+        <div class="integrated-batch-controls">
+          <button @click="handleBatchDelete" class="btn-danger-sm" :disabled="selectedIds.length === 0">
+            删除 {{ selectedIds.length }} 项
           </button>
-          <button @click="selectedIds = []" class="btn-secondary-sm">
-            取消选择
+          <button @click="toggleSelectAll" class="btn-secondary-sm" :disabled="selectedIds.length === 0 && bookmarkStore.items.length === 0">
+            {{ selectedIds.length > 0 ? '取消选择' : '全选' }}
           </button>
         </div>
       </div>
@@ -223,7 +220,7 @@ const isAllSelected = computed(() => {
 })
 
 function toggleSelectAll() {
-  if (isAllSelected.value) {
+  if (selectedIds.value.length > 0) {
     selectedIds.value = []
   } else {
     selectedIds.value = bookmarkStore.items.map((item) => item.id)
@@ -417,6 +414,15 @@ async function handleBatchDelete() {
 
 .btn-secondary-sm:hover {
   background-color: #f8fafc;
+}
+
+.btn-danger-sm:disabled,
+.btn-secondary-sm:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-primary-add {
