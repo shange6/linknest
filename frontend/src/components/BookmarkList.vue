@@ -9,11 +9,11 @@
 
         <!-- Integrated Batch Selection Controls inside the same toolbar -->
         <div class="integrated-batch-controls">
+          <button @click="toggleSelectAll" class="btn-secondary-sm" :disabled="selectedIds.length === 0 && bookmarkStore.items.length === 0">
+            {{ selectedIds.length > 0 ? '取消' : '全选' }}
+          </button>
           <button @click="handleBatchDelete" class="btn-danger-sm" :disabled="selectedIds.length === 0">
             删除 {{ selectedIds.length }} 项
-          </button>
-          <button @click="toggleSelectAll" class="btn-secondary-sm" :disabled="selectedIds.length === 0 && bookmarkStore.items.length === 0">
-            {{ selectedIds.length > 0 ? '取消选择' : '全选' }}
           </button>
         </div>
       </div>
