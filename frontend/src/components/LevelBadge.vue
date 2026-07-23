@@ -1,7 +1,7 @@
 <template>
   <span
     class="level-badge"
-    :class="['lvl-' + Math.min(depth, 4), { 'is-down': isDown }]"
+    :class="['lvl-' + Math.min(depth, 8), { 'is-down': isDown }]"
     @click="handleClick"
   >
     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="triangle-icon">
@@ -62,6 +62,7 @@ function handleClick(e) {
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .level-badge:hover {
@@ -85,9 +86,14 @@ function handleClick(e) {
   transform: rotate(90deg);
 }
 
-.lvl-0 { background: #e0f2fe; color: #0369a1; }
-.lvl-1 { background: #f0fdf4; color: #15803d; }
-.lvl-2 { background: #fef3c7; color: #b45309; }
-.lvl-3 { background: #f3e8ff; color: #6b21a8; }
-.lvl-4 { background: #ffe4e6; color: #be123c; }
+/* 1~9 级淡雅护眼马卡龙配色方案（淡颜色、橙色1级、黄色9级、高对比度） */
+.lvl-0 { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; } /* 1级: 淡橙色 */
+.lvl-1 { background: #f0f9ff; color: #0284c7; border: 1px solid #e0f2fe; } /* 2级: 淡天空蓝 */
+.lvl-2 { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; } /* 3级: 淡翡翠绿 */
+.lvl-3 { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; } /* 4级: 淡罗兰紫 */
+.lvl-4 { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; } /* 5级: 淡玫瑰粉 */
+.lvl-5 { background: #f0fdfa; color: #0d9488; border: 1px solid #ccfbf1; } /* 6级: 淡薄荷青 */
+.lvl-6 { background: #f5f3ff; color: #6d28d9; border: 1px solid #ede9fe; } /* 7级: 淡靛青蓝 */
+.lvl-7 { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; } /* 8级: 淡高级灰 */
+.lvl-8 { background: #fefce8; color: #ca8a04; border: 1px solid #fef08a; } /* 9级: 淡明黄色 */
 </style>
