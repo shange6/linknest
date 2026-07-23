@@ -64,7 +64,11 @@
               @click.stop="item.node.children && item.node.children.length > 0 && toggleExpand(item.node.id)"
             />
 
-            <div class="name-inline">
+            <div
+              class="name-inline"
+              :class="{ 'is-clickable': item.node.children && item.node.children.length > 0 }"
+              @click.stop="item.node.children && item.node.children.length > 0 && toggleExpand(item.node.id)"
+            >
               <span class="name-zh">{{ item.node.name_zh || item.node.name || '-' }}</span>
             </div>
           </div>
@@ -1566,5 +1570,16 @@ onUnmounted(() => {
 .column-checkbox-item input {
   cursor: pointer;
   accent-color: var(--c-primary, #2563eb);
+}
+
+.name-inline.is-clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.name-inline.is-clickable:hover {
+  opacity: 0.85;
+  color: var(--c-primary, #2563eb);
 }
 </style>
