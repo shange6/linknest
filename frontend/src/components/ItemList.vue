@@ -175,7 +175,7 @@
               <!-- Checkbox Column -->
               <td
                 v-if="col.key === 'checkbox'"
-                style="text-align: center; padding: 8px 4px;"
+                style="text-align: center; padding: 5px 4px;"
               >
                 <input
                   type="checkbox"
@@ -760,7 +760,9 @@ onUnmounted(() => {
 
 .modern-table th {
   background-color: var(--c-table-header-bg, #f8fafc);
-  padding: 12px 8px;
+  height: 40px;
+  padding: 0 8px;
+  box-sizing: border-box;
   font-weight: 600;
   color: var(--c-text-secondary, #64748b);
   border-bottom: 1px solid var(--c-table-border, #e2e8f0);
@@ -770,7 +772,7 @@ onUnmounted(() => {
 
 .modern-table td {
   background-color: var(--c-table-body-bg, #ffffff);
-  padding: 10px 8px;
+  padding: 8px 8px;
   border-bottom: 1px solid var(--c-table-border, #f1f5f9);
   border-right: 1px dashed var(--c-border, #e2e8f0);
   color: var(--c-text, #0f172a);
