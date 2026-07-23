@@ -80,19 +80,17 @@
 
         <!-- Slug Column -->
         <template #cell-slug="{ item }">
-          <code class="slug-tag">{{ item.node.slug }}</code>
+          <span class="chip-badge-sm">{{ item.node.slug }}</span>
         </template>
 
         <!-- Subcategory Count Column -->
         <template #cell-count="{ item }">
-          <span :class="['count-badge', { 'count-zero': countSubtree(item.node) === 0 }]">
-            {{ countSubtree(item.node) }}
-          </span>
+          <span class="id-tag">{{ countSubtree(item.node) }}</span>
         </template>
 
         <!-- Sort Weights Column -->
         <template #cell-sort="{ item }">
-          <span class="sort-val">{{ item.node.sort_zh ?? item.node.sort ?? '-' }}</span>
+          <span class="id-tag">{{ item.node.sort_zh ?? item.node.sort ?? '-' }}</span>
         </template>
 
         <!-- Description Column -->
@@ -107,17 +105,24 @@
         <!-- Actions Column -->
         <template #cell-actions="{ item }">
           <div class="actions-inline">
-            <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
-            <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
-            <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
-            <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
-              <input
-                type="checkbox"
-                :checked="item.node.status"
-                @change.stop="toggleStatus(item.node)"
-              />
-              <span class="slider"></span>
-            </label>
+            <button @click="openCreateModal(item.node)" class="bm-action-btn" title="为此分类添加子分类">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <button @click="openEditModal(item.node)" class="bm-action-btn" title="编辑全量属性与父分类迁移">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button @click="handleDelete(item.node)" class="bm-action-btn bm-action-btn--danger" title="删除分类及其子树">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+            </button>
+            <button
+              type="button"
+              @click="toggleStatus(item.node)"
+              :class="['bm-action-btn', 'bm-status-square-btn', item.node.status ? 'active' : 'disabled']"
+              :title="item.node.status ? '已启用（点击禁用）' : '已禁用（点击启用）'"
+            >
+              <svg v-if="item.node.status" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg v-else width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
           </div>
         </template>
       </ItemList>
@@ -349,13 +354,13 @@ const settingsStore = useSettingsStore()
 
 // ItemList Column Definitions for Category Management
 const categoryColumns = [
-  { key: 'id', label: 'ID', width: '50px', align: 'center' },
-  { key: 'name', label: '分类名称', align: 'left' },
-  { key: 'slug', label: 'Slug', align: 'center' },
-  { key: 'count', label: '统计', width: '68px', align: 'center' },
-  { key: 'sort', label: '排序', width: '90px', align: 'center' },
-  { key: 'description', label: '说明', width: '140px', align: 'left' },
-  { key: 'actions', label: '操作', width: '140px', align: 'center' }
+  { key: 'id', label: 'ID', width: '70px', align: 'center' },
+  { key: 'name', label: '分类名称', width: '50%', align: 'left' },
+  { key: 'slug', label: 'Slug', width: '30%', align: 'center' },
+  { key: 'count', label: '统计', width: '60px', align: 'center' },
+  { key: 'sort', label: '排序', width: '60px', align: 'center' },
+  { key: 'description', label: '说明', width: '20%', align: 'left' },
+  { key: 'actions', label: '操作', width: '125px', align: 'center' }
 ]
 
 const categoryColumnOptions = DEFAULT_CATEGORY_COLUMNS
@@ -939,7 +944,7 @@ onUnmounted(() => {
 .id-tag {
   font-family: monospace;
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--c-text-secondary, #64748b);
   font-weight: 600;
 }
 
@@ -1053,8 +1058,8 @@ onUnmounted(() => {
 }
 
 .desc-zh {
-  color: #334155;
-  font-size: 0.78rem;
+  color: var(--c-text-secondary, #64748b);
+  font-size: 0.82rem;
 }
 
 .desc-en {
@@ -1092,88 +1097,90 @@ onUnmounted(() => {
   font-weight: normal;
 }
 
-.slug-tag {
-  background: #f1f5f9;
+.chip-badge-sm {
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+  color: var(--c-primary, #2563eb);
+  font-size: 13px;
   padding: 2px 6px;
   border-radius: 4px;
-  font-family: monospace;
-  font-size: 0.8rem;
-  color: #334155;
-}
-
-/* Switch Toggle */
-.switch-toggle {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 18px;
-}
-
-.switch-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #cbd5e1;
-  transition: .2s;
-  border-radius: 20px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 12px;
-  width: 12px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .2s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #16a34a;
-}
-
-input:checked + .slider:before {
-  transform: translateX(14px);
-}
-
-/* Action Links (Single Line Row) */
-.actions-cell {
-  white-space: nowrap;
-  text-align: center !important;
-  width: 140px;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .actions-inline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.action-link {
-  background: none;
-  border: none;
-  color: #2563eb;
+.bm-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  border: 1px solid var(--c-border, #e2e8f0);
+  border-radius: 5px;
+  background: var(--c-bg-secondary, rgba(255, 255, 255, 0.9));
+  color: var(--c-text-secondary, #475569);
   cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 1px 3px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 }
 
-.action-link:hover {
-  text-decoration: underline;
+.bm-action-btn:hover {
+  background: var(--c-table-row-hover-bg, #f1f5f9);
+  color: var(--c-primary, #2563eb);
+  border-color: var(--c-primary, #2563eb);
 }
 
-.action-link.danger {
-  color: #dc2626;
+.bm-action-btn--danger {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+.bm-action-btn--danger:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+.bm-status-square-btn {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.bm-status-square-btn.active {
+  background-color: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.bm-status-square-btn.active:hover {
+  background-color: rgba(16, 185, 129, 0.25);
+  border-color: #059669;
+  color: #059669;
+}
+
+.bm-status-square-btn.disabled {
+  background-color: rgba(148, 163, 184, 0.15);
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+.bm-status-square-btn.disabled:hover {
+  background-color: rgba(148, 163, 184, 0.3);
+  border-color: #94a3b8;
+  color: #64748b;
 }
 
 /* Modal Styling */

@@ -208,7 +208,7 @@ const tableColumns = [
   { key: 'title', label: '标题', width: '20%', align: 'center' },
   { key: 'description', label: '说明', width: '15%', align: 'center' },
   { key: 'url', label: '网站链接', width: '15%', align: 'center' },
-  { key: 'sort', label: '排序', width: '45px', align: 'center' },
+  { key: 'sort', label: '排序', width: '50px', align: 'center' },
   { key: 'categories', label: '分类', width: '30%', align: 'left' },
   { key: 'actions', label: '操作', width: '95px', align: 'center' }
 ]
@@ -541,10 +541,11 @@ onMounted(async () => {
 .chip-badge-sm {
   background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
   color: var(--c-primary, #2563eb);
-  font-size: 11px;
+  font-size: 13px;
   padding: 2px 6px;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
