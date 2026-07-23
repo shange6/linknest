@@ -1,27 +1,42 @@
 <template>
   <div
     class="bm-card"
-    :class="{ 'bm-card--selected': selected }"
+    :class="{ 'bm-card--selected': selected, 'bm-card--disabled': bookmark.status === false }"
   >
     <!-- Selection Checkbox (top-left absolute) -->
     <input
       type="checkbox"
       :checked="selected"
-      @change="$emit('update:selected', $event.target.checked)"
+      @change="$event => $emit('update:selected', $event.target.checked)"
       class="bm-card__checkbox"
     />
 
     <!-- Quick Actions (hover top-right) -->
     <div class="bm-card__actions">
-      <button @click="$emit('copy', bookmark.href)" class="bm-action-btn" title="复制链接">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      </button>
-      <button @click="$emit('edit', bookmark)" class="bm-action-btn" title="编辑">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      </button>
-      <button @click="$emit('delete', bookmark.id)" class="bm-action-btn bm-action-btn--danger" title="删除">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-      </button>
+      <div class="bm-action-row">
+        <button @click="$emit('edit', bookmark)" class="bm-action-btn" title="编辑">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button @click="$emit('delete', bookmark.id)" class="bm-action-btn bm-action-btn--danger" title="删除">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </div>
+
+      <!-- Copy Button & Square Status Toggle Switch -->
+      <div class="bm-action-switch-row">
+        <button @click="$emit('copy', bookmark.href)" class="bm-action-btn" title="复制链接">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+        <button
+          type="button"
+          @click="$emit('toggle-status', bookmark)"
+          :class="['bm-action-btn', 'bm-status-square-btn', bookmark.status !== false ? 'active' : 'disabled']"
+          :title="bookmark.status !== false ? '已启用（点击禁用）' : '已禁用（点击启用）'"
+        >
+          <svg v-if="bookmark.status !== false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg v-else width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
     </div>
 
     <!-- Header: Icon on Left, Name & SubLine on Right -->
@@ -99,7 +114,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['update:selected', 'copy', 'edit', 'delete'])
+defineEmits(['update:selected', 'copy', 'edit', 'delete', 'toggle-status'])
 
 const auth = useAuthStore()
 const categoryStore = useCategoryStore()
@@ -282,13 +297,70 @@ const displayUrl = computed(() => {
   top: 8px;
   right: 8px;
   display: flex;
-  gap: 3px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
   opacity: 0;
   transition: opacity 0.15s ease;
+  z-index: 5;
 }
 
-.bm-card:hover .bm-card__actions {
+.bm-card:hover .bm-card__actions,
+.bm-card--disabled .bm-card__actions {
   opacity: 1;
+}
+
+.bm-action-row {
+  display: flex;
+  gap: 3px;
+}
+
+.bm-action-switch-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.bm-status-square-btn {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.bm-status-square-btn.active {
+  background-color: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.bm-status-square-btn.active:hover {
+  background-color: rgba(16, 185, 129, 0.25);
+  border-color: #059669;
+  color: #059669;
+}
+
+.bm-status-square-btn.disabled {
+  background-color: rgba(148, 163, 184, 0.15);
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+.bm-status-square-btn.disabled:hover {
+  background-color: rgba(148, 163, 184, 0.3);
+  border-color: #94a3b8;
+  color: #64748b;
+}
+
+.bm-card--disabled {
+  opacity: 0.75;
+  background-color: var(--c-bg-secondary, #f8fafc);
 }
 
 .bm-action-btn {

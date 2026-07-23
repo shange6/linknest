@@ -67,6 +67,7 @@
                   @copy="copyLink"
                   @edit="openEditor"
                   @delete="handleDelete"
+                  @toggle-status="handleToggleStatus"
                 />
               </template>
 
@@ -341,6 +342,16 @@ async function handleDelete(id) {
     await bookmarkStore.remove(id)
     selectedIds.value = selectedIds.value.filter((i) => i !== id)
     showToast('已删除 1 条书签')
+  }
+}
+
+async function handleToggleStatus(bookmark) {
+  const nextStatus = !(bookmark.status !== false)
+  try {
+    await bookmarkStore.update(bookmark.id, { status: nextStatus })
+    showToast(nextStatus ? '已成功启用该书签' : '已成功禁用该书签')
+  } catch {
+    showToast('修改书签状态失败')
   }
 }
 

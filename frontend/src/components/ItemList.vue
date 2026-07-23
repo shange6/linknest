@@ -155,7 +155,7 @@
               </th>
               <th
                 v-else
-                :style="{ width: col.width, textAlign: col.align || 'center' }"
+                :style="{ width: col.width, textAlign: col.headerAlign || 'center' }"
               >
                 {{ col.label }}
               </th>
@@ -764,6 +764,7 @@ onUnmounted(() => {
   font-weight: 600;
   color: var(--c-text-secondary, #64748b);
   border-bottom: 1px solid var(--c-table-border, #e2e8f0);
+  border-right: 1px dashed var(--c-border, #e2e8f0);
   text-align: center;
 }
 
@@ -771,9 +772,15 @@ onUnmounted(() => {
   background-color: var(--c-table-body-bg, #ffffff);
   padding: 10px 8px;
   border-bottom: 1px solid var(--c-table-border, #f1f5f9);
+  border-right: 1px dashed var(--c-border, #e2e8f0);
   color: var(--c-text, #0f172a);
   vertical-align: middle;
   transition: background-color 0.15s;
+}
+
+.modern-table th:last-child,
+.modern-table td:last-child {
+  border-right: none;
 }
 
 .modern-table input[type="checkbox"] {

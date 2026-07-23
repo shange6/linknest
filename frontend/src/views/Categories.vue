@@ -30,7 +30,7 @@
         :loading="loading"
         loading-text="加载分类数据中..."
         empty-title="未找到匹配的分类数据"
-        primary-add-label="+ 新建分类"
+        primary-add-label="新建分类"
         :show-batch-controls="false"
         :show-view-mode-toggle="false"
         :columns-dropdown-options="categoryColumnOptions"
