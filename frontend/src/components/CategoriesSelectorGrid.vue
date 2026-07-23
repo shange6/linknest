@@ -81,7 +81,11 @@
               />
 
               <!-- Level Depth Tag -->
-              <LevelBadge :depth="row.item.depth" />
+              <LevelBadge
+                :depth="row.item.depth"
+                :model-value="row.item.node.children && row.item.node.children.length > 0 ? (expandedMap[row.item.node.id] !== false) : false"
+                @click.prevent.stop="row.item.node.children && row.item.node.children.length > 0 && toggleExpand(row.item.node.id)"
+              />
 
               <!-- Category Info -->
               <span class="node-name">{{ getCategoryLabel(row.item.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
@@ -143,7 +147,11 @@
                   />
 
                   <!-- Level Depth Tag -->
-                  <LevelBadge :depth="leaf.depth" />
+                  <LevelBadge
+                    :depth="leaf.depth"
+                    :model-value="leaf.node.children && leaf.node.children.length > 0 ? (expandedMap[leaf.node.id] !== false) : false"
+                    @click.prevent.stop="leaf.node.children && leaf.node.children.length > 0 && toggleExpand(leaf.node.id)"
+                  />
 
                   <!-- Category Info -->
                   <span class="node-name">{{ getCategoryLabel(leaf.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>

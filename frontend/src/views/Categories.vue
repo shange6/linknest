@@ -68,7 +68,11 @@
             </button>
             <span v-else class="toggle-spacer">•</span>
 
-            <LevelBadge :depth="item.depth" />
+            <LevelBadge
+              :depth="item.depth"
+              :model-value="item.node.children && item.node.children.length > 0 ? (expandedMap[item.node.id] !== false) : false"
+              @click.stop="item.node.children && item.node.children.length > 0 && toggleExpand(item.node.id)"
+            />
 
             <div class="name-inline">
               <span class="name-zh">{{ item.node.name_zh || item.node.name || '-' }}</span>
