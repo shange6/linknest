@@ -26,6 +26,15 @@ def check_category_permission(db: Session, category: Category, user: User) -> bo
     return False
 
 
+def get_subtree_bookmark_ids(category: Category) -> set:
+    """Recursively collect unique bookmark IDs for a category and all its descendants."""
+    b_set = {b.id for b in category.bookmarks}
+    if category.children:
+        for child in category.children:
+            b_set.update(get_subtree_bookmark_ids(child))
+    return b_set
+
+
 def format_category_dict(category: Category, lang: str = "zh") -> Dict[str, Any]:
     """Format category object with translation fields for requested language and backward compatibility."""
     trans_map = {t.language_code: t for t in category.translations}
@@ -33,6 +42,7 @@ def format_category_dict(category: Category, lang: str = "zh") -> Dict[str, Any]
 
     zh_t = trans_map.get("zh")
     en_t = trans_map.get("en")
+    subtree_bookmark_ids = get_subtree_bookmark_ids(category)
 
     return {
         "id": category.id,
@@ -60,6 +70,7 @@ def format_category_dict(category: Category, lang: str = "zh") -> Dict[str, Any]
             for t in category.translations
         ],
         "bookmarks_count": len(category.bookmarks),
+        "total_bookmarks_count": len(subtree_bookmark_ids),
         "managers": [{"id": m.id, "username": m.username, "email": m.email} for m in category.managers],
     }
 

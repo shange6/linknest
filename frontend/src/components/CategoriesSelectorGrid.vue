@@ -365,13 +365,32 @@ function getCategoryLabel(node) {
   return zh || en
 }
 
-// Get bookmark count for a category node
-function getItemCount(node) {
+// Get direct bookmark count for a single node
+function getDirectCount(node) {
   if (!node) return 0
-  if (node.bookmarks_count !== undefined) return node.bookmarks_count
-  if (node.count !== undefined) return node.count
+  if (node.bookmarks_count !== undefined && node.bookmarks_count !== null) {
+    return Number(node.bookmarks_count) || 0
+  }
+  if (node.count !== undefined && node.count !== null) {
+    return Number(node.count) || 0
+  }
   if (Array.isArray(node.bookmarks)) return node.bookmarks.length
   return 0
+}
+
+// Get total bookmark count for a category node including all its subcategories
+function getItemCount(node) {
+  if (!node) return 0
+  if (node.total_bookmarks_count !== undefined && node.total_bookmarks_count !== null) {
+    return Number(node.total_bookmarks_count) || 0
+  }
+  let total = getDirectCount(node)
+  if (node.children && Array.isArray(node.children)) {
+    for (const child of node.children) {
+      total += getItemCount(child)
+    }
+  }
+  return total
 }
 
 // Expand/Collapse methods
