@@ -86,14 +86,14 @@ function handleClick(e) {
   transform: rotate(90deg);
 }
 
-/* 1~9 级淡雅护眼马卡龙配色方案（淡颜色、橙色1级、黄色9级、高对比度） */
-.lvl-0 { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; } /* 1级: 淡橙色 */
-.lvl-1 { background: #f0f9ff; color: #0284c7; border: 1px solid #e0f2fe; } /* 2级: 淡天空蓝 */
-.lvl-2 { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; } /* 3级: 淡翡翠绿 */
-.lvl-3 { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; } /* 4级: 淡罗兰紫 */
-.lvl-4 { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; } /* 5级: 淡玫瑰粉 */
-.lvl-5 { background: #f0fdfa; color: #0d9488; border: 1px solid #ccfbf1; } /* 6级: 淡薄荷青 */
-.lvl-6 { background: #f5f3ff; color: #6d28d9; border: 1px solid #ede9fe; } /* 7级: 淡靛青蓝 */
-.lvl-7 { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; } /* 8级: 淡高级灰 */
-.lvl-8 { background: #fefce8; color: #ca8a04; border: 1px solid #fef08a; } /* 9级: 淡明黄色 */
+/* 1~9 级精致度中等色调方案（第1级:翡翠绿, 第9级:薄荷青） */
+.lvl-0 { background: #e6f4ea; color: #15803d; border: 1px solid #bbf7d0; } /* 1级: 翡翠绿 (原第3级) */
+.lvl-1 { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; } /* 2级: 暖亮橙 */
+.lvl-2 { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; } /* 3级: 天空蓝 */
+.lvl-3 { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; } /* 4级: 罗兰紫 */
+.lvl-4 { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; } /* 5级: 玫瑰粉 */
+.lvl-5 { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; } /* 6级: 靛青蓝 */
+.lvl-6 { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; } /* 7级: 暖珀黄 */
+.lvl-7 { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; } /* 8级: 高级灰 */
+.lvl-8 { background: #ccfbf1; color: #0f766e; border: 1px solid #99f6e4; } /* 9级: 薄荷青 (原第6级) */
 </style>

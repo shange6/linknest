@@ -58,16 +58,6 @@
         <!-- Name Column with Tree Indent -->
         <template #cell-name="{ item }">
           <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
-            <button
-              v-if="item.node.children && item.node.children.length > 0"
-              type="button"
-              @click="toggleExpand(item.node.id)"
-              class="toggle-btn"
-            >
-              {{ expandedMap[item.node.id] ? '▼' : '▶' }}
-            </button>
-            <span v-else class="toggle-spacer">•</span>
-
             <LevelBadge
               :depth="item.depth"
               :model-value="item.node.children && item.node.children.length > 0 ? (expandedMap[item.node.id] !== false) : false"

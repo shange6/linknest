@@ -47,16 +47,6 @@
             }"
             :style="{ paddingLeft: (row.item.depth * 18 + 8) + 'px' }"
           >
-            <!-- Expand/Collapse Toggle Button -->
-            <button
-              v-if="row.item.node.children && row.item.node.children.length > 0"
-              type="button"
-              @click.stop="toggleExpand(row.item.node.id)"
-              class="node-expand-btn"
-            >
-              {{ expandedMap[row.item.node.id] ? '▼' : '▶' }}
-            </button>
-            <span v-else class="expand-spacer">•</span>
 
             <!-- Checkbox or Radio Selection Element -->
             <label class="node-label">
@@ -107,16 +97,6 @@
                 :key="leaf.node.id"
                 class="leaf-chip-wrapper"
               >
-                <!-- Expand button for collapsed parents shown as chips -->
-                <button
-                  v-if="leaf.node.children && leaf.node.children.length > 0"
-                  type="button"
-                  class="chip-expand-btn"
-                  :title="expandedMap[leaf.node.id] === true ? '折叠' : '展开子分类'"
-                  @click.stop="toggleExpand(leaf.node.id)"
-                >
-                  {{ expandedMap[leaf.node.id] === true ? '▼' : '▶' }}
-                </button>
 
                 <label
                   class="leaf-chip"
