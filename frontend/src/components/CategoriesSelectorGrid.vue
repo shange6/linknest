@@ -81,9 +81,7 @@
               />
 
               <!-- Level Depth Tag -->
-              <span class="level-badge" :class="'lvl-' + Math.min(row.item.depth, 4)">
-                L{{ row.item.depth + 1 }}
-              </span>
+              <LevelBadge :depth="row.item.depth" />
 
               <!-- Category Info -->
               <span class="node-name">{{ getCategoryLabel(row.item.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
@@ -145,9 +143,7 @@
                   />
 
                   <!-- Level Depth Tag -->
-                  <span class="level-badge" :class="'lvl-' + Math.min(leaf.depth, 4)">
-                    L{{ leaf.depth + 1 }}
-                  </span>
+                  <LevelBadge :depth="leaf.depth" />
 
                   <!-- Category Info -->
                   <span class="node-name">{{ getCategoryLabel(leaf.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>
@@ -165,6 +161,7 @@
 <script setup>
 import { ref, computed, reactive, watch } from 'vue'
 import { useSettingsStore } from '../stores/settings'
+import LevelBadge from './LevelBadge.vue'
 
 const settingsStore = useSettingsStore()
 
@@ -713,19 +710,7 @@ function handleSelect(id) {
   accent-color: var(--c-primary, #2563eb);
 }
 
-.level-badge {
-  font-size: 0.68rem;
-  font-weight: 600;
-  padding: 1px 4px;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
 
-.lvl-0 { background: #e0f2fe; color: #0369a1; }
-.lvl-1 { background: #f0fdf4; color: #15803d; }
-.lvl-2 { background: #fef3c7; color: #b45309; }
-.lvl-3 { background: #f3e8ff; color: #6b21a8; }
-.lvl-4 { background: #ffe4e6; color: #be123c; }
 
 .node-name {
   font-weight: 500;

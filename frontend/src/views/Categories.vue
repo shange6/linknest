@@ -68,9 +68,7 @@
             </button>
             <span v-else class="toggle-spacer">•</span>
 
-            <span class="depth-badge" :class="'depth-' + Math.min(item.depth, 4)">
-              L{{ item.depth + 1 }}
-            </span>
+            <LevelBadge :depth="item.depth" />
 
             <div class="name-inline">
               <span class="name-zh">{{ item.node.name_zh || item.node.name || '-' }}</span>
@@ -347,6 +345,7 @@ import AppHeader from '../components/AppHeader.vue'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
 import ColorThemeSelector from '../components/ColorThemeSelector.vue'
 import ItemList from '../components/ItemList.vue'
+import LevelBadge from '../components/LevelBadge.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -976,19 +975,7 @@ onUnmounted(() => {
   margin-right: 4px;
 }
 
-.depth-badge {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 1px 5px;
-  border-radius: 4px;
-  margin-right: 8px;
-}
 
-.depth-0 { background: #e0f2fe; color: #0369a1; }
-.depth-1 { background: #f0fdf4; color: #15803d; }
-.depth-2 { background: #fef3c7; color: #b45309; }
-.depth-3 { background: #f3e8ff; color: #6b21a8; }
-.depth-4 { background: #ffe4e6; color: #be123c; }
 
 /* Inline 1-row name styling */
 .name-inline {
