@@ -2,22 +2,27 @@ import { defineStore } from 'pinia'
 import { useThemeStore } from './theme'
 
 export const DEFAULT_BOOKMARK_COLUMNS = [
-  { key: 'checkbox', label_zh: '多选', label_en: 'Select' },
-  { key: 'icon', label_zh: '图标', label_en: 'Icon' },
-  { key: 'name', label_zh: '名称', label_en: 'Name' },
-  { key: 'title', label_zh: '标题', label_en: 'Title' },
-  { key: 'url', label_zh: '网站链接', label_en: 'URL' },
-  { key: 'description', label_zh: '说明', label_en: 'Desc' },
-  { key: 'categories', label_zh: '所属分类', label_en: 'Categories' },
-  { key: 'actions', label_zh: '操作', label_en: 'Actions' }
+  { key: 'checkbox', label: '多选', db_field: 'checkbox' },
+  { key: 'icon', label: '图标', db_field: 'icon' },
+  { key: 'name', label: '名称', db_field: 'name' },
+  { key: 'title', label: '标题', db_field: 'title' },
+  { key: 'url', label: '网站链接', db_field: 'href' },
+  { key: 'status', label: '状态', db_field: 'status' },
+  { key: 'sort', label: '排序', db_field: 'sort' },
+  { key: 'description', label: '说明', db_field: 'description' },
+  { key: 'categories', label: '所属分类', db_field: 'categories' },
+  { key: 'actions', label: '操作', db_field: 'actions' }
 ]
 
 export const DEFAULT_CATEGORY_COLUMNS = [
-  { key: 'id', label_zh: 'ID', label_en: 'ID' },
-  { key: 'name', label_zh: '分类名称', label_en: 'Category Name' },
-  { key: 'slug', label_zh: 'Slug 标识', label_en: 'Slug' },
-  { key: 'status', label_zh: '状态', label_en: 'Status' },
-  { key: 'actions', label_zh: '操作', label_en: 'Actions' }
+  { key: 'id', label: 'ID', db_field: 'id' },
+  { key: 'name', label: '分类名称', db_field: 'name_zh' },
+  { key: 'slug', label: 'Slug', db_field: 'slug' },
+  { key: 'status', label: '状态', db_field: 'status' },
+  { key: 'count', label: '统计', db_field: 'children' },
+  { key: 'sort', label: '排序', db_field: 'sort_zh' },
+  { key: 'description', label: '说明', db_field: 'desc_zh' },
+  { key: 'actions', label: '操作', db_field: 'actions' }
 ]
 
 function getLocalJSON(key, defaultVal) {
@@ -44,7 +49,7 @@ function getLocalBookmarkColumns() {
       }
     }
   } catch {}
-  return ['checkbox', 'icon', 'name', 'title', 'url', 'description', 'categories', 'actions']
+  return ['checkbox', 'icon', 'name', 'title', 'url', 'status', 'sort', 'description', 'categories', 'actions']
 }
 
 export const useSettingsStore = defineStore('settings', {
@@ -65,7 +70,7 @@ export const useSettingsStore = defineStore('settings', {
     categoryFoldAll: localStorage.getItem('setting_category_fold_all') === 'true',
 
     // 8. Category Management Columns
-    categoryColumns: getLocalJSON('setting_category_columns', ['id', 'name', 'slug', 'status', 'actions']),
+    categoryColumns: getLocalJSON('setting_category_columns', ['id', 'name', 'slug', 'status', 'count', 'sort', 'description', 'actions']),
 
     // 9. Bookmark Table View Columns
     bookmarkColumns: getLocalBookmarkColumns()
@@ -129,7 +134,7 @@ export const useSettingsStore = defineStore('settings', {
       this.setShowCardDesc(true)
       this.setCategoryLooseMode(false)
       this.setCategoryFoldAll(false)
-      this.bookmarkColumns = ['checkbox', 'icon', 'name', 'title', 'url', 'description', 'categories', 'actions']
+      this.bookmarkColumns = ['checkbox', 'icon', 'name', 'title', 'url', 'status', 'sort', 'description', 'categories', 'actions']
       this.categoryColumns = ['id', 'name', 'slug', 'status', 'actions']
       localStorage.setItem('setting_bookmark_columns', JSON.stringify(this.bookmarkColumns))
       localStorage.setItem('setting_category_columns', JSON.stringify(this.categoryColumns))

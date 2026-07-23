@@ -24,195 +24,103 @@
         </div>
       </div>
 
-      <!-- Action & Filter Toolbar -->
-      <div class="toolbar-card">
-        <div class="toolbar-left">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input
-              v-model="searchQuery"
-              type="text"
-              class="search-input"
-              placeholder="搜索分类名称 / Slug / 描述..."
-            />
-            <button v-if="searchQuery" @click="searchQuery = ''" class="clear-btn">✕</button>
-          </div>
-
-          <button @click="toggleAllNodes" class="btn-secondary">
+      <!-- Category Tree Table rendered using generic ItemList component -->
+      <ItemList
+        :items="visibleRows"
+        :loading="loading"
+        loading-text="加载分类数据中..."
+        empty-title="未找到匹配的分类数据"
+        primary-add-label="+ 新建分类"
+        :show-batch-controls="false"
+        :show-view-mode-toggle="false"
+        :columns-dropdown-options="categoryColumnOptions"
+        :columns="categoryColumns"
+        :columns-visible="columnsVisible"
+        v-model:search-query="searchQuery"
+        search-placeholder="搜索分类名称 / Slug / 描述..."
+        :show-pagination="false"
+        :item-key="item => item.node.id"
+        :row-class="item => item.node.status ? '' : 'row-disabled'"
+        @primary-add="openCreateModal(null)"
+        @toggle-column="toggleColumnVisibility"
+      >
+        <template #toolbar-left-extra>
+          <button type="button" @click="toggleAllNodes" class="btn-secondary-sm">
             {{ allExpanded ? '折叠全部' : '展开全部' }}
           </button>
+        </template>
 
-          <!-- Columns Visibility Dropdown Control -->
-          <div class="columns-dropdown-wrapper" ref="columnDropdownRef">
+        <!-- ID Column -->
+        <template #cell-id="{ item }">
+          <span class="id-tag">{{ item.node.id }}</span>
+        </template>
+
+        <!-- Name Column with Tree Indent -->
+        <template #cell-name="{ item }">
+          <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
             <button
+              v-if="item.node.children && item.node.children.length > 0"
               type="button"
-              @click="isColumnDropdownOpen = !isColumnDropdownOpen"
-              class="btn-secondary columns-trigger-btn"
-              title="选择要在表格中显示的列"
+              @click="toggleExpand(item.node.id)"
+              class="toggle-btn"
             >
-              <span>显示列</span>
-              <span class="dropdown-caret">▼</span>
+              {{ expandedMap[item.node.id] ? '▼' : '▶' }}
             </button>
+            <span v-else class="toggle-spacer">•</span>
 
-            <div v-if="isColumnDropdownOpen" class="columns-popover-menu">
-              <div class="columns-popover-body">
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.id" @change="toggleColumnVisibility('id')" />
-                  <span>ID</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.name" @change="toggleColumnVisibility('name')" />
-                  <span>分类名称</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.slug" @change="toggleColumnVisibility('slug')" />
-                  <span>Slug</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.count" @change="toggleColumnVisibility('count')" />
-                  <span>统计</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.sort" @change="toggleColumnVisibility('sort')" />
-                  <span>排序</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.timestamps" @change="toggleColumnVisibility('timestamps')" />
-                  <span>时间戳</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.description" @change="toggleColumnVisibility('description')" />
-                  <span>说明</span>
-                </label>
-                <label class="column-checkbox-item">
-                  <input type="checkbox" :checked="columnsVisible.actions" @change="toggleColumnVisibility('actions')" />
-                  <span>操作</span>
-                </label>
-              </div>
+            <span class="depth-badge" :class="'depth-' + Math.min(item.depth, 4)">
+              L{{ item.depth + 1 }}
+            </span>
+
+            <div class="name-inline">
+              <span class="name-zh">{{ item.node.name_zh || item.node.name || '-' }}</span>
             </div>
           </div>
-        </div>
+        </template>
 
-        <div class="toolbar-right">
-          <button @click="openCreateModal(null)" class="btn-primary">
-            + 新建分类
-          </button>
-        </div>
-      </div>
+        <!-- Slug Column -->
+        <template #cell-slug="{ item }">
+          <code class="slug-tag">{{ item.node.slug }}</code>
+        </template>
 
-      <!-- Main Category Tree Table -->
-      <div class="table-container">
-        <div v-if="loading" class="state-box">
-          <div class="spinner"></div>
-          <p>加载分类数据中...</p>
-        </div>
+        <!-- Subcategory Count Column -->
+        <template #cell-count="{ item }">
+          <span :class="['count-badge', { 'count-zero': countSubtree(item.node) === 0 }]">
+            {{ countSubtree(item.node) }}
+          </span>
+        </template>
 
-        <div v-else-if="filteredCategories.length === 0" class="state-box">
-          <p class="empty-text">未找到匹配的分类数据</p>
-        </div>
+        <!-- Sort Weights Column -->
+        <template #cell-sort="{ item }">
+          <span class="sort-val">{{ item.node.sort_zh ?? item.node.sort ?? '-' }}</span>
+        </template>
 
-        <table v-else class="tree-table">
-          <thead>
-            <tr>
-              <th v-if="columnsVisible.id" style="width: 50px;">ID</th>
-              <th v-if="columnsVisible.name">分类名称</th>
-              <th v-if="columnsVisible.slug">Slug</th>
-              <th v-if="columnsVisible.count" style="width: 68px;">统计</th>
-              <th v-if="columnsVisible.sort" style="width: 90px;">排序</th>
-              <th v-if="columnsVisible.timestamps" style="width: 130px;">时间戳</th>
-              <th v-if="columnsVisible.description" style="width: 140px;">说明</th>
-              <th v-if="columnsVisible.actions" style="width: 140px;">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="item in visibleRows"
-              :key="item.node.id"
-              :class="{ 'row-disabled': !item.node.status }"
-            >
-              <!-- ID Column -->
-              <td v-if="columnsVisible.id" class="id-cell">
-                <span class="id-tag">{{ item.node.id }}</span>
-              </td>
+        <!-- Description Column -->
+        <template #cell-description="{ item }">
+          <div class="desc-stacked">
+            <div class="desc-zh text-ellipsis" :title="item.node.desc_zh || item.node.description || ''">
+              {{ item.node.desc_zh || item.node.description || '-' }}
+            </div>
+          </div>
+        </template>
 
-              <!-- Name Column -->
-              <td v-if="columnsVisible.name" class="name-cell">
-                <div :style="{ paddingLeft: (item.depth * 24) + 'px' }" class="indent-wrapper">
-                  <!-- Expand/Collapse toggle button -->
-                  <button
-                    v-if="item.node.children && item.node.children.length > 0"
-                    @click="toggleExpand(item.node.id)"
-                    class="toggle-btn"
-                  >
-                    {{ expandedMap[item.node.id] ? '▼' : '▶' }}
-                  </button>
-                  <span v-else class="toggle-spacer">•</span>
-
-                  <span class="depth-badge" :class="'depth-' + Math.min(item.depth, 4)">
-                    L{{ item.depth + 1 }}
-                  </span>
-
-                  <div class="name-inline">
-                    <span class="name-zh">{{ item.node.name_zh }}</span>
-                    <span class="name-divider">/</span>
-                    <span class="name-en">{{ (item.node.name_en && item.node.name_en.trim()) ? item.node.name_en : '-' }}</span>
-                  </div>
-                </div>
-              </td>
-
-              <!-- Slug -->
-              <td v-if="columnsVisible.slug">
-                <code class="slug-tag">{{ item.node.slug }}</code>
-              </td>
-
-              <!-- Subcategory Count Column -->
-              <td v-if="columnsVisible.count" class="count-cell text-center">
-                <span :class="['count-badge', { 'count-zero': countSubtree(item.node) === 0 }]">
-                  {{ countSubtree(item.node) }}
-                </span>
-              </td>
-
-              <!-- Sort Weights -->
-              <td v-if="columnsVisible.sort" class="sort-cell text-center">
-                <span class="sort-val">{{ item.node.sort_zh ?? '-' }}</span>
-                <span class="sort-divider">/</span>
-                <span class="sort-val sub-text">{{ item.node.sort_en ?? '-' }}</span>
-              </td>
-
-              <!-- Optional Timestamps -->
-              <td v-if="columnsVisible.timestamps" class="time-cell">
-                <div class="time-row" title="创建时间">创建: {{ formatDate(item.node.created_at) }}</div>
-                <div class="time-row" title="更新时间">更新: {{ formatDate(item.node.updated_at) }}</div>
-              </td>
-
-              <!-- Optional Description -->
-              <td v-if="columnsVisible.description" class="desc-cell">
-                <div class="desc-stacked">
-                  <div class="desc-zh text-ellipsis" :title="item.node.desc_zh || ''">{{ item.node.desc_zh || '-' }}</div>
-                  <div class="desc-en text-ellipsis" :title="item.node.desc_en || ''">{{ (item.node.desc_en && item.node.desc_en.trim()) ? item.node.desc_en : '-' }}</div>
-                </div>
-              </td>
-
-              <!-- Actions -->
-              <td v-if="columnsVisible.actions" class="actions-cell text-center">
-                <div class="actions-inline">
-                  <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
-                  <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
-                  <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
-                  <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
-                    <input
-                      type="checkbox"
-                      :checked="item.node.status"
-                      @change.stop="toggleStatus(item.node)"
-                    />
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- Actions Column -->
+        <template #cell-actions="{ item }">
+          <div class="actions-inline">
+            <button @click="openCreateModal(item.node)" class="action-link" title="为此分类添加子分类">增</button>
+            <button @click="handleDelete(item.node)" class="action-link danger" title="删除分类及其子树">删</button>
+            <button @click="openEditModal(item.node)" class="action-link" title="编辑全量属性与父分类迁移">改</button>
+            <label class="switch-toggle mini-switch" :title="item.node.status ? '已启用，点击禁用' : '已禁用，点击启用'" @click.stop>
+              <input
+                type="checkbox"
+                :checked="item.node.status"
+                @change.stop="toggleStatus(item.node)"
+              />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </template>
+      </ItemList>
     </div>
 
     <!-- Create / Edit / Relocate Modal -->
@@ -428,15 +336,29 @@
 import { ref, computed, reactive, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import { useSettingsStore } from '../stores/settings'
+import { useSettingsStore, DEFAULT_CATEGORY_COLUMNS } from '../stores/settings'
 import { categoriesAPI } from '../api/endpoints'
 import AppHeader from '../components/AppHeader.vue'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
 import ColorThemeSelector from '../components/ColorThemeSelector.vue'
+import ItemList from '../components/ItemList.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
 const settingsStore = useSettingsStore()
+
+// ItemList Column Definitions for Category Management
+const categoryColumns = [
+  { key: 'id', label: 'ID', width: '50px', align: 'center' },
+  { key: 'name', label: '分类名称', align: 'left' },
+  { key: 'slug', label: 'Slug', align: 'center' },
+  { key: 'count', label: '统计', width: '68px', align: 'center' },
+  { key: 'sort', label: '排序', width: '90px', align: 'center' },
+  { key: 'description', label: '说明', width: '140px', align: 'left' },
+  { key: 'actions', label: '操作', width: '140px', align: 'center' }
+]
+
+const categoryColumnOptions = DEFAULT_CATEGORY_COLUMNS
 
 // State
 const rawTree = ref([])
@@ -453,7 +375,6 @@ const columnsVisible = computed(() => ({
   status: settingsStore.categoryColumns.includes('status'),
   count: settingsStore.categoryColumns.includes('count'),
   sort: settingsStore.categoryColumns.includes('sort'),
-  timestamps: settingsStore.categoryColumns.includes('timestamps'),
   description: settingsStore.categoryColumns.includes('description'),
   actions: settingsStore.categoryColumns.includes('actions')
 }))

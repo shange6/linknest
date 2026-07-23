@@ -27,7 +27,118 @@
         <!-- Main Content Wrapper -->
         <div class="content-wrapper">
           <main class="content-panel">
-            <BookmarkList />
+            <ItemList
+              :items="bookmarkStore.items"
+              :loading="bookmarkStore.loading"
+              loading-text="正在读取书签中..."
+              empty-title="暂无符合条件的书签"
+              :empty-subtext="emptySubtext"
+              empty-icon="🔖"
+              :show-reset-filters="Boolean(bookmarkStore.categoryId || bookmarkStore.searchQuery)"
+              primary-add-label="新建书签"
+              v-model:selected-ids="selectedIds"
+              v-model:search-query="searchInput"
+              search-placeholder="搜索书签标题、描述或 URL..."
+              :view-mode="settingsStore.bookmarkViewMode"
+              :columns="tableColumns"
+              :columns-visible="columnsVisible"
+              :columns-dropdown-options="bookmarkColumnOptions"
+              :total="bookmarkStore.total"
+              :page="bookmarkStore.page"
+              :page-size="bookmarkStore.pageSize"
+              item-key="id"
+              @primary-add="openEditor(null)"
+              @batch-delete="handleBatchDelete"
+              @search="onSearch"
+              @toggle-column="key => settingsStore.toggleBookmarkColumn(key)"
+              @update:view-mode="mode => settingsStore.setBookmarkViewMode(mode)"
+              @page-change="p => bookmarkStore.setPage(p)"
+              @reset-filters="resetFilters"
+            >
+              <!-- Grid Item Slot -->
+              <template #grid-item="{ item }">
+                <BookmarkLargeCard
+                  :key="item.id"
+                  :bookmark="item"
+                  :selected="selectedIds.includes(item.id)"
+                  :show-href="settingsStore.showCardHref"
+                  :show-desc="settingsStore.showCardDesc"
+                  @update:selected="val => toggleBookmarkSelect(item.id, val)"
+                  @copy="copyLink"
+                  @edit="openEditor"
+                  @delete="handleDelete"
+                />
+              </template>
+
+              <!-- Table Icon Cell -->
+              <template #cell-icon="{ item }">
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                  <div class="favicon-avatar-sm" :style="{ backgroundColor: isImgIcon(item) ? 'transparent' : getAvatarBg(item) }">
+                    <img v-if="isImgIcon(item)" :src="item.icon" alt="" class="table-img-icon" />
+                    <span v-else>{{ getBookmarkIcon(item) }}</span>
+                  </div>
+                </div>
+              </template>
+
+              <!-- Table Name Cell -->
+              <template #cell-name="{ item }">
+                <a :href="item.href" target="_blank" rel="noopener" class="table-link" :title="getName(item)">
+                  {{ getName(item) }}
+                </a>
+              </template>
+
+              <!-- Table Title Cell -->
+              <template #cell-title="{ item }">
+                <span class="table-text-title" :title="getTitle(item)">{{ getTitle(item) || '-' }}</span>
+              </template>
+
+              <!-- Table URL Cell -->
+              <template #cell-url="{ item }">
+                <a :href="item.href" target="_blank" rel="noopener" class="table-url-link" :title="item.href">
+                  {{ formatDisplayUrl(item.href) }}
+                </a>
+              </template>
+
+              <!-- Table Status Cell -->
+              <template #cell-status="{ item }">
+                <span :class="['chip-status-sm', item.status !== false ? 'active' : 'disabled']">
+                  {{ item.status !== false ? '启用' : '禁用' }}
+                </span>
+              </template>
+
+              <!-- Table Sort Cell -->
+              <template #cell-sort="{ item }">
+                <span class="table-text-sort">{{ item.sort ?? item.sort_zh ?? '-' }}</span>
+              </template>
+
+              <!-- Table Description Cell -->
+              <template #cell-description="{ item }">
+                <span class="table-text-desc" :title="getDesc(item)">{{ getDesc(item) || '-' }}</span>
+              </template>
+
+              <!-- Table Categories Cell -->
+              <template #cell-categories="{ item }">
+                <div class="table-categories">
+                  <span v-for="cat in item.categories" :key="cat.id" class="chip-badge-sm">
+                    {{ cat.name_zh || cat.name }}
+                  </span>
+                  <span v-if="!item.categories?.length" class="text-muted-sm">未归类</span>
+                </div>
+              </template>
+
+              <!-- Table Actions Cell -->
+              <template #cell-actions="{ item }">
+                <div class="table-actions-2rows">
+                  <div class="actions-row">
+                    <button @click="copyLink(item.href)" class="icon-btn-sm" title="复制">📋</button>
+                    <button @click="openEditor(item)" class="icon-btn-sm" title="编辑">✏️</button>
+                  </div>
+                  <div class="actions-row">
+                    <button @click="handleDelete(item.id)" class="icon-btn-sm danger" title="删除">🗑️</button>
+                  </div>
+                </div>
+              </template>
+            </ItemList>
           </main>
         </div>
       </div>
@@ -40,28 +151,86 @@
       @close="closeEditor"
       @saved="onSaved"
     />
+
+    <!-- Toast Notification Popup -->
+    <Transition name="toast">
+      <div v-if="toastMessage" class="toast-popup">
+        <span class="toast-icon">✅</span>
+        <span class="toast-text">{{ toastMessage }}</span>
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, provide, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useCategoryStore } from '../stores/categories'
 import { useBookmarkStore } from '../stores/bookmarks'
+import { useAuthStore } from '../stores/auth'
+import { useSettingsStore, DEFAULT_BOOKMARK_COLUMNS } from '../stores/settings'
 import AppHeader from '../components/AppHeader.vue'
 import CategoriesSelectorGrid from '../components/CategoriesSelectorGrid.vue'
-import BookmarkList from '../components/BookmarkList.vue'
+import BookmarkLargeCard from '../components/BookmarkLargeCard.vue'
 import BookmarkEditor from '../components/BookmarkEditor.vue'
+import ItemList from '../components/ItemList.vue'
 
 const categoryStore = useCategoryStore()
 const bookmarkStore = useBookmarkStore()
+const auth = useAuthStore()
+const settingsStore = useSettingsStore()
 
 const editorVisible = ref(false)
 const editingBookmark = ref(null)
 const selectedCategoryIds = ref([])
+const searchInput = ref('')
+const selectedIds = ref([])
+const toastMessage = ref('')
+let searchTimer = null
+let toastTimer = null
+
+const tableColumns = [
+  { key: 'checkbox', label: '', width: '40px', align: 'center' },
+  { key: 'icon', label: '图标', width: '45px', align: 'center' },
+  { key: 'name', label: '名称', width: '16%', align: 'center' },
+  { key: 'title', label: '标题', width: '20%', align: 'center' },
+  { key: 'url', label: '网站链接', width: '16%', align: 'center' },
+  { key: 'status', label: '状态', width: '65px', align: 'center' },
+  { key: 'sort', label: '排序', width: '65px', align: 'center' },
+  { key: 'description', label: '说明', width: '18%', align: 'center' },
+  { key: 'categories', label: '分类', width: '10%', align: 'center' },
+  { key: 'actions', label: '操作', width: '50px', align: 'center' }
+]
+
+const bookmarkColumnOptions = DEFAULT_BOOKMARK_COLUMNS
+
+const columnsVisible = computed(() => {
+  const cols = settingsStore.bookmarkColumns || []
+  return {
+    checkbox: cols.includes('checkbox'),
+    icon: cols.includes('icon'),
+    name: cols.includes('name'),
+    title: cols.includes('title'),
+    url: cols.includes('url'),
+    status: cols.includes('status'),
+    sort: cols.includes('sort'),
+    description: cols.includes('description'),
+    categories: cols.includes('categories'),
+    actions: cols.includes('actions')
+  }
+})
+
+const emptySubtext = computed(() => {
+  if (bookmarkStore.categoryId) {
+    return '当前选中的分类下还没有添加书签'
+  }
+  if (bookmarkStore.searchQuery) {
+    return `未找到与「${bookmarkStore.searchQuery}」匹配的书签`
+  }
+  return '点击左上方「新建书签」按钮开始添加吧！'
+})
 
 watch(selectedCategoryIds, (val) => {
   if (val && val.length > 0) {
-    // 按最新选中的分类进行书签筛选
     bookmarkStore.setCategoryFilter(val[val.length - 1])
   } else {
     bookmarkStore.setCategoryFilter(null)
@@ -72,23 +241,117 @@ function openEditor(bookmark = null) {
   editingBookmark.value = bookmark
   editorVisible.value = true
 }
+
 function closeEditor() {
   editorVisible.value = false
   editingBookmark.value = null
 }
+
 function onSaved() {
   closeEditor()
   bookmarkStore.fetchBookmarks()
 }
 
-function clearCategorySelection() {
+function toggleBookmarkSelect(id, val) {
+  if (val) {
+    if (!selectedIds.value.includes(id)) {
+      selectedIds.value.push(id)
+    }
+  } else {
+    selectedIds.value = selectedIds.value.filter((i) => i !== id)
+  }
+}
+
+function onSearch() {
+  clearTimeout(searchTimer)
+  searchTimer = setTimeout(() => {
+    bookmarkStore.setSearch(searchInput.value)
+  }, 300)
+}
+
+function resetFilters() {
+  searchInput.value = ''
   selectedCategoryIds.value = []
-  categoryStore.clearSelection()
+  bookmarkStore.setSearch('')
   bookmarkStore.setCategoryFilter(null)
 }
 
-provide('openEditor', openEditor)
-provide('closeEditor', closeEditor)
+function isImgIcon(bookmark) {
+  const icon = bookmark.icon
+  return icon && (icon.startsWith('http://') || icon.startsWith('https://') || icon.startsWith('data:image/'))
+}
+
+function getName(bookmark) {
+  return bookmark.name || bookmark.title || bookmark.href
+}
+
+function getTitle(bookmark) {
+  return bookmark.title || ''
+}
+
+function getDesc(bookmark) {
+  return bookmark.description || ''
+}
+
+function getBookmarkIcon(bookmark) {
+  const text = getName(bookmark)
+  return text.charAt(0).toUpperCase() || '🔗'
+}
+
+function getAvatarBg(bookmark) {
+  const colors = [
+    'var(--c-primary, #2563eb)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 85%, #000000)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 70%, #ffffff)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 90%, #059669)',
+    'color-mix(in srgb, var(--c-primary, #2563eb) 80%, #7c3aed)',
+  ]
+  const charCode = getName(bookmark).charCodeAt(0) || 0
+  return colors[charCode % colors.length]
+}
+
+function formatDisplayUrl(url) {
+  try {
+    const parsed = new URL(url)
+    return parsed.hostname + (parsed.pathname !== '/' ? parsed.pathname : '')
+  } catch {
+    return url
+  }
+}
+
+function showToast(msg) {
+  toastMessage.value = msg
+  clearTimeout(toastTimer)
+  toastTimer = setTimeout(() => {
+    toastMessage.value = ''
+  }, 2500)
+}
+
+async function copyLink(url) {
+  try {
+    await navigator.clipboard.writeText(url)
+    showToast('书签链接已成功复制到剪贴板！')
+  } catch {
+    showToast('复制失败，请手动复制：' + url)
+  }
+}
+
+async function handleDelete(id) {
+  if (confirm('确定要删除这个书签吗？')) {
+    await bookmarkStore.remove(id)
+    selectedIds.value = selectedIds.value.filter((i) => i !== id)
+    showToast('已删除 1 条书签')
+  }
+}
+
+async function handleBatchDelete() {
+  const count = selectedIds.value.length
+  if (confirm(`确定要批量删除选中的 ${count} 条书签吗？`)) {
+    await bookmarkStore.bulkRemove(selectedIds.value)
+    selectedIds.value = []
+    showToast(`已成功批量删除 ${count} 条书签`)
+  }
+}
 
 onMounted(async () => {
   await categoryStore.fetchTree()
@@ -174,6 +437,185 @@ onMounted(async () => {
 
 .content-panel {
   width: 100%;
+}
+
+.favicon-avatar-sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.table-img-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.table-link {
+  font-weight: 600;
+  color: var(--c-text, #0f172a);
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.table-link:hover {
+  color: var(--c-primary, #2563eb);
+}
+
+.table-text-title {
+  font-size: 13px;
+  color: var(--c-text, #0f172a);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-text-desc {
+  font-size: 12.5px;
+  color: var(--c-text-secondary, #64748b);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-url-link {
+  color: var(--c-text-secondary, #64748b);
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s ease;
+}
+
+.table-url-link:hover {
+  color: var(--c-primary, #2563eb);
+  text-decoration: underline;
+}
+
+.table-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.chip-badge-sm {
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+  color: var(--c-primary, #2563eb);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.text-muted-sm {
+  font-size: 12px;
+  color: var(--c-text-secondary, #94a3b8);
+}
+
+.chip-status-sm {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.chip-status-sm.active {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.chip-status-sm.disabled {
+  background-color: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+}
+
+.table-text-sort {
+  font-size: 12px;
+  color: var(--c-text-secondary, #64748b);
+}
+
+.table-actions-2rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.actions-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.icon-btn-sm {
+  background: none;
+  border: none;
+  padding: 3px 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--c-text-secondary, #64748b);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.icon-btn-sm:hover {
+  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+  color: var(--c-primary, #2563eb);
+}
+
+.icon-btn-sm.danger:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* Toast Popup */
+.toast-popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--c-bg, #ffffff);
+  border: 1px solid var(--c-border, #e2e8f0);
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 9999;
+  font-size: 14px;
+  color: var(--c-text, #0f172a);
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.3s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
 /* ─── 响应式 ─── */
