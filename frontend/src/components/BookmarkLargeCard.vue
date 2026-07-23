@@ -22,11 +22,8 @@
         </button>
       </div>
 
-      <!-- Copy Button & Square Status Toggle Switch -->
+      <!-- Square Status Toggle Switch -->
       <div class="bm-action-switch-row">
-        <button @click="$emit('copy', bookmark.href)" class="bm-action-btn" title="复制链接">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
         <button
           type="button"
           @click="$emit('toggle-status', bookmark)"
@@ -114,7 +111,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['update:selected', 'copy', 'edit', 'delete', 'toggle-status'])
+defineEmits(['update:selected', 'edit', 'delete', 'toggle-status'])
 
 const auth = useAuthStore()
 const categoryStore = useCategoryStore()
@@ -386,10 +383,16 @@ const displayUrl = computed(() => {
   border-color: var(--c-primary, #2563eb);
 }
 
+.bm-action-btn--danger {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
 .bm-action-btn--danger:hover {
-  background: #fee2e2;
-  color: #dc2626;
-  border-color: #fca5a5;
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
 }
 
 .bm-card__header-row {

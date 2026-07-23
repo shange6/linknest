@@ -64,7 +64,6 @@
                   :show-href="settingsStore.showCardHref"
                   :show-desc="settingsStore.showCardDesc"
                   @update:selected="val => toggleBookmarkSelect(item.id, val)"
-                  @copy="copyLink"
                   @edit="openEditor"
                   @delete="handleDelete"
                   @toggle-status="handleToggleStatus"
@@ -129,14 +128,22 @@
 
               <!-- Table Actions Cell -->
               <template #cell-actions="{ item }">
-                <div class="table-actions-2rows">
-                  <div class="actions-row">
-                    <button @click="copyLink(item.href)" class="icon-btn-sm" title="复制">📋</button>
-                    <button @click="openEditor(item)" class="icon-btn-sm" title="编辑">✏️</button>
-                  </div>
-                  <div class="actions-row">
-                    <button @click="handleDelete(item.id)" class="icon-btn-sm danger" title="删除">🗑️</button>
-                  </div>
+                <div class="actions-inline">
+                  <button @click="openEditor(item)" class="bm-action-btn" title="编辑书签信息">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button @click="handleDelete(item.id)" class="bm-action-btn bm-action-btn--danger" title="删除书签">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                  </button>
+                  <button
+                    type="button"
+                    @click="handleToggleStatus(item)"
+                    :class="['bm-action-btn', 'bm-status-square-btn', item.status !== false ? 'active' : 'disabled']"
+                    :title="item.status !== false ? '已启用（点击禁用）' : '已禁用（点击启用）'"
+                  >
+                    <svg v-if="item.status !== false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg v-else width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
                 </div>
               </template>
             </ItemList>
@@ -191,15 +198,14 @@ let toastTimer = null
 
 const tableColumns = [
   { key: 'checkbox', label: '', width: '40px', align: 'center' },
-  { key: 'icon', label: '图标', width: '45px', align: 'center' },
-  { key: 'name', label: '名称', width: '16%', align: 'center' },
+  { key: 'icon', label: '图标', width: '50px', align: 'center' },
+  { key: 'name', label: '名称', width: '15%', align: 'center' },
   { key: 'title', label: '标题', width: '20%', align: 'center' },
-  { key: 'url', label: '网站链接', width: '16%', align: 'center' },
-  { key: 'status', label: '状态', width: '65px', align: 'center' },
-  { key: 'sort', label: '排序', width: '65px', align: 'center' },
-  { key: 'description', label: '说明', width: '18%', align: 'center' },
-  { key: 'categories', label: '分类', width: '10%', align: 'center' },
-  { key: 'actions', label: '操作', width: '50px', align: 'center' }
+  { key: 'description', label: '说明', width: '15%', align: 'center' },
+  { key: 'url', label: '网站链接', width: '15%', align: 'center' },
+  { key: 'sort', label: '排序', width: '45px', align: 'center' },
+  { key: 'categories', label: '分类', width: '30%', align: 'center' },
+  { key: 'actions', label: '操作', width: '95px', align: 'center' }
 ]
 
 const bookmarkColumnOptions = DEFAULT_BOOKMARK_COLUMNS
@@ -328,14 +334,6 @@ function showToast(msg) {
   }, 2500)
 }
 
-async function copyLink(url) {
-  try {
-    await navigator.clipboard.writeText(url)
-    showToast('书签链接已成功复制到剪贴板！')
-  } catch {
-    showToast('复制失败，请手动复制：' + url)
-  }
-}
 
 async function handleDelete(id) {
   if (confirm('确定要删除这个书签吗？')) {
@@ -563,41 +561,80 @@ onMounted(async () => {
   color: var(--c-text-secondary, #64748b);
 }
 
-.table-actions-2rows {
-  display: flex;
-  flex-direction: column;
+.actions-inline {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
 }
 
-.actions-row {
-  display: flex;
-  justify-content: center;
+.bm-action-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 2px;
-}
-
-.icon-btn-sm {
-  background: none;
-  border: none;
-  padding: 3px 5px;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  border: 1px solid var(--c-border, #e2e8f0);
+  border-radius: 5px;
+  background: var(--c-bg-secondary, rgba(255, 255, 255, 0.9));
+  color: var(--c-text-secondary, #475569);
   cursor: pointer;
-  border-radius: 4px;
-  font-size: 12px;
-  line-height: 1;
-  color: var(--c-text-secondary, #64748b);
-  transition: background-color 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 }
 
-.icon-btn-sm:hover {
-  background-color: color-mix(in srgb, var(--c-primary, #2563eb) 12%, transparent);
+.bm-action-btn:hover {
+  background: var(--c-table-row-hover-bg, #f1f5f9);
   color: var(--c-primary, #2563eb);
+  border-color: var(--c-primary, #2563eb);
 }
 
-.icon-btn-sm.danger:hover {
-  background-color: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
+.bm-action-btn--danger {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+.bm-action-btn--danger:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+.bm-status-square-btn {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.bm-status-square-btn.active {
+  background-color: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.bm-status-square-btn.active:hover {
+  background-color: rgba(16, 185, 129, 0.25);
+  border-color: #059669;
+  color: #059669;
+}
+
+.bm-status-square-btn.disabled {
+  background-color: rgba(148, 163, 184, 0.15);
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+.bm-status-square-btn.disabled:hover {
+  background-color: rgba(148, 163, 184, 0.3);
+  border-color: #94a3b8;
+  color: #64748b;
 }
 
 /* Toast Popup */
