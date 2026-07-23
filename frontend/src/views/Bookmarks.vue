@@ -118,8 +118,13 @@
 
               <!-- Table Categories Cell -->
               <template #cell-categories="{ item }">
-                <div class="table-categories">
-                  <span v-for="cat in item.categories" :key="cat.id" class="chip-badge-sm">
+                <div class="table-categories" :title="getCategoriesTooltip(item)">
+                  <span
+                    v-for="cat in item.categories"
+                    :key="cat.id"
+                    class="chip-badge-sm text-ellipsis"
+                    :title="cat.name_zh || cat.name"
+                  >
                     {{ cat.name_zh || cat.name }}
                   </span>
                   <span v-if="!item.categories?.length" class="text-muted-sm">未归类</span>
@@ -204,7 +209,7 @@ const tableColumns = [
   { key: 'description', label: '说明', width: '15%', align: 'center' },
   { key: 'url', label: '网站链接', width: '15%', align: 'center' },
   { key: 'sort', label: '排序', width: '45px', align: 'center' },
-  { key: 'categories', label: '分类', width: '30%', align: 'center' },
+  { key: 'categories', label: '分类', width: '30%', align: 'left' },
   { key: 'actions', label: '操作', width: '95px', align: 'center' }
 ]
 
@@ -267,6 +272,11 @@ function toggleBookmarkSelect(id, val) {
   } else {
     selectedIds.value = selectedIds.value.filter((i) => i !== id)
   }
+}
+
+function getCategoriesTooltip(item) {
+  if (!item.categories || item.categories.length === 0) return ''
+  return item.categories.map((cat) => cat.name_zh || cat.name).join(', ')
 }
 
 function onSearch() {
@@ -520,9 +530,12 @@ onMounted(async () => {
 
 .table-categories {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   gap: 4px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .chip-badge-sm {
@@ -532,6 +545,12 @@ onMounted(async () => {
   padding: 2px 6px;
   border-radius: 4px;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  flex-shrink: 1;
+  display: inline-block;
 }
 
 .text-muted-sm {
