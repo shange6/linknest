@@ -472,8 +472,8 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  background-color: var(--c-bg, #ffffff);
-  border: 1px solid var(--c-border, #e2e8f0);
+  background-color: var(--c-table-body-bg, var(--c-bg, #ffffff));
+  border: 1px solid var(--c-table-border, var(--c-border, #e2e8f0));
   border-radius: 10px;
   padding: 10px 14px;
   box-sizing: border-box;
@@ -496,7 +496,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 8px;
   padding-left: 10px;
-  border-left: 1px solid var(--c-border, #e2e8f0);
+  border-left: 1px solid var(--c-table-border, var(--c-border, #e2e8f0));
 }
 
 .btn-secondary-sm,

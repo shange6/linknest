@@ -127,6 +127,14 @@ const isImageIcon = computed(() => {
   return icon && (icon.startsWith('http://') || icon.startsWith('https://') || icon.startsWith('data:image/'))
 })
 
+function getCategoryName(cat) {
+  if (!cat) return ''
+  if (auth.locale === 'en') {
+    return (cat.name_en || cat.name_zh || cat.name || '').trim()
+  }
+  return (cat.name_zh || cat.name_en || cat.name || '').trim()
+}
+
 function getCategoryPathNodes(catId, tree) {
   if (!tree || !Array.isArray(tree)) return []
   for (const node of tree) {
@@ -146,13 +154,13 @@ function getCategoryPathNodes(catId, tree) {
 function getCategoryPathNames(cat) {
   const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
   if (pathNodes.length > 0) {
-    return pathNodes.map(node => node.name || '')
+    return pathNodes.map(node => getCategoryName(node)).filter(Boolean)
   }
-  return [cat.name || '']
+  return [getCategoryName(cat)].filter(Boolean)
 }
 
 function getCategoryFullPath(cat) {
-  return getCategoryPathNames(cat).join(' - ')
+  return getCategoryPathNames(cat).join(' / ')
 }
 
 const displayCategoryPath = computed(() => {

@@ -123,9 +123,9 @@
                     v-for="cat in item.categories"
                     :key="cat.id"
                     class="chip-badge-sm text-ellipsis"
-                    :title="cat.name_zh || cat.name"
+                    :title="getCategoryFullPath(cat)"
                   >
-                    {{ cat.name_zh || cat.name }}
+                    {{ getCategoryFullPath(cat) }}
                   </span>
                   <span v-if="!item.categories?.length" class="text-muted-sm">未归类</span>
                 </div>
@@ -274,9 +274,45 @@ function toggleBookmarkSelect(id, val) {
   }
 }
 
+function getCategoryName(cat) {
+  if (!cat) return ''
+  if (auth.locale === 'en') {
+    return (cat.name_en || cat.name_zh || cat.name || '').trim()
+  }
+  return (cat.name_zh || cat.name_en || cat.name || '').trim()
+}
+
+function getCategoryPathNodes(catId, tree) {
+  if (!tree || !Array.isArray(tree)) return []
+  for (const node of tree) {
+    if (node.id === catId) {
+      return [node]
+    }
+    if (node.children && node.children.length > 0) {
+      const subPath = getCategoryPathNodes(catId, node.children)
+      if (subPath.length > 0) {
+        return [node, ...subPath]
+      }
+    }
+  }
+  return []
+}
+
+function getCategoryPathNames(cat) {
+  const pathNodes = getCategoryPathNodes(cat.id, categoryStore.tree)
+  if (pathNodes.length > 0) {
+    return pathNodes.map(node => getCategoryName(node)).filter(Boolean)
+  }
+  return [getCategoryName(cat)].filter(Boolean)
+}
+
+function getCategoryFullPath(cat) {
+  return getCategoryPathNames(cat).join(' / ')
+}
+
 function getCategoriesTooltip(item) {
   if (!item.categories || item.categories.length === 0) return ''
-  return item.categories.map((cat) => cat.name_zh || cat.name).join(', ')
+  return item.categories.map((cat) => getCategoryFullPath(cat)).join('\n')
 }
 
 function onSearch() {
