@@ -4,10 +4,12 @@
     :class="['lvl-' + Math.min(depth, 8), { 'is-down': isDown }]"
     @click="handleClick"
   >
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="triangle-icon">
-      <polygon points="6 3 21 12 6 21"/>
-    </svg>
-    <span>{{ depth + 1 }}</span>
+    <span class="icon-wrapper">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="triangle-icon">
+        <polygon points="6 3 21 12 6 21"/>
+      </svg>
+    </span>
+    <span class="level-num">{{ depth + 1 }}</span>
   </span>
 </template>
 
@@ -56,17 +58,19 @@ function handleClick(e) {
 .level-badge {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  justify-content: center;
+  gap: 2px;
   font-size: 0.72rem;
-  padding: 1px 5px;
+  padding: 0 5px;
   border-radius: 4px;
   font-weight: bold;
   margin-right: 6px;
-  line-height: 1.2;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1;
+  height: 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   cursor: pointer;
   user-select: none;
-  box-sizing: border-box;
 }
 
 .level-badge:hover {
@@ -74,22 +78,29 @@ function handleClick(e) {
   transition: filter 0.12s ease;
 }
 
-.level-badge:active {
-  transform: scale(0.95);
-  transition: transform 0.1s ease;
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
 }
 
 .triangle-icon {
-  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
   opacity: 0.85;
-  width: 12px;
-  height: 12px;
   transition: transform 0.2s ease;
   transform-origin: center;
 }
 
 .is-down .triangle-icon {
   transform: rotate(90deg);
+}
+
+.level-num {
+  line-height: 1;
 }
 
 /* 1~9 级精致度中等色调方案（第1级:翡翠绿, 第9级:薄荷青） */
