@@ -42,7 +42,12 @@ const isDown = computed({
 })
 
 function handleClick(e) {
-  isDown.value = !isDown.value
+  const nextVal = !isDown.value
+  if (props.modelValue === undefined) {
+    internalDown.value = nextVal
+  }
+  emit('update:modelValue', nextVal)
+  emit('toggle', nextVal)
   emit('click', e)
 }
 </script>
