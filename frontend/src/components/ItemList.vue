@@ -777,7 +777,6 @@ onUnmounted(() => {
   border-right: 1px dashed var(--c-border, #e2e8f0);
   color: var(--c-text, #0f172a);
   vertical-align: middle;
-  transition: background-color 0.15s;
 }
 
 .modern-table th:last-child,
