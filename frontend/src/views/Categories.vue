@@ -66,8 +66,11 @@
 
             <div
               class="name-inline"
-              :class="{ 'is-clickable': item.node.children && item.node.children.length > 0 }"
-              @click.stop="item.node.children && item.node.children.length > 0 && toggleExpand(item.node.id)"
+              :class="{
+                'is-clickable': true,
+                'is-selected': selectedCategoryId === item.node.id
+              }"
+              @click.stop="selectCategoryRow(item.node)"
             >
               <span class="name-zh">{{ item.node.name_zh || item.node.name || '-' }}</span>
             </div>
@@ -603,6 +606,15 @@ async function loadCategories() {
   }
 }
 
+const selectedCategoryId = ref(null)
+
+function selectCategoryRow(node) {
+  selectedCategoryId.value = selectedCategoryId.value === node.id ? null : node.id
+  if (node.children && node.children.length > 0) {
+    toggleExpand(node.id)
+  }
+}
+
 function toggleExpand(id) {
   expandedMap[id] = !expandedMap[id]
 }
@@ -986,6 +998,11 @@ onUnmounted(() => {
 .name-zh {
   font-weight: 600;
   color: #0f172a;
+}
+
+.name-inline.is-selected .name-zh {
+  color: #ef4444 !important;
+  font-weight: 700;
 }
 
 .name-divider {

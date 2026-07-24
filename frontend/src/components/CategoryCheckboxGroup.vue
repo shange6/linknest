@@ -53,3 +53,10 @@ function toggleCategory(id) {
 <script>
 export default { name: 'CategoryCheckboxGroup' }
 </script>
+
+<style scoped>
+.category-checkbox-label input:checked + span {
+  color: #ef4444;
+  font-weight: 600;
+}
+</style>

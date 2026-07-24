@@ -51,3 +51,10 @@ function selectCategory(node) {
   bookmarkStore.setCategoryFilter(node.id)
 }
 </script>
+
+<style scoped>
+.category-item.selected .category-name {
+  color: #ef4444;
+  font-weight: 600;
+}
+</style>

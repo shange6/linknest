@@ -600,6 +600,11 @@ function handleSelect(id) {
   background-color: var(--c-table-row-hover-bg, #dcfce7);
 }
 
+.category-chip.is-selected .chip-name {
+  color: #ef4444;
+  font-weight: 600;
+}
+
 .category-chip.is-disabled {
   opacity: 0.5;
   cursor: not-allowed;
