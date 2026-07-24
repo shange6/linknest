@@ -595,13 +595,13 @@ function handleSelect(id) {
   background: var(--c-table-body-bg, #ffffff);
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.12s ease;
   box-sizing: border-box;
   flex: 0 0 auto;
 }
 
 .category-chip:hover {
   background-color: var(--c-table-row-hover-bg, #dcfce7);
+  transition: background-color 0.12s ease;
 }
 
 .category-chip.is-selected {

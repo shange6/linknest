@@ -66,16 +66,17 @@ function handleClick(e) {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   cursor: pointer;
   user-select: none;
-  transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .level-badge:hover {
   filter: brightness(0.92);
+  transition: filter 0.12s ease;
 }
 
 .level-badge:active {
   transform: scale(0.95);
+  transition: transform 0.1s ease;
 }
 
 .triangle-icon {
