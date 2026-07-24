@@ -278,15 +278,7 @@ const renderedRows = computed(() => {
     }))
   }
 
-  // Build a set of IDs that have at least one visible child in the current view
-  const hasVisibleChild = new Set()
-  visible.forEach((item) => {
-    if (item.parent) {
-      hasVisibleChild.add(item.parent.id)
-    }
-  })
-
-  // Compact mode: accumulate terminal nodes (no visible children) by (parentId, depth)
+  // Compact mode: accumulate leaf nodes (no subcategories) by (parentId, depth)
   const rows = []
   let leafBuffer = []
   let bufferParentId = null
@@ -307,8 +299,8 @@ const renderedRows = computed(() => {
   }
 
   for (const item of visible) {
-    const isTerminal = !hasVisibleChild.has(item.node.id)
-    if (isTerminal) {
+    const isLeafNode = !item.node.children || item.node.children.length === 0
+    if (isLeafNode) {
       const parentId = item.parent ? item.parent.id : null
       if (parentId !== bufferParentId || item.depth !== bufferDepth) {
         flushBuffer()
