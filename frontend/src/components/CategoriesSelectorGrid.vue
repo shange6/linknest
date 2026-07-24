@@ -48,28 +48,15 @@
             :style="{ paddingLeft: (row.item.depth * 18 + 8) + 'px' }"
           >
 
-            <!-- Checkbox or Radio Selection Element -->
-            <label class="node-label">
-              <input
-                v-if="multiple"
-                type="checkbox"
-                :value="row.item.node.id"
-                :checked="isSelected(row.item.node.id)"
-                :disabled="isDisabled(row.item.node.id)"
-                @change="handleSelect(row.item.node.id)"
-                class="selection-input"
-              />
-              <input
-                v-else
-                type="radio"
-                :name="radioName"
-                :value="row.item.node.id"
-                :checked="isSelected(row.item.node.id)"
-                :disabled="isDisabled(row.item.node.id)"
-                @change="handleSelect(row.item.node.id)"
-                class="selection-input"
-              />
-
+            <!-- Category Node Item -->
+            <div
+              class="node-label"
+              :class="{
+                'is-selected': isSelected(row.item.node.id),
+                'is-disabled': isDisabled(row.item.node.id)
+              }"
+              @click="handleSelect(row.item.node.id)"
+            >
               <!-- Level Depth Tag -->
               <LevelBadge
                 :depth="row.item.depth"
@@ -80,7 +67,7 @@
               <!-- Category Info -->
               <span class="node-name">{{ getCategoryLabel(row.item.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(row.item.node) }}</span>
               <code v-if="row.item.node.slug && !isCompactLayout" class="node-slug">{{ row.item.node.slug }}</code>
-            </label>
+            </div>
           </div>
 
           <!-- Compact leaf group: flow layout for leaf nodes under the same parent at same depth -->
@@ -98,34 +85,15 @@
                 class="leaf-chip-wrapper"
               >
 
-                <label
+                <div
                   class="leaf-chip"
                   :class="{
                     'is-selected': isSelected(leaf.node.id),
                     'is-disabled': isDisabled(leaf.node.id),
                     'has-children': leaf.node.children && leaf.node.children.length > 0
                   }"
+                  @click="handleSelect(leaf.node.id)"
                 >
-                  <input
-                    v-if="multiple"
-                    type="checkbox"
-                    :value="leaf.node.id"
-                    :checked="isSelected(leaf.node.id)"
-                    :disabled="isDisabled(leaf.node.id)"
-                    @change="handleSelect(leaf.node.id)"
-                    class="selection-input"
-                  />
-                  <input
-                    v-else
-                    type="radio"
-                    :name="radioName"
-                    :value="leaf.node.id"
-                    :checked="isSelected(leaf.node.id)"
-                    :disabled="isDisabled(leaf.node.id)"
-                    @change="handleSelect(leaf.node.id)"
-                    class="selection-input"
-                  />
-
                   <!-- Level Depth Tag -->
                   <LevelBadge
                     :depth="leaf.depth"
@@ -135,7 +103,7 @@
 
                   <!-- Category Info -->
                   <span class="node-name">{{ getCategoryLabel(leaf.node) }}</span><span v-if="showCount" class="item-count-badge">{{ getItemCount(leaf.node) }}</span>
-                </label>
+                </div>
               </div>
             </div>
           </div>
@@ -566,17 +534,8 @@ function handleSelect(id) {
 .node-row {
   display: flex;
   align-items: center;
-  padding: 0.35rem 0.5rem;
-  transition: background-color 0.15s ease;
+  padding: 0.15rem 0.5rem;
   user-select: none;
-}
-
-.node-row:hover {
-  background-color: var(--c-table-row-hover-bg, #dcfce7);
-}
-
-.node-row.is-selected {
-  background-color: var(--c-table-row-selected-bg, #bbf7d0);
 }
 
 .node-row.is-disabled {
@@ -609,7 +568,7 @@ function handleSelect(id) {
   gap: 0.3rem;
   padding: 0.18rem 0.45rem;
   border-radius: 5px;
-  border: 1px solid var(--c-table-border, #bbf7d0);
+  border: 1px solid transparent;
   background: var(--c-table-body-bg, #ffffff);
   cursor: pointer;
   transition: background-color 0.12s ease, border-color 0.12s ease;
@@ -620,12 +579,12 @@ function handleSelect(id) {
 
 .leaf-chip:hover {
   background-color: var(--c-table-row-hover-bg, #dcfce7);
-  border-color: var(--c-primary, #059669);
+  border-color: transparent;
 }
 
 .leaf-chip.is-selected {
   background-color: var(--c-table-row-selected-bg, #bbf7d0);
-  border-color: var(--c-primary, #059669);
+  border-color: transparent;
   font-weight: 600;
 }
 
@@ -701,13 +660,25 @@ function handleSelect(id) {
 
 /* Standard node label (non-compact or non-leaf) */
 .node-label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-size: 0.84rem;
   cursor: pointer;
-  flex: 1;
-  overflow: hidden;
+  padding: 0.18rem 0.45rem;
+  border-radius: 5px;
+  transition: background-color 0.15s ease;
+  user-select: none;
+}
+
+.node-label:hover {
+  background-color: var(--c-table-row-hover-bg, #dcfce7);
+}
+
+.node-row.is-selected .node-label,
+.node-label.is-selected {
+  background-color: var(--c-table-row-selected-bg, #bbf7d0);
+  font-weight: 600;
 }
 
 .selection-input {
